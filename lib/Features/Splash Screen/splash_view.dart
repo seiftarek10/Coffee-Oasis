@@ -1,5 +1,7 @@
+import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -9,18 +11,29 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  void _navigation() {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (mounted) {
+        GoRouter.of(context).pushReplacement(Routes.ownerHome);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _navigation();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      
+    return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 58, 38, 28),
-          image: DecorationImage(
-            image: AssetImage(Assets.imagesSplash),
-            
-          )
-        ),
+            color: Color.fromARGB(255, 58, 38, 28),
+            image: DecorationImage(
+              image: AssetImage(Assets.imagesSplash),
+            )),
       ),
     );
   }
