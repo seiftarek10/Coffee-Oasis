@@ -1,0 +1,54 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "owner",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_owner.dart",
+            "args": [
+                "--flavor",
+                "owner",
+                "--target",
+                "lib/main_owner.dart"
+            ]
+        },
+        {
+            "name": "staff",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_staff.dart",
+            "args": [
+                "--flavor",
+                "staff",
+                "--target",
+                "lib/main_staff.dart"
+            ]
+        },
+        {
+            "name": "delivery",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_delivery.dart",
+            "args": [
+                "--flavor",
+                "delivery",
+                "--target",
+                "lib/main_delivery.dart"
+            ]
+        },
+        {
+            "name": "user",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_user.dart",
+            "args": [
+                "--flavor",
+                "user",
+                "--target",
+                "lib/user.dart"
+            ]
+        }
+    ],
+    "compounds": []
+}
