@@ -6,9 +6,17 @@ class OwnerHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-          child: Background()),
+    return  Scaffold(
+      bottomNavigationBar: Container(
+        height: 80,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(60)
+        ),
+      ),
+      body: const SafeArea(
+          child: Background(
+            child: SizedBox.shrink(),
+          )),
     );
   }
 }
