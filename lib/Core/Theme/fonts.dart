@@ -12,6 +12,12 @@ abstract class Fonts {
   fontWeight: FontWeight.w300
   );
 
+      static TextStyle font40_700White =  TextStyle(
+    fontSize: 40.sp,
+  fontWeight: FontWeight.w700,
+  color: Colors.white
+  );
+
 
    static TextStyle font14_400PrimaryColor =  TextStyle(
     fontSize: 14.sp,

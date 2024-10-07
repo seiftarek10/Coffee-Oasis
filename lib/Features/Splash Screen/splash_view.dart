@@ -14,7 +14,7 @@ class _SplashViewState extends State<SplashView> {
   void _navigation() {
     Future.delayed(const Duration(milliseconds: 500), () {
       if (mounted) {
-        GoRouter.of(context).pushReplacement(Routes.ownerHome);
+        GoRouter.of(context).pushReplacement(Routes.owner);
       }
     });
   }

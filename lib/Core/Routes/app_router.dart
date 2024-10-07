@@ -11,9 +11,9 @@ final GoRouter router = GoRouter(
         pageBuilder: (context, state) =>
             pageTransition(context, state, const SplashView())),
     GoRoute(
-        path: Routes.ownerHome,
+        path: Routes.owner,
         pageBuilder: (context, state) =>
-            pageTransition(context, state, const OwnerHome())),
-  
+            pageTransition(context, state, const OwnerView())),
+
   ],
 );

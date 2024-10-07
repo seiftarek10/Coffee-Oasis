@@ -43,9 +43,11 @@ class _AppBottomBarState extends State<AppBottomBar> {
             }).toList()),
           )),
       resizeToAvoidBottomInset: false,
-      body: Stack(children: [
-        Background(child: widget.pages.elementAt(_selectedIndex))
-      ]),
+      body: SafeArea(
+        child: Stack(children: [
+          Background(child: widget.pages.elementAt(_selectedIndex))
+        ]),
+      ),
 
       //   bottomNavigationBar:
     );
