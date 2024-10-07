@@ -23,9 +23,12 @@ class NavigationBarItem extends StatelessWidget {
               title: bottomBarItemModel.title,
               icon: bottomBarItemModel.icon,
             )
-          : InActiveBottomBarItem(
-              icon: bottomBarItemModel.icon,
-            ),
+          : Padding(
+            padding: const EdgeInsets.only(right:  20.0),
+            child: InActiveBottomBarItem(
+                icon: bottomBarItemModel.icon,
+              ),
+          ),
     );
   }
 }

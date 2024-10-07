@@ -16,9 +16,9 @@ class OwnerHomeView extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
               child: Column(children: [
-            Space.topSpace,
+            Space.topPageSpace,
             Text("All Categories", style: Fonts.font40_700White),
-            Space.topSpace,
+            Space.topPageSpace,
           ])),
           const AllCategoiresListView(),
           SliverToBoxAdapter(child: Space.bottomSpace)
