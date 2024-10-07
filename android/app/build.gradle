@@ -6,6 +6,31 @@ plugins {
 }
 
 android {
+
+    flavorDimensions += "default"
+
+    productFlavors {
+        create("owner") {
+            dimension = "default"
+            resValue "string","app_name","Owner"
+            applicationIdSuffix = ""
+        }
+        create("staff") {
+            dimension = "default"
+            resValue "string","app_name","Staff"
+            applicationIdSuffix = ""
+        }
+        create("delivery") {
+            dimension = "default"
+            resValue "string","app_name","Delivery"
+            applicationIdSuffix = ""
+        }
+        create("user") {
+            dimension = "default"
+            resValue "string","app_name","User"
+            applicationIdSuffix = ""
+        }
+    }
     namespace = "com.example.coffee_oasis"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
