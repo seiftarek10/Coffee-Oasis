@@ -12,12 +12,11 @@ class AnalyticsView extends StatelessWidget {
       child: Column(
         children: [
           Space.topPageSpace,
-          const Expanded(flex: 2, child: AnayliticsContainer(title: 'Today',
+          const Expanded(child: AnayliticsContainer(title: 'Today',
 
           )),
           Space.bottomSpace,
           const Expanded(
-              flex: 2,
               child: AnayliticsContainer(title: 'All Time',)),
           Space.bottomSpace
         ],

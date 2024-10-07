@@ -32,7 +32,7 @@ class _SplashViewState extends State<SplashView> {
         decoration: const BoxDecoration(
             color: Color.fromARGB(255, 58, 38, 28),
             image: DecorationImage(
-              image: AssetImage(Assets.imagesSplash),
+              image: AssetImage(Assets.imagesLogo),
             )),
       ),
     );
