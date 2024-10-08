@@ -35,7 +35,7 @@ class ActiveBottomBarItem extends StatelessWidget {
               fit: BoxFit.scaleDown,
               child: Text(
                 title,
-                style: Fonts.font14_400PrimaryColor,
+                style: Fonts.font14_500PrimaryColor,
                 textAlign: TextAlign.center,
               ),
             ),
