@@ -4,8 +4,8 @@ import 'package:coffee_oasis/Core/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Category extends StatelessWidget {
-  const Category({
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({
     super.key,
   });
 
@@ -23,7 +23,7 @@ class Category extends StatelessWidget {
             style: Fonts.font16_500,
           )),
         ),
-        child: const Image(image: AssetImage(Assets.imagesBackground)),
+        child: const Image(image: AssetImage(Assets.imagesTest),fit: BoxFit.fill,),
       ),
     );
   }

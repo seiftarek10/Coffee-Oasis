@@ -1,6 +1,8 @@
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/category.dart';
+import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class AllCategoiresListView extends StatelessWidget {
   const AllCategoiresListView({
@@ -16,7 +18,11 @@ class AllCategoiresListView extends StatelessWidget {
           crossAxisSpacing: 20.w,
           mainAxisSpacing: 20.h),
       delegate: SliverChildBuilderDelegate((context, index) {
-        return const Category();
+        return GestureDetector(
+            onTap: () {
+              GoRouter.of(context).push(Routes.category);
+            },
+            child: const CategoryCard());
       }, childCount: 20),
     );
   }

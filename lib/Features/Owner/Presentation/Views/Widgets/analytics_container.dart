@@ -23,7 +23,7 @@ class AnayliticsContainer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, right: 20, top: 24),
             decoration: BoxDecoration(
                 color: AppColors.kWhiteObacity,
-                borderRadius: BorderRadius.circular(20)),
+                borderRadius: BorderRadius.circular(AppConstant.kBorderRadius)),
             child: const Column(
               children: [
                 Expanded(
