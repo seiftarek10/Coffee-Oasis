@@ -1,16 +1,17 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_coffee_drink_form.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/edit_coffee_drink_photo.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/add_coffee_form.dart';
+
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/coffee_photo_buttton.dart';
 import 'package:flutter/material.dart';
 
-class DialogEditBody extends StatelessWidget {
-  const DialogEditBody({
+class AddCoffeeDrinkBody extends StatelessWidget {
+  const AddCoffeeDrinkBody({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         child: Padding(
@@ -21,7 +22,7 @@ class DialogEditBody extends StatelessWidget {
               Space.topPageSpace,
               const CoffeeDtrinkPhoto(),
               Space.topPageSpace,
-              const EditCoffeeDrinkForm()
+              const AddCoffeeDrinkForm()
             ],
           ),
         ),
@@ -29,8 +30,6 @@ class DialogEditBody extends StatelessWidget {
     );
   }
 }
-
-
 
 
 

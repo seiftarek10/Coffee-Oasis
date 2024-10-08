@@ -22,7 +22,7 @@ class CoffeeDrinkItem extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: 0.7,
                 child: Image.asset(
-                  Assets.imagesCoffee,
+                  Assets.imagesBackground,
                   fit: BoxFit.fill,
                 ),
               ),

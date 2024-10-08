@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/category_card.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

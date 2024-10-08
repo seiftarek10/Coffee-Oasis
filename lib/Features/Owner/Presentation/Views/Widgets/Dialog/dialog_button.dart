@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -18,9 +19,11 @@ class DialogButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
+          overlayColor: AppColors.kPrimaryColor,
             padding: const EdgeInsets.symmetric(vertical: 10),
             backgroundColor: backgroundColor),
         onPressed: onPresed,
+        
         child:
             Text(title, style: Fonts.font20_700.copyWith(color: titleColor)));
   }
