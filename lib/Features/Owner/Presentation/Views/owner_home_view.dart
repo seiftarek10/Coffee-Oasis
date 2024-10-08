@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/all_categroies_list_view.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/all_categroies_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
