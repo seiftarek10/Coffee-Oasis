@@ -1,6 +1,9 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/constant.dart';
+
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_field_body.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_work_time_body.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/profile_info_item.dart';
 import 'package:flutter/material.dart';
 
@@ -26,25 +29,61 @@ class ShopInfoContainer extends StatelessWidget {
               ProfileInfoItem(
                 title: 'Email',
                 info: 'Seift470@gmail.com',
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return EditFieldBody(
+                          labelText: 'seift470@gmail.com',
+                          onSaved: (v) {},
+                        );
+                      });
+                },
               ),
               const SizedBox(height: 20),
               ProfileInfoItem(
                 title: 'phone',
                 info: '01027870171',
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return EditFieldBody(
+                          labelText: '01027870171',
+                          onSaved: (v) {},
+                        );
+                      });
+                },
               ),
               const SizedBox(height: 20),
               ProfileInfoItem(
                 title: 'Location',
                 info: 'Giza',
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return EditFieldBody(
+                          labelText: 'Giza',
+                          onSaved: (v) {},
+                        );
+                      });
+                },
               ),
               const SizedBox(height: 20),
               ProfileInfoItem(
                 title: 'Work Time',
                 info: 'From 10 AM To 11 PM',
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const EditWorkTimeBody(
+                          startTime: 'From 10 AM ',
+                          endTime: 'To 11 PM',
+                        );
+                      });
+                },
               ),
             ],
           ),
