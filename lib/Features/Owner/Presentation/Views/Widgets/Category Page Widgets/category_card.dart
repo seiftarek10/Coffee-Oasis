@@ -23,7 +23,7 @@ class CategoryCard extends StatelessWidget {
             style: Fonts.font16_500,
           )),
         ),
-        child: const Image(image: AssetImage(Assets.imagesBackground)),
+        child: const Image(image: AssetImage(Assets.imagesTest),fit: BoxFit.fill,),
       ),
     );
   }
