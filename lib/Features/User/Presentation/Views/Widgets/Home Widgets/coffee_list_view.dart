@@ -6,18 +6,22 @@ class HomeCoffeeDrinksListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 180 / 280,
-        crossAxisSpacing: 15,
-        mainAxisSpacing: 40,
+    return SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+
+      sliver: SliverGrid(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 180 / 280,
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 40,
+        ),
+        
+        delegate:SliverChildBuilderDelegate((context, index) {
+          return const HomeCoffeeDrinkItem();
+        },
+        childCount: 20) 
       ),
-      
-      delegate:SliverChildBuilderDelegate((context, index) {
-        return const HomeCoffeeDrinkItem();
-      },
-      childCount: 20) 
     );
   }
 }

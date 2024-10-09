@@ -15,8 +15,7 @@ class UserHomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: double.infinity,
-      width: double.infinity,
+      height: 215.h,
       color: const Color(0xff1d1d1d),
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
       child: Column(
