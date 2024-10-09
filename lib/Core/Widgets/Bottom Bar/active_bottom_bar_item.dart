@@ -25,7 +25,7 @@ class ActiveBottomBarItem extends StatelessWidget {
                 radius: 23,
                 child: Icon(
                   icon,
-                  size: 30,
+                  size: 28,
                   color: Colors.white,
                 )),
            ),
