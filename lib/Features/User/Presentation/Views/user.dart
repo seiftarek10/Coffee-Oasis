@@ -14,6 +14,7 @@ class UserView extends StatelessWidget {
       bottomBarItmeModel: [
         BottomBarItemModel(
           icon: EvaIcons.home,
+          
           title: 'Home'
         ),
          BottomBarItemModel(

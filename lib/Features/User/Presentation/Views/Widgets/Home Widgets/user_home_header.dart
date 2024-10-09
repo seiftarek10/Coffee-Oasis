@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
 import 'package:coffee_oasis/Core/constant.dart';
@@ -28,7 +29,7 @@ class UserHomeHeader extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Luka Modrich',
-            style: Fonts.font18_700.copyWith(color: Colors.white),
+            style: Fonts.font18_700.copyWith(color: AppColors.kWhiteObacity),
           ),
           Flexible(
             child: SizedBox(height: 20.h),
@@ -47,7 +48,7 @@ class UserHomeHeader extends StatelessWidget {
                         BorderRadius.circular(AppConstant.kBorderRadius),
                     child: AspectRatio(
                         aspectRatio: 1,
-                        child: SvgPicture.asset(Assets.imagesFiletr))),
+                        child: SvgPicture.asset(Assets.imagesFilet))),
               )
             ],
           )

@@ -25,6 +25,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       bottomNavigationBar: SizedBox(
           height: 55.h,
           child: Padding(

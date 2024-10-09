@@ -13,8 +13,8 @@ class SearchField extends StatelessWidget {
     return TextFormField(
       cursorColor: Colors.white,
       decoration: InputDecoration(
-        hintText: 'Search Coffee',
-        hintStyle: Fonts.font18_700
+        hintText: 'Search coffee',
+        hintStyle: Fonts.font16_500
             .copyWith(color: const Color(0xff939393)),
         fillColor: const Color(0xff2a2a2a),
         filled: true,
@@ -23,8 +23,8 @@ class SearchField extends StatelessWidget {
           size: 25.h,
           color: Colors.white,
         ),
-        // enabledBorder: borderShap(),
-        // focusedBorder: borderShap(),
+        enabledBorder: borderShap(),
+        focusedBorder: borderShap(),
       ),
     );
   }
