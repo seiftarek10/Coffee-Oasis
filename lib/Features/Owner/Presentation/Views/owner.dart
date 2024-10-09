@@ -12,6 +12,7 @@ class OwnerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBottomBar(
+      useBackGround: true,
       bottomBarItmeModel: <BottomBarItemModel>[
         BottomBarItemModel(title: 'Home', icon: EvaIcons.home),
         BottomBarItemModel(title: 'Analytics', icon: EvaIcons.barChart),

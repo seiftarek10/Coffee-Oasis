@@ -20,6 +20,7 @@ class ActiveBottomBarItem extends StatelessWidget {
       child: Row(
         children: [
            Expanded(
+            flex: 4,
              child: CircleAvatar(
                 backgroundColor: AppColors.kPrimaryColor,
                 radius: 23,
@@ -29,8 +30,9 @@ class ActiveBottomBarItem extends StatelessWidget {
                   color: Colors.white,
                 )),
            ),
+           const SizedBox(width: 4),
           Expanded(
-            flex: 2,
+            flex: 5,
             child: FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(
