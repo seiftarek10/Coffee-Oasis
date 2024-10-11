@@ -15,6 +15,9 @@ class CoffeeOasis extends StatelessWidget {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: router,
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white
+          ),
         );
       },
     );
