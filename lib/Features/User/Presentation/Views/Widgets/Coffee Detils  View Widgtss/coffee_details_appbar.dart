@@ -25,10 +25,10 @@ class _CoffeeDetailsAppBarState extends State<CoffeeDetailsAppBar> {
               onPressed: () {
                 GoRouter.of(context).pop();
               },
-              icon: const Icon(Icons.arrow_back_ios_rounded, size: 30)),
+              icon:  const Icon(Icons.arrow_back_ios_rounded, size: 28)),
         ),
         Expanded(
-            flex: 5,
+            flex: 7,
             child: Text('Details',
                 textAlign: TextAlign.center, style: Fonts.font20_700)),
         Expanded(
@@ -38,7 +38,7 @@ class _CoffeeDetailsAppBarState extends State<CoffeeDetailsAppBar> {
                   _isFavorite = !_isFavorite;
                 });
               },
-              icon: SvgPicture.asset(_isFavorite?Assets.imagesFillHeart : Assets.imagesHeart, height: 25.h)),
+              icon: SvgPicture.asset(_isFavorite?Assets.imagesFillHeart : Assets.imagesHeart, height: 25.h,fit: BoxFit.cover,)),
         )
       ],
     );
