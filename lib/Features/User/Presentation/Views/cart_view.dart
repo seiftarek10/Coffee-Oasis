@@ -1,4 +1,3 @@
-
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_header.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_item_list_view.dart';
@@ -11,10 +10,10 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Background(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          child: CustomScrollView(
-            physics: BouncingScrollPhysics(),
-                slivers: [
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      child: CustomScrollView(
+        physics: BouncingScrollPhysics(),
+        slivers: [
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,17 +21,12 @@ class CartView extends StatelessWidget {
                 SizedBox(height: 20),
                 CartHeaderPage(),
                 SizedBox(height: 40),
-          
-           
-
               ],
             ),
           ),
-         CartItemListView()
-                ],
-              ),
-        ));
+          CartItemListView()
+        ],
+      ),
+    ));
   }
 }
-
-

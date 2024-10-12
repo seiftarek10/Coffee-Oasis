@@ -15,7 +15,7 @@ class RecivingOptionContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: index==0?  const EdgeInsets.only(right: 8):const EdgeInsets.only(left: 8),
       child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),

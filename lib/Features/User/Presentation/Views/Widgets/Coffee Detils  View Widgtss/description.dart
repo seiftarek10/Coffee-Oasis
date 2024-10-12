@@ -14,7 +14,6 @@ class Description extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Description', style: Fonts.font20_700),
-        const SizedBox(height: 8),
         const ReadMoreText(
           text:  'A cappuccino is an approximately 150 ml (5 oz) beverage, with 25 ml of espresso coffee and 85ml of fresh milk the fo.',
           maxLines: 3,

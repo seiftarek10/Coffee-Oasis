@@ -19,7 +19,7 @@ class _RecivedOptionsState extends State<RecivedOptions> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Receiving Options', style: Fonts.font20_700),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         Row(
           children: List.generate(2, (index) {
             return Expanded(

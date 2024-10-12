@@ -62,7 +62,7 @@ class CartItem extends StatelessWidget {
           ),
           Expanded(
               flex: 2,
-              child: IconButton(onPressed: (){}, icon: const Icon(Icons.delete,color: AppColors.kDarkerPrimaryColor)))
+              child: IconButton(onPressed: (){}, icon: const Icon(Icons.delete,color: AppColors.kPrimaryColor)))
         ],
       ),
     );
