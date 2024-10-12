@@ -1,6 +1,8 @@
+import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_header.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_item_list_view.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/delete_note.dart';
 import 'package:flutter/material.dart';
 
 class CartView extends StatelessWidget {
@@ -8,23 +10,25 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Background(
+    return  Background(
         child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
-                CartHeaderPage(),
-                SizedBox(height: 40),
+                Space.k20 ,
+                const CartHeaderPage(),
+                const SizedBox(height: 40),
+                const DeleteNote(),
+                Space.k12
               ],
             ),
           ),
-          CartItemListView()
+          const CartItemListView()
         ],
       ),
     ));

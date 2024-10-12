@@ -3,10 +3,8 @@ import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
 import 'package:flutter/material.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({
-    super.key,
-  });
+class OrderItem extends StatelessWidget {
+  const OrderItem({super.key});
 
   @override
   Widget build(BuildContext context) {
