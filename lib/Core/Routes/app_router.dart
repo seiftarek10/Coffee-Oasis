@@ -4,6 +4,7 @@ import 'package:coffee_oasis/Features/Owner/Presentation/Views/category_view.dar
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/owner.dart';
 import 'package:coffee_oasis/Features/Splash%20Screen/splash_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/coffee_details_view.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/order_details.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/user.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,6 +29,10 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: Routes.coffeeDetails,
         pageBuilder: (context, state) =>
-            pageTransition(context, state, const CoffeeDetailsView()))
+            pageTransition(context, state, const CoffeeDetailsView())),
+        GoRoute(
+        path: Routes.orderDetails,
+        pageBuilder: (context, state) =>
+            pageTransition(context, state, const OrderDetailsView()))
   ],
 );

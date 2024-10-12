@@ -1,6 +1,8 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/Utils/assets.dart';
+import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Common%20Widgets/coffee_name_category.dart';
+import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {
@@ -14,40 +16,20 @@ class OrderItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(15)),
       child: Row(
         children: [
-          Expanded(
+          const Expanded(
             flex: 3,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  bottomLeft: Radius.circular(15)),
-              child: AspectRatio(
+            child: AppClipReact(
+            radiusForAll: false,
+              child: CoffeePhotoCard(
                 aspectRatio: 1,
-                child: Image.asset(
-                  Assets.imagesTest,
-                  fit: BoxFit.cover,
-                ),
+                
               ),
             ),
           ),
           const SizedBox(width: 16),
-          Expanded(
+          const Expanded(
             flex: 7,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 4),
-                Text('Coffee Name',
-                    style: Fonts.font18_700,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
-                Text('Category',
-                    style: Fonts.font16_300,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
-                const SizedBox(height: 4),
-              ],
-            ),
+            child: CoffeeNameAndCategory(),
           ),
           Expanded(
             flex: 3,

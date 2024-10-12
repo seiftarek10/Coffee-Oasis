@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/Utils/assets.dart';
+import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,12 +16,14 @@ class HomeCoffeeDrinkItem extends StatelessWidget {
       elevation: 3,
       child: Column(
         children: [
-          Expanded(
+          const Expanded(
               flex: 3,
-              child: AspectRatio(
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                child: CoffeePhotoCard(
                   aspectRatio: 140 / 100,
-                  child: Image.asset(Assets.imagesCoffee,
-                      fit: BoxFit.fill))),
+                ),
+              )),
           SizedBox(height: 5.h),
           Expanded(
               flex: 2,
@@ -33,8 +35,8 @@ class HomeCoffeeDrinkItem extends StatelessWidget {
                     Text('Flat White', style: Fonts.font18_700),
                     const SizedBox(height: 4),
                     Text('Espresso',
-                        style: Fonts.font14_500
-                            .copyWith(color: Colors.grey[600])),
+                        style:
+                            Fonts.font14_500.copyWith(color: Colors.grey[600])),
                     const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,12 +45,10 @@ class HomeCoffeeDrinkItem extends StatelessWidget {
                         IconButton(
                             onPressed: () {},
                             icon: Container(
-                              
-                              padding: const EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     color: AppColors.kPrimaryColor,
-                                    borderRadius:
-                                        BorderRadius.circular(10)),
+                                    borderRadius: BorderRadius.circular(10)),
                                 child: const Icon(
                                   Icons.add,
                                   color: Colors.white,

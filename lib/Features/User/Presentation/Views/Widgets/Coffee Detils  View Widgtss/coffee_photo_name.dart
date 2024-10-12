@@ -1,7 +1,8 @@
 
-import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Common%20Widgets/coffee_name_category.dart';
+import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
 import 'package:flutter/material.dart';
 
 class CoffeePhotoAndName extends StatelessWidget {
@@ -13,11 +14,11 @@ class CoffeePhotoAndName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ClipRRect(
-         borderRadius: BorderRadius.circular(AppConstant.kBorderRadius),
-          child: AspectRatio(
+        const AppClipReact(
+       radiusForAll: true,
+          child: CoffeePhotoCard(
            aspectRatio: 327/202,
-           child: Image.asset(Assets.imagesBackground,fit: BoxFit.cover)),
+          ),
         ),
         const SizedBox(height: 16),
         Padding(
@@ -25,13 +26,7 @@ class CoffeePhotoAndName extends StatelessWidget {
           child: Row(
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Text('Coffee Name',style: Fonts.font24_700),
-                 Text('Hot/Ice',style: Fonts.font16_300),
-               ],
-             ),
+          const CoffeeNameAndCategory(),
              Image.asset(Assets.imagesSuperiority,scale: 0.95,)
            ],
           ),
