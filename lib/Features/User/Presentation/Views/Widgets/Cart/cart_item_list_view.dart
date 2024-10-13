@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_item.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/%20cart_slideable_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,9 +14,11 @@ class CartItemListView extends StatelessWidget {
           onTap: () {
             GoRouter.of(context).push(Routes.coffeeDetails);
           },
-          child: const Padding(
-            padding: EdgeInsets.only(bottom: 24.0),
-            child: CartItem(),
+          child:  Padding(
+            padding: const EdgeInsets.only(bottom: 24.0),
+            child: CartSlideableItem(
+              itemKey: Key(index.toString()),
+            ),
           ),
         );
       }, childCount: 20),
