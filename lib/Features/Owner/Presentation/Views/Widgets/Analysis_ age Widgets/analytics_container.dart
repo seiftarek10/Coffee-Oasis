@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/constant.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/analytics_item.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Analysis_%20age%20Widgets/analytics_item.dart';
 import 'package:flutter/material.dart';
 
 class AnayliticsContainer extends StatelessWidget {

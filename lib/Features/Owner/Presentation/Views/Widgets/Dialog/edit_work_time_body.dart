@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/dialog_button.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/dialog_text_field.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/am_pm_switcher.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Profile/am_pm_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';

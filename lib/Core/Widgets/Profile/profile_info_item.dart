@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 
 class ProfileInfoItem extends StatelessWidget {
   const ProfileInfoItem({
-    super.key, required this.info, required this.title, required this.onPressed,
+    super.key,
+    required this.info,
+    required this.title,
+    required this.onPressed, this.editItem,
   });
 
   final String title, info;
   final void Function() onPressed;
+  final bool? editItem;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +22,10 @@ class ProfileInfoItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title, style: Fonts.font20_700),
-            Text(info, style: Fonts.font16_500),
+           editItem==null?  Text(info, style: Fonts.font16_500):const SizedBox.shrink(),
           ],
         ),
-        IconButton(onPressed: onPressed, icon: const Icon(Icons.edit))
+        IconButton(onPressed: onPressed, icon:  Icon(editItem==null? Icons.edit:Icons.arrow_forward_ios_sharp))
       ],
     );
   }
