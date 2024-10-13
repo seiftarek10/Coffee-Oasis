@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/profile_header.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/shop_info.dart';
+import 'package:coffee_oasis/Core/Widgets/Profile/profile_header.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Profile/shop_info_container.dart';
 import 'package:flutter/material.dart';
 
 class OwnerProfile extends StatelessWidget {
@@ -14,7 +14,10 @@ class OwnerProfile extends StatelessWidget {
       child: Column(
         children: [
           Space.topPageSpace,
-          const ProfileHeaderContainer(),
+          const ProfileHeaderContainer(
+            title: 'Seif Tariq',
+            subTitle: 'Owner of the coffee oasis',
+          ),
           const SizedBox(height: 40),
           const ShopInfoContainer(),
         ],

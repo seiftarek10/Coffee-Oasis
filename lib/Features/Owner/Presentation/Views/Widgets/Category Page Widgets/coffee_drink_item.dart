@@ -1,7 +1,9 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/Utils/assets.dart';
-import 'package:coffee_oasis/Core/constant.dart';
+
+
+import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
+import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,20 +14,14 @@ class CoffeeDrinkItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(AppConstant.kBorderRadius),
+    return AppClipReact(
+      radiusForAll: true,
       child: Container(
         color: AppColors.kWhiteObacity,
         child: Row(
           children: [
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: 0.7,
-                child: Image.asset(
-                  Assets.imagesBackground,
-                  fit: BoxFit.fill,
-                ),
-              ),
+            const Expanded(
+              child: CoffeePhotoCard(aspectRatio: 0.7,),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -60,3 +56,4 @@ class CoffeeDrinkItem extends StatelessWidget {
     );
   }
 }
+

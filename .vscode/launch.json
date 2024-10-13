@@ -46,7 +46,7 @@
                 "--flavor",
                 "user",
                 "--target",
-                "lib/user.dart"
+                "lib/main_user.dart"
             ]
         }
     ],

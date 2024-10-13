@@ -4,7 +4,7 @@ import 'package:coffee_oasis/Core/constant.dart';
 
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_field_body.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_work_time_body.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/profile_info_item.dart';
+import 'package:coffee_oasis/Core/Widgets/Profile/profile_info_item.dart';
 import 'package:flutter/material.dart';
 
 class ShopInfoContainer extends StatelessWidget {
@@ -50,6 +50,7 @@ class ShopInfoContainer extends StatelessWidget {
                       builder: (context) {
                         return EditFieldBody(
                           labelText: '01027870171',
+                          keyboardType: TextInputType.number,
                           onSaved: (v) {},
                         );
                       });

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class ActiveBottomBarItem extends StatelessWidget {
   const ActiveBottomBarItem({
-    super.key, required this.title, required this.icon,
+    super.key,
+    required this.title,
+    required this.icon,
   });
 
   final String title;
@@ -19,18 +21,20 @@ class ActiveBottomBarItem extends StatelessWidget {
           color: Colors.grey[300], borderRadius: BorderRadius.circular(80)),
       child: Row(
         children: [
-           Expanded(
-             child: CircleAvatar(
+          Expanded(
+            flex: 4,
+            child: CircleAvatar(
                 backgroundColor: AppColors.kPrimaryColor,
                 radius: 23,
                 child: Icon(
                   icon,
-                  size: 30,
+                  size:  26,
                   color: Colors.white,
                 )),
-           ),
+          ),
+          const SizedBox(width: 4),
           Expanded(
-            flex: 2,
+            flex: 5,
             child: FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(

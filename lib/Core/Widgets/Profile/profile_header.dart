@@ -1,4 +1,3 @@
-
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
@@ -8,9 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileHeaderContainer extends StatelessWidget {
   const ProfileHeaderContainer({
-    super.key,
+    super.key, required this.title, required this.subTitle,
   });
 
+  final String title,subTitle;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +24,6 @@ class ProfileHeaderContainer extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: AppColors.kPrimaryColor,
                 backgroundImage: const AssetImage(Assets.imagesLogo),
-                
                 radius: 35.h,
               ),
             ),
@@ -34,14 +33,12 @@ class ProfileHeaderContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Seif Tariq',style: Fonts.font18_700),
-                  Text('Owner of the coffee oasis',style: Fonts.font16_500),
-              
+                  Text(title, style: Fonts.font18_700),
+                  Text(subTitle, style: Fonts.font16_500),
                 ],
               ),
             )
           ],
-        )
-        );
+        ));
   }
 }

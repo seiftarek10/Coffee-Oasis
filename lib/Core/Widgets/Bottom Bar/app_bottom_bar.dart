@@ -9,11 +9,12 @@ class AppBottomBar extends StatefulWidget {
   const AppBottomBar({
     super.key,
     required this.pages,
-    required this.bottomBarItmeModel,
+    required this.bottomBarItmeModel, required this.useBackGround,
   });
 
   final List<Widget> pages;
   final List<BottomBarItemModel> bottomBarItmeModel;
+  final bool useBackGround;
 
   @override
   State<AppBottomBar> createState() => _AppBottomBarState();
@@ -24,6 +25,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       bottomNavigationBar: SizedBox(
           height: 55.h,
           child: Padding(
@@ -44,10 +46,12 @@ class _AppBottomBarState extends State<AppBottomBar> {
           )),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Stack(children: [
+        child: widget.useBackGround==true?
+        
+         Stack(children: [
           Background(child: widget.pages.elementAt(_selectedIndex))
-        ]),
-      ),
+        ]):widget.pages.elementAt(_selectedIndex
+      )),
 
       //   bottomNavigationBar:
     );
