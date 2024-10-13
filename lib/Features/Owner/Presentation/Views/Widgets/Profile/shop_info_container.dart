@@ -50,6 +50,7 @@ class ShopInfoContainer extends StatelessWidget {
                       builder: (context) {
                         return EditFieldBody(
                           labelText: '01027870171',
+                          keyboardType: TextInputType.number,
                           onSaved: (v) {},
                         );
                       });

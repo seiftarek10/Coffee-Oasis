@@ -1,8 +1,9 @@
 import 'package:coffee_oasis/Core/Routes/page_transition.dart';
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
+import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_in_view.dart';
+import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_up_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/category_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/owner.dart';
-import 'package:coffee_oasis/Features/Splash%20Screen/splash_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/coffee_details_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/favorite_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/order_details.dart';
@@ -14,7 +15,11 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: '/',
         pageBuilder: (context, state) =>
-            pageTransition(context, state, const SplashView())),
+            pageTransition(context, state, const SignUpView())),
+    // GoRoute(
+    //     path: '/',
+    //     pageBuilder: (context, state) =>
+    //         pageTransition(context, state, const SplashView())),
     GoRoute(
         path: Routes.owner,
         pageBuilder: (context, state) =>
@@ -31,13 +36,21 @@ final GoRouter router = GoRouter(
         path: Routes.coffeeDetails,
         pageBuilder: (context, state) =>
             pageTransition(context, state, const CoffeeDetailsView())),
-        GoRoute(
+    GoRoute(
         path: Routes.orderDetails,
         pageBuilder: (context, state) =>
             pageTransition(context, state, const OrderDetailsView())),
-             GoRoute(
+    GoRoute(
         path: Routes.favorite,
         pageBuilder: (context, state) =>
-            pageTransition(context, state, const FavoriteView()))
+            pageTransition(context, state, const FavoriteView())),
+    GoRoute(
+        path: Routes.signup,
+        pageBuilder: (context, state) =>
+            pageTransition(context, state, const SignUpView())),
+    GoRoute(
+        path: Routes.signin,
+        pageBuilder: (context, state) =>
+            pageTransition(context, state, const SignInView()))
   ],
 );

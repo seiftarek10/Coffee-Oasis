@@ -1,7 +1,6 @@
-
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/dialog_button.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/dialog_text_field.dart';
+import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,18 +14,28 @@ class AddCoffeeDrinkForm extends StatelessWidget {
     return Form(
         child: Column(
       children: [
-        DialogTextField(
+        AppTextField(
           labelText: 'Coffee Drink Name',
+          validator: (v) {
+            return '';
+          },
           onSaved: (v) {},
         ),
         const SizedBox(height: 40),
-        DialogTextField(
+        AppTextField(
           labelText: 'Description',
+          validator: (v) {
+            return '';
+          },
           onSaved: (v) {},
         ),
         const SizedBox(height: 40),
-        DialogTextField(
+        AppTextField(
           labelText: 'Price',
+          keyboardType: TextInputType.number,
+          validator: (v) {
+            return '';
+          },
           onSaved: (v) {},
         ),
         const SizedBox(height: 60),
@@ -45,13 +54,11 @@ class AddCoffeeDrinkForm extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: DialogButton(
-              title: 'Add',
-              titleColor: Colors.white,
-              backgroundColor: AppColors.kPrimaryColor,
-              onPresed: () {
-                
-              },
-            ),
+                title: 'Add',
+                titleColor: Colors.white,
+                backgroundColor: AppColors.kPrimaryColor,
+                onPresed: () {},
+              ),
             ),
           ],
         ),
