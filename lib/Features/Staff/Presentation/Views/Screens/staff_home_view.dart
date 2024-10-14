@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
-import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/staff_home_header.dart';
+import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/home_header_text.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/tabs.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/tabs_view.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,6 @@ class StaffHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        
         length: 2,
         initialIndex: 0,
         child: Scaffold(
@@ -23,7 +22,9 @@ class StaffHomeView extends StatelessWidget {
                 child: Column(
                   children: [
                     Space.k20,
-                    const StaffHomeHeader(),
+                    const StaffHomeHeaderText(
+                   
+                    ),
                     Space.k24,
                     const Tabs(),
                     Space.k24,
@@ -36,6 +37,3 @@ class StaffHomeView extends StatelessWidget {
         ));
   }
 }
-
-
-

@@ -10,7 +10,8 @@ class SwapNote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(text: TextSpan(
+    return 
+    RichText(text: TextSpan(
       text:'Swipe left to ',
       style: Fonts.font18_700 ,
       children: [

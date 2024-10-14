@@ -1,5 +1,7 @@
+import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/staff_order_item.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PickUpOrdersListView extends StatelessWidget {
   const PickUpOrdersListView({super.key});
@@ -10,9 +12,14 @@ class PickUpOrdersListView extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       itemCount: 20,
       itemBuilder: (context, index) {
-        return const Padding(
-          padding: EdgeInsets.only(bottom: 24),
-          child: StaffOrderItem(),
+        return GestureDetector(
+          onTap: () {
+            GoRouter.of(context).push(Routes.staffOrderDetails);
+          },
+          child: const Padding(
+            padding: EdgeInsets.only(bottom: 24),
+            child: StaffOrderItem(),
+          ),
         );
       },
     );
