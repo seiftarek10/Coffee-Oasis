@@ -1,11 +1,11 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-
+import 'package:coffee_oasis/Core/Utils/assets.dart';
 import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
-import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/search_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class UserHomeHeader extends StatelessWidget {
   const UserHomeHeader({
@@ -41,11 +41,12 @@ class UserHomeHeader extends StatelessWidget {
                 child: SearchField(),
               ),
               SizedBox(width: 15.w),
-              const Expanded(
+               Expanded(
                 child: AppClipReact(
                      radiusForAll: true,
-                    child: CoffeePhotoCard(
-                        aspectRatio: 1
+                    child: AspectRatio(
+                        aspectRatio: 1,
+                        child: SvgPicture.asset(Assets.imagesFilet),
                         )),
               )
             ],
