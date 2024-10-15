@@ -1,9 +1,9 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
-import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/home_header_text.dart';
-import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/tabs.dart';
-import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/tabs_view.dart';
+import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Home%20Widgets/home_header_text.dart';
+import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Home%20Widgets/tabs.dart';
+import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Home%20Widgets/tabs_view.dart';
 import 'package:flutter/material.dart';
 
 class StaffHomeView extends StatelessWidget {
@@ -23,7 +23,6 @@ class StaffHomeView extends StatelessWidget {
                   children: [
                     Space.k20,
                     const StaffHomeHeaderText(
-                   
                     ),
                     Space.k24,
                     const Tabs(),

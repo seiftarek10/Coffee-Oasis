@@ -54,9 +54,9 @@ final GoRouter router = GoRouter(
         path: Routes.signin,
         pageBuilder: (context, state) =>
             pageTransition(context, state, const SignInView())),
-       GoRoute(
+    GoRoute(
         path: Routes.staffOrderDetails,
         pageBuilder: (context, state) =>
-            pageTransition(context, state, const StaffOrderDetails()))
+            pageTransition(context, state, const StaffOrderDetailsView()))
   ],
 );
