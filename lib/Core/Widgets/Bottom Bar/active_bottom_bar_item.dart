@@ -20,6 +20,7 @@ class ActiveBottomBarItem extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey[300], borderRadius: BorderRadius.circular(80)),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             flex: 4,
@@ -32,7 +33,7 @@ class ActiveBottomBarItem extends StatelessWidget {
                   color: Colors.white,
                 )),
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: 6),
           Expanded(
             flex: 5,
             child: FittedBox(
