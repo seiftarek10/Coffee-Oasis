@@ -10,4 +10,5 @@ abstract class Routes {
   static const String signin = '/signin';
   static const String staff = '/staff';
   static const String staffOrderDetails = '/stafforderdetails';
+  static const String delivery = '/delivery';
 }
