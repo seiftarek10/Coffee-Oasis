@@ -1,6 +1,5 @@
-import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_field_body.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_work_time_body.dart';
@@ -19,11 +18,8 @@ class ShopInfoContainer extends StatelessWidget {
       children: [
         Text('Shop Info', style: Fonts.font35_700White),
         const SizedBox(height: 10),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-          decoration: BoxDecoration(
-              color: AppColors.kWhiteObacity,
-              borderRadius: BorderRadius.circular(AppConstant.kBorderRadius)),
+        AppWhiteContainer(
+        
           child: Column(
             children: [
               ProfileInfoItem(

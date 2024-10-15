@@ -3,6 +3,7 @@ import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_name_category.dart';
 import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
+import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {
@@ -10,10 +11,8 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: AppColors.kWhiteObacity,
-          borderRadius: BorderRadius.circular(15)),
+    return AppWhiteContainer(
+     noPadding: true,
       child: Row(
         children: [
           const Expanded(

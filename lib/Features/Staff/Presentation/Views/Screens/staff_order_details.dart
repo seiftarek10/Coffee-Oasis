@@ -13,11 +13,12 @@ class StaffOrderDetails extends StatelessWidget {
       body: SafeArea(
         child: Background(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
               children: [
                 Space.k40,
-              const OrderDetailsHeaderText()
+              const OrderDetailsHeaderText(),
+              
               ],
             ),
           ),

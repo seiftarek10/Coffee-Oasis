@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
-import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Widgets/white_container.dart';
+
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_field_body.dart';
 import 'package:coffee_oasis/Core/Widgets/Profile/profile_info_item.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +19,8 @@ class UserInfoContainer extends StatelessWidget {
       children: [
         Text('User Info', style: Fonts.font35_700White),
         const SizedBox(height: 10),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-          decoration: BoxDecoration(
-              color: AppColors.kWhiteObacity,
-              borderRadius: BorderRadius.circular(AppConstant.kBorderRadius)),
+        AppWhiteContainer(
+       
           child: Column(
             children: [
               ProfileInfoItem(
