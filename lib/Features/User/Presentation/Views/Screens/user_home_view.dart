@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/all_categories_list_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/coffee_list_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/offer_card.dart';
@@ -10,26 +11,28 @@ class UserHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
-      slivers: [
-        SliverToBoxAdapter(
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  const UserHomeHeader(),
-                  SizedBox(height: 75.h),
-                  const HomeCategoriesListView(),
-                  const SizedBox(height: 30),
-                ],
-              ),
-              const OfferCard(),
-            ],
+    return AppAnimatedOpacity(
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverToBoxAdapter(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    const UserHomeHeader(),
+                    SizedBox(height: 75.h),
+                    const HomeCategoriesListView(),
+                    const SizedBox(height: 30),
+                  ],
+                ),
+                const OfferCard(),
+              ],
+            ),
           ),
-        ),
-        const HomeCoffeeDrinksListView(),
-      ],
+          const HomeCoffeeDrinksListView(),
+        ],
+      ),
     );
   }
 }

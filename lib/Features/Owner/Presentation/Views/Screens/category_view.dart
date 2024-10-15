@@ -26,7 +26,7 @@ class CategoryView extends StatelessWidget {
                 ),
                 Space.k24,
                 const SwapNote(),
-                Space.k12,
+                Space.k24,
                const CoffeeDrinksListView()
               ],
             ),

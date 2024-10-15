@@ -1,5 +1,6 @@
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
+import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,12 +29,14 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 58, 38, 28),
-            image: DecorationImage(
-              image: AssetImage(Assets.imagesLogo),
-            )),
+      body: AppAnimatedOpacity(
+        child: Container(
+          decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 58, 38, 28),
+              image: DecorationImage(
+                image: AssetImage(Assets.imagesLogo),
+              )),
+        ),
       ),
     );
   }

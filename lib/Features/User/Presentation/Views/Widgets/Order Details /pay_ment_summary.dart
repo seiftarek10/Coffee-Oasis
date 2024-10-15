@@ -31,6 +31,13 @@ class PaymentSummary extends StatelessWidget {
             Text('Deliver', style: Fonts.font16_500),
             Text(r'$ 3,43', style: Fonts.font18_700),
           ],
+        ),  Space.k8,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Total', style: Fonts.font16_500),
+            Text(r'$ 3,43', style: Fonts.font18_700),
+          ],
         ),
       ],
     );

@@ -14,7 +14,9 @@ class CoffeeDetailsAppBar extends StatelessWidget {
     return Row(
       children: [
         const Expanded(
-          child: ArrowBackIcon()
+          child: ArrowBackIcon(
+            color: Colors.black,
+          )
         ),
         Expanded(
             flex: 7,

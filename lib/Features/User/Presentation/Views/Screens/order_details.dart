@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
+import 'package:coffee_oasis/Core/Theme/fonts.dart';
 
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Order%20Details%20/contact_container.dart';
@@ -26,7 +27,10 @@ class OrderDetailsView extends StatelessWidget {
               Space.k40,
               const AddressContainer(),
               Space.k40,
-              const OrderContainer()
+              const OrderContainer(),
+              const Spacer(),
+              Text('Deveolped by @Seif Tariq',
+                  style: Fonts.font16_500.copyWith(color: Colors.white))
             ],
           ),
         ),
@@ -34,4 +38,3 @@ class OrderDetailsView extends StatelessWidget {
     );
   }
 }
-

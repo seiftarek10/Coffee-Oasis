@@ -14,6 +14,7 @@ class HeaderBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
        const ArrowBackIcon(),
         Expanded(
