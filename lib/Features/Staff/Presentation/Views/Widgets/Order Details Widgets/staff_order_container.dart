@@ -7,8 +7,9 @@ import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 import 'package:flutter/material.dart';
 
 class StaffOrderContainer extends StatelessWidget {
-  const StaffOrderContainer({super.key});
+  const StaffOrderContainer({super.key, required this.deliver});
 
+  final bool deliver;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,17 +32,26 @@ class StaffOrderContainer extends StatelessWidget {
                 const Expanded(flex: 7, child: TitleAndSubTitleCaffeeCard()),
                 Text('1', style: Fonts.font18_700)
               ]),
-              const Divider(height: 30),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text(
-                  'Delivery :',
-                  style: Fonts.font18_700,
-                ),
-                Text(
-                  'Tamim',
-                  style: Fonts.font18_700,
-                )
-              ]),
+
+              deliver?
+              Column(
+                children: [
+                  const Divider(height: 30),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Delivery :',
+                          style: Fonts.font18_700,
+                        ),
+                        Text(
+                          'Tamim',
+                          style: Fonts.font18_700,
+                        )
+                      ]),
+                ],
+              ):
+              const SizedBox.shrink()
             ],
           ),
         ),

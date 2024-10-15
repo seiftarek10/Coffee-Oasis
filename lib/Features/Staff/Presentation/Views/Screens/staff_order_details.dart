@@ -14,30 +14,28 @@ class StaffOrderDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Background(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Space.k40,
-                  const OrderDetailsHeaderText(),
-                  Space.k40,
-                  const RequesterInfo(),
-                  Space.k24,
-                  const StaffOrderContainer(),
-                  Space.k24,
-                  const StaffPaymentSummaryContaier(),
-                  Space.k40,
-                  const StaffOrderDetailsButton()
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+        body: SafeArea(
+            child: Background(
+                child: SingleChildScrollView(
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Space.k40,
+                              const OrderDetailsHeaderText(),
+                              Space.k40,
+                              const RequesterInfo(),
+                              Space.k24,
+                              const StaffOrderContainer(
+                                deliver: true,
+                              ),
+                              Space.k24,
+                              const StaffPaymentSummaryContaier(
+                                deliver: true,
+                              ),
+                              Space.k40,
+                              const StaffOrderDetailsButton()
+                            ]))))));
   }
 }

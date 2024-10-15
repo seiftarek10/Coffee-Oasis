@@ -4,6 +4,7 @@ import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_in_vi
 import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_up_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/category_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/owner.dart';
+import 'package:coffee_oasis/Features/Staff/Presentation/Views/Screens/staff_home_view.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Screens/staff_order_details.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/coffee_details_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/favorite_view.dart';
@@ -16,7 +17,7 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: '/',
         pageBuilder: (context, state) => 
-            pageTransition(context, state, const UserView())),
+            pageTransition(context, state, const StaffHomeView())),
     // GoRoute(
     //     path: '/',
     //     pageBuilder: (context, state) =>

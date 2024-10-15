@@ -2,7 +2,7 @@ import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
 import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/search_filed.dart';
+import 'package:coffee_oasis/Core/Widgets/search_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
