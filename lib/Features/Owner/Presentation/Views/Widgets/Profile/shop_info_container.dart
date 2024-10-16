@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_field_body.dart';
+import 'package:coffee_oasis/Core/Widgets/Profile/edit_profile_field.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_work_time_body.dart';
 import 'package:coffee_oasis/Core/Widgets/Profile/profile_info_item.dart';
 import 'package:flutter/material.dart';

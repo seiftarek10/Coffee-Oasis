@@ -12,19 +12,22 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Background(
-      child: AppAnimatedOpacity(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            children: [
-              Space.topPageSpace,
-              const ProfileHeaderContainer(
-                title: 'Seif Tariq',
-                subTitle: 'Valued Coffee Oasis Member',
-              ),
-              const SizedBox(height: 40),
-              const UserInfoContainer()
-            ],
+      child: SingleChildScrollView(
+        child: AppAnimatedOpacity(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              children: [
+                Space.topPageSpace,
+                const ProfileHeaderContainer(
+                  title: 'Seif Tariq',
+                  subTitle: 'Valued Coffee Oasis Member',
+                ),
+                Space.k40,
+                const UserInfoContainer(),
+                Space.k40
+              ],
+            ),
           ),
         ),
       ),

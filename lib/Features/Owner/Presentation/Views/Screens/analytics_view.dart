@@ -14,12 +14,9 @@ class AnalyticsView extends StatelessWidget {
         child: Column(
           children: [
             Space.topPageSpace,
-            const Expanded(child: AnayliticsContainer(title: 'Today',
-      
-            )),
+            const Expanded(child: AnayliticsContainer(title: 'Today')),
             Space.bottomSpace,
-            const Expanded(
-                child: AnayliticsContainer(title: 'All Time',)),
+            const Expanded(child: AnayliticsContainer(title: 'All Time')),
             Space.bottomSpace
           ],
         ),
@@ -27,5 +24,3 @@ class AnalyticsView extends StatelessWidget {
     );
   }
 }
-
-

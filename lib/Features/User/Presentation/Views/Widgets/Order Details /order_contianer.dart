@@ -16,7 +16,6 @@ class OrderContainer extends StatelessWidget {
         radiusForAll: true,
         child: Container(
             padding: const EdgeInsets.all(15),
-            width: double.infinity,
             color: AppColors.kWhiteObacity,
             child: Column(
               children: [

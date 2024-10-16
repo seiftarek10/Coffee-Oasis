@@ -7,7 +7,7 @@ abstract class Fonts {
       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500);
 
   static TextStyle font18_700 =
-      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700);
+      TextStyle(fontSize: 18.spMin, fontWeight: FontWeight.w700);
   static TextStyle font20_700 =
       TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700);
     static TextStyle font24_700 =

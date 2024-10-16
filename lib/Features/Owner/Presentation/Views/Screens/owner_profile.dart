@@ -10,19 +10,23 @@ class OwnerProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppAnimatedOpacity(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            Space.topPageSpace,
-            const ProfileHeaderContainer(
-              title: 'Seif Tariq',
-              subTitle: 'Owner of the coffee oasis',
-            ),
-            const SizedBox(height: 40),
-            const ShopInfoContainer(),
-          ],
+    return SingleChildScrollView(
+      child: AppAnimatedOpacity(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            children: [
+              Space.topPageSpace,
+              const ProfileHeaderContainer(
+                title: 'Seif Tariq',
+                subTitle: 'Owner of the coffee oasis',
+              ),
+              Space.k40,
+              const ShopInfoContainer(),
+              Space.k40,
+
+            ],
+          ),
         ),
       ),
     );

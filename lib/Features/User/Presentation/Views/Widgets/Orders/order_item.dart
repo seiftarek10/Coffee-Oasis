@@ -6,6 +6,7 @@ import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Orders/order_state_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({super.key});
@@ -15,12 +16,12 @@ class OrderItem extends StatelessWidget {
     return AppWhiteContainer(
         noPadding: true,
         child: Row(children: [
-          const Expanded(
+           Expanded(
               flex: 3,
               child: AppClipReact(
                   radiusForAll: false,
                   child: CoffeePhotoCard(
-                    aspectRatio: 0.8,
+                    aspectRatio: 0.5.h,
                   ))),
           const SizedBox(width: 16),
           const Expanded(

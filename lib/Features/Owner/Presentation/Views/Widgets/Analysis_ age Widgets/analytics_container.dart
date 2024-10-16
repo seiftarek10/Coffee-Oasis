@@ -19,9 +19,10 @@ class AnayliticsContainer extends StatelessWidget {
         Text(title, style: Fonts.font35_700White),
         const Expanded(
           child: AppWhiteContainer(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 24),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 0),
           
             child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: AnalyticsContainerItem(

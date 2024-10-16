@@ -50,7 +50,7 @@ class UserHomeHeader extends StatelessWidget {
                         )),
               )
             ],
-          )
+          ),
         ],
       ),
     );

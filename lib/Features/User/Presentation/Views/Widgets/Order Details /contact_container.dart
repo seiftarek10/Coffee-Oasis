@@ -12,7 +12,6 @@ class AddressContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      width: double.infinity,
       decoration: BoxDecoration(
           color: AppColors.kWhiteObacity,
           borderRadius: BorderRadius.circular(AppConstant.kBorderRadius)),

@@ -18,7 +18,7 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: '/',
         pageBuilder: (context, state) => 
-            pageTransition(context, state, const StaffHomeView())),
+            pageTransition(context, state, const DeliveryView())),
     // GoRoute(
     //     path: '/',
     //     pageBuilder: (context, state) =>

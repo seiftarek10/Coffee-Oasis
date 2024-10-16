@@ -1,6 +1,5 @@
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnalyticsContainerItem extends StatelessWidget {
   const AnalyticsContainerItem({
@@ -13,16 +12,11 @@ class AnalyticsContainerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title, style: Fonts.font18_700),
-            Text(info, style: Fonts.font16_500),
-          ],
-        ),
-        Divider(thickness: 2, height: 15.h),
+        Text(title, style: Fonts.font18_700),
+        Text(info, style: Fonts.font16_500),
       ],
     );
   }

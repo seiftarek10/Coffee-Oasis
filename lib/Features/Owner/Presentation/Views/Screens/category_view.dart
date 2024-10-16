@@ -13,6 +13,7 @@ class CategoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton:const AddFloatingActionButton(),
+        resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Background(
           child: Padding(

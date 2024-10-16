@@ -35,7 +35,8 @@ class StaffOrderDetailsView extends StatelessWidget {
                                 deliver: true,
                               ),
                               Space.k40,
-                              const StaffOrderDetailsButton()
+                              const StaffOrderDetailsButton(),
+                              Space.k40
                             ]))))));
   }
 }

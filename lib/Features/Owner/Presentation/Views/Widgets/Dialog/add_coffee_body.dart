@@ -12,17 +12,22 @@ class AddCoffeeDrinkBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height
+        ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal:16),
+          
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Space.topPageSpace,
               const CoffeeDtrinkPhoto(),
               Space.topPageSpace,
-              const AddCoffeeDrinkForm()
+              const AddCoffeeDrinkForm(),
+              Space.bottomSpace
             ],
           ),
         ),

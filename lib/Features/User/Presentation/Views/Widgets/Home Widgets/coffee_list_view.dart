@@ -1,6 +1,7 @@
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/coffee_drink_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeCoffeeDrinksListView extends StatelessWidget {
@@ -11,9 +12,9 @@ class HomeCoffeeDrinksListView extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       sliver: SliverGrid(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate:   SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            childAspectRatio: 180 / 280,
+            childAspectRatio: 170.w / 240.h,
             crossAxisSpacing: 15,
             mainAxisSpacing: 40,
           ),

@@ -40,7 +40,6 @@ class _AnimtaedCircleAvatarState extends State<AnimtaedCircleAvatar>
       position: _position,
       child: CircleAvatar(
         backgroundColor: AppColors.kPrimaryColor,
-        radius: 23,
         child: Icon(
           widget.icon,
           size:  26,
