@@ -2,6 +2,7 @@ import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 
 import 'package:coffee_oasis/Core/Widgets/Profile/profile_header.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Profile/manage_categories_container.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Profile/shop_info_container.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,8 @@ class OwnerProfile extends StatelessWidget {
               Space.k40,
               const ShopInfoContainer(),
               Space.k40,
+
+              const ManageCategoriesContainer()
 
             ],
           ),

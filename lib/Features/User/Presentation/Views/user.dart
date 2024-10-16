@@ -12,28 +12,15 @@ class UserView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  AppBottomBar(
+    return AppBottomBar(
       useBackGround: false,
       bottomBarItmeModel: [
-        BottomBarItemModel(
-          icon: EvaIcons.home,
-          
-          title: 'Home'
-        ),
-         BottomBarItemModel(
-          icon: Icons.shopping_cart_outlined,
-          title: 'Cart'
-        ),
-        BottomBarItemModel(
-          icon: EvaIcons.shoppingBag,
-          title: 'Orders'
-        ),
-        BottomBarItemModel(
-          icon: EvaIcons.person,
-          title: 'Profile'
-        )
+        BottomBarItemModel(icon: EvaIcons.home, title: 'Home'),
+        BottomBarItemModel(icon: Icons.shopping_cart_outlined, title: 'Cart'),
+        BottomBarItemModel(icon: EvaIcons.shoppingBag, title: 'Orders'),
+        BottomBarItemModel(icon: EvaIcons.person, title: 'Profile')
       ],
-      pages: const[
+      pages: const [
         UserHomeView(),
         CartView(),
         UserOrdersView(),
