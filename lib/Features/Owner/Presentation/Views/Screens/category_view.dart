@@ -13,6 +13,7 @@ class CategoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton:const AddFloatingActionButton(),
+        resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Background(
           child: Padding(
@@ -26,7 +27,7 @@ class CategoryView extends StatelessWidget {
                 ),
                 Space.k24,
                 const SwapNote(),
-                Space.k12,
+                Space.k24,
                const CoffeeDrinksListView()
               ],
             ),

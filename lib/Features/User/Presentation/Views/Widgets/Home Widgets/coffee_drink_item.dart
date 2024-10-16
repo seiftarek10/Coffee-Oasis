@@ -17,44 +17,63 @@ class HomeCoffeeDrinkItem extends StatelessWidget {
       child: Column(
         children: [
           const Expanded(
-              flex: 3,
+              flex: 4,
               child: ClipRRect(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15)),
                 child: CoffeePhotoCard(
                   aspectRatio: 140 / 100,
                 ),
               )),
           SizedBox(height: 5.h),
           Expanded(
-              flex: 2,
+              flex: 3,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Flat White', style: Fonts.font18_700),
+                    Expanded(
+                      flex: 3,
+                      child: Text('Flat White', style: Fonts.font18_700)),
                     const SizedBox(height: 4),
-                    Text('Espresso',
-                        style:
-                            Fonts.font14_500.copyWith(color: Colors.grey[600])),
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(r'$ 4.53', style: Fonts.font20_700),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    color: AppColors.kPrimaryColor,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                )))
-                      ],
-                    )
+                    Expanded(
+                      flex: 3,
+                      child: Text('Espresso',
+                          style:
+                              Fonts.font14_500.copyWith(color: Colors.grey[600])),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 7,
+                            child: Text(r'$ 4.53', style: Fonts.font20_700)),
+                          Expanded(
+                            flex: 3,
+                            child: IconButton(
+                                onPressed: () {},
+                              padding: EdgeInsets.zero,
+                                icon: Container(
+                                    padding: const EdgeInsets.all(8),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.kPrimaryColor,
+                                        borderRadius: BorderRadius.circular(10)),
+                                    child:  Icon(
+                                      Icons.add,
+                                      size: 20.h,
+                                      color: Colors.white,
+                                    ))),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 5.h),
                   ],
                 ),
               ))

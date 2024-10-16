@@ -12,6 +12,8 @@ class SearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: Colors.white,
+      cursorHeight: 25,
+      style: Fonts.font16_500.copyWith(color: Colors.white),
       decoration: InputDecoration(
         hintText: 'Search coffee',
         hintStyle: Fonts.font16_500

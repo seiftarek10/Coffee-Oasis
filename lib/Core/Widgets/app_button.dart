@@ -8,12 +8,13 @@ class AppButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.verticalPadding,
-    required this.onPressed,
+    required this.onPressed, this.backgroundColor,
   });
 
   final String title;
   final double verticalPadding;
   final void Function() onPressed;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class AppButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppConstant.kBorderRadius)),
             padding: EdgeInsets.symmetric(vertical: verticalPadding),
-            backgroundColor: AppColors.kPrimaryColor),
+            backgroundColor: backgroundColor?? AppColors.kPrimaryColor),
         onPressed: onPressed,
         child: Text(
           title,

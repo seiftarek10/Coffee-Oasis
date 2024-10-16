@@ -20,12 +20,13 @@ class CoffeeDrinkItem extends StatelessWidget {
         color: AppColors.kWhiteObacity,
         child: Row(
           children: [
-            const Expanded(
-              child: CoffeePhotoCard(aspectRatio: 0.7,),
+             Expanded(
+              flex: 2,
+              child: CoffeePhotoCard(aspectRatio: 0.5.h),
             ),
             const SizedBox(width: 16),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -50,6 +51,8 @@ class CoffeeDrinkItem extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(width: 8),
+
           ],
         ),
       ),

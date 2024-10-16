@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
+import 'package:coffee_oasis/Core/Widgets/arrow_back.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class FavoriteHeader extends StatelessWidget {
   const FavoriteHeader({super.key});
@@ -11,12 +11,7 @@ class FavoriteHeader extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IconButton(
-            onPressed: () {
-              GoRouter.of(context).pop();
-            },
-            icon: const Icon(Icons.arrow_back_ios_new,
-                color: Colors.white, size: 28)),
+        const ArrowBackIcon(),
         const SizedBox(width: 12),
         Expanded(
           child: Column(

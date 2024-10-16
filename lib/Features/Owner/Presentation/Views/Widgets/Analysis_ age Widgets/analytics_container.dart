@@ -1,6 +1,5 @@
-import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Analysis_%20age%20Widgets/analytics_item.dart';
 import 'package:flutter/material.dart';
 
@@ -18,13 +17,12 @@ class AnayliticsContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(title, style: Fonts.font35_700White),
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 24),
-            decoration: BoxDecoration(
-                color: AppColors.kWhiteObacity,
-                borderRadius: BorderRadius.circular(AppConstant.kBorderRadius)),
-            child: const Column(
+        const Expanded(
+          child: AppWhiteContainer(
+            padding: EdgeInsets.only(left: 20, right: 20, top: 0),
+          
+            child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: AnalyticsContainerItem(

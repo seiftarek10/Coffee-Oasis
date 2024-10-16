@@ -29,7 +29,8 @@ class CoffeeDetailsView extends StatelessWidget {
                 const Divider(height: 22),
                 const CounterWidget(),
                 const Divider(height: 22),
-                const RecivedOptions()
+                const RecivedOptions(),
+                Space.k24
               ],
             ),
           ),

@@ -25,7 +25,9 @@ class _AppBottomBarState extends State<AppBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
+      
       bottomNavigationBar: SizedBox(
           height: 55.h,
           child: Padding(
@@ -44,7 +46,6 @@ class _AppBottomBarState extends State<AppBottomBar> {
               );
             }).toList()),
           )),
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: widget.useBackGround==true?
         

@@ -10,7 +10,7 @@ class OfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 147.h, // Adjust to your desired position
+      top: 150.h, 
       left: 18,
       right: 18,
       child: Image.asset(

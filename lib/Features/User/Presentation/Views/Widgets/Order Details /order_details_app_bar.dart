@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
+import 'package:coffee_oasis/Core/Widgets/arrow_back.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class OrderDetailsAppBar extends StatelessWidget {
   const OrderDetailsAppBar({super.key});
@@ -9,20 +9,11 @@ class OrderDetailsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-   
-        IconButton(
-            onPressed: () {
-              GoRouter.of(context).pop();
-            },
-            icon: const Icon(Icons.arrow_back_ios_rounded, size: 28,color: Colors.white,)),
-      
+        const ArrowBackIcon(),
         const Spacer(),
         Text('Order Details', style: Fonts.font35_700White),
         const Spacer(),
-       const SizedBox(width: 30),
-
-
-
+        const SizedBox(width: 30),
       ],
     );
   }

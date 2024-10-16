@@ -12,8 +12,11 @@ class CoffeeDrinksListView extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         itemCount: 10,
         itemBuilder: (context, index) {
-          return  CoffeeDrinkSlidableItme(
-            itemKey: Key(index.toString()),
+          return  Padding(
+            padding: const EdgeInsets.only(bottom:8.0),
+            child: CoffeeDrinkSlidableItme(
+              itemKey: Key(index.toString()),
+            ),
           );
         },
       ),

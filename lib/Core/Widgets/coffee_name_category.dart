@@ -1,9 +1,8 @@
-
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:flutter/material.dart';
 
-class CoffeeNameAndCategory extends StatelessWidget {
-  const CoffeeNameAndCategory({
+class TitleAndSubTitleCaffeeCard extends StatelessWidget {
+  const TitleAndSubTitleCaffeeCard({
     super.key,
   });
 

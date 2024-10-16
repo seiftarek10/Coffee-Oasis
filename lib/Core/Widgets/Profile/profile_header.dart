@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,11 +13,8 @@ class ProfileHeaderContainer extends StatelessWidget {
   final String title,subTitle;
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        decoration: BoxDecoration(
-            color: AppColors.kWhiteObacity,
-            borderRadius: BorderRadius.circular(AppConstant.kBorderRadius)),
+    return AppWhiteContainer(
+      
         child: Row(
           children: [
             Expanded(
