@@ -8,11 +8,13 @@ class ActiveBottomBarItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
+    this.needRightPadding,
   });
 
   final String title;
 
   final IconData icon;
+  final bool? needRightPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,10 @@ class ActiveBottomBarItem extends StatelessWidget {
           Expanded(
             flex: 4,
             child: Align(
-              alignment: Alignment.centerLeft,
-              child: AnimtaedCircleAvatar(icon: icon)),
+                alignment: Alignment.centerLeft,
+                child: AnimtaedCircleAvatar(icon: icon)),
           ),
+          SizedBox(width: 4.w),
           Expanded(
             flex: 5,
             child: FittedBox(
@@ -40,12 +43,11 @@ class ActiveBottomBarItem extends StatelessWidget {
               ),
             ),
           ),
-           SizedBox(width: 8.w),
+          needRightPadding == null
+              ? const SizedBox.shrink()
+              : SizedBox(width: 12.w)
         ],
       ),
     );
   }
 }
-
-
-
