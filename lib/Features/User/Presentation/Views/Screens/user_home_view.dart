@@ -22,7 +22,7 @@ class UserHomeView extends StatelessWidget {
                   children: [
                     const UserHomeHeader(),
                     SizedBox(height: 75.h),
-                    const HomeCategoriesListView(),
+                    const UserHomeCategoriesListView(),
                     const SizedBox(height: 30),
                   ],
                 ),
@@ -30,7 +30,7 @@ class UserHomeView extends StatelessWidget {
               ],
             ),
           ),
-          const HomeCoffeeDrinksListView(),
+          const UserHomeCoffeeDrinksListView(),
         ],
       ),
     );

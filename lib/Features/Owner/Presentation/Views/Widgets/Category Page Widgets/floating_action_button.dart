@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/add_coffee_body.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/add_coffee_form.dart';
 import 'package:flutter/material.dart';
 
 class AddFloatingActionButton extends StatelessWidget {
@@ -17,7 +17,7 @@ class AddFloatingActionButton extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) {
-                return const AddCoffeeDrinkBody();
+                return const AddCoffeeDrinkForm();
               });
         },
         backgroundColor: AppColors.kPrimaryColor,

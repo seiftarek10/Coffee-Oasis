@@ -41,13 +41,13 @@ class UserHomeHeader extends StatelessWidget {
                 child: SearchField(),
               ),
               SizedBox(width: 15.w),
-               Expanded(
+              Expanded(
                 child: AppClipReact(
-                     radiusForAll: true,
+                    radiusForAll: true,
                     child: AspectRatio(
-                        aspectRatio: 1,
-                        child: SvgPicture.asset(Assets.imagesFilet),
-                        )),
+                      aspectRatio: 1,
+                      child: SvgPicture.asset(Assets.imagesFilet),
+                    )),
               )
             ],
           ),
@@ -55,8 +55,4 @@ class UserHomeHeader extends StatelessWidget {
       ),
     );
   }
-
-
 }
-
-

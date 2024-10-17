@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeCoffeeDrinksListView extends StatelessWidget {
-  const HomeCoffeeDrinksListView({super.key});
+class UserHomeCoffeeDrinksListView extends StatelessWidget {
+  const UserHomeCoffeeDrinksListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       sliver: SliverGrid(
-          gridDelegate:   SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 170.w / 240.h,
             crossAxisSpacing: 15,
@@ -23,7 +23,7 @@ class HomeCoffeeDrinksListView extends StatelessWidget {
                 onTap: () {
                   GoRouter.of(context).push(Routes.coffeeDetails);
                 },
-                child: const HomeCoffeeDrinkItem());
+                child: const UserHomeCoffeeDrinkItem());
           }, childCount: 20)),
     );
   }

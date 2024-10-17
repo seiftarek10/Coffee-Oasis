@@ -23,8 +23,10 @@ class AppTextField extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
         color: const Color.fromARGB(57, 0, 0, 0),
         child: TextFormField(
+        
           validator: validator,
           onSaved: onSaved,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: keyboardType,
           cursorColor: AppColors.kPrimaryColor,
           cursorHeight: 20.h,

@@ -1,10 +1,10 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Detils%20%20View%20Widgtss/bottom_section.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Detils%20%20View%20Widgtss/coffee_details_appbar.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Detils%20%20View%20Widgtss/coffee_photo_name.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Detils%20%20View%20Widgtss/counter_widget.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Detils%20%20View%20Widgtss/description.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Detils%20%20View%20Widgtss/recived_option.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/bottom_bar.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/coffee_details_appbar.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/coffee_photo_name.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/counter_widget.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/description.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/recived_way.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeDetailsView extends StatelessWidget {
@@ -13,7 +13,7 @@ class CoffeeDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const DetailsViewBottomSection(),
+      bottomNavigationBar: const DetailsViewBottomBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

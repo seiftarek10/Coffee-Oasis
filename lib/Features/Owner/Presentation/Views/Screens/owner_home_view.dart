@@ -22,7 +22,7 @@ class OwnerHomeView extends StatelessWidget {
               Text("All Categories", style: Fonts.font40_700White),
               Space.k40,
             ])),
-            const AllCategoiresListView(),
+            const OwnerAllCategoiresListView(),
             SliverToBoxAdapter(child: Space.bottomSpace)
           ],
         ),

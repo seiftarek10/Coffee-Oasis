@@ -11,22 +11,28 @@ class RequesterInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('Requster Info', style: Fonts.font24_700.copyWith(color: Colors.white)),
+      Text('Requster Info',
+          style: Fonts.font24_700.copyWith(color: Colors.white)),
       Space.k8,
       AppWhiteContainer(
           child: Column(children: [
-        Row(children: [
-          const Icon(Icons.person, size: 28),
-          const SizedBox(width: 6),
-          Text('Seif Tariq', style: Fonts.font18_700)
-        ]),
+        _buildRequesterInfoItem(info: 'Seif Tariq', icon: Icons.person),
         Space.k12,
-        Row(children: [
-          const Icon(Icons.phone, size: 28),
-          const SizedBox(width: 6),
-          Text('01027870171', style: Fonts.font18_700)
-        ])
+        _buildRequesterInfoItem(info: '01027870171', icon: Icons.phone),
+        Space.k12,
+        _buildRequesterInfoItem(info: 'Giza', icon: Icons.location_on_rounded),
       ]))
+    ]);
+  }
+
+
+
+  Widget _buildRequesterInfoItem(
+      {required String info, required IconData icon}) {
+    return Row(children: [
+      Icon(icon, size: 28),
+      const SizedBox(width: 6),
+      Text(info, style: Fonts.font18_700)
     ]);
   }
 }

@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/coffee_drink_item.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/edit_coffee_body.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/edit_coffee_form.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/slide_card.dart';
 import 'package:flutter/material.dart';
 
@@ -15,17 +13,15 @@ class CoffeeDrinksListView extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         itemCount: 10,
         itemBuilder: (context, index) {
-          return  Padding(
+          return Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: SlideCard(
-              delete: () {
-                log('Delete');
-              },
+              delete: () {},
               update: () {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return const DialogEditBody();
+                      return const EditCoffeeDrinkForm();
                     });
               },
               itemKey: Key(index.toString()),

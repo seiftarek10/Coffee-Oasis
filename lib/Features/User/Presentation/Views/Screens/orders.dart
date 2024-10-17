@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Orders/order_header.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Orders/order_header_text.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Orders/orders_list_view.dart';
 import 'package:flutter/material.dart';
 

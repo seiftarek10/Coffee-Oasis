@@ -12,50 +12,40 @@ class StaffOrderContainer extends StatelessWidget {
   final bool deliver;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Order info',
-            style: Fonts.font24_700.copyWith(color: Colors.white)),
-        Space.k8,
-        AppWhiteContainer(
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text('Order info', style: Fonts.font24_700.copyWith(color: Colors.white)),
+      Space.k8,
+      AppWhiteContainer(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: Column(
-            children: [
-              Row(children: [
-                const Expanded(
-                    flex: 2,
-                    child: AppClipReact(
-                        radiusForAll: true,
-                        child: CoffeePhotoCard(aspectRatio: 1))),
-                const SizedBox(width: 16),
-                const Expanded(flex: 7, child: TitleAndSubTitleCaffeeCard()),
-                Text('1', style: Fonts.font18_700)
-              ]),
-
-              deliver?
-              Column(
-                children: [
-                  const Divider(height: 30),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Delivery :',
-                          style: Fonts.font18_700,
-                        ),
-                        Text(
-                          'Tamim',
-                          style: Fonts.font18_700,
-                        )
-                      ]),
-                ],
-              ):
-              const SizedBox.shrink()
-            ],
-          ),
-        ),
-      ],
-    );
+          child: Column(children: [
+            Row(children: [
+              const Expanded(
+                  flex: 2,
+                  child: AppClipReact(
+                      radiusForAll: true,
+                      child: CoffeePhotoCard(aspectRatio: 1))),
+              const SizedBox(width: 16),
+              const Expanded(flex: 7, child: TitleAndSubTitleCaffeeCard()),
+              Text('1', style: Fonts.font18_700)
+            ]),
+            deliver
+                ? Column(children: [
+                    const Divider(height: 30),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Delivery :',
+                            style: Fonts.font18_700,
+                          ),
+                          Text(
+                            'Tamim',
+                            style: Fonts.font18_700,
+                          )
+                        ])
+                  ])
+                : const SizedBox.shrink()
+          ]))
+    ]);
   }
 }

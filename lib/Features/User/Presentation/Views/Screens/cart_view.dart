@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_header.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_header_text.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_item_list_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Common%20Widgets/delete_note.dart';
 import 'package:flutter/material.dart';

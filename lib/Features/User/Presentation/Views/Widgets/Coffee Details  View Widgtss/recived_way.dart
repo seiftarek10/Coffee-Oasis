@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Detils%20%20View%20Widgtss/recived_option_container.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/recived_option_container.dart';
 import 'package:flutter/material.dart';
 
 class RecivedOptions extends StatefulWidget {

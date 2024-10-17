@@ -4,8 +4,8 @@ import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DetailsViewBottomSection extends StatelessWidget {
-  const DetailsViewBottomSection({
+class DetailsViewBottomBar extends StatelessWidget {
+  const DetailsViewBottomBar({
     super.key,
   });
 

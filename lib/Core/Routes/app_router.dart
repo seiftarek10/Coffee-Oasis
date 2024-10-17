@@ -20,73 +20,69 @@ class AppRouter {
 
   AppRouter({required this.flavor});
 
-
-   GoRouter get router{
+  GoRouter get router {
     return GoRouter(
       initialLocation: '/',
-    routes: <RouteBase>[
-      GoRoute(
-        
-        path: '/',
-        
-        pageBuilder: (context, state) {
-          return pageTransition(
-            context,
-            state,
-            // SplashView(flavor: flavor),
-            const ManageCategories()
-          );
-        },
-      ),
-      GoRoute(
-          path: Routes.owner,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const OwnerView())),
-      GoRoute(
-          path: Routes.category,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const CategoryView())),
-      GoRoute(
-          path: Routes.user,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const UserView())),
-      GoRoute(
-          path: Routes.coffeeDetails,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const CoffeeDetailsView())),
-      GoRoute(
-          path: Routes.orderDetails,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const OrderDetailsView())),
-      GoRoute(
-          path: Routes.favorite,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const FavoriteView())),
-      GoRoute(
-          path: Routes.signup,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const SignUpView())),
-      GoRoute(
-          path: Routes.signin,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const SignInView())),
-      GoRoute(
-          path: Routes.staffOrderDetails,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const StaffOrderDetailsView())),
-      GoRoute(
-          path: Routes.staff,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const StaffHomeView())),
-      GoRoute(
-          path: Routes.delivery,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const DeliveryView())),
-         GoRoute(
-          path: Routes.manageCategories,
-          pageBuilder: (context, state) =>
-              pageTransition(context, state, const ManageCategories()))
-    ],
-  );
-   }
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/',
+          pageBuilder: (context, state) {
+            return pageTransition(
+                context,
+                state,
+                // SplashView(flavor: flavor),
+                const ManageCategories());
+          },
+        ),
+        GoRoute(
+            path: Routes.owner,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const OwnerView())),
+        GoRoute(
+            path: Routes.category,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const CategoryView())),
+        GoRoute(
+            path: Routes.user,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const UserView())),
+        GoRoute(
+            path: Routes.coffeeDetails,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const CoffeeDetailsView())),
+        GoRoute(
+            path: Routes.orderDetails,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const OrderDetailsView())),
+        GoRoute(
+            path: Routes.favorite,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const FavoriteView())),
+        GoRoute(
+            path: Routes.signup,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const SignUpView())),
+        GoRoute(
+            path: Routes.signin,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const SignInView())),
+        GoRoute(
+            path: Routes.staffOrderDetails,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const StaffOrderDetailsView())),
+        GoRoute(
+            path: Routes.staff,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const StaffHomeView())),
+        GoRoute(
+            path: Routes.delivery,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const DeliveryView())),
+        GoRoute(
+            path: Routes.manageCategories,
+            pageBuilder: (context, state) =>
+                pageTransition(context, state, const ManageCategories()))
+      ],
+    );
+  }
 }

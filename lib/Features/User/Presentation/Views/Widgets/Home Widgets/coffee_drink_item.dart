@@ -4,8 +4,8 @@ import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeCoffeeDrinkItem extends StatelessWidget {
-  const HomeCoffeeDrinkItem({
+class UserHomeCoffeeDrinkItem extends StatelessWidget {
+  const UserHomeCoffeeDrinkItem({
     super.key,
   });
 
@@ -36,14 +36,14 @@ class HomeCoffeeDrinkItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      flex: 3,
-                      child: Text('Flat White', style: Fonts.font18_700)),
+                        flex: 3,
+                        child: Text('Flat White', style: Fonts.font18_700)),
                     const SizedBox(height: 4),
                     Expanded(
                       flex: 3,
                       child: Text('Espresso',
-                          style:
-                              Fonts.font14_500.copyWith(color: Colors.grey[600])),
+                          style: Fonts.font14_500
+                              .copyWith(color: Colors.grey[600])),
                     ),
                     Expanded(
                       flex: 5,
@@ -51,20 +51,21 @@ class HomeCoffeeDrinkItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            flex: 7,
-                            child: Text(r'$ 4.53', style: Fonts.font20_700)),
+                              flex: 7,
+                              child: Text(r'$ 4.53', style: Fonts.font20_700)),
                           Expanded(
                             flex: 3,
                             child: IconButton(
                                 onPressed: () {},
-                              padding: EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
                                 icon: Container(
                                     padding: const EdgeInsets.all(8),
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                         color: AppColors.kPrimaryColor,
-                                        borderRadius: BorderRadius.circular(10)),
-                                    child:  Icon(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Icon(
                                       Icons.add,
                                       size: 20.h,
                                       color: Colors.white,

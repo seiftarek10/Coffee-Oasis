@@ -25,7 +25,7 @@ class OrderDetailsView extends StatelessWidget {
                 Space.topPageSpace,
                 const OrderDetailsAppBar(),
                 Space.k40,
-                const RecivedWay(),
+                const OrderDetatilsRecivedWay(),
                 Space.k40,
                 const AddressContainer(),
                 Space.k40,
