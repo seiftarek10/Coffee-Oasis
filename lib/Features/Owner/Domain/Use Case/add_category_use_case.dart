@@ -11,6 +11,6 @@ class AddCategorUseCase extends UseCase<String, CategoryEntity> {
 
   @override
   Future<Either<Failure, String>> execute({CategoryEntity? param}) {
-    return ownerRepo.addCategor(category: param!);
+    return ownerRepo.addCategory(category: param!);
   }
 }

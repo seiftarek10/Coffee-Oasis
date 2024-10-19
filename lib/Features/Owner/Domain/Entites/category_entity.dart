@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
 
 class CategoryEntity {
-  final String id;
+  final String? id;
   final String name;
   final String photo;
   final List<CoffeeEntity> coffeeDrinks;
@@ -15,7 +15,7 @@ class CategoryEntity {
   toJson() {
     return {
       'name': name,
-      'photo': photo,
+      // 'photo': photo,
     };
   }
 }

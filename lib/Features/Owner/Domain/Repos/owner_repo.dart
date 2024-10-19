@@ -3,8 +3,6 @@ import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart'
 import 'package:dartz/dartz.dart';
 
 abstract class OwnerRepo {
-  Future<Either<Failure, String>> addCategor({required CategoryEntity category});
+  Future<Either<Failure, String>> addCategory(
+      {required CategoryEntity category});
 }
-
-
-
