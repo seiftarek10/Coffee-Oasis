@@ -3,12 +3,12 @@ import 'package:coffee_oasis/Core/Helpers/failed_message.dart';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Helpers/validation_form.dart';
 import 'package:coffee_oasis/Core/NetWork/upload_file_service.dart';
+import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/add_category/add_category_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/coffee_photo_buttton.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/form_buttons.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -72,7 +72,7 @@ class ManageCategoryForm extends StatelessWidget {
   }
 
   Future<void> _addCategoryWithPhoto(BuildContext context) async {
-    StorageService storageService = StorageService(FirebaseStorage.instance);
+    StorageService storageService = getIt.get<StorageService>();
     String? photoUrl = await storageService.uploadPhoto(
         photo: photo!, folderName: 'Categories');
     CategoryEntity category = CategoryEntity(name: name, photo: photoUrl);
