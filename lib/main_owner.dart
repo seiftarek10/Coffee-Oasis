@@ -11,9 +11,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Bloc.observer = MyBlocObserver();
   setupGetIt();
-  runApp(const CoffeeOasis(
-    flavor: Flavor.owner,
-  ));
+  runApp(const CoffeeOasis(flavor: Flavor.owner));
+  Bloc.observer = MyBlocObserver();
 }

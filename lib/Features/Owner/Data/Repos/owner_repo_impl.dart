@@ -22,4 +22,18 @@ class OwnerRepoImpl extends OwnerRepo {
       return left(FireBaseError(errMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<CategoryEntity>>> getAllCategories() async {
+    try {
+      List<CategoryEntity> categories =
+          await _ownerRemoteDataSource.getAllCategories();
+      return right(categories);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
 }

@@ -8,12 +8,12 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 
 void setupGetIt() {
+  getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
   getIt.registerSingleton<StorageService>(
       StorageService(getIt.get<FirebaseStorage>()));
-  getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
-  getIt.registerSingleton<OwnerRepoImpl>(
-      OwnerRepoImpl(getIt.get<OwnerRemoteDataSource>()));
+  getIt.registerSingleton<DatabaseServices>(DatabaseServices());
   getIt.registerSingleton<OwnerRemoteDataSource>(
       OwnerRemoteDataSource(getIt.get<DatabaseServices>()));
-  getIt.registerSingleton<DatabaseServices>(DatabaseServices());
+  getIt.registerSingleton<OwnerRepoImpl>(
+      OwnerRepoImpl(getIt.get<OwnerRemoteDataSource>()));
 }

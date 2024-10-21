@@ -8,12 +8,12 @@ class DatabaseServices {
     await FirebaseFirestore.instance.collection(endPoint).add(body);
   }
 
-  Future<QuerySnapshot<Object?>> getCollection(
+  Future<QuerySnapshot<Map<String,dynamic>>> getCollection(
       {required String endPoint}) async {
     return await FirebaseFirestore.instance.collection(endPoint).get();
   }
 
-  Future<DocumentSnapshot<Object?>> get(
+  Future<DocumentSnapshot<Map<String,dynamic>?>> get(
       {required String endPoint, required String docId}) async {
     return await FirebaseFirestore.instance
         .collection(endPoint)

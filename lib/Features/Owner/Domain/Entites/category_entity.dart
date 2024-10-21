@@ -15,7 +15,8 @@ class CategoryEntity {
   toJson() {
     return {
       'name': name,
-      'photo':photo
+      'photo':photo,
+      'drinks':coffeeDrinks
     };
   }
 }

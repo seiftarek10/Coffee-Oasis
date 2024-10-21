@@ -1,6 +1,5 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
-import 'package:coffee_oasis/Core/NetWork/database_services.dart';
-import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_source.dart';
+import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Repos/owner_repo_impl.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/add_category_use_case.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/add_category/add_category_cubit.dart';
@@ -15,7 +14,7 @@ class ManageCategoryFormStructure extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AddCategoryCubit(AddCategorUseCase(
-          ownerRepo: OwnerRepoImpl(OwnerRemoteDataSource(DatabaseServices())))),
+          ownerRepo: getIt.get<OwnerRepoImpl>())),
       child: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
