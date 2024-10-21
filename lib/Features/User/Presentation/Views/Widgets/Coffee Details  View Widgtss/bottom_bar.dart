@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/Widgets/app_button.dart';
+import 'package:coffee_oasis/Core/Widgets/cancel_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,15 +35,11 @@ class DetailsViewBottomBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 30),
-          Expanded(
+          const Expanded(
             flex: 3,
             child: Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: AppButton(
-                title: 'Order Now',
-                verticalPadding: 12.h,
-                onPressed: () {},
-              ),
+              padding: EdgeInsets.only(right: 20),
+              child: CancelButton()
             ),
           )
         ],

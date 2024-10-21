@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:coffee_oasis/Core/Helpers/failed_message.dart';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
@@ -31,7 +30,6 @@ class ManageCategoryForm extends StatelessWidget {
           CoffeeDtrinkPhoto(
             pickedPhoto: (coffeePhoto) {
               photo = coffeePhoto;
-              log(photo?.path ?? 'null');
             },
           ),
           Space.k40,
@@ -52,17 +50,16 @@ class ManageCategoryForm extends StatelessWidget {
               },
               buttonTitle: 'Add',
               onPressed: (loading) async {
-                loading();
                 if (_key.currentState!.validate()) {
                   if (photo == null) {
                     failedMessage(
                         context: context, message: 'Coffee Photo Is Required');
                     return;
                   }
+                  loading();
                   _key.currentState!.save();
                   await _addCategoryWithPhoto(context);
-                loading();
-
+                  loading();
                 }
               })
         ]));

@@ -1,33 +1,53 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/constant.dart';
 import 'package:flutter/material.dart';
 
-class AppButton extends StatelessWidget {
+class AppButton extends StatefulWidget {
   const AppButton({
     super.key,
+    required this.titleColor,
+    required this.backgroundColor,
     required this.title,
-    required this.verticalPadding,
-    required this.onPressed, this.backgroundColor,
+    required this.onPressed,
   });
 
+  final Color titleColor, backgroundColor;
   final String title;
-  final double verticalPadding;
-  final void Function() onPressed;
-  final Color? backgroundColor;
+  final Future<void> Function(Function toggleLoading) onPressed;
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _AppButtonState createState() => _AppButtonState();
+}
+
+class _AppButtonState extends State<AppButton> {
+  bool _isLoading = false;
+
+  void _toggleLoading() {
+    setState(() {
+      _isLoading = !_isLoading;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppConstant.kBorderRadius)),
-            padding: EdgeInsets.symmetric(vertical: verticalPadding),
-            backgroundColor: backgroundColor?? AppColors.kPrimaryColor),
-        onPressed: onPressed,
-        child: Text(
-          title,
-          style: Fonts.font20_700.copyWith(color: Colors.white),
-        ));
+      style: ElevatedButton.styleFrom(
+        overlayColor: AppColors.kPrimaryColor,
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        backgroundColor: widget.backgroundColor,
+      ),
+      onPressed: _isLoading
+          ? null
+          : () async => await widget.onPressed(_toggleLoading),
+      child: _isLoading
+          ? const CircularProgressIndicator(
+              color: Colors.white,
+            )
+          : Text(
+              widget.title,
+              style: Fonts.font20_700.copyWith(color: widget.titleColor),
+            ),
+    );
   }
 }

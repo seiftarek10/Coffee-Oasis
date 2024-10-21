@@ -9,23 +9,19 @@ import 'package:go_router/go_router.dart';
 
 class AddCategoryBlocListner extends StatelessWidget {
   const AddCategoryBlocListner({super.key});
-  static bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddCategoryCubit, AddCategoryState>(
         listener: (context, state) {
       if (state is AddCategoryFailureState) {
         failedMessage(context: context, message: state.errMessage);
-        isLoading = false;
       } else if (state is AddCategorySuccessState) {
         GoRouter.of(context).pop();
-        isLoading = false;
         successMessage(
             context: context,
             message: 'The category has been added successfully');
-      } else if (state is AddCategoryLoadingState) {
-        isLoading = true;
-      }
+      } 
     }, child: const ManageCategoryForm(
        
       ));

@@ -1,7 +1,6 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/coffee_photo_buttton.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/form_buttons.dart';
 import 'package:flutter/material.dart';
 
 class AddCoffeeDrinkForm extends StatelessWidget {
@@ -19,13 +18,11 @@ class AddCoffeeDrinkForm extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-               CoffeeDtrinkPhoto(
-                pickedPhoto: (photo) {
-                  
-                },
+              CoffeeDtrinkPhoto(
+                pickedPhoto: (photo) {},
               ),
               Space.topPageSpace,
               _buildTextField(
@@ -52,7 +49,7 @@ class AddCoffeeDrinkForm extends StatelessWidget {
               // FormButtons(
               //   buttonTitle: 'Add',
               //   // onPressed: () {},
-              // ), 
+              // ),
               Space.k20
             ],
           )),
