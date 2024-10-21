@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:coffee_oasis/Core/Helpers/failed_message.dart';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Helpers/validation_form.dart';
-import 'package:coffee_oasis/Core/NetWork/upload_file_service.dart';
+import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
@@ -75,7 +75,7 @@ class ManageCategoryForm extends StatelessWidget {
     StorageService storageService = getIt.get<StorageService>();
     String? photoUrl = await storageService.uploadPhoto(
         photo: photo!, folderName: 'Categories');
-    CategoryEntity category = CategoryEntity(name: name, photo: photoUrl);
+    CategoryEntity category = CategoryEntity(name: name, photo: photoUrl,coffeeDrinks: []);
     await _addCategoryMethod(context, category);
     photo = null;
   }

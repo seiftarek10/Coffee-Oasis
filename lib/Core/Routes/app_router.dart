@@ -15,7 +15,7 @@ import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/order_deta
 import 'package:coffee_oasis/Features/User/Presentation/Views/user.dart';
 import 'package:coffee_oasis/coffee_oasis.dart';
 import 'package:go_router/go_router.dart';
-
+ 
 class AppRouter {
   final Flavor flavor;
 
@@ -32,7 +32,9 @@ class AppRouter {
                 context,
                 state,
                 // SplashView(flavor: flavor),
-                const ManageCategories());
+                const ManageCategories()
+           
+                );
           },
         ),
         GoRoute(

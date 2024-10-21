@@ -5,5 +5,6 @@ import 'package:dartz/dartz.dart';
 abstract class OwnerRepo {
   Future<Either<Failure, String>> addCategory(
       {required CategoryEntity category});
-  Future<Either<Failure,List<CategoryEntity>>>getAllCategories();
+  Future<Either<Failure, List<CategoryEntity>>> getAllCategories();
+  Future<Either<Failure, String>> deleteCategory({required String id,required String url});
 }

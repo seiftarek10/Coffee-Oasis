@@ -13,7 +13,7 @@ class AddCategoryBlocListner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddCategoryCubit, AddCategoryState>(
-        listener: (context, state) {
+        listener: (context, state)  {
           if (state is AddCategoryFailureState) {
             failedMessage(context: context, message: state.errMessage);
           } else if (state is AddCategorySuccessState) {

@@ -20,4 +20,8 @@ class StorageService {
       return null;
     }
   }
+
+  Future<void> deletePhoto({required String url}) async {
+    await _firebaseStorage.refFromURL(url).delete();
+  }
 }

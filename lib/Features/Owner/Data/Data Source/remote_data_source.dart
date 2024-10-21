@@ -1,7 +1,7 @@
-
-
 import 'package:coffee_oasis/Core/NetWork/database_services.dart';
 import 'package:coffee_oasis/Core/NetWork/endpoints.dart';
+import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
+import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/category_model.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 
@@ -24,5 +24,10 @@ class OwnerRemoteDataSource {
       categories.add(CategoryModel.fromJson(item));
     }
     return categories;
+  }
+
+  Future<void> deleteCategory({required String id, required String url}) async {
+    await _databaseServices.delete(endPoint: Endpoints.categories, docId: id);
+    await getIt.get<StorageService>().deletePhoto(url: url);
   }
 }
