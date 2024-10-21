@@ -32,9 +32,7 @@ class AppRouter {
                 context,
                 state,
                 // SplashView(flavor: flavor),
-                const ManageCategories()
-           
-                );
+                const ManageCategories());
           },
         ),
         GoRoute(

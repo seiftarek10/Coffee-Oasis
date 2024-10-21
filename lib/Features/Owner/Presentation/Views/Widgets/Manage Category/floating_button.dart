@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/category_form_body.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/form_structure.dart';
 import 'package:flutter/material.dart';
 
 class ManageCategoryFloatingButton extends StatelessWidget {
@@ -15,7 +15,7 @@ class ManageCategoryFloatingButton extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) {
-                return const ManageCategoryForm();
+                return const ManageCategoryFormStructure();
               });
         },
         backgroundColor: AppColors.kPrimaryColor,

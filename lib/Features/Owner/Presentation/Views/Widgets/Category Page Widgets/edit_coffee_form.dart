@@ -23,7 +23,9 @@ class EditCoffeeDrinkForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Space.topPageSpace,
-              const CoffeeDtrinkPhoto(),
+               CoffeeDtrinkPhoto(
+                photo: (photo){},
+              ),
               AppTextField(
                 labelText: 'Lettee',
                 validator: (v) {

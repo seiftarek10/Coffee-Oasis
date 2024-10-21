@@ -22,7 +22,11 @@ class AddCoffeeDrinkForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const CoffeeDtrinkPhoto(),
+               CoffeeDtrinkPhoto(
+                photo: (photo) {
+                  
+                },
+              ),
               Space.topPageSpace,
               _buildTextField(
                   label: 'Coffee Drink Name',

@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/categor_card.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/category_form_body.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/form_structure.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/slide_card.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class ManageAllCategoriesListView extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return const ManageCategoryForm();
+                      return const ManageCategoryFormStructure();
                     });
               },
               itemKey: Key(index.toString()),

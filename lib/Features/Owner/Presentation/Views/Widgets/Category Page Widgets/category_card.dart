@@ -24,7 +24,7 @@ class CategoryCard extends StatelessWidget {
             )),
           ),
           child: const Image(
-            image: AssetImage(Assets.imageTest),
+            image: AssetImage(Assets.imagesTest),
             fit: BoxFit.fill,
           ),
         ));

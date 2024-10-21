@@ -26,7 +26,6 @@ class AppTextField extends StatelessWidget {
         
           validator: validator,
           onSaved: onSaved,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: keyboardType,
           cursorColor: AppColors.kPrimaryColor,
           cursorHeight: 20.h,
@@ -38,15 +37,19 @@ class AppTextField extends StatelessWidget {
               fillColor: Colors.transparent,
               filled: true,
               enabledBorder:
-                  borderStyle(color: AppColors.kWhiteObacity, width: 2),
+                  _borderStyle(color: AppColors.kWhiteObacity),
               focusedBorder:
-                  borderStyle(width: 2, color: AppColors.kPrimaryColor)),
+                  _borderStyle(color: AppColors.kPrimaryColor),
+                  errorBorder: _borderStyle(color: Colors.red)
+                  ),
+              
         ));
   }
 }
 
-OutlineInputBorder borderStyle({required double width, required Color color}) {
+OutlineInputBorder _borderStyle({required Color color}) {
   return OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
-      borderSide: BorderSide(width: width, color: color));
+      
+      borderSide: BorderSide(width: 2, color: color));
 }

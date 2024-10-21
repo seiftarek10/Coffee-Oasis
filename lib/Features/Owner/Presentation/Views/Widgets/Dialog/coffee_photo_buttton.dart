@@ -1,26 +1,45 @@
-
+import 'dart:io';
+import 'package:coffee_oasis/Core/Helpers/image_picker_service.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
-class CoffeeDtrinkPhoto extends StatelessWidget {
+class CoffeeDtrinkPhoto extends StatefulWidget {
   const CoffeeDtrinkPhoto({
     super.key,
+    required this.photo,
   });
+
+  final ValueChanged<File>? photo;
+
+  @override
+  State<CoffeeDtrinkPhoto> createState() => _CoffeeDtrinkPhotoState();
+}
+
+class _CoffeeDtrinkPhotoState extends State<CoffeeDtrinkPhoto> {
+  File? photo;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 170,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           color: Colors.white,
-          image: DecorationImage(image: AssetImage(Assets.imagesCoffee)),
+          image: DecorationImage(
+              image: photo == null
+                  ? const AssetImage(Assets.imagesCoffeePlaceholder)
+                  : FileImage(photo!)),
           shape: BoxShape.circle),
       child: Align(
           alignment: Alignment(0.3.w, 1),
           child: IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                photo = await ImagePickerService(picker: ImagePicker()).pickImage(source: ImageSource.gallery);
+                widget.photo != null ? (photo) : null;
+                setState(() {});
+              },
               icon: const Icon(Icons.add_a_photo,
                   color: AppColors.kPrimaryColor, size: 40))),
     );
