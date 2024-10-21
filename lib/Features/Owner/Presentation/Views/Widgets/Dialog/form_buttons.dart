@@ -1,4 +1,3 @@
-import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/dialog_button.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +5,14 @@ import 'package:go_router/go_router.dart';
 
 class FormButtons extends StatelessWidget {
   const FormButtons({
-    super.key, required this.buttonTitle, required this.onPressed,
+    super.key,
+    required this.buttonTitle,
+    required this.onPressed,
+    this.isLoading
   });
   final String buttonTitle;
   final void Function() onPressed;
+  final bool? isLoading;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,13 +27,14 @@ class FormButtons extends StatelessWidget {
             },
           ),
         ),
-        Space.k12,
+        const SizedBox(width: 12),
         Expanded(
           child: DialogButton(
+            isLoading: isLoading,
             title: buttonTitle,
             titleColor: Colors.white,
             backgroundColor: AppColors.kPrimaryColor,
-            onPresed:onPressed,
+            onPresed: onPressed,
           ),
         ),
       ],

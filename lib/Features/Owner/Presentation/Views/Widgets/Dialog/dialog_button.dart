@@ -8,23 +8,26 @@ class DialogButton extends StatelessWidget {
     required this.titleColor,
     required this.backgroundColor,
     required this.title,
-    required this.onPresed,
+    required this.onPresed,  this.isLoading,
   });
 
   final Color titleColor, backgroundColor;
   final String title;
   final void Function() onPresed;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-          overlayColor: AppColors.kPrimaryColor,
+            overlayColor: AppColors.kPrimaryColor,
             padding: const EdgeInsets.symmetric(vertical: 10),
             backgroundColor: backgroundColor),
         onPressed: onPresed,
-        
-        child:
-            Text(title, style: Fonts.font20_700.copyWith(color: titleColor)));
+        child: (isLoading==null)||(isLoading==false)? 
+            Text(title, style: Fonts.font20_700.copyWith(color: titleColor)):
+            const CircularProgressIndicator(
+          color: Colors.white,
+        ));
   }
 }
