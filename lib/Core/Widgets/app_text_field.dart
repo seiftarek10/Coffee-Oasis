@@ -14,7 +14,7 @@ class AppTextField extends StatelessWidget {
   final String labelText;
   final TextInputType? keyboardType;
   final void Function(String?) onSaved;
-  final String Function(String?) validator;
+  final String? Function(String?)? validator;
   final Widget? suffixIcon;
 
   @override
@@ -23,7 +23,7 @@ class AppTextField extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
         color: const Color.fromARGB(57, 0, 0, 0),
         child: TextFormField(
-        
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
           onSaved: onSaved,
           keyboardType: keyboardType,
@@ -40,7 +40,8 @@ class AppTextField extends StatelessWidget {
                   _borderStyle(color: AppColors.kWhiteObacity),
               focusedBorder:
                   _borderStyle(color: AppColors.kPrimaryColor),
-                  errorBorder: _borderStyle(color: Colors.red)
+                  errorBorder: _borderStyle(color: Colors.red),
+                  focusedErrorBorder:_borderStyle(color: Colors.red) 
                   ),
               
         ));

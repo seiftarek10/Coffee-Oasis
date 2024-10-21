@@ -24,7 +24,7 @@ class EditCoffeeDrinkForm extends StatelessWidget {
             children: [
               Space.topPageSpace,
                CoffeeDtrinkPhoto(
-                photo: (photo){},
+                pickedPhoto: (photo){},
               ),
               AppTextField(
                 labelText: 'Lettee',
@@ -51,7 +51,7 @@ class EditCoffeeDrinkForm extends StatelessWidget {
                 onSaved: (v) {},
               ),
               Space.k40,
-              FormButtons(buttonTitle: 'Edit', onPressed: () {}),
+              // FormButtons(buttonTitle: 'Edit', onPressed: () {}),
               Space.k20
             ],
           )),

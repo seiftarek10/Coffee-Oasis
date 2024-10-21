@@ -9,6 +9,7 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
   final AddCategorUseCase _addCategorUseCase;
 
   Future<void> addCategory({required CategoryEntity category}) async {
+    emit(AddCategoryLoadingState());
     var response = await _addCategorUseCase.execute(param: category);
     response.fold(
         (failure) =>

@@ -9,10 +9,10 @@ import 'package:image_picker/image_picker.dart';
 class CoffeeDtrinkPhoto extends StatefulWidget {
   const CoffeeDtrinkPhoto({
     super.key,
-    required this.photo,
+    required this.pickedPhoto,
   });
 
-  final ValueChanged<File>? photo;
+  final ValueChanged<File>? pickedPhoto;
 
   @override
   State<CoffeeDtrinkPhoto> createState() => _CoffeeDtrinkPhotoState();
@@ -36,8 +36,12 @@ class _CoffeeDtrinkPhotoState extends State<CoffeeDtrinkPhoto> {
           alignment: Alignment(0.3.w, 1),
           child: IconButton(
               onPressed: () async {
-                photo = await ImagePickerService(picker: ImagePicker()).pickImage(source: ImageSource.gallery);
-                widget.photo != null ? (photo) : null;
+                photo = await ImagePickerService(picker: ImagePicker())
+                    .pickImage(source: ImageSource.gallery);
+                    if (photo != null) {
+                  widget.pickedPhoto!(photo!); 
+                }
+             
                 setState(() {});
               },
               icon: const Icon(Icons.add_a_photo,

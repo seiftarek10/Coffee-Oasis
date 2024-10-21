@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/dialog_button.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/button.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Profile/am_pm_switcher.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class EditWorkTimeBody extends StatelessWidget {
                     title: 'Cancel',
                     titleColor: Colors.black,
                     backgroundColor: AppColors.kWhiteObacity,
-                    onPresed: () {
+                    onPressed: () {
                       GoRouter.of(context).pop();
                     },
                   ),
@@ -58,7 +58,7 @@ class EditWorkTimeBody extends StatelessWidget {
                     title: 'Edit',
                     titleColor: Colors.white,
                     backgroundColor: AppColors.kPrimaryColor,
-                    onPresed: () {},
+                    onPressed: () {},
                   ),
                 ),
               ],

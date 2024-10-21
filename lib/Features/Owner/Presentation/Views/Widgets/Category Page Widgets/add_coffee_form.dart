@@ -23,7 +23,7 @@ class AddCoffeeDrinkForm extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
                CoffeeDtrinkPhoto(
-                photo: (photo) {
+                pickedPhoto: (photo) {
                   
                 },
               ),
@@ -49,10 +49,10 @@ class AddCoffeeDrinkForm extends StatelessWidget {
                   },
                   value: 15),
               Space.k40,
-              FormButtons(
-                buttonTitle: 'Add',
-                onPressed: () {},
-              ),
+              // FormButtons(
+              //   buttonTitle: 'Add',
+              //   // onPressed: () {},
+              // ), 
               Space.k20
             ],
           )),

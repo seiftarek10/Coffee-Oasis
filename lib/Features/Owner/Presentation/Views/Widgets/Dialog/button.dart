@@ -8,12 +8,13 @@ class DialogButton extends StatelessWidget {
     required this.titleColor,
     required this.backgroundColor,
     required this.title,
-    required this.onPresed,  this.isLoading,
+    required this.onPressed,
+    this.isLoading,
   });
 
   final Color titleColor, backgroundColor;
   final String title;
-  final void Function() onPresed;
+  final void Function() onPressed;
   final bool? isLoading;
 
   @override
@@ -23,11 +24,11 @@ class DialogButton extends StatelessWidget {
             overlayColor: AppColors.kPrimaryColor,
             padding: const EdgeInsets.symmetric(vertical: 10),
             backgroundColor: backgroundColor),
-        onPressed: onPresed,
-        child: (isLoading==null)||(isLoading==false)? 
-            Text(title, style: Fonts.font20_700.copyWith(color: titleColor)):
-            const CircularProgressIndicator(
-          color: Colors.white,
-        ));
+        onPressed: onPressed,
+        child: (isLoading == null) || (isLoading == false)
+            ? Text(title, style: Fonts.font20_700.copyWith(color: titleColor))
+            : const CircularProgressIndicator(
+                color: Colors.white,
+              ));
   }
 }

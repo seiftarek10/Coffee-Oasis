@@ -7,10 +7,10 @@ class CategoryEntity {
   final List<CoffeeEntity>? coffeeDrinks;
 
   CategoryEntity(
-      {required this.id,
-      required this.name,
-      required this.photo,
-      required this.coffeeDrinks});
+      { this.id,
+       this.name,
+       this.photo,
+       this.coffeeDrinks});
 
   toJson() {
     return {

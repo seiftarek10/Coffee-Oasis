@@ -1,10 +1,12 @@
 abstract class ValidationForm {
+
   static String? nullOrEpmty(String? value) {
     if (value == null || value.isEmpty) {
       return 'Required';
     }
-    return null;
+    return null; 
   }
+
 
   static String? validEmail(String? email) {
     if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
