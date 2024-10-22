@@ -9,10 +9,11 @@ import 'package:image_picker/image_picker.dart';
 class CoffeeDtrinkPhoto extends StatefulWidget {
   const CoffeeDtrinkPhoto({
     super.key,
-    required this.pickedPhoto,
+    required this.pickedPhoto, this.url,
   });
 
   final ValueChanged<File>? pickedPhoto;
+  final String? url;
 
   @override
   State<CoffeeDtrinkPhoto> createState() => _CoffeeDtrinkPhotoState();
@@ -28,9 +29,9 @@ class _CoffeeDtrinkPhotoState extends State<CoffeeDtrinkPhoto> {
       decoration: BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
-              image: photo == null
+              image: (photo == null && widget.url==null)
                   ? const AssetImage(Assets.imagesCoffeePlaceholder)
-                  : FileImage(photo!)),
+                  : widget.url==null? FileImage(photo!):NetworkImage(widget.url!)),
           shape: BoxShape.circle),
       child: Align(
           alignment: Alignment(0.3.w, 1),
@@ -38,10 +39,10 @@ class _CoffeeDtrinkPhotoState extends State<CoffeeDtrinkPhoto> {
               onPressed: () async {
                 photo = await ImagePickerService(picker: ImagePicker())
                     .pickImage(source: ImageSource.gallery);
-                    if (photo != null) {
-                  widget.pickedPhoto!(photo!); 
+                if (photo != null) {
+                  widget.pickedPhoto!(photo!);
                 }
-             
+
                 setState(() {});
               },
               icon: const Icon(Icons.add_a_photo,

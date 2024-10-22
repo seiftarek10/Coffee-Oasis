@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class ManageCategoryForm extends StatelessWidget {
-  const ManageCategoryForm({
+class ManageCategoryAddForm extends StatelessWidget {
+  const ManageCategoryAddForm({
     super.key,
   });
 
@@ -75,7 +75,8 @@ class ManageCategoryForm extends StatelessWidget {
     StorageService storageService = getIt.get<StorageService>();
     String? photoUrl = await storageService.uploadPhoto(
         photo: photo!, folderName: 'Categories');
-    CategoryEntity category = CategoryEntity(name: name, photo: photoUrl,coffeeDrinks: []);
+    CategoryEntity category =
+        CategoryEntity(name: name, photo: photoUrl, coffeeDrinks: []);
     await _addCategoryMethod(context, category);
     photo = null;
   }

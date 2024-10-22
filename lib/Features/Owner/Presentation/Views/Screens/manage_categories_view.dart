@@ -14,22 +14,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ManageCategories extends StatelessWidget {
   const ManageCategories({super.key});
-  
-  
+
   @override
   Widget build(BuildContext context) {
+    final getAllCategoriesCubit = GetAllCategoriesCubit(
+        GetAllCategoriesUseCase(getIt.get<OwnerRepoImpl>()));
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => GetAllCategoriesCubit(
-                  GetAllCategoriesUseCase(getIt.get<OwnerRepoImpl>()))
-                ..getAllCategories()),
+              create: (context) => getAllCategoriesCubit..getAllCategories()),
           BlocProvider(
               create: (context) => DeleteCategoryCubit(
                   DeleteCategoryUseCase(getIt.get<OwnerRepoImpl>())))
         ],
         child: Scaffold(
-            floatingActionButton: const ManageCategoryFloatingButton(),
+            floatingActionButton: ManageCategoryFloatingButton(
+              cubit: getAllCategoriesCubit,
+            ),
             resizeToAvoidBottomInset: true,
             body: SafeArea(
                 child: Background(
@@ -42,7 +43,8 @@ class ManageCategories extends StatelessWidget {
                               const HeaderBar(
                                 headerText: 'All Categories',
                               ),
-                              const Expanded(child: GetAllCategoriesBlocBuilder())
+                              const Expanded(
+                                  child: GetAllCategoriesBlocBuilder())
                             ]))))));
   }
 }

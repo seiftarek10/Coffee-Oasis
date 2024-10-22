@@ -2,7 +2,7 @@ import 'package:coffee_oasis/Core/Models/bottom_naivigation_bar_item.dart';
 import 'package:coffee_oasis/Core/Widgets/Bottom%20Bar/app_bottom_bar.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/analytics_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/owner_home_view.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/owner_profile.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/owner_profile_view.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 

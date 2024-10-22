@@ -16,4 +16,5 @@ void setupGetIt() {
       OwnerRemoteDataSource(getIt.get<DatabaseServices>()));
   getIt.registerSingleton<OwnerRepoImpl>(
       OwnerRepoImpl(getIt.get<OwnerRemoteDataSource>()));
+
 }

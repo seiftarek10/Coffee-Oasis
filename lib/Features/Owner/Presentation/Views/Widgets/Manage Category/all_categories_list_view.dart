@@ -6,7 +6,7 @@ import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/del
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_all_categories/get_all_categories_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/swap_note.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/categor_card.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/form.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/edit_form.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/slide_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +52,9 @@ class ManageAllCategoriesListView extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return const ManageCategoryForm();
+                            return  ManageCategoryEditForm(
+                              categoryEntity: categoriesList[index],
+                            );
                           });
                     },
                     itemKey: Key(index.toString()),
