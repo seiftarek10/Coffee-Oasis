@@ -31,8 +31,7 @@ class AppRouter {
             return pageTransition(
                 context,
                 state,
-                // SplashView(flavor: flavor),
-                const ManageCategories()
+                SplashView(flavor: flavor),
            
                 );
           },

@@ -9,14 +9,16 @@ class ManageCategoriesContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppWhiteContainer(
-      child: ProfileInfoItem(
-        info: '',
-        title: 'Manage Your Categories',
-        onPressed: () {
+    return GestureDetector(
+      onTap: (){
           GoRouter.of(context).push(Routes.manageCategories);
-        },
-        editItem: false,
+      },
+      child: const AppWhiteContainer(
+        child: ProfileInfoItem(
+          info: '',
+          title: 'Manage Your Categories',
+          editItem: false,
+        ),
       ),
     );
   }

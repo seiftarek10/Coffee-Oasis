@@ -13,18 +13,19 @@ class AppLoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 24),
-      child: SingleChildScrollView(
-        child: Skeletonizer(
-            enabled: true,
-            child: Column(
-              children: List.generate(7, (index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: child
-                );
-              }),
-            )),
-      ),
+      child: Skeletonizer(
+          enabled: true,
+          child: ListView.builder(
+            itemCount: 7,
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context,index){
+             return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: child
+              );
+            },
+          )),
     );
   }
 }

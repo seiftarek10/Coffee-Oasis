@@ -7,7 +7,7 @@ import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/delete_category_us
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_all_categories.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/delete_category/delete_category_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_all_categories/get_all_categories_cubit.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Bloc%20Widgets/get_all_categories_bloc_builder.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/Bloc%20Widgets/get_all_categories_bloc_builder.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/floating_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
