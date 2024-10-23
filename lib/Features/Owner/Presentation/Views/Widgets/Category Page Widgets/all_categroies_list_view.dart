@@ -21,7 +21,7 @@ class OwnerAllCategoiresListView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate((context, index) {
         return GestureDetector(
             onTap: () {
-              GoRouter.of(context).push(Routes.category);
+              GoRouter.of(context).push(Routes.category,extra: categories[index]);
             },
             child: CategoryCard(
               categoryEntity: categories[index],

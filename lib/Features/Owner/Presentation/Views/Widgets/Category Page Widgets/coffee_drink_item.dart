@@ -1,17 +1,15 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 
-
 import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CoffeeDrinkItem extends StatelessWidget {
-  const CoffeeDrinkItem({super.key, 
-
+  const CoffeeDrinkItem({
+    super.key,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +19,9 @@ class CoffeeDrinkItem extends StatelessWidget {
         color: AppColors.kWhiteObacity,
         child: Row(
           children: [
-             Expanded(
+            Expanded(
               flex: 2,
-              child: CoffeePhotoCard(aspectRatio: 0.5.h),
+              child: CoffeePhotoCard(aspectRatio: 0.6.h),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -48,16 +46,16 @@ class CoffeeDrinkItem extends StatelessWidget {
                   Text(
                     r'Price: 70 $',
                     style: Fonts.font14_500PrimaryColor,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
             const SizedBox(width: 8),
-    
           ],
         ),
       ),
     );
   }
 }
-

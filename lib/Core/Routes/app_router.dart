@@ -3,6 +3,7 @@ import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_in_view.dart';
 import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_up_view.dart';
 import 'package:coffee_oasis/Features/Delivery/Presentation/Views/delivery.dart';
+import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/category_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/manage_categories_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/owner.dart';
@@ -15,7 +16,7 @@ import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/order_deta
 import 'package:coffee_oasis/Features/User/Presentation/Views/user.dart';
 import 'package:coffee_oasis/coffee_oasis.dart';
 import 'package:go_router/go_router.dart';
- 
+
 class AppRouter {
   final Flavor flavor;
 
@@ -29,11 +30,10 @@ class AppRouter {
           path: '/',
           pageBuilder: (context, state) {
             return pageTransition(
-                context,
-                state,
-                SplashView(flavor: flavor),
-           
-                );
+              context,
+              state,
+              SplashView(flavor: flavor),
+            );
           },
         ),
         GoRoute(
@@ -42,8 +42,15 @@ class AppRouter {
                 pageTransition(context, state, const OwnerView())),
         GoRoute(
             path: Routes.category,
-            pageBuilder: (context, state) =>
-                pageTransition(context, state, const CategoryView())),
+            pageBuilder: (context, state) {
+              final CategoryEntity category = state.extra as CategoryEntity;
+              return pageTransition(
+                  context,
+                  state,
+                  CategoryView(
+                    categoryEntity: category,
+                  ));
+            }),
         GoRoute(
             path: Routes.user,
             pageBuilder: (context, state) =>

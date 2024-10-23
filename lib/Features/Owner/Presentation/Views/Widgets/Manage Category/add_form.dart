@@ -77,7 +77,7 @@ class ManageCategoryAddForm extends StatelessWidget {
     String? photoUrl = await storageService.uploadPhoto(
         photo: photo!, folderName: FoldersName.categoriesImages);
     CategoryEntity category =
-        CategoryEntity(name: name, photo: photoUrl, coffeeDrinks: []);
+        CategoryEntity(name: name, photo: photoUrl);
     await _addCategoryMethod(context, category);
     photo = null;
   }

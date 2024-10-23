@@ -27,13 +27,14 @@ class OwnerRemoteDataSource {
   }
 
   Future<void> deleteCategory({required String id, required String url}) async {
-    await _databaseServices.delete(endPoint: Endpoints.categories, docId: id);
+    await _databaseServices.deleteDoc(
+        endPoint: Endpoints.categories, docId: id);
     await getIt.get<StorageService>().deletePhoto(url: url);
   }
 
   Future<void> updateCategory(
-      {required String id, required Map<String,dynamic> body}) async {
-    await _databaseServices.update(
+      {required String id, required Map<String, dynamic> body}) async {
+    await _databaseServices.updateDoc(
         endPoint: Endpoints.categories, body: body, docId: id);
   }
 }
