@@ -38,10 +38,26 @@ class OwnerRepoImpl extends OwnerRepo {
   }
 
   @override
-  Future<Either<Failure, String>> deleteCategory({required String id,required String url}) async {
+  Future<Either<Failure, void>> deleteCategory(
+      {required String id, required String url}) async {
     try {
-      await _ownerRemoteDataSource.deleteCategory(id: id,url: url);
-      return right('Success');
+      await _ownerRemoteDataSource.deleteCategory(id: id, url: url);
+      // ignore: void_checks
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateCategory(
+      {required String id, required Map<String,dynamic>body }) async {
+    try {
+      _ownerRemoteDataSource.updateCategory(id: id, body: body);
+      return right(unit);
     } catch (e) {
       if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));

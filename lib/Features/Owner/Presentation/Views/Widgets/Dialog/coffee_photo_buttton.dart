@@ -9,7 +9,8 @@ import 'package:image_picker/image_picker.dart';
 class CoffeeDtrinkPhoto extends StatefulWidget {
   const CoffeeDtrinkPhoto({
     super.key,
-    required this.pickedPhoto, this.url,
+    required this.pickedPhoto,
+    this.url,
   });
 
   final ValueChanged<File>? pickedPhoto;
@@ -29,9 +30,13 @@ class _CoffeeDtrinkPhotoState extends State<CoffeeDtrinkPhoto> {
       decoration: BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
-              image: (photo == null && widget.url==null)
+              image: (photo == null && widget.url == null)
                   ? const AssetImage(Assets.imagesCoffeePlaceholder)
-                  : widget.url==null? FileImage(photo!):NetworkImage(widget.url!)),
+                  : photo != null
+                      ? FileImage(photo!)
+                      : widget.url != null
+                          ? NetworkImage(widget.url!)
+                          : const AssetImage(Assets.imagesCoffeePlaceholder)),
           shape: BoxShape.circle),
       child: Align(
           alignment: Alignment(0.3.w, 1),

@@ -6,5 +6,8 @@ abstract class OwnerRepo {
   Future<Either<Failure, String>> addCategory(
       {required CategoryEntity category});
   Future<Either<Failure, List<CategoryEntity>>> getAllCategories();
-  Future<Either<Failure, String>> deleteCategory({required String id,required String url});
+  Future<Either<Failure, void>> deleteCategory(
+      {required String id, required String url});
+  Future<Either<Failure, void>> updateCategory(
+      {required String id, required Map<String,dynamic> body});
 }

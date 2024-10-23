@@ -1,23 +1,26 @@
 import 'dart:io';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
-import 'package:coffee_oasis/Core/Helpers/validation_form.dart';
-
+import 'package:coffee_oasis/Core/NetWork/folders_name.dart';
+import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
+import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
-
+import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/update_category/update_category_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/coffee_photo_buttton.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/form_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ManageCategoryEditForm extends StatelessWidget {
   const ManageCategoryEditForm({
-    super.key, required this.categoryEntity,
+    super.key,
+    required this.categoryEntity,
   });
 
   static final GlobalKey<FormState> _key = GlobalKey();
-  static File? photo;
-  static String? name;
+  static File? selectedPhoto;
+  static String? updatedName;
   final CategoryEntity categoryEntity;
   @override
   Widget build(BuildContext context) {
@@ -28,49 +31,72 @@ class ManageCategoryEditForm extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Center(
-              child: Form(
+              child: Form(  
                   key: _key,
                   child: Column(children: [
                     CoffeeDtrinkPhoto(
                       url: categoryEntity.photo,
                       pickedPhoto: (coffeePhoto) {
-                        photo = coffeePhoto;
+                        selectedPhoto = coffeePhoto;
                       },
                     ),
                     Space.k40,
                     AppTextField(
-                      labelText: categoryEntity.name??'',
-                      validator: (value) {
-                        return ValidationForm.nullOrEpmty(value);
-                      },
+                      labelText: categoryEntity.name ?? '',
                       onSaved: (value) {
-                        name = value!;
+                        updatedName = value!;
                       },
                     ),
                     const SizedBox(height: 40),
                     FormButtons(
                         cancel: () {
-                          photo = null;
-                          GoRouter.of(context).pop();
+                          _resetForm(context);
                         },
-                        buttonTitle: 'Add',
+                        buttonTitle: 'Edit',
                         onPressed: (loading) async {
-                          // if (_key.currentState!.validate()) {
-                          //   if (photo == null) {
-                          //     failedMessage(
-                          //         context: context,
-                          //         message: 'Coffee Photo Is Required');
-                          //     return;
-                          //   }
-                          //   loading();
-                          //   _key.currentState!.save();
-                          //   await _addCategoryWithPhoto(context);
-                          //   loading();
-                          // }
+                          _key.currentState?.save();
+                          if (updatedName!.isEmpty && selectedPhoto == null) {
+                            GoRouter.of(context).pop();
+                            return;
+                          }
+                          loading();
+                          await _updateCategory(context);
+                          loading();
                         })
                   ])),
             )),
       ),
     );
+  }
+
+  void _resetForm(BuildContext context) {
+    selectedPhoto = null;
+    GoRouter.of(context).pop();
+  }
+
+  Future<Map<String, dynamic>> _buildBodyRequest() async {
+    if (selectedPhoto == null) {
+      return {'name': updatedName!};
+    }
+    if (updatedName!.isEmpty) {
+      String? newPhoto = await _getNewUrl();
+      return {'name': categoryEntity.name!, 'photo': newPhoto};
+    }
+
+    return {};
+  }
+
+  Future<void> _updateCategory(BuildContext context) async {
+    final body =  await _buildBodyRequest();
+    await BlocProvider.of<UpdateCategoryCubit>(context)
+        .updateCategory(id: categoryEntity.id!, body: body);
+    selectedPhoto = null;
+  }
+
+  Future<String?> _getNewUrl() async {
+    await getIt.get<StorageService>().deletePhoto(url: categoryEntity.photo!);
+    String? newPhoto = await getIt.get<StorageService>().uploadPhoto(
+        photo: selectedPhoto!, folderName: FoldersName.categoriesImages);
+    return newPhoto;
   }
 }

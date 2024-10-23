@@ -16,4 +16,5 @@ class GetAllCategoriesCubit extends Cubit<GetAllCategoriesState> {
             emit(GetAllCategoriesFailure(errMessage: failure.errMessage)),
         (data) => emit(GetAllCategoriesSuccess(categories: data)));
   }
+
 }

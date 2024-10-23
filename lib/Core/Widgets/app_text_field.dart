@@ -8,7 +8,7 @@ class AppTextField extends StatelessWidget {
     super.key,
     required this.labelText,
     required this.onSaved,
-    this.suffixIcon, required this.validator,  this.keyboardType,
+    this.suffixIcon,  this.validator,  this.keyboardType,
   });
 
   final String labelText;

@@ -43,8 +43,10 @@ class ManageCategories extends StatelessWidget {
                               const HeaderBar(
                                 headerText: 'All Categories',
                               ),
-                              const Expanded(
-                                  child: GetAllCategoriesBlocBuilder())
+                              Expanded(
+                                  child: GetAllCategoriesBlocBuilder(
+                                    cubit:getAllCategoriesCubit ,
+                                  ))
                             ]))))));
   }
 }

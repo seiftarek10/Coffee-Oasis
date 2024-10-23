@@ -23,7 +23,7 @@ class FireBaseError extends Failure {
         return FireBaseError(errMessage: "Invalid data provided.");
 
       default:
-        return FireBaseError(errMessage: "Failed to add user");
+        return FireBaseError(errMessage: "Proccess Failed");
     }
   }
 }

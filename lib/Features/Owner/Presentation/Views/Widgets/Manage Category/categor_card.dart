@@ -19,7 +19,7 @@ class ManageCategoryCard extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: CoffeePhotoCard(aspectRatio: 1.h),
+              child: CoffeePhotoCard(aspectRatio: 1.h,photo: categoryEntity.photo),
             ),
             const SizedBox(width: 16),
             Expanded(
