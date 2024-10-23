@@ -1,8 +1,8 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
-import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
+import 'package:coffee_oasis/Core/Widgets/cancel_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({super.key});
@@ -51,7 +51,8 @@ class SignUpForm extends StatelessWidget {
                 },
                 onSaved: (s) {}),
             Space.k40,
-            AppButton(title: 'Sign Up', verticalPadding: 15.h, onPressed: () {})
+          const CancelButton()
+          
           ],
         ));
   }

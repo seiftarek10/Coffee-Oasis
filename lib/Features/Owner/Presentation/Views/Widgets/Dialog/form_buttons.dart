@@ -1,36 +1,32 @@
-import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/dialog_button.dart';
+import 'package:coffee_oasis/Core/Widgets/app_button.dart';
+import 'package:coffee_oasis/Core/Widgets/cancel_button.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class FormButtons extends StatelessWidget {
-  const FormButtons({
-    super.key, required this.buttonTitle, required this.onPressed,
-  });
+  const FormButtons(
+      {super.key,
+      required this.buttonTitle,
+      required this.onPressed,
+      this.cancel});
   final String buttonTitle;
-  final void Function() onPressed;
+  final Future<void> Function(Function) onPressed;
+  final void Function()? cancel;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: DialogButton(
-            title: 'Cancel',
-            titleColor: Colors.black,
-            backgroundColor: AppColors.kWhiteObacity,
-            onPresed: () {
-              GoRouter.of(context).pop();
-            },
-          ),
+          child: CancelButton(onPressed: cancel),
         ),
-        Space.k12,
+        const SizedBox(width: 12),
         Expanded(
-          child: DialogButton(
+          child: AppButton(
             title: buttonTitle,
             titleColor: Colors.white,
             backgroundColor: AppColors.kPrimaryColor,
-            onPresed:onPressed,
+            onPressed: onPressed,
           ),
         ),
       ],

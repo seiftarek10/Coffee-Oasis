@@ -1,17 +1,14 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
-import 'package:coffee_oasis/Core/Theme/colors.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Dialog/dialog_button.dart';
+import 'package:coffee_oasis/Core/Widgets/cancel_button.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class EditFieldBody extends StatelessWidget {
-  const EditFieldBody({
-    super.key,
-    required this.labelText,
-    required this.onSaved,
-    this.keyboardType
-  });
+  const EditFieldBody(
+      {super.key,
+      required this.labelText,
+      required this.onSaved,
+      this.keyboardType});
 
   final String labelText;
   final void Function(String?) onSaved;
@@ -22,7 +19,7 @@ class EditFieldBody extends StatelessWidget {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
+          minHeight: MediaQuery.of(context).size.height,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -37,26 +34,17 @@ class EditFieldBody extends StatelessWidget {
                   },
                   onSaved: onSaved),
               Space.k40,
-              Row(
+              const Row(
                 children: [
                   Expanded(
-                    child: DialogButton(
-                      title: 'Cancel',
-                      titleColor: Colors.black,
-                      backgroundColor: AppColors.kWhiteObacity,
-                      onPresed: () {
-                        GoRouter.of(context).pop();
-                      },
+                    child: CancelButton(
+                  
+                      
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
-                    child: DialogButton(
-                      title: 'Edit',
-                      titleColor: Colors.white,
-                      backgroundColor: AppColors.kPrimaryColor,
-                      onPresed: () {},
-                    ),
+                  child: CancelButton(),
                   ),
                 ],
               ),

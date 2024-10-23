@@ -4,7 +4,7 @@ import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_in_vi
 import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_up_view.dart';
 import 'package:coffee_oasis/Features/Delivery/Presentation/Views/delivery.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/category_view.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/manage_categories.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/manage_categories_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/owner.dart';
 import 'package:coffee_oasis/Features/Splash%20Screen/splash_view.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Screens/staff_home_view.dart';
@@ -15,7 +15,7 @@ import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/order_deta
 import 'package:coffee_oasis/Features/User/Presentation/Views/user.dart';
 import 'package:coffee_oasis/coffee_oasis.dart';
 import 'package:go_router/go_router.dart';
-
+ 
 class AppRouter {
   final Flavor flavor;
 
@@ -31,7 +31,8 @@ class AppRouter {
             return pageTransition(
                 context,
                 state,
-                SplashView(flavor: flavor),
+                // SplashView(flavor: flavor),
+                const ManageCategories()
            
                 );
           },
