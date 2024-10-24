@@ -1,5 +1,6 @@
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
+import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class OwnerRepo {
@@ -9,5 +10,7 @@ abstract class OwnerRepo {
   Future<Either<Failure, void>> deleteCategory(
       {required String id, required String url});
   Future<Either<Failure, void>> updateCategory(
-      {required String id, required Map<String,dynamic> body});
+      {required String id, required Map<String, dynamic> body});
+  Future<Either<Failure, void>> addCoffeeDrink(
+      {required CoffeeEntity coffeeEntity,required String docId});
 }

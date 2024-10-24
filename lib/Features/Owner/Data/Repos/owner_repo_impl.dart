@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
+import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Repos/owner_repo.dart';
 import 'package:dartz/dartz.dart';
 
@@ -54,9 +55,24 @@ class OwnerRepoImpl extends OwnerRepo {
 
   @override
   Future<Either<Failure, void>> updateCategory(
-      {required String id, required Map<String,dynamic>body }) async {
+      {required String id, required Map<String, dynamic> body}) async {
     try {
       _ownerRemoteDataSource.updateCategory(id: id, body: body);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addCoffeeDrink(
+      {required CoffeeEntity coffeeEntity, required String docId}) async {
+    try {
+      await _ownerRemoteDataSource.addCoffeeDrink(
+          coffeeEntity: coffeeEntity, docId: docId);
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {

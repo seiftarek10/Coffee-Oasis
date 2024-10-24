@@ -15,7 +15,9 @@ class CategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: const AddFloatingActionButton(),
+      floatingActionButton:  AddFloatingActionButton(
+        id: categoryEntity.id!,
+      ),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Background(

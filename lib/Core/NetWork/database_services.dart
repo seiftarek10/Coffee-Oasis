@@ -10,14 +10,15 @@ class DatabaseServices {
   }
 
   Future<void> postToSubCollection(
-      {required String parentCollection,
-      required String docID,
-      required endPoint,
+      {
+    required FireBasePathParam fireBasePathParam,
+        
+     
       required Map<String, dynamic> body}) async {
     await FirebaseFirestore.instance
-        .collection(parentCollection)
-        .doc(docID)
-        .collection(endPoint)
+        .collection(fireBasePathParam.parentCollection)
+        .doc(fireBasePathParam.parentDocId)
+        .collection(fireBasePathParam.subCollection!)
         .add(body);
   }
 
