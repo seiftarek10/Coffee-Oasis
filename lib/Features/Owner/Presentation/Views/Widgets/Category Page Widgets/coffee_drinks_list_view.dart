@@ -7,8 +7,8 @@ import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/del
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_category_coffee_drinks.dart/get_category_coffee_drinks_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/update_coffee_drink/update_coffee_drink_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/Bloc%20Widgets/delete_coffee_drink_bloc_listner.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/Bloc%20Widgets/upadate_coffee_drink_bloc_listner.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/coffee_drink_item.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/edit_coffee_form.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/swap_note.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/slide_card.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +60,7 @@ class CoffeeDrinksListView extends StatelessWidget {
                                                               OwnerRepoImpl>()))),
                                           BlocProvider.value(value: getCategoryCoffeeDrinksCubit)
                                         ],
-                                        child: EditCoffeeDrinkForm(
+                                        child: UpadateCoffeeDrinkBlocListner(
                                           coffeeEntity: coffeeDrinks[index],
                                           id: id,
                                         ));

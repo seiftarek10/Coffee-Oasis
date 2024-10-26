@@ -9,11 +9,12 @@ class NavigationBarItem extends StatelessWidget {
       {super.key,
       required this.bottomBarItemModel,
       required this.isActive,
-      required this.onTap});
+      required this.onTap, this.needRightPadding});
 
   final BottomBarItemModel bottomBarItemModel;
   final bool isActive;
   final void Function() onTap;
+  final bool? needRightPadding; 
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class NavigationBarItem extends StatelessWidget {
             child: ActiveBottomBarItem(
                 title: bottomBarItemModel.title,
                 icon: bottomBarItemModel.icon,
+                needRightPadding:needRightPadding ,
               ),
           )
           : Padding(
