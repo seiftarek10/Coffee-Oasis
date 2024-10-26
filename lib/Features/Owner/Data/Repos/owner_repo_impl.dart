@@ -40,9 +40,9 @@ class OwnerRepoImpl extends OwnerRepo {
 
   @override
   Future<Either<Failure, void>> deleteCategory(
-      {required String id, required String url}) async {
+      {required String id, required String photoUrl}) async {
     try {
-      await _ownerRemoteDataSource.deleteCategory(id: id, url: url);
+      await _ownerRemoteDataSource.deleteCategory(id: id, url: photoUrl);
       // ignore: void_checks
       return right(unit);
     } catch (e) {
@@ -91,6 +91,23 @@ class OwnerRepoImpl extends OwnerRepo {
       return right(coffeeDrinks);
     } catch (e) {
       if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCoffeeDrink(
+      {required String parentDocId,
+      required String docId,
+      required String photoUrl}) async {
+    try {
+      await _ownerRemoteDataSource.deleteCoffeeDrink(
+          parentDocId: parentDocId, docId: docId, photoUrl: photoUrl);
+      return right(unit);
+    } catch (e) {
+       if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));
       }
       return left(FireBaseError(errMessage: e.toString()));

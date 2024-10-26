@@ -98,6 +98,8 @@ class AddCoffeeDrinkForm extends StatelessWidget {
   }
 
   Future<void> _addCoffee(BuildContext context) async {
+  final addCoffeeDrinkCubit = BlocProvider.of<AddCoffeeDrinkCubit>(context);
+
     String? photoUrl = await getIt.get<StorageService>().uploadPhoto(
         photo: selectedPhoto!, folderName: FoldersName.coffeeDrinkImage);
     final CoffeeEntity coffee = CoffeeEntity(
@@ -105,8 +107,11 @@ class AddCoffeeDrinkForm extends StatelessWidget {
         name: coffeeName,
         description: description,
         price: price);
-    await BlocProvider.of<AddCoffeeDrinkCubit>(context)
+    await addCoffeeDrinkCubit
         .addCoffeeDrink(coffee: coffee, docId: id);
     
   }
+
+
+
 }

@@ -31,6 +31,7 @@ class GetCoffeeDrinksBlocBuilder extends StatelessWidget {
           }
           return CoffeeDrinksListView(
             coffeeDrinks: state.coffeeDrinks,
+            id: id,
           );
         } else {
           return const Expanded(

@@ -4,7 +4,9 @@ import 'package:coffee_oasis/Core/Widgets/app_bar.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Repos/owner_repo_impl.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
+import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/delete_coffee_drink_use_case.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_category_coffee_drinks.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/delete_coffee_drink/delete_coffee_drink_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_category_coffee_drinks.dart/get_category_coffee_drinks_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/Bloc%20Widgets/get_coffee_drinks_bloc_builder.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/floating_action_button.dart';
@@ -17,14 +19,26 @@ class CategoryView extends StatelessWidget {
   final CategoryEntity categoryEntity;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => GetCategoryCoffeeDrinksCubit(
-            GetCategoryCoffeeDrinksUseCase(getIt.get<OwnerRepoImpl>()))
-          ..getCategoryCoffeeDrink(id: categoryEntity.id!),
+  Widget build(BuildContext context) {    
+    
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => GetCategoryCoffeeDrinksCubit(
+      GetCategoryCoffeeDrinksUseCase(getIt.get<OwnerRepoImpl>()))
+                ..getCategoryCoffeeDrink(id: categoryEntity.id!)),
+          BlocProvider(
+              create: (context) => DeleteCoffeeDrinkCubit(
+                  DeleteCoffeeDrinkUseCase(getIt.get<OwnerRepoImpl>())))
+        ],
         child: Scaffold(
-            floatingActionButton: AddFloatingActionButton(
-              id: categoryEntity.id!,
+            floatingActionButton: Builder(
+              builder: (context) {
+                return AddFloatingActionButton(
+                  id: categoryEntity.id!,
+                  getCategoryCoffeeDrinksCubit: context.read<GetCategoryCoffeeDrinksCubit>(),
+                );
+              }
             ),
             resizeToAvoidBottomInset: true,
             body: SafeArea(

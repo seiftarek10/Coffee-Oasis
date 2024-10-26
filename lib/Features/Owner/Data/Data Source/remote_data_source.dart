@@ -2,7 +2,6 @@ import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
 import 'package:coffee_oasis/Core/NetWork/database_services.dart';
 import 'package:coffee_oasis/Core/NetWork/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
-import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/category_model.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drink_model.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
@@ -10,8 +9,9 @@ import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
 
 class OwnerRemoteDataSource {
   final DatabaseServices _databaseServices;
+  final StorageService _storageService;
 
-  OwnerRemoteDataSource(this._databaseServices);
+  OwnerRemoteDataSource(this._databaseServices, this._storageService);
 
   Future<void> addCategory({required CategoryEntity category}) async {
     await _databaseServices.postDoc(
@@ -33,7 +33,7 @@ class OwnerRemoteDataSource {
   Future<void> deleteCategory({required String id, required String url}) async {
     await _databaseServices.deleteDoc(
         endPoint: EndPoints.categories, docId: id);
-    await getIt.get<StorageService>().deletePhoto(url: url);
+    await _storageService.deletePhoto(url: url);
   }
 
   Future<void> updateCategory(
@@ -58,11 +58,25 @@ class OwnerRemoteDataSource {
         fireBasePathParam: FireBasePathParam(
             parentCollection: EndPoints.categories,
             parentDocId: docId,
-            subCollection:EndPoints.coffeeDrinks));
+            subCollection: EndPoints.coffeeDrinks));
     List<CoffeeEntity> coffeeDrinks = [];
     for (var item in response.docs) {
       coffeeDrinks.add(CoffeeDrinkModel.fromjson(item));
     }
     return coffeeDrinks;
+  }
+
+  Future<void> deleteCoffeeDrink({
+    required String parentDocId,
+    required String docId,
+    required String photoUrl,
+  }) async {
+    await _databaseServices.deleteDocFromSubCollection(
+        fireBasePathParam: FireBasePathParam(
+            parentCollection: EndPoints.categories,
+            parentDocId: parentDocId,
+            subCollection: EndPoints.coffeeDrinks,
+            subDocId: docId));
+    await _storageService.deletePhoto(url: photoUrl);
   }
 }

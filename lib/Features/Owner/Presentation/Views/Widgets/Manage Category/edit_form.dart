@@ -87,8 +87,9 @@ class ManageCategoryEditForm extends StatelessWidget {
   }
 
   Future<void> _updateCategory(BuildContext context) async {
+    UpdateCategoryCubit updateCategoryCubit=BlocProvider.of<UpdateCategoryCubit>(context);
     final body =  await _buildBodyRequest();
-    await BlocProvider.of<UpdateCategoryCubit>(context)
+    await updateCategoryCubit
         .updateCategory(id: categoryEntity.id!, body: body);
     selectedPhoto = null;
   }

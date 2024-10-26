@@ -59,26 +59,20 @@ class ManageCategoryAddForm extends StatelessWidget {
                   }
                   loading();
                   _key.currentState!.save();
-                  await _addCategoryWithPhoto(context);
+                  await _addCategory(context);
                   loading();
                 }
               })
         ]));
   }
 
-  Future<void> _addCategoryMethod(
-      BuildContext context, CategoryEntity category) async {
-    await BlocProvider.of<AddCategoryCubit>(context)
-        .addCategory(category: category);
-  }
-
-  Future<void> _addCategoryWithPhoto(BuildContext context) async {
+  Future<void> _addCategory(BuildContext context) async {
+    final addCategoryCubit = BlocProvider.of<AddCategoryCubit>(context);
     StorageService storageService = getIt.get<StorageService>();
     String? photoUrl = await storageService.uploadPhoto(
         photo: photo!, folderName: FoldersName.categoriesImages);
-    CategoryEntity category =
-        CategoryEntity(name: name, photo: photoUrl);
-    await _addCategoryMethod(context, category);
+    CategoryEntity category = CategoryEntity(name: name, photo: photoUrl);
+    await addCategoryCubit.addCategory(category: category);
     photo = null;
   }
 }

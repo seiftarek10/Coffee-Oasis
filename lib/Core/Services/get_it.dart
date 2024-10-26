@@ -14,7 +14,7 @@ void setupGetIt() {
       StorageService(getIt.get<FirebaseStorage>()));
   getIt.registerSingleton<DatabaseServices>(DatabaseServices());
   getIt.registerSingleton<OwnerRemoteDataSource>(
-      OwnerRemoteDataSource(getIt.get<DatabaseServices>()));
+      OwnerRemoteDataSource(getIt.get<DatabaseServices>(),getIt.get<StorageService>()));
   getIt.registerSingleton<OwnerRepoImpl>(
       OwnerRepoImpl(getIt.get<OwnerRemoteDataSource>()));
   getIt.registerSingleton<GetAllCategoriesUseCase>(GetAllCategoriesUseCase(getIt.get<OwnerRepoImpl>()));
