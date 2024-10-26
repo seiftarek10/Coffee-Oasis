@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GetCoffeeDrinksBlocBuilder extends StatelessWidget {
-  const GetCoffeeDrinksBlocBuilder({super.key, required this.id});
+  const GetCoffeeDrinksBlocBuilder({super.key, required this.id, required this.getCategoryCoffeeDrinksCubit});
   final String id;
+    final GetCategoryCoffeeDrinksCubit getCategoryCoffeeDrinksCubit;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetCategoryCoffeeDrinksCubit,
@@ -32,6 +33,7 @@ class GetCoffeeDrinksBlocBuilder extends StatelessWidget {
           return CoffeeDrinksListView(
             coffeeDrinks: state.coffeeDrinks,
             id: id,
+            getCategoryCoffeeDrinksCubit: getCategoryCoffeeDrinksCubit,
           );
         } else {
           return const Expanded(

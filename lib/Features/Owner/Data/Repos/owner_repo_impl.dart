@@ -107,7 +107,24 @@ class OwnerRepoImpl extends OwnerRepo {
           parentDocId: parentDocId, docId: docId, photoUrl: photoUrl);
       return right(unit);
     } catch (e) {
-       if (e is FirebaseException) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateCoffeeDrink(
+      {required String parentDocId,
+      required String docId,
+      required Map<String, dynamic> body}) async {
+    try {
+      await _ownerRemoteDataSource.updateCoffeeDrink(
+          parentDocId: parentDocId, docId: docId, body: body);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));
       }
       return left(FireBaseError(errMessage: e.toString()));

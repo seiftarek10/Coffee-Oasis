@@ -52,8 +52,13 @@ class CategoryView extends StatelessWidget {
                               HeaderBar(
                                 headerText: categoryEntity.name ?? 'No Name',
                               ),
-                              GetCoffeeDrinksBlocBuilder(
-                                id: categoryEntity.id!,
+                              Builder(
+                                builder: (context) {
+                                  return GetCoffeeDrinksBlocBuilder(
+                                    id: categoryEntity.id!,
+                                    getCategoryCoffeeDrinksCubit: context.read<GetCategoryCoffeeDrinksCubit>(),
+                                  );
+                                }
                               )
                             ]))))));
   }

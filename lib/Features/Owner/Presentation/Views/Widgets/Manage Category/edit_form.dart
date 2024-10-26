@@ -31,11 +31,11 @@ class ManageCategoryEditForm extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Center(
-              child: Form(  
+              child: Form(
                   key: _key,
                   child: Column(children: [
                     CoffeeDtrinkPhoto(
-                      url: categoryEntity.photo,
+                      photourl: categoryEntity.photo,
                       pickedPhoto: (coffeePhoto) {
                         selectedPhoto = coffeePhoto;
                       },
@@ -87,10 +87,11 @@ class ManageCategoryEditForm extends StatelessWidget {
   }
 
   Future<void> _updateCategory(BuildContext context) async {
-    UpdateCategoryCubit updateCategoryCubit=BlocProvider.of<UpdateCategoryCubit>(context);
-    final body =  await _buildBodyRequest();
-    await updateCategoryCubit
-        .updateCategory(id: categoryEntity.id!, body: body);
+    UpdateCategoryCubit updateCategoryCubit =
+        BlocProvider.of<UpdateCategoryCubit>(context);
+    final body = await _buildBodyRequest();
+    await updateCategoryCubit.updateCategory(
+        id: categoryEntity.id!, body: body);
     selectedPhoto = null;
   }
 

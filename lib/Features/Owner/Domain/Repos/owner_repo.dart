@@ -19,4 +19,9 @@ abstract class OwnerRepo {
       {required String parentDocId,
       required String docId,
       required String photoUrl});
+  Future<Either<Failure, void>> updateCoffeeDrink({
+    required String parentDocId,
+      required String docId,
+      required Map<String,dynamic> body
+  });
 }

@@ -79,4 +79,17 @@ class OwnerRemoteDataSource {
             subDocId: docId));
     await _storageService.deletePhoto(url: photoUrl);
   }
+
+  Future<void> updateCoffeeDrink(
+      {required String parentDocId,
+      required String docId,  
+      required Map<String, dynamic> body}) async {
+    await _databaseServices.updateDocFromSubCollection(
+        fireBasePathParam: FireBasePathParam(
+            parentCollection: EndPoints.categories,
+            parentDocId: parentDocId,
+            subCollection: EndPoints.coffeeDrinks,
+            subDocId: docId),
+        body: body);
+  }
 }
