@@ -82,8 +82,6 @@ class AddCoffeeDrinkForm extends StatelessWidget {
                           Space.k20
                         ])))));
   }
-
-
   void _resetForm(BuildContext context) {
     selectedPhoto = null;
     GoRouter.of(context).pop();
@@ -108,10 +106,6 @@ class AddCoffeeDrinkForm extends StatelessWidget {
         description: description,
         price: price);
     await addCoffeeDrinkCubit
-        .addCoffeeDrink(coffee: coffee, docId: id);
-    
+        .addCoffeeDrink(coffee: coffee, docId: id); 
   }
-
-
-
 }

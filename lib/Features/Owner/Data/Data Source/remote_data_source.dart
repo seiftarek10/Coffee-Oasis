@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
 import 'package:coffee_oasis/Core/NetWork/database_services.dart';
 import 'package:coffee_oasis/Core/NetWork/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/category_model.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drink_model.dart';
+import 'package:coffee_oasis/Features/Owner/Data/Models/shop_info_model.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
 
 class OwnerRemoteDataSource {
   final DatabaseServices _databaseServices;
@@ -82,7 +85,7 @@ class OwnerRemoteDataSource {
 
   Future<void> updateCoffeeDrink(
       {required String parentDocId,
-      required String docId,  
+      required String docId,
       required Map<String, dynamic> body}) async {
     await _databaseServices.updateDocFromSubCollection(
         fireBasePathParam: FireBasePathParam(
@@ -91,5 +94,12 @@ class OwnerRemoteDataSource {
             subCollection: EndPoints.coffeeDrinks,
             subDocId: docId),
         body: body);
+  }
+
+  Future<ShopInfoEntity> getShopInfo() async {
+    DocumentSnapshot<Map<String, dynamic>?> response = await _databaseServices
+        .getDoc(endPoint: EndPoints.shopInfo, docId: '1');
+
+    return ShopInfoModel.fromJson(response.data());
   }
 }

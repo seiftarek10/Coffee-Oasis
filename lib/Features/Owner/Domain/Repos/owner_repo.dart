@@ -1,6 +1,7 @@
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class OwnerRepo {
@@ -19,9 +20,10 @@ abstract class OwnerRepo {
       {required String parentDocId,
       required String docId,
       required String photoUrl});
-  Future<Either<Failure, void>> updateCoffeeDrink({
-    required String parentDocId,
+  Future<Either<Failure, void>> updateCoffeeDrink(
+      {required String parentDocId,
       required String docId,
-      required Map<String,dynamic> body
-  });
+      required Map<String, dynamic> body});
+
+  Future<Either<Failure, ShopInfoEntity>> getShopInfo();
 }

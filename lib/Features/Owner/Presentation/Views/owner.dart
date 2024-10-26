@@ -12,7 +12,7 @@ class OwnerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBottomBar(
-      needRightPadding: true ,
+      needRightPadding: true,
       useBackGround: true,
       bottomBarItmeModel: <BottomBarItemModel>[
         BottomBarItemModel(title: 'Home', icon: EvaIcons.home),
@@ -22,7 +22,7 @@ class OwnerView extends StatelessWidget {
       pages: const [
         OwnerHomeView(),
         AnalyticsView(),
-        OwnerProfile(),
+        OwnerProfileView(),
       ],
     );
   }
