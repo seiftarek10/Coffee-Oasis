@@ -12,5 +12,7 @@ abstract class OwnerRepo {
   Future<Either<Failure, void>> updateCategory(
       {required String id, required Map<String, dynamic> body});
   Future<Either<Failure, void>> addCoffeeDrink(
-      {required CoffeeEntity coffeeEntity,required String docId});
+      {required CoffeeEntity coffeeEntity, required String docId});
+  Future<Either<Failure, List<CoffeeEntity>>> getCategoryCoffeeDrinks(
+      {required String docId});
 }

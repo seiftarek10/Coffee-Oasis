@@ -4,16 +4,13 @@ import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
 class DatabaseServices {
   DatabaseServices();
 
-  Future<void> post(
+  Future<void> postDoc(
       {required String endPoint, required Map<String, dynamic> body}) async {
     await FirebaseFirestore.instance.collection(endPoint).add(body);
   }
 
   Future<void> postToSubCollection(
-      {
-    required FireBasePathParam fireBasePathParam,
-        
-     
+      {required FireBasePathParam fireBasePathParam,
       required Map<String, dynamic> body}) async {
     await FirebaseFirestore.instance
         .collection(fireBasePathParam.parentCollection)
@@ -38,9 +35,9 @@ class DatabaseServices {
   Future<QuerySnapshot<Map<String, dynamic>>> getSubCollection({
     required FireBasePathParam fireBasePathParam,
   }) async {
-    return await FirebaseFirestore.instance
+     return await FirebaseFirestore.instance
         .collection(fireBasePathParam.parentCollection)
-        .doc(fireBasePathParam.subDocId)
+        .doc(fireBasePathParam.parentDocId)
         .collection(fireBasePathParam.subCollection!)
         .get();
   }

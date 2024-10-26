@@ -19,7 +19,9 @@ class GetAllCategoriesBlocBuilder extends StatelessWidget {
       if (state is GetAllCategoriesSuccess) {
         if (state.categories.isEmpty) {
           
-          return const EmptyWidget();
+          return const EmptyWidget(
+            height: 1,
+          );
         }
         return ManageAllCategoriesListView(
           categoriesList: state.categories,

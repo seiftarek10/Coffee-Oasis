@@ -81,4 +81,19 @@ class OwnerRepoImpl extends OwnerRepo {
       return left(FireBaseError(errMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<CoffeeEntity>>> getCategoryCoffeeDrinks(
+      {required String docId}) async {
+    try {
+      List<CoffeeEntity> coffeeDrinks =
+          await _ownerRemoteDataSource.getCategoryCoffeeDrinks(docId: docId);
+      return right(coffeeDrinks);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
 }
