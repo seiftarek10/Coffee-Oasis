@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
-import 'package:coffee_oasis/Core/NetWork/folders_name.dart';
+import 'package:coffee_oasis/Core/NetWork/images_folders_name.dart';
 import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
@@ -31,11 +31,11 @@ class ManageCategoryEditForm extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Center(
-              child: Form(  
+              child: Form(
                   key: _key,
                   child: Column(children: [
                     CoffeeDtrinkPhoto(
-                      url: categoryEntity.photo,
+                      photourl: categoryEntity.photo,
                       pickedPhoto: (coffeePhoto) {
                         selectedPhoto = coffeePhoto;
                       },
@@ -87,9 +87,11 @@ class ManageCategoryEditForm extends StatelessWidget {
   }
 
   Future<void> _updateCategory(BuildContext context) async {
-    final body =  await _buildBodyRequest();
-    await BlocProvider.of<UpdateCategoryCubit>(context)
-        .updateCategory(id: categoryEntity.id!, body: body);
+    UpdateCategoryCubit updateCategoryCubit =
+        BlocProvider.of<UpdateCategoryCubit>(context);
+    final body = await _buildBodyRequest();
+    await updateCategoryCubit.updateCategory(
+        id: categoryEntity.id!, body: body);
     selectedPhoto = null;
   }
 

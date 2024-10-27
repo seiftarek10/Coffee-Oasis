@@ -16,7 +16,7 @@ class CategoryEntity {
     return {
       'name': name,
       'photo':photo,
-      'coffeeDrinks':coffeeDrinks
+      
     };
   }
 }

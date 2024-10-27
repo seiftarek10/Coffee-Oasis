@@ -6,11 +6,11 @@ class ProfileInfoItem extends StatelessWidget {
     super.key,
     required this.info,
     required this.title,
-    required this.onPressed, this.editItem,
+    this.onPressed, this.editItem,
   });
 
   final String title, info;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final bool? editItem;
 
   @override

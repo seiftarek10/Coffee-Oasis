@@ -10,11 +10,11 @@ class CoffeeDtrinkPhoto extends StatefulWidget {
   const CoffeeDtrinkPhoto({
     super.key,
     required this.pickedPhoto,
-    this.url,
+    this.photourl,
   });
 
   final ValueChanged<File>? pickedPhoto;
-  final String? url;
+  final String? photourl;
 
   @override
   State<CoffeeDtrinkPhoto> createState() => _CoffeeDtrinkPhotoState();
@@ -30,12 +30,12 @@ class _CoffeeDtrinkPhotoState extends State<CoffeeDtrinkPhoto> {
       decoration: BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
-              image: (photo == null && widget.url == null)
+              image: (photo == null && widget.photourl == null)
                   ? const AssetImage(Assets.imagesCoffeePlaceholder)
                   : photo != null
                       ? FileImage(photo!)
-                      : widget.url != null
-                          ? NetworkImage(widget.url!)
+                      : widget.photourl != null
+                          ? NetworkImage(widget.photourl!)
                           : const AssetImage(Assets.imagesCoffeePlaceholder)),
           shape: BoxShape.circle),
       child: Align(

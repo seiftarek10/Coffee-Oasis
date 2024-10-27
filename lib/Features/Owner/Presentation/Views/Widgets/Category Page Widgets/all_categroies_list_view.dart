@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
+import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,9 +7,9 @@ import 'package:go_router/go_router.dart';
 
 class OwnerAllCategoiresListView extends StatelessWidget {
   const OwnerAllCategoiresListView({
-    super.key,
+    super.key, required this.categories,
   });
-
+  final List<CategoryEntity> categories;
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
@@ -20,10 +21,12 @@ class OwnerAllCategoiresListView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate((context, index) {
         return GestureDetector(
             onTap: () {
-              GoRouter.of(context).push(Routes.category);
+              GoRouter.of(context).push(Routes.category,extra: categories[index]);
             },
-            child: const CategoryCard());
-      }, childCount: 20),
+            child: CategoryCard(
+              categoryEntity: categories[index],
+            ));
+      }, childCount: categories.length),
     );
   }
 }

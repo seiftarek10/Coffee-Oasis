@@ -33,6 +33,8 @@ class UserInfoContainer extends StatelessWidget {
                         return EditFieldBody(
                           labelText: 'seift470@gmail.com',
                           onSaved: (v) {},
+                          onPressed: (t)async{},
+                          formKey: GlobalKey(),
                         );
                       });
                 },
@@ -48,6 +50,8 @@ class UserInfoContainer extends StatelessWidget {
                         return EditFieldBody(
                           labelText: '01027870171',
                           onSaved: (v) {},
+                          formKey: GlobalKey(),
+                          onPressed: (t)async{},
                         );
                       });
                 },
@@ -62,7 +66,9 @@ class UserInfoContainer extends StatelessWidget {
                       builder: (context) {
                         return EditFieldBody(
                           labelText: 'Giza',
+                               formKey: GlobalKey(),
                           onSaved: (v) {},
+                          onPressed: (t)async{},
                         );
                       });
                 },

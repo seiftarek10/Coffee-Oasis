@@ -3,7 +3,7 @@ import 'package:coffee_oasis/Features/Owner/Data/Repos/owner_repo_impl.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/update_category_use_case.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/update_category/update_category_cubit.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Bloc%20Widgets/edit_category_bloc_listner.dart';
+import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/Bloc%20Widgets/edit_category_bloc_listner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
