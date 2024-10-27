@@ -102,4 +102,9 @@ class OwnerRemoteDataSource {
 
     return ShopInfoModel.fromJson(response.data());
   }
+
+  Future<void> updateShopInfo({required Map<String, dynamic> body}) async {
+    await _databaseServices.updateDoc(
+        endPoint: EndPoints.shopInfo, body: body, docId: '1');
+  }
 }

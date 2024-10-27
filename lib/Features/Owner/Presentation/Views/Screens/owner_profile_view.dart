@@ -15,7 +15,13 @@ class OwnerProfileView extends StatelessWidget {
         create: (context) =>
             GetShopInfoCubit(GetShopInfoUseCase(getIt.get<OwnerRepoImpl>()))
               ..getShopInfo(),
-        child: const OwnerProfileBlocBuilder());
+        child: Builder(
+          builder: (context) {
+            return OwnerProfileBlocBuilder(
+              getShopInfoCubit: context.read<GetShopInfoCubit>(),
+            );
+          }
+        ));
   }
 }
 

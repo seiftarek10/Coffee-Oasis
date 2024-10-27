@@ -26,4 +26,6 @@ abstract class OwnerRepo {
       required Map<String, dynamic> body});
 
   Future<Either<Failure, ShopInfoEntity>> getShopInfo();
+
+  Future<Either<Failure,void>> updateShopInfo(Map<String, dynamic> body);
 }

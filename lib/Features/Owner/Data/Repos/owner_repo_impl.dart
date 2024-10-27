@@ -143,4 +143,18 @@ class OwnerRepoImpl extends OwnerRepo {
       return left(FireBaseError(errMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateShopInfo(
+      Map<String, dynamic> body) async {
+    try {
+      await _ownerRemoteDataSource.updateShopInfo(body: body);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
 }
