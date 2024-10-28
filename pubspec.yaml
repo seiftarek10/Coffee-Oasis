@@ -34,6 +34,7 @@ dependencies:
   dartz: ^0.10.1
   device_preview: ^1.2.0
   eva_icons_flutter: ^3.1.0
+  firebase_auth: ^5.3.1
   firebase_core: ^3.6.0
   firebase_storage: ^12.3.3
   flutter:

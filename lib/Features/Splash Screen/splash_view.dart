@@ -24,7 +24,7 @@ class _SplashViewState extends State<SplashView> {
   void nextPage(Flavor flavor) {
     switch (flavor) {
       case Flavor.user:
-        GoRouter.of(context).pushReplacement(Routes.user);
+        GoRouter.of(context).pushReplacement(Routes.signup);
         break;
       case Flavor.owner:
         GoRouter.of(context).pushReplacement(Routes.owner);

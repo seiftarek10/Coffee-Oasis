@@ -18,13 +18,14 @@ class SignInView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              Space.k40,
+              Space.k55,
+           
               const HeaderText(
                 title: 'Sign In',
-                subTitle:
-                    'Welcome back to Coffee Oasis! Please sign in to continue',
+                subTitle:['Welcome back to ','Coffee Oasis! ','Please sign in to continue']
+                
               ),
-              Space.k90,
+             Space.k100,
               const SignInForm(),
               Space.k8,
               const NoAccountText()

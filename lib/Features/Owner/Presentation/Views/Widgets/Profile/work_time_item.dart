@@ -15,10 +15,7 @@ class WorkTimeItem extends StatelessWidget {
   });
 
   final ShopInfoEntity shopInfoEntity;
-  static final String? label;
-  static final String? title;
-  static final Future<void> Function(Function)? onPressed;
-  static final void Function(String?)? onSavedEndTime, onSavedStartTime;
+
   static String? _startTime, _endTime, _endAmOrPm, _startAmOrPm;
 
   static final GlobalKey<FormState> formKey = GlobalKey();
