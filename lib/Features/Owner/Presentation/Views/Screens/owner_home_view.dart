@@ -15,7 +15,9 @@ class OwnerHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetAllCategoriesCubit(getIt.get<GetAllCategoriesUseCase>())..getAllCategories(),
+      create: (context) =>
+          GetAllCategoriesCubit(getIt.get<GetAllCategoriesUseCase>())
+            ..getAllCategories(),
       child: AppAnimatedOpacity(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w),

@@ -18,49 +18,42 @@ class ManageAllCategoriesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DeleteCategoryBlocListener(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Space.k24,
-          const SwapNote(),
-          Space.k24,
-          Expanded(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Space.k24,
+        const SwapNote(),
+        Space.k24,
+        Expanded(
             child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: categoriesList.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  child: SlideCard(
-                    delete: () async {
-                      await BlocProvider.of<DeleteCategoryCubit>(context)
-                          .deleteCategory(
-                              id: categoriesList[index].id!,
-                              url: categoriesList[index].photo!);
-                    },
-                    update: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return BlocProvider.value(
-                              value: cubit,
-                              child: EditFormBlocProvider(
-                                categoryEntity: categoriesList[index],
-                              ),
-                            );
-                          });
-                    },
-                    itemKey: Key(index.toString()),
-                    child: ManageCategoryCard(
-                      categoryEntity: categoriesList[index],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+                physics: const BouncingScrollPhysics(),
+                itemCount: categoriesList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                      padding: const EdgeInsets.only(bottom: 24),
+                      child: SlideCard(
+                          delete: () async {
+                            await BlocProvider.of<DeleteCategoryCubit>(context)
+                                .deleteCategory(
+                                    id: categoriesList[index].id!,
+                                    url: categoriesList[index].photo!,
+                                    index: index);
+                          },
+                          update: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return BlocProvider.value(
+                                      value: cubit,
+                                      child: EditFormBlocProvider(
+                                          categoryEntity: categoriesList[index],
+                                          index: index));
+                                });
+                          },
+                          itemKey: Key(index.toString()),
+                          child: ManageCategoryCard(
+                            categoryEntity: categoriesList[index],
+                          )));
+                }))
+      ]),
     );
   }
 }

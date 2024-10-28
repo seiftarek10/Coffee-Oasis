@@ -33,7 +33,6 @@ class AppRouter {
               context,
               state,
               SplashView(flavor: flavor),
-              // CategoryView(categoryEntity: CategoryEntity())
             );
           },
         ),

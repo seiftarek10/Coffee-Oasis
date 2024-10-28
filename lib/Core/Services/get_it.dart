@@ -3,6 +3,7 @@ import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Repos/auth_repo_impl.dart';
+import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Repos/owner_repo_impl.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_all_categories.dart';
@@ -16,10 +17,11 @@ void setupGetIt() {
   getIt.registerSingleton<StorageService>(
       StorageService(getIt.get<FirebaseStorage>()));
   getIt.registerSingleton<FireStoreServices>(FireStoreServices());
-  getIt.registerSingleton<OwnerRemoteDataSource>(OwnerRemoteDataSource(
-      getIt.get<FireStoreServices>(), getIt.get<StorageService>()));
+  getIt.registerSingleton<OwnerLocalDataSourceImpl>(OwnerLocalDataSourceImpl());
+  getIt.registerSingleton<OwnerRemoteDataSourceImpl>(OwnerRemoteDataSourceImpl(
+      getIt.get<FireStoreServices>(), getIt.get<StorageService>(),getIt.get<OwnerLocalDataSourceImpl>()));
   getIt.registerSingleton<OwnerRepoImpl>(
-      OwnerRepoImpl(getIt.get<OwnerRemoteDataSource>()));
+      OwnerRepoImpl(getIt.get<OwnerRemoteDataSourceImpl>(),getIt.get<OwnerLocalDataSourceImpl>()));
   getIt.registerSingleton<GetAllCategoriesUseCase>(
       GetAllCategoriesUseCase(getIt.get<OwnerRepoImpl>()));
 
@@ -28,4 +30,7 @@ void setupGetIt() {
       getIt.get<FireAuthServices>(), getIt.get<FireStoreServices>()));
   getIt.registerSingleton<AuthRepoImpl>(
       AuthRepoImpl(getIt.get<AuthRemoteDataSource>()));
+
+
+  
 }

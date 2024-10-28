@@ -7,9 +7,10 @@ import 'package:dartz/dartz.dart';
 abstract class OwnerRepo {
   Future<Either<Failure, String>> addCategory(
       {required CategoryEntity category});
-  Future<Either<Failure, List<CategoryEntity>>> getAllCategories();
+  Future<Either<Failure, List<CategoryEntity>>> getAllCategories(
+      {required bool remoteSource});
   Future<Either<Failure, void>> deleteCategory(
-      {required String id, required String photoUrl});
+      {required String id, required String photoUrl,required int index});
   Future<Either<Failure, void>> updateCategory(
       {required String id, required Map<String, dynamic> body});
   Future<Either<Failure, void>> addCoffeeDrink(
@@ -27,5 +28,5 @@ abstract class OwnerRepo {
 
   Future<Either<Failure, ShopInfoEntity>> getShopInfo();
 
-  Future<Either<Failure,void>> updateShopInfo(Map<String, dynamic> body);
+  Future<Either<Failure, void>> updateShopInfo(Map<String, dynamic> body);
 }

@@ -7,14 +7,17 @@ class GetAllCategoriesCubit extends Cubit<GetAllCategoriesState> {
       : super(GetAllCategoriesInitial());
 
   final GetAllCategoriesUseCase _getAllCategoriesUseCase;
-
+  static bool remoteSource = false;
   Future<void> getAllCategories() async {
     emit(GetAllCategoriesLoading());
-    var response = await _getAllCategoriesUseCase.execute();
+    var response = await _getAllCategoriesUseCase.execute(param: remoteSource);
     response.fold(
         (failure) =>
             emit(GetAllCategoriesFailure(errMessage: failure.errMessage)),
         (data) => emit(GetAllCategoriesSuccess(categories: data)));
   }
 
+  void setRemoteSorce() {
+    remoteSource = !remoteSource;
+  }
 }

@@ -19,7 +19,9 @@ class AddCategoryBlocListner extends StatelessWidget {
             failedMessage(context: context, message: state.errMessage);
           } else if (state is AddCategorySuccessState) {
             GoRouter.of(context).pop();
+            context.read<GetAllCategoriesCubit>().setRemoteSorce();
             context.read<GetAllCategoriesCubit>().getAllCategories();
+            context.read<GetAllCategoriesCubit>().setRemoteSorce();
             successMessage(
                 context: context,
                 message: 'The category has been added successfully');

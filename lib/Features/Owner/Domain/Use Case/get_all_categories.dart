@@ -4,12 +4,12 @@ import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart'
 import 'package:coffee_oasis/Features/Owner/Domain/Repos/owner_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class GetAllCategoriesUseCase extends UseCase<List<CategoryEntity>, void> {
+class GetAllCategoriesUseCase extends UseCase<List<CategoryEntity>, bool> {
   final OwnerRepo _ownerRepo;
 
   GetAllCategoriesUseCase(this._ownerRepo);
   @override
-  Future<Either<Failure, List<CategoryEntity>>> execute({param}) async {
-    return await _ownerRepo.getAllCategories();
+  Future<Either<Failure, List<CategoryEntity>>> execute({bool? param}) async {
+    return await _ownerRepo.getAllCategories(remoteSource: param!);
   }
 }

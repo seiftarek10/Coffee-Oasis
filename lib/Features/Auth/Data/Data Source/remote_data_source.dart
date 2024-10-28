@@ -1,4 +1,4 @@
-import 'package:coffee_oasis/Core/NetWork/endpoints.dart';
+import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_auth_services.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Features/Auth/Domain/Entity/user_entity.dart';

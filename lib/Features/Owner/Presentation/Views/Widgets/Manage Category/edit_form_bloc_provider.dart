@@ -8,17 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditFormBlocProvider extends StatelessWidget {
-  const EditFormBlocProvider({super.key, required this.categoryEntity});
+  const EditFormBlocProvider({super.key, required this.categoryEntity, required this.index});
 
   final CategoryEntity categoryEntity;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UpdateCategoryCubit(
           UpdateCategoryUseCase(getIt.get<OwnerRepoImpl>())),
-      child:  EditCategoryBlocListner(
+      child: EditCategoryBlocListner(
         categoryEntity: categoryEntity,
+        index: index,
       ),
     );
   }

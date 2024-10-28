@@ -59,7 +59,9 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
           text: "$text try,again",
           onTap: () async {
             await BlocProvider.of<GetAllCategoriesCubit>(context)
-                .getAllCategories();
+                .getAllCategories(
+               
+                );
           }),
     );
   }

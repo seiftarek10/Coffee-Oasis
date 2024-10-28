@@ -9,15 +9,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class EditCategoryBlocListner extends StatelessWidget {
-  const EditCategoryBlocListner({super.key, required this.categoryEntity});
+  const EditCategoryBlocListner({super.key, required this.categoryEntity, required this.index});
   final CategoryEntity categoryEntity;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return BlocListener<UpdateCategoryCubit, UpdateCategoryState>(
       listener: (context, state) {
         if (state is UpdateCategorySuccess) {
           GoRouter.of(context).pop();
-          context.read<GetAllCategoriesCubit>().getAllCategories();
+           context.read<GetAllCategoriesCubit>().setRemoteSorce();
+            context.read<GetAllCategoriesCubit>().getAllCategories();
+            context.read<GetAllCategoriesCubit>().setRemoteSorce();
           successMessage(
               context: context,
               message: 'The category has been modified successfully');
@@ -27,6 +30,7 @@ class EditCategoryBlocListner extends StatelessWidget {
       },
       child: ManageCategoryEditForm(
         categoryEntity: categoryEntity,
+        index: index,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
+import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
@@ -8,9 +9,10 @@ import 'package:coffee_oasis/Features/Owner/Domain/Repos/owner_repo.dart';
 import 'package:dartz/dartz.dart';
 
 class OwnerRepoImpl extends OwnerRepo {
-  final OwnerRemoteDataSource _ownerRemoteDataSource;
+  final OwnerRemoteDataSourceImpl _ownerRemoteDataSource;
+  final OwnerLocalDataSource _ownerLocalDataSource;
 
-  OwnerRepoImpl(this._ownerRemoteDataSource);
+  OwnerRepoImpl(this._ownerRemoteDataSource, this._ownerLocalDataSource);
   @override
   Future<Either<Failure, String>> addCategory(
       {required CategoryEntity category}) async {
@@ -26,25 +28,13 @@ class OwnerRepoImpl extends OwnerRepo {
   }
 
   @override
-  Future<Either<Failure, List<CategoryEntity>>> getAllCategories() async {
-    try {
-      List<CategoryEntity> categories =
-          await _ownerRemoteDataSource.getAllCategories();
-      return right(categories);
-    } catch (e) {
-      if (e is FirebaseException) {
-        return left(FireBaseError.firebaseException(e));
-      }
-      return left(FireBaseError(errMessage: e.toString()));
-    }
-  }
-
-  @override
   Future<Either<Failure, void>> deleteCategory(
-      {required String id, required String photoUrl}) async {
+      {required String id,
+      required String photoUrl,
+      required int index}) async {
     try {
+      await _ownerLocalDataSource.deleteCategory(index: index);
       await _ownerRemoteDataSource.deleteCategory(id: id, url: photoUrl);
-      // ignore: void_checks
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {
@@ -56,9 +46,11 @@ class OwnerRepoImpl extends OwnerRepo {
 
   @override
   Future<Either<Failure, void>> updateCategory(
-      {required String id, required Map<String, dynamic> body}) async {
+      {required String id,
+      required Map<String, dynamic> body,
+     }) async {
     try {
-      _ownerRemoteDataSource.updateCategory(id: id, body: body);
+      await _ownerRemoteDataSource.updateCategory(id: id, body: body);
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {
@@ -150,6 +142,27 @@ class OwnerRepoImpl extends OwnerRepo {
     try {
       await _ownerRemoteDataSource.updateShopInfo(body: body);
       return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CategoryEntity>>> getAllCategories(
+      {required bool remoteSource}) async {
+    try {
+      List<CategoryEntity> categories;
+      if (!remoteSource) {
+        categories = await _ownerLocalDataSource.getCategories();
+        if (categories.isNotEmpty) {
+          return right(categories);
+        }
+      }
+      categories = await _ownerRemoteDataSource.getAllCategories();
+      return right(categories);
     } catch (e) {
       if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));

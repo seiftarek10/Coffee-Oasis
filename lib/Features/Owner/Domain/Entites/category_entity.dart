@@ -1,22 +1,26 @@
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:hive_flutter/adapters.dart';
 
-class CategoryEntity {
-  final String? id;
-  final String? name;
-  final String? photo;
-  final List<CoffeeEntity>? coffeeDrinks;
+part 'category_entity.g.dart';
 
-  CategoryEntity(
-      { this.id,
-       this.name,
-       this.photo,
-       this.coffeeDrinks});
+@HiveType(typeId: 0)
+class CategoryEntity extends HiveObject {
+  @HiveField(0)
+   String? id;
+  @HiveField(1)
+   String? name;
+  @HiveField(2)
+   String? photo;
+  @HiveField(3)
+  CategoryEntity({
+    this.id,
+    this.name,
+    this.photo,
+  });
 
   toJson() {
     return {
       'name': name,
-      'photo':photo,
-      
+      'photo': photo,
     };
   }
 }

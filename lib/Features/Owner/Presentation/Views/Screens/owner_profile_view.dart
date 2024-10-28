@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OwnerProfileView extends StatelessWidget {
   const OwnerProfileView({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
