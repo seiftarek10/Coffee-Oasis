@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
-import 'package:coffee_oasis/Core/NetWork/database_services.dart';
+import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Core/NetWork/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/category_model.dart';
@@ -11,7 +11,7 @@ import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
 
 class OwnerRemoteDataSource {
-  final DatabaseServices _databaseServices;
+  final FireStoreServices _databaseServices;
   final StorageService _storageService;
 
   OwnerRemoteDataSource(this._databaseServices, this._storageService);
