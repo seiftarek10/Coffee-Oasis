@@ -14,4 +14,8 @@ class AuthRemoteDataSource {
     await _fireStoreServices.postDoc(
         endPoint: EndPoints.users, body: userEntity.toJson());
   }
+
+  Future<void> signIn({required String email, required String password}) async {
+    await _fireAuthServices.signIn(email: email, password: password);
+  }
 }

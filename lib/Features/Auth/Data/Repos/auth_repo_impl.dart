@@ -30,4 +30,26 @@ class AuthRepoImpl implements AuthRepo {
     }
     return left(FireBaseError(errMessage: 'error'));
   }
+
+  @override
+  Future<Either<Failure, void>> signIn(
+      {required String email, required String password}) async {
+    try {
+      await _authRemoteDataSource.signIn(email: email, password: password);
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return left(FireBaseError(errMessage: 'No user found for that email.'));
+      } else if (e.code == 'wrong-password') {
+        return left(FireBaseError(
+            errMessage: 'Wrong email or password provided for that user.'));
+      }
+    }
+    return left(FireBaseError(errMessage: 'Some Thing Is Wrong'));
+  }
+
+
+
+
+
 }
