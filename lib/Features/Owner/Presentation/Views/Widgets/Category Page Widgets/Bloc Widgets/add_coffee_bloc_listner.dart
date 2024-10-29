@@ -23,7 +23,7 @@ class AddCoffeeBlocListner extends StatelessWidget {
                 message: 'The coffee has been added successfully');
             await context
                 .read<GetCategoryCoffeeDrinksCubit>()
-                .getCategoryCoffeeDrink(id: id);
+                .getCategoryCoffeeDrink(id: id,remoteSource: true);
           }
         },
         child: AddCoffeeDrinkForm(id: id));

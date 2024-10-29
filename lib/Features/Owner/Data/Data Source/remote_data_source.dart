@@ -54,12 +54,12 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
     var response =
         await _databaseServices.getCollection(endPoint: EndPoints.categories);
     List<CategoryEntity> categories = [];
-   
+
     for (var item in response.docs) {
       categories.add(CategoryModel.fromJson(item));
     }
-     await _ownerLocalDataSource.clearBox();
-      await _ownerLocalDataSource.saveCategories(categories: categories );
+    await _ownerLocalDataSource.clearCategoryBox();
+    await _ownerLocalDataSource.saveCategories(categories: categories);
 
     return categories;
   }
@@ -101,6 +101,8 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
     for (var item in response.docs) {
       coffeeDrinks.add(CoffeeDrinkModel.fromjson(item));
     }
+    await _ownerLocalDataSource.clearCoffeeBox();
+    await _ownerLocalDataSource.saveCoffeeDrinks(categoryKey: docId , coffeeDrinks: coffeeDrinks);
     return coffeeDrinks;
   }
 

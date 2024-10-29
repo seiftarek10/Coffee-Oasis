@@ -33,7 +33,6 @@ class OwnerRepoImpl extends OwnerRepo {
       required String photoUrl,
       required int index}) async {
     try {
-      await _ownerLocalDataSource.deleteCategory(index: index);
       await _ownerRemoteDataSource.deleteCategory(id: id, url: photoUrl);
       return right(unit);
     } catch (e) {
@@ -45,10 +44,10 @@ class OwnerRepoImpl extends OwnerRepo {
   }
 
   @override
-  Future<Either<Failure, void>> updateCategory(
-      {required String id,
-      required Map<String, dynamic> body,
-     }) async {
+  Future<Either<Failure, void>> updateCategory({
+    required String id,
+    required Map<String, dynamic> body,
+  }) async {
     try {
       await _ownerRemoteDataSource.updateCategory(id: id, body: body);
       return right(unit);
@@ -77,9 +76,18 @@ class OwnerRepoImpl extends OwnerRepo {
 
   @override
   Future<Either<Failure, List<CoffeeEntity>>> getCategoryCoffeeDrinks(
-      {required String docId}) async {
+      {required String docId, required bool remoteSource}) async {
     try {
-      List<CoffeeEntity> coffeeDrinks =
+      List<CoffeeEntity> coffeeDrinks;
+      if (!remoteSource) {
+        coffeeDrinks =
+            await _ownerLocalDataSource.getCoffeeDrinks(dataKey: docId);
+        if (coffeeDrinks.isNotEmpty) {
+          return right(coffeeDrinks);
+        }
+      }
+
+      coffeeDrinks =
           await _ownerRemoteDataSource.getCategoryCoffeeDrinks(docId: docId);
       return right(coffeeDrinks);
     } catch (e) {
@@ -94,10 +102,12 @@ class OwnerRepoImpl extends OwnerRepo {
   Future<Either<Failure, void>> deleteCoffeeDrink(
       {required String parentDocId,
       required String docId,
-      required String photoUrl}) async {
+      required String photoUrl,
+      required int index}) async {
     try {
       await _ownerRemoteDataSource.deleteCoffeeDrink(
           parentDocId: parentDocId, docId: docId, photoUrl: photoUrl);
+     
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {

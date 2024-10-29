@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:coffee_oasis/Core/Helpers/failed_message.dart';
 import 'package:coffee_oasis/Core/Helpers/success_message.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/delete_coffee_drink/delete_coffee_drink_cubit.dart';
@@ -20,10 +22,12 @@ class DeleteCoffeeDrinkBlocListner extends StatelessWidget {
               context: context,
               message: 'Coffee Drink Deleted Successfully',
             );
-            await  context.read<GetCategoryCoffeeDrinksCubit>().getCategoryCoffeeDrink(id: id);
-
+            await context
+                .read<GetCategoryCoffeeDrinksCubit>()
+                .getCategoryCoffeeDrink(id: id, remoteSource: true);
           } else if (state is DeleteCoffeeDrinkFailure) {
             failedMessage(context: context, message: state.errMessage);
+            log(state.errMessage);
           }
         },
         child: child);

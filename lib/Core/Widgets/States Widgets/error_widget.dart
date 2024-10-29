@@ -12,8 +12,9 @@ class AppErrorWidget extends StatelessWidget {
       onTap: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(Icons.error, size: 50.h, color: Colors.white),
+          Icon(Icons.replay_circle_filled_rounded, size: 50.h, color: Colors.white),
           Text(text, style: Fonts.font35_700White)
         ],
       ),

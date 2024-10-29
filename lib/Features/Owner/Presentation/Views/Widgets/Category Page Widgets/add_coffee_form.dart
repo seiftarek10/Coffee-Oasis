@@ -73,7 +73,9 @@ class AddCoffeeDrinkForm extends StatelessWidget {
                               },
                               onPressed: (trigger) async {
                                 if (_key.currentState!.validate()) {
-                                  _checkFormValidation(context);
+                                  if (_checkFormValidation(context)) {
+                                    return;
+                                  }
                                   trigger();
                                   await _addCoffee(context);
                                   trigger();
@@ -82,21 +84,24 @@ class AddCoffeeDrinkForm extends StatelessWidget {
                           Space.k20
                         ])))));
   }
+
   void _resetForm(BuildContext context) {
     selectedPhoto = null;
     GoRouter.of(context).pop();
   }
 
-  void _checkFormValidation(BuildContext context) {
+  bool _checkFormValidation(BuildContext context) {
     _key.currentState!.save();
     if (selectedPhoto == null) {
       failedMessage(context: context, message: 'Coffee Photo is Required');
-      return;
+      return true;
+    } else {
+      return false;
     }
   }
 
   Future<void> _addCoffee(BuildContext context) async {
-  final addCoffeeDrinkCubit = BlocProvider.of<AddCoffeeDrinkCubit>(context);
+    final addCoffeeDrinkCubit = BlocProvider.of<AddCoffeeDrinkCubit>(context);
 
     String? photoUrl = await getIt.get<StorageService>().uploadPhoto(
         photo: selectedPhoto!, folderName: FoldersName.coffeeDrinkImage);
@@ -105,7 +110,7 @@ class AddCoffeeDrinkForm extends StatelessWidget {
         name: coffeeName,
         description: description,
         price: price);
-    await addCoffeeDrinkCubit
-        .addCoffeeDrink(coffee: coffee, docId: id); 
+    await addCoffeeDrinkCubit.addCoffeeDrink(coffee: coffee, docId: id);
+    selectedPhoto = null;
   }
 }

@@ -24,7 +24,7 @@ class UpadateCoffeeDrinkBlocListner extends StatelessWidget {
               context: context, message: 'Coffee Info Updated Successufly');
           await context
               .read<GetCategoryCoffeeDrinksCubit>()
-              .getCategoryCoffeeDrink(id: id);
+              .getCategoryCoffeeDrink(id: id,remoteSource: true);
         } else if (state is UpdateCoffeeDrinkFailure) {
           failedMessage(context: context, message: state.errMessage);
         }

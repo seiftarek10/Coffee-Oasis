@@ -16,11 +16,13 @@ abstract class OwnerRepo {
   Future<Either<Failure, void>> addCoffeeDrink(
       {required CoffeeEntity coffeeEntity, required String docId});
   Future<Either<Failure, List<CoffeeEntity>>> getCategoryCoffeeDrinks(
-      {required String docId});
+      {required String docId,required bool remoteSource});
   Future<Either<Failure, void>> deleteCoffeeDrink(
       {required String parentDocId,
       required String docId,
-      required String photoUrl});
+      required String photoUrl,
+      required int index
+      });
   Future<Either<Failure, void>> updateCoffeeDrink(
       {required String parentDocId,
       required String docId,

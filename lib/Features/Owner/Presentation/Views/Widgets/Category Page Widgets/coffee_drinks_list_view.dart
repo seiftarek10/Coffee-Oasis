@@ -44,7 +44,9 @@ class CoffeeDrinksListView extends StatelessWidget {
                                   .deleteCoffeeDrink(
                                       parentDocId: id,
                                       docId: coffeeDrinks[index].id!,
-                                      photoUrl: coffeeDrinks[index].photo!);
+                                      photoUrl: coffeeDrinks[index].photo!,
+                                      index: index
+                                      );
                             },
                             update: () {
                               showDialog(

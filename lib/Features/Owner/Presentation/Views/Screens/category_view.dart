@@ -26,7 +26,7 @@ class CategoryView extends StatelessWidget {
           BlocProvider(
               create: (context) => GetCategoryCoffeeDrinksCubit(
       GetCategoryCoffeeDrinksUseCase(getIt.get<OwnerRepoImpl>()))
-                ..getCategoryCoffeeDrink(id: categoryEntity.id!)),
+                ..getCategoryCoffeeDrink(id: categoryEntity.id!,remoteSource: false)),
           BlocProvider(
               create: (context) => DeleteCoffeeDrinkCubit(
                   DeleteCoffeeDrinkUseCase(getIt.get<OwnerRepoImpl>())))

@@ -13,10 +13,11 @@ class DeleteCoffeeDrinkCubit extends Cubit<DeleteCoffeeDrinkState> {
     required String parentDocId,
     required String docId,
     required String photoUrl,
+    required int index
   }) async {
     emit(DeleteCoffeeDrinkLoading());
     var response = await _deleteCoffeeDrinkUseCase
-        .execute(param: [parentDocId, docId, photoUrl]);
+        .execute(param: [parentDocId, docId, photoUrl,index]);
     response.fold(
         (failure) =>
             emit(DeleteCoffeeDrinkFailure(errMessage: failure.errMessage)),

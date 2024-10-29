@@ -11,9 +11,9 @@ class GetCategoryCoffeeDrinksCubit extends Cubit<GetCategoryCoffeeDrinksState> {
 
   final GetCategoryCoffeeDrinksUseCase _getCategoryCoffeeDrinksUseCase;
 
-  Future<void> getCategoryCoffeeDrink({required String id}) async {
+  Future<void> getCategoryCoffeeDrink({required String id,required bool remoteSource}) async {
     emit(GetCategoryCoffeeDrinksLoading());
-    var response = await _getCategoryCoffeeDrinksUseCase.execute(param: id);
+    var response = await _getCategoryCoffeeDrinksUseCase.execute(param: [id,remoteSource]);
     response.fold(
         (failure) => emit(
             GetCategoryCoffeeDrinksFailure(errMessage: failure.errMessage)),
