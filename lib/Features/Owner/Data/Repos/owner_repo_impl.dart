@@ -80,8 +80,7 @@ class OwnerRepoImpl extends OwnerRepo {
     try {
       List<CoffeeEntity> coffeeDrinks;
       if (!remoteSource) {
-        coffeeDrinks =
-            await _ownerLocalDataSource.getCoffeeDrinks(dataKey: docId);
+        coffeeDrinks =  _ownerLocalDataSource.getCoffeeDrinks(id: docId);
         if (coffeeDrinks.isNotEmpty) {
           return right(coffeeDrinks);
         }
@@ -107,7 +106,7 @@ class OwnerRepoImpl extends OwnerRepo {
     try {
       await _ownerRemoteDataSource.deleteCoffeeDrink(
           parentDocId: parentDocId, docId: docId, photoUrl: photoUrl);
-     
+
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {
@@ -135,8 +134,16 @@ class OwnerRepoImpl extends OwnerRepo {
   }
 
   @override
-  Future<Either<Failure, ShopInfoEntity>> getShopInfo() async {
+  Future<Either<Failure, ShopInfoEntity>> getShopInfo(
+      {required bool remoteSource}) async {
     try {
+      List<ShopInfoEntity> shopInfoEntity;
+      if (!remoteSource) {
+        shopInfoEntity = _ownerLocalDataSource.getShopInfo();
+        if (shopInfoEntity.isNotEmpty) {
+          return right(shopInfoEntity[0]);
+        }
+      }
       return right(await _ownerRemoteDataSource.getShopInfo());
     } catch (e) {
       if (e is FirebaseException) {
@@ -166,7 +173,7 @@ class OwnerRepoImpl extends OwnerRepo {
     try {
       List<CategoryEntity> categories;
       if (!remoteSource) {
-        categories = await _ownerLocalDataSource.getCategories();
+        categories = _ownerLocalDataSource.getCategories();
         if (categories.isNotEmpty) {
           return right(categories);
         }

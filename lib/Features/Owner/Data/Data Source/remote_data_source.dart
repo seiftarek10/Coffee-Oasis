@@ -87,6 +87,7 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             parentDocId: docId,
             subCollection: EndPoints.coffeeDrinks),
         body: coffeeEntity.toJson());
+        await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
@@ -98,11 +99,13 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             parentDocId: docId,
             subCollection: EndPoints.coffeeDrinks));
     List<CoffeeEntity> coffeeDrinks = [];
+
     for (var item in response.docs) {
-      coffeeDrinks.add(CoffeeDrinkModel.fromjson(item));
+      coffeeDrinks.add(CoffeeDrinkModel.fromjson(item, docId));
+     
     }
-    await _ownerLocalDataSource.clearCoffeeBox();
-    await _ownerLocalDataSource.saveCoffeeDrinks(categoryKey: docId , coffeeDrinks: coffeeDrinks);
+
+    await _ownerLocalDataSource.saveCoffeeDrinks(coffeeDrinks: coffeeDrinks);
     return coffeeDrinks;
   }
 
@@ -119,6 +122,7 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             subCollection: EndPoints.coffeeDrinks,
             subDocId: docId));
     await _storageService.deletePhoto(url: photoUrl);
+        await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
@@ -133,6 +137,7 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             subCollection: EndPoints.coffeeDrinks,
             subDocId: docId),
         body: body);
+            await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
@@ -140,7 +145,10 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
     DocumentSnapshot<Map<String, dynamic>?> response = await _databaseServices
         .getDoc(endPoint: EndPoints.shopInfo, docId: '1');
 
-    return ShopInfoModel.fromJson(response.data());
+    ShopInfoEntity shopInfoEntity = ShopInfoModel.fromJson(response.data());
+    await _ownerLocalDataSource.clearShopInfoBox();
+    await _ownerLocalDataSource.saveShopInfo(shopInfo: shopInfoEntity);
+    return shopInfoEntity;
   }
 
   @override

@@ -24,7 +24,9 @@ class ShopInfoContainerBlocListner extends StatelessWidget {
         if (state is UpdateShopInfoSuccess) {
           GoRouter.of(context).pop();
           successMessage(context: context, message: 'Updated Successfuly');
-          await BlocProvider.of<GetShopInfoCubit>(context).getShopInfo();
+          await BlocProvider.of<GetShopInfoCubit>(context).getShopInfo(
+            remoteSource: true
+          );
         } else if (state is UpdateShopInfoFailure) {
           failedMessage(context: context, message: state.errMessage);
         }

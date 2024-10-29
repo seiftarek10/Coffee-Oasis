@@ -7,22 +7,27 @@ class CoffeeDrinkModel extends CoffeeEntity {
   final String? coffeephoto;
   final String? coffeeprice;
   final String? coffeedescription;
+  final String? categoryID;
 
   CoffeeDrinkModel(this.coffeeId, this.coffeedescription, this.coffeeName,
-      this.coffeephoto, this.coffeeprice)
+      this.coffeephoto, this.coffeeprice,this.categoryID)
       : super(
             description: coffeedescription ?? "",
             id: coffeeId,
             name: coffeeName ?? '',
             photo: coffeephoto ?? '',
-            price: coffeeprice ?? '');
+            price: coffeeprice ?? '',
+            categoryId: categoryID ??''
+            );
   factory CoffeeDrinkModel.fromjson(
-      QueryDocumentSnapshot<Map<String, dynamic>> json) {
+      QueryDocumentSnapshot<Map<String, dynamic>> json,String id) {
     return CoffeeDrinkModel(
         json.id,
         json.data()['description'],
         json.data()['name'],
         json.data()['photo'],
-        json.data()['price']);
+        json.data()['price'],
+        id
+        );
   }
 }

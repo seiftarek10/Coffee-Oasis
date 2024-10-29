@@ -5,17 +5,19 @@ part 'coffee_entity.g.dart';
 @HiveType(typeId: 1)
 class CoffeeEntity extends HiveObject {
   @HiveType(typeId: 0)
-  final String? id;
+  final String? categoryId;
   @HiveType(typeId: 1)
-  final String? photo;
+  final String? id;
   @HiveType(typeId: 2)
-  final String? name;
+  final String? photo;
   @HiveType(typeId: 3)
-  final String? description;
+  final String? name;
   @HiveType(typeId: 4)
+  final String? description;
+  @HiveType(typeId: 5)
   final String? price;
 
-  CoffeeEntity({this.id, this.photo, this.name, this.description, this.price});
+  CoffeeEntity({this.categoryId, this.id, this.photo, this.name, this.description, this.price});
 
   toJson() {
     return {
@@ -25,4 +27,5 @@ class CoffeeEntity extends HiveObject {
       'price': price,
     };
   }
+  
 }

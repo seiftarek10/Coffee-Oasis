@@ -28,7 +28,9 @@ abstract class OwnerRepo {
       required String docId,
       required Map<String, dynamic> body});
 
-  Future<Either<Failure, ShopInfoEntity>> getShopInfo();
+  Future<Either<Failure, ShopInfoEntity>> getShopInfo({
+    required bool remoteSource
+  });
 
   Future<Either<Failure, void>> updateShopInfo(Map<String, dynamic> body);
 }

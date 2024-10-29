@@ -19,7 +19,9 @@ class OwnerProfileBlocBuilder extends StatelessWidget {
       } else if (state is GetShopInfoFailure) {
         return AppErrorWidget(
             onTap: () async {
-              await context.read<GetShopInfoCubit>().getShopInfo();
+              await context.read<GetShopInfoCubit>().getShopInfo(
+                remoteSource: true
+              );
             },
             text: state.errMessage);
       } else {

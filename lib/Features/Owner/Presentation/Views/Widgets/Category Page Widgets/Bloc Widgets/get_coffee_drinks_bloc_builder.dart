@@ -40,7 +40,7 @@ class GetCoffeeDrinksBlocBuilder extends StatelessWidget {
             onTap: () {
               context
                   .read<GetCategoryCoffeeDrinksCubit>()
-                  .getCategoryCoffeeDrink(id: id, remoteSource: false);
+                  .getCategoryCoffeeDrink(id: id, remoteSource: true);
             },
             text: errMessage),
       ),

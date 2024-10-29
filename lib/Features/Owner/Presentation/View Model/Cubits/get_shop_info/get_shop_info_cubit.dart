@@ -10,9 +10,13 @@ class GetShopInfoCubit extends Cubit<GetShopInfoState> {
 
   final GetShopInfoUseCase _getShopInfoUseCase;
 
-  Future<void> getShopInfo() async {
+  Future<void> getShopInfo({
+    required bool remoteSource
+  }) async {
     emit(GetShopInfoLoading());
-    var response = await _getShopInfoUseCase.execute();
+    var response = await _getShopInfoUseCase.execute(
+      param: remoteSource
+    );
     response.fold(
         (failure) => emit(GetShopInfoFailure(errMessage: failure.errMessage)),
         (info) => emit(GetShopInfoSuccess(shopInfoEntity: info)));

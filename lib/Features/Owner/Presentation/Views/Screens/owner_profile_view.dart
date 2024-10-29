@@ -14,7 +14,9 @@ class OwnerProfileView extends StatelessWidget {
     return BlocProvider(
         create: (context) =>
             GetShopInfoCubit(GetShopInfoUseCase(getIt.get<OwnerRepoImpl>()))
-              ..getShopInfo(),
+              ..getShopInfo(
+                remoteSource: false
+              ),
         child: Builder(
           builder: (context) {
             return OwnerProfileBlocBuilder(
