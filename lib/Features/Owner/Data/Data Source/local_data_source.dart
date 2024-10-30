@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/Constant/boxes_name.dart';
+import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
@@ -7,7 +8,7 @@ import 'package:hive_flutter/adapters.dart';
 abstract class OwnerLocalDataSource {
   Future<void> saveCategories({required List<CategoryEntity> categories});
   List<CategoryEntity> getCategories();
-  Future<void> saveCoffeeDrinks({required List<CoffeeEntity> coffeeDrinks});
+  Future<void> saveCoffeeDrinks({required CoffeeDrinksHiveModel coffeeDrinks});
   List<CoffeeEntity> getCoffeeDrinks({required String id});
   Future<void> saveShopInfo({required ShopInfoEntity shopInfo});
   List<ShopInfoEntity> getShopInfo();
@@ -32,22 +33,16 @@ class OwnerLocalDataSourceImpl implements OwnerLocalDataSource {
 
   @override
   Future<void> saveCoffeeDrinks(
-      {required List<CoffeeEntity> coffeeDrinks}) async {
-    var box = Hive.box<CoffeeEntity>(BoxesName.coffeeBox);
-    await box.addAll(coffeeDrinks);
+      {required CoffeeDrinksHiveModel coffeeDrinks}) async {
+    var box = Hive.box<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
+    await box.put(coffeeDrinks.id, coffeeDrinks);
   }
 
   @override
   List<CoffeeEntity> getCoffeeDrinks({required String id}) {
-    var box = Hive.box<CoffeeEntity>(BoxesName.coffeeBox);
-    List<CoffeeEntity> allCoffee = box.values.toList();
-    if (allCoffee.isEmpty) {
-      return [];
-    }
-    List<CoffeeEntity> selectedCoffee =
-        allCoffee.where((coffee) => coffee.categoryId == id).toList();
-
-    return selectedCoffee;
+    var box = Hive.box<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
+    var coffeeDrinks = box.get(id);
+    return coffeeDrinks?.coffeeDrinks??[];
   }
 
   @override
@@ -58,7 +53,7 @@ class OwnerLocalDataSourceImpl implements OwnerLocalDataSource {
 
   @override
   Future<void> clearCoffeeBox() async {
-    var box = Hive.box<CoffeeEntity>(BoxesName.coffeeBox);
+    var box = Hive.box<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
     await box.clear();
   }
 

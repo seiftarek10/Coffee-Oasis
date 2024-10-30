@@ -1,6 +1,7 @@
 import 'package:coffee_oasis/Core/Constant/boxes_name.dart';
 import 'package:coffee_oasis/Core/Services/bloc_observer.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
+import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
@@ -21,9 +22,10 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(CategoryEntityAdapter());
   Hive.registerAdapter(CoffeeEntityAdapter());
+  Hive.registerAdapter(CoffeeDrinksHiveModelAdapter());
   Hive.registerAdapter(ShopInfoEntityAdapter());
   await Hive.openBox<CategoryEntity>(BoxesName.categoriesBox);
-  await Hive.openBox<CoffeeEntity>(BoxesName.coffeeBox);
+  await Hive.openBox<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
   await Hive.openBox<ShopInfoEntity>(BoxesName.shopInfoBox);
   runApp(const CoffeeOasis(flavor: Flavor.owner));
   Bloc.observer = MyBlocObserver();

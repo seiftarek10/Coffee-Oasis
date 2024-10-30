@@ -45,7 +45,6 @@ class CoffeeDrinksListView extends StatelessWidget {
                                       parentDocId: id,
                                       docId: coffeeDrinks[index].id!,
                                       photoUrl: coffeeDrinks[index].photo!,
-                                      index: index
                                       );
                             },
                             update: () {

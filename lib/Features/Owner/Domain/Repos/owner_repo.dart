@@ -21,7 +21,6 @@ abstract class OwnerRepo {
       {required String parentDocId,
       required String docId,
       required String photoUrl,
-      required int index
       });
   Future<Either<Failure, void>> updateCoffeeDrink(
       {required String parentDocId,

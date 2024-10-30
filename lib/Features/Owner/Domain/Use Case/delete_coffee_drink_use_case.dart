@@ -10,6 +10,6 @@ class DeleteCoffeeDrinkUseCase extends UseCase<void, List<dynamic>> {
   @override
   Future<Either<Failure, void>> execute({List<dynamic>? param}) async {
     return await _ownerRepo.deleteCoffeeDrink(
-        parentDocId: param![0], docId: param[1], photoUrl: param[2],index: param[3]);
+        parentDocId: param![0], docId: param[1], photoUrl: param[2]);
   }
 }

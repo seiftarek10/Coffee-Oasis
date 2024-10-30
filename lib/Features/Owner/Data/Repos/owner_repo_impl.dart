@@ -102,7 +102,7 @@ class OwnerRepoImpl extends OwnerRepo {
       {required String parentDocId,
       required String docId,
       required String photoUrl,
-      required int index}) async {
+    }) async {
     try {
       await _ownerRemoteDataSource.deleteCoffeeDrink(
           parentDocId: parentDocId, docId: docId, photoUrl: photoUrl);

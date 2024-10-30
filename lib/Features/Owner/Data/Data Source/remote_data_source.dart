@@ -6,6 +6,7 @@ import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/category_model.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drink_model.dart';
+import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/shop_info_model.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
@@ -87,7 +88,7 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             parentDocId: docId,
             subCollection: EndPoints.coffeeDrinks),
         body: coffeeEntity.toJson());
-        await _ownerLocalDataSource.clearCoffeeBox();
+    await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
@@ -101,11 +102,12 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
     List<CoffeeEntity> coffeeDrinks = [];
 
     for (var item in response.docs) {
-      coffeeDrinks.add(CoffeeDrinkModel.fromjson(item, docId));
-     
+      coffeeDrinks.add(CoffeeDrinkModel.fromjson(item));
     }
 
-    await _ownerLocalDataSource.saveCoffeeDrinks(coffeeDrinks: coffeeDrinks);
+    await _ownerLocalDataSource.saveCoffeeDrinks(
+        coffeeDrinks:
+            CoffeeDrinksHiveModel(id: docId, coffeeDrinks: coffeeDrinks));
     return coffeeDrinks;
   }
 
@@ -122,7 +124,7 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             subCollection: EndPoints.coffeeDrinks,
             subDocId: docId));
     await _storageService.deletePhoto(url: photoUrl);
-        await _ownerLocalDataSource.clearCoffeeBox();
+    await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
@@ -137,7 +139,7 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             subCollection: EndPoints.coffeeDrinks,
             subDocId: docId),
         body: body);
-            await _ownerLocalDataSource.clearCoffeeBox();
+    await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
