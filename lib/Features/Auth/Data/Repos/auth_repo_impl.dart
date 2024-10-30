@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
+import 'package:coffee_oasis/Features/Auth/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Features/Auth/Domain/Repos/auth_repo.dart';
@@ -7,8 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final AuthRemoteDataSource _authRemoteDataSource;
+  final AuthLocalDataSource _authLocalDataSource;
 
-  AuthRepoImpl(this._authRemoteDataSource);
+  AuthRepoImpl(this._authRemoteDataSource, this._authLocalDataSource);
   @override
   Future<Either<Failure, void>> signUp({required UserEntity userEntity}) async {
     try {
@@ -37,8 +39,8 @@ class AuthRepoImpl implements AuthRepo {
     try {
       UserCredential userCredential =
           await _authRemoteDataSource.signIn(email: email, password: password);
-      var user = await getUserInfo(uid: userCredential.user!.uid);
-
+      UserEntity user = await getUserInfo(uid: userCredential.user!.uid);
+      await _authLocalDataSource.saveUserInfo(user: user);
       return right(unit);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -52,14 +54,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> getUserInfo({required String uid}) async {
-    try {
-      return right(await _authRemoteDataSource.getUser(id: uid));
-    } catch (e) {
-      if (e is FirebaseException) {
-        return left(FireBaseError.firebaseException(e));
-      }
-      return left(FireBaseError(errMessage: e.toString()));
-    }
+  Future<UserEntity> getUserInfo({required String uid}) async {
+    return await _authRemoteDataSource.getUser(id: uid);
   }
 }

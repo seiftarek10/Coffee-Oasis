@@ -5,11 +5,21 @@ import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AuthRemoteDataSource {
+abstract class AuthRemoteDataSource {
+  Future<void> signUp({required UserEntity userEntity});
+
+  Future<UserCredential> signIn(
+      {required String email, required String password});
+
+  Future<UserEntity> getUser({required String id});
+}
+
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final FireAuthServices _fireAuthServices;
   final FireStoreServices _fireStoreServices;
 
-  AuthRemoteDataSource(this._fireAuthServices, this._fireStoreServices);
+  AuthRemoteDataSourceImpl(this._fireAuthServices, this._fireStoreServices);
+  @override
   Future<void> signUp({required UserEntity userEntity}) async {
     UserCredential user = await _fireAuthServices.signUp(
         email: userEntity.email!, password: userEntity.password!);
@@ -20,11 +30,13 @@ class AuthRemoteDataSource {
         id: user.user!.uid);
   }
 
+  @override
   Future<UserCredential> signIn(
       {required String email, required String password}) async {
     return await _fireAuthServices.signIn(email: email, password: password);
   }
 
+  @override
   Future<UserEntity> getUser({required String id}) async {
     var response =
         await _fireStoreServices.getDoc(endPoint: EndPoints.users, docId: id);

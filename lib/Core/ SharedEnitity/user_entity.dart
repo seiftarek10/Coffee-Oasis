@@ -1,9 +1,19 @@
-class UserEntity {
+import 'package:hive_flutter/adapters.dart';
+
+part 'user_entity.g.dart';
+
+@HiveType(typeId: 4)
+class UserEntity extends HiveObject {
+  @HiveField(0)
   String? uid;
+  @HiveField(1)
   String? email;
   String? password;
+  @HiveField(2)
   String? userName;
+  @HiveField(3)
   String? phoneNumber;
+  @HiveField(4)
   String? address;
 
   UserEntity(

@@ -1,7 +1,7 @@
-
 import 'package:coffee_oasis/Core/NetWork/fire_auth_services.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
+import 'package:coffee_oasis/Features/Auth/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Repos/auth_repo_impl.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
@@ -47,14 +47,16 @@ void setupGetIt() {
     FireAuthServices(),
   );
   getIt.registerSingleton<AuthRemoteDataSource>(
-    AuthRemoteDataSource(
+    AuthRemoteDataSourceImpl(
       getIt.get<FireAuthServices>(),
       getIt.get<FireStoreServices>(),
     ),
   );
+  getIt.registerSingleton<AuthLocalDataSource>(AuthLoaclaDataSourceImpl());
   getIt.registerSingleton<AuthRepoImpl>(
     AuthRepoImpl(
       getIt.get<AuthRemoteDataSource>(),
+      getIt.get<AuthLocalDataSource>(),
     ),
   );
 }
