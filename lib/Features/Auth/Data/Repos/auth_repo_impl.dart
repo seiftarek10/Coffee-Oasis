@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Data%20Source/remote_data_source.dart';
-import 'package:coffee_oasis/Features/Auth/Domain/Entity/user_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Features/Auth/Domain/Repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,7 +35,10 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, void>> signIn(
       {required String email, required String password}) async {
     try {
-      await _authRemoteDataSource.signIn(email: email, password: password);
+      UserCredential userCredential =
+          await _authRemoteDataSource.signIn(email: email, password: password);
+      var user = await getUserInfo(uid: userCredential.user!.uid);
+
       return right(unit);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -48,8 +51,15 @@ class AuthRepoImpl implements AuthRepo {
     return left(FireBaseError(errMessage: 'Some Thing Is Wrong'));
   }
 
-
-
-
-
+  @override
+  Future<Either<Failure, UserEntity>> getUserInfo({required String uid}) async {
+    try {
+      return right(await _authRemoteDataSource.getUser(id: uid));
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
 }

@@ -1,12 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
 
- class FireStoreServices {
+class FireStoreServices {
   FireStoreServices();
 
   Future<void> postDoc(
       {required String endPoint, required Map<String, dynamic> body}) async {
     await FirebaseFirestore.instance.collection(endPoint).add(body);
+  }
+
+  Future<void> postDocWithId(
+      {required String endPoint,
+      required Map<String, dynamic> body,
+      required String id}) async {
+    await FirebaseFirestore.instance.collection(endPoint).doc(id).set(body);
   }
 
   Future<void> postToSubCollection(

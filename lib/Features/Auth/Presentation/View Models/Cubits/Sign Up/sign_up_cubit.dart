@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:coffee_oasis/Features/Auth/Domain/Entity/user_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Features/Auth/Domain/Use%20Case/sign_up_use_case.dart';
 import 'package:meta/meta.dart';
 

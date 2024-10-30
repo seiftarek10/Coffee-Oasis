@@ -3,7 +3,7 @@ import 'package:coffee_oasis/Core/Helpers/validation_form.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
-import 'package:coffee_oasis/Features/Auth/Domain/Entity/user_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Features/Auth/Presentation/View%20Models/Cubits/Sign%20Up/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,12 +1,14 @@
 class UserEntity {
-    String? email;
-    String? password;
-    String? userName;
-    String? phoneNumber;
-    String? address;
+  String? uid;
+  String? email;
+  String? password;
+  String? userName;
+  String? phoneNumber;
+  String? address;
 
   UserEntity(
-      [this.email,
+      [this.uid,
+      this.email,
       this.password,
       this.userName,
       this.phoneNumber,
@@ -14,6 +16,8 @@ class UserEntity {
 
   toJson() {
     return {
+      'uid': uid,
+      'email': email,
       'userName': userName,
       'phoneNumber': phoneNumber,
       'Address': address
