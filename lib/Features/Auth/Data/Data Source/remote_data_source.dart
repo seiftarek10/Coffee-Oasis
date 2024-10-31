@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_auth_services.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
-import 'package:coffee_oasis/Features/Auth/Data/Models/user_model.dart';
+import 'package:coffee_oasis/Core/Models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRemoteDataSource {
@@ -38,7 +39,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<UserEntity> getUser({required String id}) async {
-    var response =
+    DocumentSnapshot<Map<String, dynamic>?> response =
         await _fireStoreServices.getDoc(endPoint: EndPoints.users, docId: id);
     return UserModel.fromJson(response);
   }
