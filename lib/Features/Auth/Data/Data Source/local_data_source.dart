@@ -1,10 +1,11 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Constant/boxes_name.dart';
+import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class AuthLocalDataSource {
   Future<void> saveUserInfo({required UserEntity user});
-  Future<UserEntity> getUserInfo({required String id});
+  Future<void> saveUserId({required String uid});
 }
 
 class AuthLoaclaDataSourceImpl implements AuthLocalDataSource {
@@ -17,9 +18,8 @@ class AuthLoaclaDataSourceImpl implements AuthLocalDataSource {
     await box.put(user.uid, user);
   }
 
-  @override
-  Future<UserEntity> getUserInfo({required String id}) async {
-    var box = Hive.box<UserEntity>(BoxesName.userBox);
-    return box.get(id)!;
+  Future<void> saveUserId({required String uid}) async {
+    var box = await Hive.openBox<String>(BoxesName.uidBox);
+    await box.put(AppConstant.uid, uid);
   }
 }

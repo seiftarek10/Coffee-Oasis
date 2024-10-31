@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

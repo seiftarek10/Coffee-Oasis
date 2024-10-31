@@ -1,4 +1,4 @@
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:flutter/material.dart';
 
 class SlideCard extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_item.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class CartSlideableItem extends StatelessWidget {
     return Column(
       children: [
         Dismissible(
-          direction: DismissDirection.endToStart,
+            direction: DismissDirection.endToStart,
             key: itemKey,
             background: Container(
               decoration: BoxDecoration(

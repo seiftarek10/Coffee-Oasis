@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:flutter/material.dart';
 
 class AddressContainer extends StatelessWidget {
@@ -20,7 +20,6 @@ class AddressContainer extends StatelessWidget {
         children: [
           Text('Alexendria', style: Fonts.font20_700),
           const SizedBox(height: 6),
-
           Text('Khaled Abn El Waled', style: Fonts.font16_500),
           const SizedBox(height: 10),
           Row(children: [
