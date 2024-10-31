@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/update_coffee_drink_use_case.dart';
+import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
 part 'update_coffee_drink_state.dart';
@@ -15,7 +17,7 @@ class UpdateCoffeeDrinkCubit extends Cubit<UpdateCoffeeDrinkState> {
       required String docID,
       required Map<String, dynamic> body}) async {
     emit(UpdateCoffeeDrinkLoading());
-    var response = await _updateCoffeeDrinkUseCase
+    Either<Failure, void> response = await _updateCoffeeDrinkUseCase
         .execute(param: [parentDocID, docID, body]);
     response.fold(
         (failure) =>

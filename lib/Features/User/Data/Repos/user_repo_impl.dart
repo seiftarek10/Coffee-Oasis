@@ -17,7 +17,7 @@ class UserRepoImpl implements UserRepo {
         _userLocalDataSource = userLocalDataSource;
   @override
   Future<Either<Failure, UserEntity>> getUserInfo(
-      {required String userID, required bool remoteSource}) async {
+      {required bool remoteSource}) async {
     try {
       UserEntity? user = await _userLocalDataSource.getUserInfo();
       if (!remoteSource || user != null) {

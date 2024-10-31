@@ -4,13 +4,12 @@ import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/User/Domain/Repos/user_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class GetUserInfoUseCase extends UseCase<UserEntity, List<dynamic>> {
+class GetUserInfoUseCase extends UseCase<UserEntity, bool> {
   final UserRepo _userRepo;
 
   GetUserInfoUseCase(this._userRepo);
   @override
-  Future<Either<Failure, UserEntity>> execute({List<dynamic>? param}) async {
-    return await _userRepo.getUserInfo(
-        userID: param![0], remoteSource: param[1]);
+  Future<Either<Failure, UserEntity>> execute({bool? param}) async {
+    return await _userRepo.getUserInfo(remoteSource: param!);
   }
 }

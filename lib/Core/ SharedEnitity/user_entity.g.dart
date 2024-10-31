@@ -17,11 +17,11 @@ class UserEntityAdapter extends TypeAdapter<UserEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserEntity(
-      fields[0] as String?,
-      fields[1] as String?,
-      fields[2] as String?,
-      fields[3] as String?,
-      fields[4] as String?,
+      uid: fields[0] as String?,
+      email: fields[1] as String?,
+      userName: fields[2] as String?,
+      phoneNumber: fields[3] as String?,
+      address: fields[4] as String?,
     );
   }
 

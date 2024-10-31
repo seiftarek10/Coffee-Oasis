@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_shop_info_use_case.dart';
+import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
 part 'get_shop_info_state.dart';
@@ -10,13 +12,10 @@ class GetShopInfoCubit extends Cubit<GetShopInfoState> {
 
   final GetShopInfoUseCase _getShopInfoUseCase;
 
-  Future<void> getShopInfo({
-    required bool remoteSource
-  }) async {
+  Future<void> getShopInfo({required bool remoteSource}) async {
     emit(GetShopInfoLoading());
-    var response = await _getShopInfoUseCase.execute(
-      param: remoteSource
-    );
+    Either<Failure, ShopInfoEntity> response =
+        await _getShopInfoUseCase.execute(param: remoteSource);
     response.fold(
         (failure) => emit(GetShopInfoFailure(errMessage: failure.errMessage)),
         (info) => emit(GetShopInfoSuccess(shopInfoEntity: info)));

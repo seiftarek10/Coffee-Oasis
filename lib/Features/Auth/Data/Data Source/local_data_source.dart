@@ -21,6 +21,9 @@ class AuthLoaclaDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> saveUserId({required String uid}) async {
     var box = await Hive.openBox<String>(BoxesName.uidBox);
+    if (box.containsKey(uid)) {
+      return;
+    }
     await box.put(AppConstant.uid, uid);
   }
 }

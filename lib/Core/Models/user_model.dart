@@ -12,7 +12,13 @@ class UserModel extends UserEntity {
   UserModel(this.userid, this.emailAddress, this.userPassword, this.userNamee,
       this.phone, this.userAddress)
       : super(
-            userid, emailAddress, userPassword, userNamee, phone, userAddress);
+          uid: userid,
+          email: emailAddress,
+          userName: userNamee,
+          password: userPassword,
+          phoneNumber: phone,
+          address: userAddress,
+        );
   factory UserModel.fromJson(DocumentSnapshot<Map<String, dynamic>?> json) {
     return UserModel(
         json.data()?['uid'],

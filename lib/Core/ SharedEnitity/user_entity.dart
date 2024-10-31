@@ -17,12 +17,12 @@ class UserEntity extends HiveObject {
   String? address;
 
   UserEntity(
-      [this.uid,
+      {this.uid,
       this.email,
       this.password,
       this.userName,
       this.phoneNumber,
-      this.address]);
+      this.address});
 
   toJson() {
     return {
