@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_source.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Repos/owner_repo.dart';
 import 'package:dartz/dartz.dart';
@@ -80,7 +80,7 @@ class OwnerRepoImpl extends OwnerRepo {
     try {
       List<CoffeeEntity> coffeeDrinks;
       if (!remoteSource) {
-        coffeeDrinks =  _ownerLocalDataSource.getCoffeeDrinks(id: docId);
+        coffeeDrinks = _ownerLocalDataSource.getCoffeeDrinks(id: docId);
         if (coffeeDrinks.isNotEmpty) {
           return right(coffeeDrinks);
         }
@@ -98,11 +98,11 @@ class OwnerRepoImpl extends OwnerRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteCoffeeDrink(
-      {required String parentDocId,
-      required String docId,
-      required String photoUrl,
-    }) async {
+  Future<Either<Failure, void>> deleteCoffeeDrink({
+    required String parentDocId,
+    required String docId,
+    required String photoUrl,
+  }) async {
     try {
       await _ownerRemoteDataSource.deleteCoffeeDrink(
           parentDocId: parentDocId, docId: docId, photoUrl: photoUrl);
@@ -137,11 +137,11 @@ class OwnerRepoImpl extends OwnerRepo {
   Future<Either<Failure, ShopInfoEntity>> getShopInfo(
       {required bool remoteSource}) async {
     try {
-      List<ShopInfoEntity> shopInfoEntity;
+      ShopInfoEntity? shopInfoEntity;
       if (!remoteSource) {
         shopInfoEntity = _ownerLocalDataSource.getShopInfo();
-        if (shopInfoEntity.isNotEmpty) {
-          return right(shopInfoEntity[0]);
+        if (shopInfoEntity != null) {
+          return right(shopInfoEntity);
         }
       }
       return right(await _ownerRemoteDataSource.getShopInfo());

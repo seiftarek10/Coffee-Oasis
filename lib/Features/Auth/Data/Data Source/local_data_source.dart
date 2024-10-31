@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
-import 'package:coffee_oasis/Core/Constant/boxes_name.dart';
+import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
 import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:hive_flutter/adapters.dart';
 

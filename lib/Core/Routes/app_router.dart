@@ -3,7 +3,7 @@ import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_in_view.dart';
 import 'package:coffee_oasis/Features/Auth/Presentation/Views/Screens/sign_up_view.dart';
 import 'package:coffee_oasis/Features/Delivery/Presentation/Views/delivery.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/category_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Screens/manage_categories_view.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/owner.dart';

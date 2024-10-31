@@ -1,3 +1,7 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
+import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/hive_services.dart';
+import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_auth_services.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
@@ -7,6 +11,7 @@ import 'package:coffee_oasis/Features/Auth/Data/Repos/auth_repo_impl.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Repos/owner_repo_impl.dart';
+import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_all_categories.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
@@ -27,7 +32,13 @@ void setupGetIt() {
     FireStoreServices(),
   );
 
-  getIt.registerSingleton<OwnerLocalDataSourceImpl>(OwnerLocalDataSourceImpl());
+  getIt.registerSingleton<OwnerLocalDataSourceImpl>(OwnerLocalDataSourceImpl(
+      categoryHiveServices:
+          HiveServices<CategoryEntity>(boxName: BoxesName.categoriesBox),
+      coffeeDrinksHiveServices:
+          HiveServices<CoffeeDrinksHiveModel>(boxName: BoxesName.coffeeBox),
+      shopInfoHiveServices:
+          HiveServices<ShopInfoEntity>(boxName: BoxesName.shopInfoBox)));
   getIt.registerSingleton<OwnerRepoImpl>(
     OwnerRepoImpl(
         OwnerRemoteDataSourceImpl(
@@ -57,8 +68,10 @@ void setupGetIt() {
     ),
   );
 
+  getIt.registerSingleton<UserLocalDataSourceImpl>(UserLocalDataSourceImpl());
+
   getIt.registerSingleton<UserRepoImpl>(UserRepoImpl(
-      userRemoteDataSource:
-          UserRemoteDataSourceImpl(getIt.get<FireStoreServices>()),
-      userLocalDataSource: UserLocalDataSourceImpl()));
+      userRemoteDataSource: UserRemoteDataSourceImpl(
+          getIt.get<FireStoreServices>(), getIt.get<UserLocalDataSourceImpl>()),
+      userLocalDataSource: getIt.get<UserLocalDataSourceImpl>()));
 }

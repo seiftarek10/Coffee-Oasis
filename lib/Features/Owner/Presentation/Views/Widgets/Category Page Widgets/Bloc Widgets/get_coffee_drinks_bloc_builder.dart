@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/empty_widget.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/error_widget.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/loading_widget.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_category_coffee_drinks.dart/get_category_coffee_drinks_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/coffee_drink_item.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Category%20Page%20Widgets/coffee_drinks_list_view.dart';

@@ -1,9 +1,8 @@
-import 'package:coffee_oasis/Core/Constant/boxes_name.dart';
-import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drinks_hive_model.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/hive_services.dart';
+import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
-import 'package:hive_flutter/adapters.dart';
 
 abstract class OwnerLocalDataSource {
   Future<void> saveCategories({required List<CategoryEntity> categories});
@@ -11,68 +10,60 @@ abstract class OwnerLocalDataSource {
   Future<void> saveCoffeeDrinks({required CoffeeDrinksHiveModel coffeeDrinks});
   List<CoffeeEntity> getCoffeeDrinks({required String id});
   Future<void> saveShopInfo({required ShopInfoEntity shopInfo});
-  List<ShopInfoEntity> getShopInfo();
-  Future<void> clearCategoryBox();
-  Future<void> clearCoffeeBox();
-  Future<void> clearShopInfoBox();
+  ShopInfoEntity? getShopInfo();
 }
 
 class OwnerLocalDataSourceImpl implements OwnerLocalDataSource {
+  final HiveServices<CategoryEntity> categoryHiveServices;
+  final HiveServices<CoffeeDrinksHiveModel> coffeeDrinksHiveServices;
+  final HiveServices<ShopInfoEntity> shopInfoHiveServices;
+
+  OwnerLocalDataSourceImpl(
+      {required this.categoryHiveServices,
+      required this.coffeeDrinksHiveServices,
+      required this.shopInfoHiveServices});
+
   @override
   Future<void> saveCategories(
       {required List<CategoryEntity> categories}) async {
-    var box = Hive.box<CategoryEntity>(BoxesName.categoriesBox);
-    await box.addAll(categories);
+    await categoryHiveServices.saveData(categories);
   }
 
   @override
   List<CategoryEntity> getCategories() {
-    var box = Hive.box<CategoryEntity>(BoxesName.categoriesBox);
-    return box.values.toList();
+    return categoryHiveServices.getData();
   }
 
   @override
   Future<void> saveCoffeeDrinks(
       {required CoffeeDrinksHiveModel coffeeDrinks}) async {
-    var box = Hive.box<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
-    await box.put(coffeeDrinks.id, coffeeDrinks);
+    await coffeeDrinksHiveServices.saveWithKey(
+        object: coffeeDrinks, objectKey: coffeeDrinks.id);
   }
 
   @override
   List<CoffeeEntity> getCoffeeDrinks({required String id}) {
-    var box = Hive.box<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
-    var coffeeDrinks = box.get(id);
-    return coffeeDrinks?.coffeeDrinks??[];
-  }
-
-  @override
-  Future<void> clearCategoryBox() async {
-    var box = Hive.box<CategoryEntity>(BoxesName.categoriesBox);
-    await box.clear();
-  }
-
-  @override
-  Future<void> clearCoffeeBox() async {
-    var box = Hive.box<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
-    await box.clear();
+    CoffeeDrinksHiveModel? allCoffeeDrinks =
+        coffeeDrinksHiveServices.getByKey(objectKey: id);
+    List<CoffeeEntity> selectedCoffee = [];
+    if (allCoffeeDrinks != null || allCoffeeDrinks!.coffeeDrinks.isNotEmpty) {
+      for (var coffee in allCoffeeDrinks.coffeeDrinks) {
+        if (coffee.id != null) {
+          selectedCoffee.add(coffee);
+        }
+      }
+      return selectedCoffee;
+    }
+    return [];
   }
 
   @override
   Future<void> saveShopInfo({required ShopInfoEntity shopInfo}) async {
-    var box = Hive.box<ShopInfoEntity>(BoxesName.shopInfoBox);
-    await box.add(shopInfo);
+    await shopInfoHiveServices.saveWithKey(object: shopInfo, objectKey: 'shop');
   }
 
   @override
-  List<ShopInfoEntity> getShopInfo() {
-    var box = Hive.box<ShopInfoEntity>(BoxesName.shopInfoBox);
-
-    return box.values.toList();
-  }
-
-  @override
-  Future<void> clearShopInfoBox() async {
-    var box = Hive.box<ShopInfoEntity>(BoxesName.shopInfoBox);
-    await box.clear();
+  ShopInfoEntity? getShopInfo() {
+    return shopInfoHiveServices.getByKey(objectKey: 'shop');
   }
 }

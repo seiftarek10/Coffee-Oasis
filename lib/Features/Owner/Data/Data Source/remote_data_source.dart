@@ -4,12 +4,12 @@ import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
-import 'package:coffee_oasis/Features/Owner/Data/Models/category_model.dart';
-import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drink_model.dart';
-import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drinks_hive_model.dart';
+import 'package:coffee_oasis/Core/Models/category_model.dart';
+import 'package:coffee_oasis/Core/Models/coffee_drink_model.dart';
+import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/shop_info_model.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
 
 abstract class OwnerRemoteDataSource {
@@ -59,7 +59,6 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
     for (var item in response.docs) {
       categories.add(CategoryModel.fromJson(item));
     }
-    await _ownerLocalDataSource.clearCategoryBox();
     await _ownerLocalDataSource.saveCategories(categories: categories);
 
     return categories;
@@ -88,7 +87,6 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             parentDocId: docId,
             subCollection: EndPoints.coffeeDrinks),
         body: coffeeEntity.toJson());
-    await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
@@ -124,7 +122,6 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             subCollection: EndPoints.coffeeDrinks,
             subDocId: docId));
     await _storageService.deletePhoto(url: photoUrl);
-    await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
@@ -139,7 +136,6 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
             subCollection: EndPoints.coffeeDrinks,
             subDocId: docId),
         body: body);
-    await _ownerLocalDataSource.clearCoffeeBox();
   }
 
   @override
@@ -148,7 +144,6 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
         .getDoc(endPoint: EndPoints.shopInfo, docId: '1');
 
     ShopInfoEntity shopInfoEntity = ShopInfoModel.fromJson(response.data());
-    await _ownerLocalDataSource.clearShopInfoBox();
     await _ownerLocalDataSource.saveShopInfo(shopInfo: shopInfoEntity);
     return shopInfoEntity;
   }

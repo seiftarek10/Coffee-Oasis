@@ -1,4 +1,4 @@
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'category_entity.g.dart';
@@ -13,12 +13,7 @@ class CategoryEntity extends HiveObject {
   String? photo;
   @HiveField(3)
   List<CoffeeEntity>? coffeeDrinks;
-  CategoryEntity({
-    this.id,
-    this.name,
-    this.photo,
-    this.coffeeDrinks
-  });
+  CategoryEntity({this.id, this.name, this.photo, this.coffeeDrinks});
 
   toJson() {
     return {

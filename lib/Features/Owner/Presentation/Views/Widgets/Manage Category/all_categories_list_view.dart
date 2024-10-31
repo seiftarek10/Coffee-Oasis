@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/delete_category/delete_category_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_all_categories/get_all_categories_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Manage%20Category/Bloc%20Widgets/delete_category_bloc_listner.dart';

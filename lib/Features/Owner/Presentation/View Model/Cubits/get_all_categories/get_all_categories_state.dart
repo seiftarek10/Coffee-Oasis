@@ -1,4 +1,4 @@
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 
 sealed class GetAllCategoriesState {}
 

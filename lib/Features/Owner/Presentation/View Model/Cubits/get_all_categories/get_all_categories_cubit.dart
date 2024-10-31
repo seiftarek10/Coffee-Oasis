@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_all_categories.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

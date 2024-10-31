@@ -1,4 +1,4 @@
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'coffee_drinks_hive_model.g.dart';

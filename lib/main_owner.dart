@@ -1,9 +1,9 @@
-import 'package:coffee_oasis/Core/Constant/boxes_name.dart';
+import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
 import 'package:coffee_oasis/Core/Services/bloc_observer.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
-import 'package:coffee_oasis/Features/Owner/Data/Models/coffee_drinks_hive_model.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/category_entity.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/coffee_entity.dart';
+import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
 
 import 'package:coffee_oasis/coffee_oasis.dart';
