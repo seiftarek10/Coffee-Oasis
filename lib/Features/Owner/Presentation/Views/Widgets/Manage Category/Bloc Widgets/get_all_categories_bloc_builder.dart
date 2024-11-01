@@ -9,10 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GetAllCategoriesBlocBuilder extends StatelessWidget {
   const GetAllCategoriesBlocBuilder({super.key, required this.cubit});
-  final GetAllCategoriesCubit cubit;
+  final OwnerGetAllCategoriesCubit cubit;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetAllCategoriesCubit, GetAllCategoriesState>(
+    return BlocBuilder<OwnerGetAllCategoriesCubit, OwnerGetAllCategoriesState>(
         builder: (context, state) {
       if (state is GetAllCategoriesSuccess) {
         if (state.categories.isEmpty) {
@@ -28,12 +28,14 @@ class GetAllCategoriesBlocBuilder extends StatelessWidget {
         return AppErrorWidget(
             text: "${state.errMessage} try,again",
             onTap: () async {
-              await BlocProvider.of<GetAllCategoriesCubit>(context)
+              await BlocProvider.of<OwnerGetAllCategoriesCubit>(context)
                   .getAllCategories();
             });
       } else {
         return const Center(
-            child: CircularProgressIndicator(color: Colors.white,));
+            child: CircularProgressIndicator(
+          color: Colors.white,
+        ));
       }
     });
   }

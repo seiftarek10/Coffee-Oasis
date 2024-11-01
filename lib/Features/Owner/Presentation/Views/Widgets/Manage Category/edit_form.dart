@@ -98,7 +98,7 @@ class ManageCategoryEditForm extends StatelessWidget {
   }
 
   Future<String?> _getNewUrl() async {
-    await getIt.get<StorageService>().deletePhoto(url: categoryEntity.photo!);
+    await getIt.get<StorageService>().deletePhoto(url: categoryEntity.photo);
     String? newPhoto = await getIt.get<StorageService>().uploadPhoto(
         photo: selectedPhoto!, folderName: FoldersName.categoriesImages);
     return newPhoto;

@@ -9,12 +9,11 @@ class CategoryModel extends CategoryEntity {
   CategoryModel({this.coffeeName, this.categoryPhoto, this.coffeeId})
       : super(id: coffeeId, name: coffeeName, photo: categoryPhoto);
 
-  factory CategoryModel.fromJson(
-      QueryDocumentSnapshot<Map<String, dynamic>> json) {
+  factory CategoryModel.fromJson(DocumentSnapshot<Map<String, dynamic>> json) {
     return CategoryModel(
       coffeeId: json.id,
-      categoryPhoto: json.data()['photo'],
-      coffeeName: json.data()['name'],
+      categoryPhoto: json.data()!['photo'],
+      coffeeName: json.data()!['name'],
     );
   }
 }

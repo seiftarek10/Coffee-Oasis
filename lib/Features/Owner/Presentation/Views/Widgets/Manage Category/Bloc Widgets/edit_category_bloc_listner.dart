@@ -16,15 +16,15 @@ class EditCategoryBlocListner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<UpdateCategoryCubit, UpdateCategoryState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is UpdateCategorySuccess) {
           GoRouter.of(context).pop();
-          context.read<GetAllCategoriesCubit>().setRemoteSorce();
-          context.read<GetAllCategoriesCubit>().getAllCategories();
-          context.read<GetAllCategoriesCubit>().setRemoteSorce();
           successMessage(
               context: context,
               message: 'The category has been modified successfully');
+          await context
+              .read<OwnerGetAllCategoriesCubit>()
+              .getAllCategories(remoteSource: true);
         } else if (state is UpdateCategoryFailure) {
           failedMessage(context: context, message: state.errMessage);
         }

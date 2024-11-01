@@ -11,7 +11,7 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetAllCategoriesCubit, GetAllCategoriesState>(
+    return BlocBuilder<OwnerGetAllCategoriesCubit, OwnerGetAllCategoriesState>(
         builder: (context, state) {
       if (state is GetAllCategoriesSuccess) {
         if (state.categories.isEmpty) {
@@ -48,9 +48,9 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
 
   Widget _buildEmptyWidget(BuildContext context) {
     return const SliverToBoxAdapter(
-        child:  EmptyWidget(
-          height: 0.6,
-        ));
+        child: EmptyWidget(
+      height: 0.6,
+    ));
   }
 
   Widget _buildErrorWidget(BuildContext context, String text) {
@@ -58,10 +58,8 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
       child: AppErrorWidget(
           text: "$text try,again",
           onTap: () async {
-            await BlocProvider.of<GetAllCategoriesCubit>(context)
-                .getAllCategories(
-               
-                );
+            await BlocProvider.of<OwnerGetAllCategoriesCubit>(context)
+                .getAllCategories();
           }),
     );
   }

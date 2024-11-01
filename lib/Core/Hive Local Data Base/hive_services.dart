@@ -27,8 +27,11 @@ class HiveServices<T> {
     await box.put(objectKey, object);
   }
 
-  T? getByKey({required String objectKey}) {
+  T? getByKey({required String? objectKey}) {
     Box<T> box = Hive.box<T>(boxName);
+    if (!box.containsKey(objectKey)) {
+      return null;
+    }
     return box.get(objectKey);
   }
 }

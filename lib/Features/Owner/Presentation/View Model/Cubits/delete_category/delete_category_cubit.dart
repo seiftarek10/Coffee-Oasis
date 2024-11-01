@@ -13,7 +13,7 @@ class DeleteCategoryCubit extends Cubit<DeleteCategoryState> {
   final DeleteCategoryUseCase _deleteCategoryUseCase;
 
   Future<void> deleteCategory(
-      {required String id, required String url, required int index}) async {
+      {required String id, required String? url, required int index}) async {
     emit(DeleteCategoryLoading());
     Either<Failure, void> response =
         await _deleteCategoryUseCase.execute(param: [id, url, index]);

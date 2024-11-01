@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
@@ -30,7 +31,7 @@ class OwnerRepoImpl extends OwnerRepo {
   @override
   Future<Either<Failure, void>> deleteCategory(
       {required String id,
-      required String photoUrl,
+      required String? photoUrl,
       required int index}) async {
     try {
       await _ownerRemoteDataSource.deleteCategory(id: id, url: photoUrl);
@@ -78,9 +79,9 @@ class OwnerRepoImpl extends OwnerRepo {
   Future<Either<Failure, List<CoffeeEntity>>> getCategoryCoffeeDrinks(
       {required String docId, required bool remoteSource}) async {
     try {
-      List<CoffeeEntity> coffeeDrinks;
+      List<CoffeeEntity> coffeeDrinks = [];
+      coffeeDrinks = _ownerLocalDataSource.getCoffeeDrinks(id: docId);
       if (!remoteSource) {
-        coffeeDrinks = _ownerLocalDataSource.getCoffeeDrinks(id: docId);
         if (coffeeDrinks.isNotEmpty) {
           return right(coffeeDrinks);
         }
@@ -169,16 +170,15 @@ class OwnerRepoImpl extends OwnerRepo {
 
   @override
   Future<Either<Failure, List<CategoryEntity>>> getAllCategories(
-      {required bool remoteSource}) async {
+      {bool? remoteSource}) async {
     try {
-      List<CategoryEntity> categories;
-      if (!remoteSource) {
-        categories = _ownerLocalDataSource.getCategories();
-        if (categories.isNotEmpty) {
-          return right(categories);
-        }
+      List<CategoryEntity> categories = [];
+      categories = _ownerLocalDataSource.getCategories();
+      if (categories.isEmpty || remoteSource != null) {
+        categories = await _ownerRemoteDataSource.getAllCategories();
+        await _ownerLocalDataSource.saveCategories(categories: categories);
+        return right(categories);
       }
-      categories = await _ownerRemoteDataSource.getAllCategories();
       return right(categories);
     } catch (e) {
       if (e is FirebaseException) {

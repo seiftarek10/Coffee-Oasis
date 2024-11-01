@@ -46,7 +46,7 @@ class OwnerLocalDataSourceImpl implements OwnerLocalDataSource {
     CoffeeDrinksHiveModel? allCoffeeDrinks =
         coffeeDrinksHiveServices.getByKey(objectKey: id);
     List<CoffeeEntity> selectedCoffee = [];
-    if (allCoffeeDrinks != null || allCoffeeDrinks!.coffeeDrinks.isNotEmpty) {
+    if (allCoffeeDrinks != null) {
       for (var coffee in allCoffeeDrinks.coffeeDrinks) {
         if (coffee.id != null) {
           selectedCoffee.add(coffee);

@@ -16,7 +16,7 @@ class OwnerHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          GetAllCategoriesCubit(getIt.get<GetAllCategoriesUseCase>())
+          OwnerGetAllCategoriesCubit(getIt.get<GetAllCategoriesUseCase>())
             ..getAllCategories(),
       child: AppAnimatedOpacity(
         child: Padding(

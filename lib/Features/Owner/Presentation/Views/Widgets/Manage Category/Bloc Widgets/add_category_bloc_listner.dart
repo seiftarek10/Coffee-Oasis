@@ -14,17 +14,17 @@ class AddCategoryBlocListner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddCategoryCubit, AddCategoryState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is AddCategoryFailureState) {
             failedMessage(context: context, message: state.errMessage);
           } else if (state is AddCategorySuccessState) {
             GoRouter.of(context).pop();
-            context.read<GetAllCategoriesCubit>().setRemoteSorce();
-            context.read<GetAllCategoriesCubit>().getAllCategories();
-            context.read<GetAllCategoriesCubit>().setRemoteSorce();
             successMessage(
                 context: context,
                 message: 'The category has been added successfully');
+            await context
+                .read<OwnerGetAllCategoriesCubit>()
+                .getAllCategories(remoteSource: true);
           }
         },
         child: const ManageCategoryAddForm());

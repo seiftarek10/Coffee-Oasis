@@ -17,7 +17,7 @@ class ManageCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final getAllCategoriesCubit = GetAllCategoriesCubit(
+    final getAllCategoriesCubit = OwnerGetAllCategoriesCubit(
         GetAllCategoriesUseCase(getIt.get<OwnerRepoImpl>()));
     return MultiBlocProvider(
         providers: [
@@ -45,8 +45,8 @@ class ManageCategories extends StatelessWidget {
                               ),
                               Expanded(
                                   child: GetAllCategoriesBlocBuilder(
-                                    cubit:getAllCategoriesCubit ,
-                                  ))
+                                cubit: getAllCategoriesCubit,
+                              ))
                             ]))))));
   }
 }

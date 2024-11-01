@@ -10,6 +10,6 @@ class UserGetAllCategoiresUseCase extends UseCase<List<CategoryEntity>, bool> {
   UserGetAllCategoiresUseCase(this.userRepo);
   @override
   Future<Either<Failure, List<CategoryEntity>>> execute({bool? param}) async {
-    return userRepo.getAllCategories(firstTime: param!);
+    return userRepo.getAllCategories();
   }
 }

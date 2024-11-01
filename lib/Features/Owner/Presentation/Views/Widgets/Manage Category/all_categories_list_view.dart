@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ManageAllCategoriesListView extends StatelessWidget {
   const ManageAllCategoriesListView(
       {super.key, required this.categoriesList, required this.cubit});
-  final GetAllCategoriesCubit cubit;
+  final OwnerGetAllCategoriesCubit cubit;
   final List<CategoryEntity> categoriesList;
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class ManageAllCategoriesListView extends StatelessWidget {
                             await BlocProvider.of<DeleteCategoryCubit>(context)
                                 .deleteCategory(
                                     id: categoriesList[index].id!,
-                                    url: categoriesList[index].photo!,
+                                    url: categoriesList[index].photo,
                                     index: index);
                           },
                           update: () {

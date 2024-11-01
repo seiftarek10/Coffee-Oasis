@@ -9,6 +9,7 @@ class DeleteCategoryUseCase extends UseCase<void, List<dynamic>> {
   DeleteCategoryUseCase(this._ownerRepo);
   @override
   Future<Either<Failure, void>> execute({List<dynamic>? param}) async {
-    return await _ownerRepo.deleteCategory(id: param![0], photoUrl: param[1],index: param[2]);
+    return await _ownerRepo.deleteCategory(
+        id: param?[0], photoUrl: param?[1], index: param?[2]);
   }
 }

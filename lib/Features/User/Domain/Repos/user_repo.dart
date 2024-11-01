@@ -5,6 +5,5 @@ import 'package:dartz/dartz.dart';
 
 abstract class UserRepo {
   Future<Either<Failure, UserEntity>> getUserInfo({required bool remoteSource});
-  Future<Either<Failure, List<CategoryEntity>>> getAllCategories(
-      {required bool firstTime});
+  Future<Either<Failure, List<CategoryEntity>>> getAllCategories();
 }

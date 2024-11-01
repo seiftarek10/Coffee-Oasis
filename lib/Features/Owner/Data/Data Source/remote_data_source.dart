@@ -65,9 +65,13 @@ class OwnerRemoteDataSourceImpl implements OwnerRemoteDataSource {
   }
 
   @override
-  Future<void> deleteCategory({required String id, required String url}) async {
+  Future<void> deleteCategory(
+      {required String id, required String? url}) async {
     await _databaseServices.deleteDoc(
         endPoint: EndPoints.categories, docId: id);
+    if (url == null) {
+      return;
+    }
     await _storageService.deletePhoto(url: url);
   }
 

@@ -10,6 +10,6 @@ class GetAllCategoriesUseCase extends UseCase<List<CategoryEntity>, bool> {
   GetAllCategoriesUseCase(this._ownerRepo);
   @override
   Future<Either<Failure, List<CategoryEntity>>> execute({bool? param}) async {
-    return await _ownerRepo.getAllCategories(remoteSource: param!);
+    return await _ownerRepo.getAllCategories(remoteSource: param);
   }
 }

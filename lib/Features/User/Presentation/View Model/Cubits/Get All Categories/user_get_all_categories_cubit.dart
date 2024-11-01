@@ -13,18 +13,15 @@ class UserGetAllCategoriesCubit extends Cubit<UserGetAllCategoriesState> {
 
   final UserGetAllCategoiresUseCase _getAllCategoriesUseCase;
 
-  static bool firstTime = true;
-
   Future<void> getAllCategories() async {
     emit(UserGetAllCategoriesLoading());
     Either<Failure, List<CategoryEntity>> response =
-        await _getAllCategoriesUseCase.execute(param: firstTime);
+        await _getAllCategoriesUseCase.execute();
     response.fold(
         (failure) =>
             emit(UserGetAllCategoriesFailure(errMssage: failure.errMessage)),
         (data) {
       emit(UserGetAllCategoriesSuccess(categories: data));
-      firstTime = false;
     });
   }
 }

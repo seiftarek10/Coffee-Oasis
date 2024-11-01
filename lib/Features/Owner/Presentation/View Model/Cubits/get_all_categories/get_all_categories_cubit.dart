@@ -5,13 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View Model/Cubits/get_all_categories/get_all_categories_state.dart';
 
-class GetAllCategoriesCubit extends Cubit<GetAllCategoriesState> {
-  GetAllCategoriesCubit(this._getAllCategoriesUseCase)
+class OwnerGetAllCategoriesCubit extends Cubit<OwnerGetAllCategoriesState> {
+  OwnerGetAllCategoriesCubit(this._getAllCategoriesUseCase)
       : super(GetAllCategoriesInitial());
 
   final GetAllCategoriesUseCase _getAllCategoriesUseCase;
-  static bool remoteSource = false;
-  Future<void> getAllCategories() async {
+  Future<void> getAllCategories({bool? remoteSource}) async {
     emit(GetAllCategoriesLoading());
     Either<Failure, List<CategoryEntity>> response =
         await _getAllCategoriesUseCase.execute(param: remoteSource);
@@ -19,9 +18,5 @@ class GetAllCategoriesCubit extends Cubit<GetAllCategoriesState> {
         (failure) =>
             emit(GetAllCategoriesFailure(errMessage: failure.errMessage)),
         (data) => emit(GetAllCategoriesSuccess(categories: data)));
-  }
-
-  void setRemoteSorce() {
-    remoteSource = !remoteSource;
   }
 }

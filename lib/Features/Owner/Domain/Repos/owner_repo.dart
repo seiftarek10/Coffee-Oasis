@@ -8,9 +8,9 @@ abstract class OwnerRepo {
   Future<Either<Failure, String>> addCategory(
       {required CategoryEntity category});
   Future<Either<Failure, List<CategoryEntity>>> getAllCategories(
-      {required bool remoteSource});
+      {bool? remoteSource});
   Future<Either<Failure, void>> deleteCategory(
-      {required String id, required String photoUrl, required int index});
+      {required String id, required String? photoUrl, required int index});
   Future<Either<Failure, void>> updateCategory(
       {required String id, required Map<String, dynamic> body});
   Future<Either<Failure, void>> addCoffeeDrink(

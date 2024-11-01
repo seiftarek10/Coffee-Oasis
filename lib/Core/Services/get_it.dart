@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/hive_services.dart';
 import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
@@ -23,11 +24,7 @@ final getIt = GetIt.instance;
 
 void setupGetIt() {
   getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
-  getIt.registerSingleton<StorageService>(
-    StorageService(
-      getIt.get<FirebaseStorage>(),
-    ),
-  );
+  getIt.registerSingleton<StorageService>(StorageService());
   getIt.registerSingleton<FireStoreServices>(
     FireStoreServices(),
   );
@@ -68,7 +65,11 @@ void setupGetIt() {
     ),
   );
 
-  getIt.registerSingleton<UserLocalDataSourceImpl>(UserLocalDataSourceImpl());
+  getIt.registerSingleton<UserLocalDataSourceImpl>(UserLocalDataSourceImpl(
+      categoryHiveServices:
+          HiveServices<CategoryEntity>(boxName: BoxesName.categoriesBox),
+      userInfoHiveServices:
+          HiveServices<UserEntity>(boxName: BoxesName.userBox)));
 
   getIt.registerSingleton<UserRepoImpl>(UserRepoImpl(
       userRemoteDataSource: UserRemoteDataSourceImpl(

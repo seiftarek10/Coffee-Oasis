@@ -38,13 +38,16 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<Either<Failure, List<CategoryEntity>>> getAllCategories(
-      {required bool firstTime}) async {
+  Future<Either<Failure, List<CategoryEntity>>> getAllCategories() async {
     try {
       List<CategoryEntity> categories = [];
 
       categories = await _userLocalDataSource.getAllCategories();
       final completer = Completer<Either<Failure, List<CategoryEntity>>>();
+      if (categories.isEmpty) {
+        categories = await _userRemoteDataSource.getAllCategories();
+        await _userLocalDataSource.saveCategories(categories);
+      }
       completer.complete(right(categories));
 
       FirebaseFirestore.instance
@@ -69,45 +72,4 @@ class UserRepoImpl implements UserRepo {
     }
   }
 
-  // @override
-  // Future<Either<Failure, List<CategoryEntity>>> getAllCategories(
-  //     {required bool firstTime}) async {
-  //   try {
-  //     List<CategoryEntity> categories = [];
-  //     final Completer<Either<Failure, List<CategoryEntity>>> completer =
-  //         Completer();
-
-  //     FirebaseFirestore.instance
-  //         .collection(EndPoints.categories)
-  //         .snapshots()
-  //         .listen((snapshot) async {
-  //       if (snapshot.docChanges.any((change) =>
-  //           change.type == DocumentChangeType.added ||
-  //           change.type == DocumentChangeType.modified ||
-  //           change.type == DocumentChangeType.removed)) {
-  //         categories = await _userRemoteDataSource.getAllCategories();
-  //         await _userLocalDataSource.saveCategories(categories);
-  //         print('remote');
-  //         print('====================================================');
-  //         if (!completer.isCompleted) {
-  //           completer.complete(right(categories));
-  //         }
-  //       } else {
-  //         print('local');
-  //         print('====================================================');
-  //         categories = await _userLocalDataSource.getAllCategories();
-  //         if (!completer.isCompleted) {
-  //           completer.complete(right(categories));
-  //         }
-  //       }
-  //     });
-
-  //     return completer.future;
-  //   } catch (e) {
-  //     if (e is FirebaseException) {
-  //       return left(FireBaseError.firebaseException(e));
-  //     }
-  //     return left(FireBaseError(errMessage: e.toString()));
-  //   }
-  // }
 }
