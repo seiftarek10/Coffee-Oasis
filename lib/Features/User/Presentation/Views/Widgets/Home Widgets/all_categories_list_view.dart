@@ -24,28 +24,46 @@ class _UserHomeCategoriesListViewState
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SizedBox(
         height: 45,
-        child: Skeletonizer(
-          enabled: widget.enabled,
-          child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: widget.categories.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedIndex = index;
-                      });
-                    },
-                    child: UserHomeCategoryItem(
-                      isSelected: _selectedIndex == index,
-                      categoryName: widget.categories[index].name,
-                    ),
-                  ),
-                );
-              }),
+        child: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+              },
+              child: UserHomeCategoryItem(
+                categoryName: 'All Coffee',
+                isSelected: _selectedIndex == 0,
+              ),
+            ),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Skeletonizer(
+                enabled: widget.enabled,
+                child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.categories.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedIndex = index + 1;
+                            });
+                          },
+                          child: UserHomeCategoryItem(
+                            isSelected: _selectedIndex == index + 1,
+                            categoryName: widget.categories[index].name,
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            ),
+          ],
         ),
       ),
     );

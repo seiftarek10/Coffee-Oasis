@@ -11,10 +11,11 @@ class UserHomeCategoryItem extends StatelessWidget {
 
   final bool isSelected;
   final String? categoryName;
+
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 100),
+      constraints: const BoxConstraints(minWidth: 100),
       child: AnimatedScale(
         scale: isSelected == true ? 1.06 : 0.95,
         duration: const Duration(milliseconds: 200),

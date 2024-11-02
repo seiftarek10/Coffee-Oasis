@@ -66,10 +66,11 @@ void setupGetIt() {
   );
 
   getIt.registerSingleton<UserLocalDataSourceImpl>(UserLocalDataSourceImpl(
-      categoryHiveServices:
-          HiveServices<CategoryEntity>(boxName: BoxesName.categoriesBox),
-      userInfoHiveServices:
-          HiveServices<UserEntity>(boxName: BoxesName.userBox)));
+    categoryBox: HiveServices<CategoryEntity>(boxName: BoxesName.categoriesBox),
+    userBox: HiveServices<UserEntity>(boxName: BoxesName.userBox),
+    coffeeDrinksBox:
+        HiveServices<CoffeeDrinksHiveModel>(boxName: BoxesName.coffeeBox),
+  ));
 
   getIt.registerSingleton<UserRepoImpl>(UserRepoImpl(
       userRemoteDataSource: UserRemoteDataSourceImpl(

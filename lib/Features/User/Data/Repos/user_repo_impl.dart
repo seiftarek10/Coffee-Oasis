@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
+import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
@@ -40,9 +42,8 @@ class UserRepoImpl implements UserRepo {
   @override
   Future<Either<Failure, List<CategoryEntity>>> getAllCategories() async {
     try {
-      List<CategoryEntity> categories = [];
-
-      categories = await _userLocalDataSource.getAllCategories();
+      List<CategoryEntity>? categories = [];
+      categories = _userLocalDataSource.getAllCategories();
       final completer = Completer<Either<Failure, List<CategoryEntity>>>();
       if (categories.isEmpty) {
         categories = await _userRemoteDataSource.getAllCategories();
@@ -59,7 +60,7 @@ class UserRepoImpl implements UserRepo {
             change.type == DocumentChangeType.modified ||
             change.type == DocumentChangeType.removed)) {
           categories = await _userRemoteDataSource.getAllCategories();
-          await _userLocalDataSource.saveCategories(categories);
+          await _userLocalDataSource.saveCategories(categories ?? []);
         }
       });
 
@@ -72,4 +73,84 @@ class UserRepoImpl implements UserRepo {
     }
   }
 
+  @override
+  Future<Either<Failure, List<CoffeeEntity>>> getCoffeeDrinks(
+      {String? id}) async {
+    try {
+      List<CoffeeEntity> coffeeDrinks;
+
+      if (id == null) {
+        coffeeDrinks = await handleGetAllCoffee();
+      } else {
+        coffeeDrinks = await getSpecificCategoryCoffeeDrinks(id: id);
+      }
+
+      return right(coffeeDrinks);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  Future<List<CoffeeEntity>> handleGetAllCoffee() async {
+    List<CoffeeEntity> coffeeDrinks;
+
+    coffeeDrinks = _userLocalDataSource.getAllCoffee();
+    if (coffeeDrinks.isEmpty) {
+      coffeeDrinks = await _userRemoteDataSource.getAllCoffee();
+      await _userLocalDataSource.saveCoffeeDrink(
+        coffeeDrinks:
+            CoffeeDrinksHiveModel(id: 'allCoffee', coffeeDrinks: coffeeDrinks),
+      );
+    }
+    FirebaseFirestore.instance
+        .collection(EndPoints.coffeeDrinks)
+        .snapshots()
+        .listen((snapshot) async {
+      if (snapshot.docChanges.any((change) =>
+          change.type == DocumentChangeType.added ||
+          change.type == DocumentChangeType.modified ||
+          change.type == DocumentChangeType.removed)) {
+        coffeeDrinks = await _userRemoteDataSource.getAllCoffee();
+        await _userLocalDataSource.saveCoffeeDrink(
+          coffeeDrinks: CoffeeDrinksHiveModel(
+              id: 'allCoffee', coffeeDrinks: coffeeDrinks),
+        );
+      }
+    });
+
+    return coffeeDrinks;
+  }
+
+  Future<List<CoffeeEntity>> getSpecificCategoryCoffeeDrinks(
+      {required String id}) async {
+    List<CoffeeEntity> coffeeDrinks;
+
+    coffeeDrinks = _userLocalDataSource.getCoffeeDrinks(id: id);
+    if (coffeeDrinks.isEmpty) {
+      coffeeDrinks = await _userRemoteDataSource.getCoffeeDrinks(id: id);
+      await _userLocalDataSource.saveCoffeeDrink(
+        coffeeDrinks: CoffeeDrinksHiveModel(id: id, coffeeDrinks: coffeeDrinks),
+      );
+    }
+    FirebaseFirestore.instance
+        .collection(EndPoints.coffeeDrinks)
+        .snapshots()
+        .listen((snapshot) async {
+      if (snapshot.docChanges.any((change) =>
+          change.type == DocumentChangeType.added ||
+          change.type == DocumentChangeType.modified ||
+          change.type == DocumentChangeType.removed)) {
+        coffeeDrinks = await _userRemoteDataSource.getCoffeeDrinks(id: id);
+        await _userLocalDataSource.saveCoffeeDrink(
+          coffeeDrinks:
+              CoffeeDrinksHiveModel(id: id, coffeeDrinks: coffeeDrinks),
+        );
+      }
+    });
+
+    return coffeeDrinks;
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
@@ -7,8 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class UserHomeCoffeeDrinkItem extends StatelessWidget {
   const UserHomeCoffeeDrinkItem({
     super.key,
+    required this.coffeeEntity,
+    required this.categoryName,
   });
 
+  final CoffeeEntity coffeeEntity;
+  final String categoryName;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -16,14 +21,15 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
       elevation: 3,
       child: Column(
         children: [
-          const Expanded(
+          Expanded(
               flex: 4,
               child: ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15)),
                 child: CoffeePhotoCard(
                   aspectRatio: 140 / 100,
+                  photo: coffeeEntity.photo,
                 ),
               )),
           SizedBox(height: 5.h),
@@ -37,11 +43,12 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
                   children: [
                     Expanded(
                         flex: 3,
-                        child: Text('Flat White', style: Fonts.font18_700)),
+                        child: Text(coffeeEntity.name ?? 'No Name',
+                            style: Fonts.font18_700)),
                     const SizedBox(height: 4),
                     Expanded(
                       flex: 3,
-                      child: Text('Espresso',
+                      child: Text(categoryName,
                           style: Fonts.font14_500
                               .copyWith(color: Colors.grey[600])),
                     ),
@@ -52,7 +59,8 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
                         children: [
                           Expanded(
                               flex: 7,
-                              child: Text(r'$ 4.53', style: Fonts.font20_700)),
+                              child: Text(r'$' '${coffeeEntity.price}',
+                                  style: Fonts.font20_700)),
                           Expanded(
                             flex: 3,
                             child: IconButton(
