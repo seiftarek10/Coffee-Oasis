@@ -40,7 +40,7 @@ class AuthRepoImpl implements AuthRepo {
       UserCredential userCredential =
           await _authRemoteDataSource.signIn(email: email, password: password);
       UserEntity user = await getUserInfo(uid: userCredential.user!.uid);
-      _authLocalDataSource.saveUserId(uid: userCredential.user!.uid);
+      await _authLocalDataSource.saveUserId(uid: userCredential.user!.uid);
       await _authLocalDataSource.saveUserInfo(user: user);
       return right(unit);
     } on FirebaseAuthException catch (e) {

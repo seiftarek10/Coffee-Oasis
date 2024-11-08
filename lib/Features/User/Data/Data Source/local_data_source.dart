@@ -68,7 +68,13 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   List<CoffeeEntity> getAllCoffee() {
-    List<CoffeeDrinksHiveModel> categoryCoffee = coffeeDrinksBox.getData();
-    return categoryCoffee.expand((category) => category.coffeeDrinks).toList();
+    CoffeeDrinksHiveModel? categoryCoffee =
+        coffeeDrinksBox.getByKey(objectKey: 'allCoffee');
+    List<CoffeeEntity> allCoffee = [];
+    for (var coffee in categoryCoffee?.coffeeDrinks ?? []) {
+      allCoffee.add(coffee);
+    }
+
+    return allCoffee;
   }
 }

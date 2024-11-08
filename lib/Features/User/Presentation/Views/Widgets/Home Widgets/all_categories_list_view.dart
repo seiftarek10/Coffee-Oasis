@@ -1,6 +1,8 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Coffee%20Drinks/user_get_coffee_drink_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/category_home_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class UserHomeCategoriesListView extends StatefulWidget {
@@ -27,10 +29,12 @@ class _UserHomeCategoriesListViewState
         child: Row(
           children: [
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 setState(() {
                   _selectedIndex = 0;
                 });
+                await BlocProvider.of<UserGetCoffeeDrinkCubit>(context)
+                    .getCoffeeDrinks();
               },
               child: UserHomeCategoryItem(
                 categoryName: 'All Coffee',
@@ -49,7 +53,11 @@ class _UserHomeCategoriesListViewState
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                            await BlocProvider.of<UserGetCoffeeDrinkCubit>(
+                                    context)
+                                .getCoffeeDrinks(
+                                    id: widget.categories[index].id);
                             setState(() {
                               _selectedIndex = index + 1;
                             });

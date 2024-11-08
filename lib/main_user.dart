@@ -21,20 +21,18 @@ Future<void> main() async {
   );
 
   setupGetIt();
-
-  await Hive.initFlutter();
   await checkAndMigrateHiveData();
   await setupHive();
-  runApp(const CoffeeOasis(flavor: Flavor.user));
   Bloc.observer = MyBlocObserver();
+  runApp(const CoffeeOasis(flavor: Flavor.user));
 }
 
 Future<void> setupHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserEntityAdapter());
   Hive.registerAdapter(CategoryEntityAdapter());
-  Hive.registerAdapter(CoffeeDrinksHiveModelAdapter());
   Hive.registerAdapter(CoffeeEntityAdapter());
+  Hive.registerAdapter(CoffeeDrinksHiveModelAdapter());
 
   await Hive.openBox<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
   await Hive.openBox<UserEntity>(BoxesName.userBox);

@@ -41,7 +41,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     for (var category in data.docs) {
       allCategoires.add(CategoryModel.fromJson(category));
     }
-    _userLocalDataSource.saveCategories(allCategoires);
+    await _userLocalDataSource.saveCategories(allCategoires);
     return allCategoires;
   }
 
@@ -80,6 +80,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         allCoffee.add(CoffeeDrinkModel.fromjson(coffee));
       }
     }
+    await _userLocalDataSource.saveCoffeeDrink(
+      coffeeDrinks:
+          CoffeeDrinksHiveModel(id: 'allCoffee', coffeeDrinks: allCoffee),
+    );
     return allCoffee;
   }
 }

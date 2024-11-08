@@ -14,7 +14,7 @@ class SignInBlocListner extends StatelessWidget {
     return BlocListener<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInSuccess) {
-          GoRouter.of(context).push(Routes.user);
+          GoRouter.of(context).pushReplacement(Routes.user);
         } else if (state is SignInFailure) {
           failedMessage(context: context, message: state.errMessage);
         }

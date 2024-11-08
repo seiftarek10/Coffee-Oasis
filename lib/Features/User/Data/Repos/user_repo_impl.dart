@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
-import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
@@ -60,7 +58,6 @@ class UserRepoImpl implements UserRepo {
             change.type == DocumentChangeType.modified ||
             change.type == DocumentChangeType.removed)) {
           categories = await _userRemoteDataSource.getAllCategories();
-          await _userLocalDataSource.saveCategories(categories ?? []);
         }
       });
 
@@ -100,10 +97,6 @@ class UserRepoImpl implements UserRepo {
     coffeeDrinks = _userLocalDataSource.getAllCoffee();
     if (coffeeDrinks.isEmpty) {
       coffeeDrinks = await _userRemoteDataSource.getAllCoffee();
-      await _userLocalDataSource.saveCoffeeDrink(
-        coffeeDrinks:
-            CoffeeDrinksHiveModel(id: 'allCoffee', coffeeDrinks: coffeeDrinks),
-      );
     }
     FirebaseFirestore.instance
         .collection(EndPoints.coffeeDrinks)
@@ -114,10 +107,6 @@ class UserRepoImpl implements UserRepo {
           change.type == DocumentChangeType.modified ||
           change.type == DocumentChangeType.removed)) {
         coffeeDrinks = await _userRemoteDataSource.getAllCoffee();
-        await _userLocalDataSource.saveCoffeeDrink(
-          coffeeDrinks: CoffeeDrinksHiveModel(
-              id: 'allCoffee', coffeeDrinks: coffeeDrinks),
-        );
       }
     });
 
@@ -131,9 +120,6 @@ class UserRepoImpl implements UserRepo {
     coffeeDrinks = _userLocalDataSource.getCoffeeDrinks(id: id);
     if (coffeeDrinks.isEmpty) {
       coffeeDrinks = await _userRemoteDataSource.getCoffeeDrinks(id: id);
-      await _userLocalDataSource.saveCoffeeDrink(
-        coffeeDrinks: CoffeeDrinksHiveModel(id: id, coffeeDrinks: coffeeDrinks),
-      );
     }
     FirebaseFirestore.instance
         .collection(EndPoints.coffeeDrinks)
@@ -144,10 +130,6 @@ class UserRepoImpl implements UserRepo {
           change.type == DocumentChangeType.modified ||
           change.type == DocumentChangeType.removed)) {
         coffeeDrinks = await _userRemoteDataSource.getCoffeeDrinks(id: id);
-        await _userLocalDataSource.saveCoffeeDrink(
-          coffeeDrinks:
-              CoffeeDrinksHiveModel(id: id, coffeeDrinks: coffeeDrinks),
-        );
       }
     });
 

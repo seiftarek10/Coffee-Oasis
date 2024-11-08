@@ -16,12 +16,29 @@ class CoffeeEntityAdapter extends TypeAdapter<CoffeeEntity> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return CoffeeEntity();
+    return CoffeeEntity(
+      id: fields[0] as String?,
+      photo: fields[1] as String?,
+      name: fields[2] as String?,
+      description: fields[3] as String?,
+      price: fields[4] as String?,
+    );
   }
 
   @override
   void write(BinaryWriter writer, CoffeeEntity obj) {
-    writer.writeByte(0);
+    writer
+      ..writeByte(5)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.photo)
+      ..writeByte(2)
+      ..write(obj.name)
+      ..writeByte(3)
+      ..write(obj.description)
+      ..writeByte(4)
+      ..write(obj.price);
   }
 
   @override
