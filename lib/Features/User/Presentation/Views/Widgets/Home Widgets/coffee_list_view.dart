@@ -1,42 +1,61 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
+import 'package:coffee_oasis/Core/Helpers/failed_message.dart';
+import 'package:coffee_oasis/Core/Helpers/success_message.dart';
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
+import 'package:coffee_oasis/Core/Theme/colors.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
+import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Add%20To%20Cart/add_to_cart_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/coffee_drink_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class UserHomeCoffeeDrinksListView extends StatelessWidget {
-  const UserHomeCoffeeDrinksListView(
-      {super.key,
-      required this.coffeeDrinks,
-      required this.enabled,
-      required this.categoryName});
+  const UserHomeCoffeeDrinksListView({
+    super.key,
+    required this.coffeeDrinks,
+  });
 
   final List<CoffeeEntity> coffeeDrinks;
-  final bool enabled;
-  final String categoryName;
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      sliver: SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 170.w / 240.h,
-            crossAxisSpacing: 15,
-            mainAxisSpacing: 40,
-          ),
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return GestureDetector(
-                onTap: () {
-                  GoRouter.of(context).push(Routes.coffeeDetails);
-                },
-                child: UserHomeCoffeeDrinkItem(
-                  categoryName: categoryName,
-                  coffeeEntity: coffeeDrinks[index],
-                ));
-          }, childCount: coffeeDrinks.length)),
+    return BlocListener<AddToCartCubit, AddToCartState>(
+      listener: (context, state) {
+        if (state is AddToCartSuccess) {
+          successMessage(
+              context: context,
+              message: '1 Item - EGP 95.00',
+              backgroundColor: AppColors.kPrimaryColor);
+        } else if (state is AddToCartFailure) {
+          failedMessage(context: context, message: state.errMessage);
+        }
+      },
+      child: SliverPadding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        sliver: SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 170.w / 240.h,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 40,
+            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push(Routes.coffeeDetails);
+                  },
+                  child: UserHomeCoffeeDrinkItem(
+                    coffeeEntity: coffeeDrinks[index],
+                    onPreessed: () async {
+                      await BlocProvider.of<AddToCartCubit>(context).addToCart(
+                          cartItem: CartItemEntity(
+                              counter: 0, coffee: coffeeDrinks[index]));
+                    },
+                  ));
+            }, childCount: coffeeDrinks.length)),
+      ),
     );
   }
 }

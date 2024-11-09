@@ -1,8 +1,10 @@
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
+import 'package:coffee_oasis/Features/User/Domain/Use%20Case/add_to_cart_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_all_categoires_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_coffee_drinks_use_case.dart';
+import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Add%20To%20Cart/add_to_cart_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20All%20Categories/user_get_all_categories_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Coffee%20Drinks/user_get_coffee_drink_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Bloc%20Widgets/get_all_categories_bloc_builder.dart';
@@ -29,6 +31,10 @@ class UserHomeView extends StatelessWidget {
             create: (context) => UserGetCoffeeDrinkCubit(
                 UserGetCoffeeDrinksUseCase(getIt.get<UserRepoImpl>()))
               ..getCoffeeDrinks()),
+        BlocProvider(
+          create: (context) =>
+              AddToCartCubit(AddToCartUseCase(getIt.get<UserRepoImpl>())),
+        )
       ],
       child: AppAnimatedOpacity(
         child: CustomScrollView(

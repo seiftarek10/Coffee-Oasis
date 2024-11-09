@@ -11,9 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddFloatingActionButton extends StatelessWidget {
   const AddFloatingActionButton({
     super.key,
-    required this.id, required this.getCategoryCoffeeDrinksCubit,
+    required this.id,
+    required this.getCategoryCoffeeDrinksCubit,
+    required this.category,
   });
   final String id;
+  final String category;
   final GetCategoryCoffeeDrinksCubit getCategoryCoffeeDrinksCubit;
   @override
   Widget build(BuildContext context) {
@@ -26,13 +29,15 @@ class AddFloatingActionButton extends StatelessWidget {
               context: context,
               builder: (context) {
                 return MultiBlocProvider(
-                providers: [
-                  BlocProvider(  create: (context) => AddCoffeeDrinkCubit(
-                      AddCoffeeDrinkUseCase(getIt.get<OwnerRepoImpl>()))),
-                  BlocProvider.value(value: getCategoryCoffeeDrinksCubit)
-                ],
+                  providers: [
+                    BlocProvider(
+                        create: (context) => AddCoffeeDrinkCubit(
+                            AddCoffeeDrinkUseCase(getIt.get<OwnerRepoImpl>()))),
+                    BlocProvider.value(value: getCategoryCoffeeDrinksCubit)
+                  ],
                   child: AddCoffeeBlocListner(
                     id: id,
+                    category: category,
                   ),
                 );
               });

@@ -2,9 +2,9 @@ import 'package:hive_flutter/adapters.dart';
 
 part 'coffee_entity.g.dart';
 
-@HiveType(typeId: 1) // Set a unique typeId for CoffeeEntity
+@HiveType(typeId: 1)
 class CoffeeEntity extends HiveObject {
-  @HiveField(0) // Use @HiveField with unique indices for each field
+  @HiveField(0)
   final String? id;
 
   @HiveField(1)
@@ -19,7 +19,16 @@ class CoffeeEntity extends HiveObject {
   @HiveField(4)
   final String? price;
 
-  CoffeeEntity({this.id, this.photo, this.name, this.description, this.price});
+  @HiveField(5)
+  final String? category;
+
+  CoffeeEntity(
+      {this.id,
+      this.photo,
+      this.name,
+      this.description,
+      this.price,
+      this.category});
 
   Map<String, dynamic> toJson() {
     return {
@@ -28,6 +37,18 @@ class CoffeeEntity extends HiveObject {
       'name': name,
       'description': description,
       'price': price,
+      'category': category
     };
+  }
+
+  factory CoffeeEntity.fromJson(Map<String, dynamic> json) {
+    return CoffeeEntity(
+      id: json['id'],
+      photo: json['photo'],
+      name: json['name'],
+      description: json['description'],
+      price: json['price'],
+      category: json['category'],
+    );
   }
 }

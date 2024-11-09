@@ -9,11 +9,11 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
   const UserHomeCoffeeDrinkItem({
     super.key,
     required this.coffeeEntity,
-    required this.categoryName,
+    required this.onPreessed,
   });
 
   final CoffeeEntity coffeeEntity;
-  final String categoryName;
+  final void Function() onPreessed;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -48,7 +48,7 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
                     const SizedBox(height: 4),
                     Expanded(
                       flex: 3,
-                      child: Text(categoryName,
+                      child: Text(coffeeEntity.category ?? '',
                           style: Fonts.font14_500
                               .copyWith(color: Colors.grey[600])),
                     ),
@@ -58,13 +58,13 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                              flex: 7,
+                              flex: 10,
                               child: Text(r'$' '${coffeeEntity.price}',
                                   style: Fonts.font20_700)),
                           Expanded(
-                            flex: 3,
+                            flex: 4,
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: onPreessed,
                                 padding: EdgeInsets.zero,
                                 icon: Container(
                                     padding: const EdgeInsets.all(8),

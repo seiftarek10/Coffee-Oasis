@@ -15,9 +15,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class AddCoffeeDrinkForm extends StatelessWidget {
-  const AddCoffeeDrinkForm({super.key, required this.id});
+  const AddCoffeeDrinkForm(
+      {super.key, required this.id, required this.category});
 
   final String id;
+  final String category;
   static File? selectedPhoto;
   static String? coffeeName, description, price;
   static final GlobalKey<FormState> _key = GlobalKey();
@@ -109,7 +111,8 @@ class AddCoffeeDrinkForm extends StatelessWidget {
         photo: photoUrl,
         name: coffeeName,
         description: description,
-        price: price);
+        price: price,
+        category: category);
     await addCoffeeDrinkCubit.addCoffeeDrink(coffee: coffee, docId: id);
     selectedPhoto = null;
   }

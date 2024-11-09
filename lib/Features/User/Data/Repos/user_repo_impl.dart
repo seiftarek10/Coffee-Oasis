@@ -7,6 +7,7 @@ import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Repos/user_repo.dart';
 import 'package:dartz/dartz.dart';
 
@@ -134,5 +135,47 @@ class UserRepoImpl implements UserRepo {
     });
 
     return coffeeDrinks;
+  }
+
+  @override
+  Future<Either<Failure, void>> addToCart(
+      {required CartItemEntity coffeeItem}) async {
+    try {
+      await _userRemoteDataSource.addToCart(cartItem: coffeeItem);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CartItemEntity>>> getCartItems() async {
+    try {
+      List<CartItemEntity> cartItem = [];
+      cartItem = _userLocalDataSource.getCartItems();
+      if (cartItem.isEmpty) {
+        cartItem = await _userRemoteDataSource.getCartItems();
+      }
+      FirebaseFirestore.instance
+          .collection(EndPoints.userCart)
+          .snapshots()
+          .listen((snapshot) async {
+        if (snapshot.docChanges.any((change) =>
+            change.type == DocumentChangeType.added ||
+            change.type == DocumentChangeType.modified ||
+            change.type == DocumentChangeType.removed)) {
+          cartItem = await _userRemoteDataSource.getCartItems();
+        }
+      });
+      return right(cartItem);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
   }
 }

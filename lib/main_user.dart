@@ -6,6 +6,7 @@ import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Core/Services/bloc_observer.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
 import 'package:coffee_oasis/coffee_oasis.dart';
 import 'package:coffee_oasis/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,7 +22,7 @@ Future<void> main() async {
   );
 
   setupGetIt();
-  await checkAndMigrateHiveData();
+  // await checkAndMigrateHiveData();
   await setupHive();
   Bloc.observer = MyBlocObserver();
   runApp(const CoffeeOasis(flavor: Flavor.user));
@@ -33,10 +34,11 @@ Future<void> setupHive() async {
   Hive.registerAdapter(CategoryEntityAdapter());
   Hive.registerAdapter(CoffeeEntityAdapter());
   Hive.registerAdapter(CoffeeDrinksHiveModelAdapter());
-
+  Hive.registerAdapter(CartItemEntityAdapter());
   await Hive.openBox<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
   await Hive.openBox<UserEntity>(BoxesName.userBox);
   await Hive.openBox<CategoryEntity>(BoxesName.categoriesBox);
+  await Hive.openBox<CartItemEntity>(BoxesName.cartBox);
 }
 
 Future<void> checkAndMigrateHiveData() async {

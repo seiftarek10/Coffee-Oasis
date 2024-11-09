@@ -8,8 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class AddCoffeeBlocListner extends StatelessWidget {
-  const AddCoffeeBlocListner({super.key, required this.id});
+  const AddCoffeeBlocListner(
+      {super.key, required this.id, required this.category});
   final String id;
+  final String category;
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddCoffeeDrinkCubit, AddCoffeeDrinkState>(
@@ -23,9 +25,12 @@ class AddCoffeeBlocListner extends StatelessWidget {
                 message: 'The coffee has been added successfully');
             await context
                 .read<GetCategoryCoffeeDrinksCubit>()
-                .getCategoryCoffeeDrink(id: id,remoteSource: true);
+                .getCategoryCoffeeDrink(id: id, remoteSource: true);
           }
         },
-        child: AddCoffeeDrinkForm(id: id));
+        child: AddCoffeeDrinkForm(
+          id: id,
+          category: category,
+        ));
   }
 }

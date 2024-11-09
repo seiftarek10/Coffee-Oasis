@@ -35,6 +35,7 @@ class CategoryView extends StatelessWidget {
             floatingActionButton: Builder(builder: (context) {
               return AddFloatingActionButton(
                 id: categoryEntity.id!,
+                category: categoryEntity.name ?? '',
                 getCategoryCoffeeDrinksCubit:
                     context.read<GetCategoryCoffeeDrinksCubit>(),
               );

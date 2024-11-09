@@ -31,9 +31,7 @@ class UserGetCoffeeDrinksBlocBuilder extends StatelessWidget {
       return const SliverToBoxAdapter(child: EmptyWidget(height: 1));
     }
     return UserHomeCoffeeDrinksListView(
-      categoryName: 'Esspresso',
       coffeeDrinks: coffee,
-      enabled: false,
     );
   }
 
@@ -63,7 +61,9 @@ class UserGetCoffeeDrinksBlocBuilder extends StatelessWidget {
                     itemCount: 4,
                     itemBuilder: ((context, index) {
                       return UserHomeCoffeeDrinkItem(
-                          categoryName: '', coffeeEntity: CoffeeEntity());
+                        coffeeEntity: CoffeeEntity(),
+                        onPreessed: () {},
+                      );
                     })))));
   }
 }

@@ -10,6 +10,8 @@ import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
 import 'package:coffee_oasis/Core/Models/user_model.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
+import 'package:coffee_oasis/Features/User/Data/Models/cart_item_model.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class UserRemoteDataSource {
@@ -17,6 +19,8 @@ abstract class UserRemoteDataSource {
   Future<List<CategoryEntity>> getAllCategories();
   Future<List<CoffeeEntity>> getCoffeeDrinks({required String id});
   Future<List<CoffeeEntity>> getAllCoffee();
+  Future<void> addToCart({required CartItemEntity cartItem});
+  Future<List<CartItemEntity>> getCartItems();
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -85,5 +89,29 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           CoffeeDrinksHiveModel(id: 'allCoffee', coffeeDrinks: allCoffee),
     );
     return allCoffee;
+  }
+
+  @override
+  Future<void> addToCart({required CartItemEntity cartItem}) async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    await _fireStoreServices.postToSubCollection(
+        fireBasePathParam: FireBasePathParam(
+          parentCollection: EndPoints.allCart,
+          parentDocId: uid,
+          subCollection: EndPoints.userCart,
+        ),
+        body: cartItem.toJson());
+  }
+
+  @override
+  Future<List<CartItemEntity>> getCartItems() async {
+    QuerySnapshot<Map<String, dynamic>> response =
+        await _fireStoreServices.getCollection(endPoint: EndPoints.allCart);
+    List<CartItemEntity> cartItems = [];
+    for (var item in response.docs) {
+      cartItems.add(CartItemModel.fromJson(item));
+    }
+    await _userLocalDataSource.saveCartItems(cartItems);
+    return cartItems;
   }
 }
