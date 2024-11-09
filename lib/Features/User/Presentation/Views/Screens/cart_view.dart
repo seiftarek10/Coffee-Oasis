@@ -3,7 +3,9 @@ import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
+import 'package:coffee_oasis/Features/User/Domain/Use%20Case/delete_cart_item.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_cart_items_use_case.dart';
+import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Detete%20Cart%20Item/delete_cart_item_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Cart%20Items/get_cart_items_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Bloc%20Widgets/get_cart_items_bloc_builder.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_header_text.dart';
@@ -16,10 +18,18 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          GetCartItemsCubit(GetCartItemsUseCase(getIt.get<UserRepoImpl>()))
-            ..getCartItems(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              GetCartItemsCubit(GetCartItemsUseCase(getIt.get<UserRepoImpl>()))
+                ..getCartItems(),
+        ),
+        BlocProvider(
+          create: (context) => DeleteCartItemCubit(
+              DeleteCartItemUseCase(getIt.get<UserRepoImpl>())),
+        ),
+      ],
       child: Background(
           child: AppAnimatedOpacity(
         child: Padding(
