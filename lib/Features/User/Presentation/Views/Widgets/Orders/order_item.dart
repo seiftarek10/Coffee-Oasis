@@ -16,7 +16,7 @@ class OrderItem extends StatelessWidget {
     return AppWhiteContainer(
         noPadding: true,
         child: Row(children: [
-           Expanded(
+          Expanded(
               flex: 3,
               child: AppClipReact(
                   radiusForAll: false,
@@ -29,7 +29,10 @@ class OrderItem extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TitleAndSubTitleCaffeeCard(),
+                    TitleAndSubTitleCaffeeCard(
+                      title: '',
+                      subTitle: '',
+                    ),
                     SizedBox(height: 4),
                     OrderStateText(
                       isFinished: false,
@@ -48,5 +51,3 @@ class OrderItem extends StatelessWidget {
         ]));
   }
 }
-
-

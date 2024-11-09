@@ -10,6 +10,7 @@ import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source
 import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Repos/user_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserRepoImpl implements UserRepo {
   final UserRemoteDataSource _userRemoteDataSource;
@@ -154,12 +155,15 @@ class UserRepoImpl implements UserRepo {
   @override
   Future<Either<Failure, List<CartItemEntity>>> getCartItems() async {
     try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
       List<CartItemEntity> cartItem = [];
       cartItem = _userLocalDataSource.getCartItems();
       if (cartItem.isEmpty) {
         cartItem = await _userRemoteDataSource.getCartItems();
       }
       FirebaseFirestore.instance
+          .collection(EndPoints.allCart)
+          .doc(uid)
           .collection(EndPoints.userCart)
           .snapshots()
           .listen((snapshot) async {
@@ -171,6 +175,19 @@ class UserRepoImpl implements UserRepo {
         }
       });
       return right(cartItem);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCartItem({required String id}) async {
+    try {
+      await _userRemoteDataSource.deleteCartItem(id: id);
+      return right(unit);
     } catch (e) {
       if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));

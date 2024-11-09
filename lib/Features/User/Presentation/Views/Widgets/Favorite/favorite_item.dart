@@ -11,7 +11,7 @@ class FavoriteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppWhiteContainer(
-    noPadding: true,
+      noPadding: true,
       child: Row(
         children: [
           const Expanded(
@@ -26,7 +26,10 @@ class FavoriteItem extends StatelessWidget {
           const SizedBox(width: 16),
           const Expanded(
             flex: 7,
-            child: TitleAndSubTitleCaffeeCard(),
+            child: TitleAndSubTitleCaffeeCard(
+              title: '',
+              subTitle: '',
+            ),
           ),
           Expanded(
               flex: 3,

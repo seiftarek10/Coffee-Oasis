@@ -28,7 +28,7 @@ class UserGetCoffeeDrinksBlocBuilder extends StatelessWidget {
 
   Widget _buildSuccessWidget(List<CoffeeEntity> coffee) {
     if (coffee.isEmpty) {
-      return const SliverToBoxAdapter(child: EmptyWidget(height: 1));
+      return const SliverToBoxAdapter(child: AppEmptyWidget(height: 1));
     }
     return UserHomeCoffeeDrinksListView(
       coffeeDrinks: coffee,

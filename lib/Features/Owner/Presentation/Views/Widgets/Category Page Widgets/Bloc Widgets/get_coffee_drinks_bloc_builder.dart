@@ -49,7 +49,7 @@ class GetCoffeeDrinksBlocBuilder extends StatelessWidget {
 
   Widget _buildSuccessWidget(List<CoffeeEntity> coffee) {
     if (coffee.isEmpty) {
-      return const EmptyWidget(
+      return const AppEmptyWidget(
         height: 0.7,
       );
     }

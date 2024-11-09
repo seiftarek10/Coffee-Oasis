@@ -48,7 +48,7 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
 
   Widget _buildEmptyWidget(BuildContext context) {
     return const SliverToBoxAdapter(
-        child: EmptyWidget(
+        child: AppEmptyWidget(
       height: 0.6,
     ));
   }

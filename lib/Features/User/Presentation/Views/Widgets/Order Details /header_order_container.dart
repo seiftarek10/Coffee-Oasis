@@ -20,7 +20,12 @@ class HeaderOrderCotainer extends StatelessWidget {
             child: AppClipReact(
                 radiusForAll: true, child: CoffeePhotoCard(aspectRatio: 1))),
         const SizedBox(width: 16),
-        const Expanded(flex: 7, child: TitleAndSubTitleCaffeeCard()),
+        const Expanded(
+            flex: 7,
+            child: TitleAndSubTitleCaffeeCard(
+              title: '',
+              subTitle: '',
+            )),
         Text('1', style: Fonts.font18_700)
       ]),
     );

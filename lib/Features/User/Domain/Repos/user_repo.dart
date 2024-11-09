@@ -11,4 +11,5 @@ abstract class UserRepo {
   Future<Either<Failure, List<CoffeeEntity>>> getCoffeeDrinks({String? id});
   Future<Either<Failure, void>> addToCart({required CartItemEntity coffeeItem});
   Future<Either<Failure, List<CartItemEntity>>> getCartItems();
+  Future<Either<Failure, void>> deleteCartItem({required String id});
 }

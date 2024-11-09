@@ -25,7 +25,10 @@ class CoffeePhotoAndName extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const TitleAndSubTitleCaffeeCard(),
+              const TitleAndSubTitleCaffeeCard(
+                title: '',
+                subTitle: '',
+              ),
               Image.asset(
                 Assets.imagesSuperiority,
                 scale: 0.95,

@@ -11,14 +11,19 @@ class StaffOrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppWhiteContainer(
-   noPadding: true,
+      noPadding: true,
       child: Row(children: [
         const Expanded(
             flex: 2,
             child: AppClipReact(
                 radiusForAll: false, child: CoffeePhotoCard(aspectRatio: 1))),
         const SizedBox(width: 16),
-        const Expanded(flex: 7, child: TitleAndSubTitleCaffeeCard()),
+        const Expanded(
+            flex: 7,
+            child: TitleAndSubTitleCaffeeCard(
+              title: '',
+              subTitle: '',
+            )),
         Padding(
           padding: const EdgeInsets.only(right: 16),
           child: Text('1', style: Fonts.font18_700),

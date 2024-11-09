@@ -16,7 +16,7 @@ class GetAllCategoriesBlocBuilder extends StatelessWidget {
         builder: (context, state) {
       if (state is GetAllCategoriesSuccess) {
         if (state.categories.isEmpty) {
-          return const EmptyWidget(
+          return const AppEmptyWidget(
             height: 1,
           );
         }
