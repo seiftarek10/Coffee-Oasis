@@ -8,7 +8,7 @@ final class GetCartItemsInitial extends GetCartItemsState {}
 final class GetCartItemsLoading extends GetCartItemsState {}
 
 final class GetCartItemsSuccess extends GetCartItemsState {
-  final List<CartItemEntity> cartItems;
+  final List<OrderEntity> cartItems;
 
   GetCartItemsSuccess({required this.cartItems});
 }

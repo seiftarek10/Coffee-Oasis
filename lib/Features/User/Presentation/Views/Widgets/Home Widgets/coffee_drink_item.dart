@@ -1,6 +1,7 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
+import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,7 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
   });
 
   final CoffeeEntity coffeeEntity;
-  final void Function() onPreessed;
+  final Future<void> Function(Function) onPreessed;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -59,25 +60,17 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
                         children: [
                           Expanded(
                               flex: 10,
-                              child: Text(r'$' '${coffeeEntity.price}',
+                              child: Text(r'$ ' '${coffeeEntity.price}',
                                   style: Fonts.font20_700)),
                           Expanded(
                             flex: 4,
-                            child: IconButton(
-                                onPressed: onPreessed,
-                                padding: EdgeInsets.zero,
-                                icon: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.kPrimaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 20.h,
-                                      color: Colors.white,
-                                    ))),
+                            child: AppButton(
+                              onPressed: onPreessed,
+                              title: '+',
+                              titleColor: Colors.white,
+                              backgroundColor: AppColors.kPrimaryColor,
+                              squareShape: true,
+                            ),
                           )
                         ],
                       ),

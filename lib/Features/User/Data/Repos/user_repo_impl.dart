@@ -7,7 +7,7 @@ import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Repos/user_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -140,7 +140,7 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, void>> addToCart(
-      {required CartItemEntity coffeeItem}) async {
+      {required OrderEntity coffeeItem}) async {
     try {
       await _userRemoteDataSource.addToCart(cartItem: coffeeItem);
       return right(unit);
@@ -153,10 +153,10 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<Either<Failure, List<CartItemEntity>>> getCartItems() async {
+  Future<Either<Failure, List<OrderEntity>>> getCartItems() async {
     try {
       String uid = FirebaseAuth.instance.currentUser!.uid;
-      List<CartItemEntity> cartItem = [];
+      List<OrderEntity> cartItem = [];
       cartItem = _userLocalDataSource.getCartItems();
       if (cartItem.isEmpty) {
         cartItem = await _userRemoteDataSource.getCartItems();

@@ -9,10 +9,14 @@ class AppButton extends StatefulWidget {
     required this.backgroundColor,
     required this.title,
     required this.onPressed,
+    this.squareShape,
+    this.radius,
   });
 
   final Color titleColor, backgroundColor;
   final String title;
+  final bool? squareShape;
+  final double? radius;
   final Future<void> Function(Function toggleLoading) onPressed;
 
   @override
@@ -33,10 +37,13 @@ class _AppButtonState extends State<AppButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        overlayColor: AppColors.kPrimaryColor,
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        backgroundColor: widget.backgroundColor,
-      ),
+          overlayColor: AppColors.kPrimaryColor,
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          backgroundColor: widget.backgroundColor,
+          shape: widget.squareShape != null
+              ? RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(widget.radius ?? 10))
+              : null),
       onPressed: _isLoading
           ? null
           : () async => await widget.onPressed(_toggleLoading),

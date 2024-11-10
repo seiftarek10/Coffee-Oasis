@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Detete%20Cart%20Item/delete_cart_item_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Cart%20Items/get_cart_items_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_slideable_item.dart';
@@ -10,14 +10,15 @@ import 'package:go_router/go_router.dart';
 class CartItemListView extends StatelessWidget {
   const CartItemListView({super.key, required this.cartItems});
 
-  final List<CartItemEntity> cartItems;
+  final List<OrderEntity> cartItems;
   @override
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildBuilderDelegate((context, index) {
         return GestureDetector(
           onTap: () {
-            GoRouter.of(context).push(Routes.coffeeDetails);
+            GoRouter.of(context)
+                .push(Routes.coffeeDetails, extra: cartItems[index]);
           },
           child: Padding(
             padding: const EdgeInsets.only(bottom: 12.0),

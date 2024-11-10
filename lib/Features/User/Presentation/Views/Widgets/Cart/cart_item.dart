@@ -4,7 +4,7 @@ import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_name_category.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:flutter/material.dart';
 
 class CartItem extends StatelessWidget {
@@ -13,7 +13,7 @@ class CartItem extends StatelessWidget {
     required this.cartItemEntity,
   });
 
-  final CartItemEntity cartItemEntity;
+  final OrderEntity cartItemEntity;
 
   @override
   Widget build(BuildContext context) {

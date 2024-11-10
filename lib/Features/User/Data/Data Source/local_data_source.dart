@@ -5,7 +5,7 @@ import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
 import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/hive_services.dart';
 import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class UserLocalDataSource {
@@ -15,15 +15,15 @@ abstract class UserLocalDataSource {
   Future<void> saveCoffeeDrink({required CoffeeDrinksHiveModel coffeeDrinks});
   List<CoffeeEntity> getAllCoffee();
   List<CoffeeEntity> getCoffeeDrinks({required String id});
-  Future<void> saveCartItems(List<CartItemEntity> cartItems);
-  List<CartItemEntity> getCartItems();
+  Future<void> saveCartItems(List<OrderEntity> cartItems);
+  List<OrderEntity> getCartItems();
 }
 
 class UserLocalDataSourceImpl implements UserLocalDataSource {
   final HiveServices<UserEntity> userBox;
   final HiveServices<CategoryEntity> categoryBox;
   final HiveServices<CoffeeDrinksHiveModel> coffeeDrinksBox;
-  final HiveServices<CartItemEntity> cartBox;
+  final HiveServices<OrderEntity> cartBox;
 
   UserLocalDataSourceImpl(
       {required this.userBox,
@@ -83,12 +83,12 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  Future<void> saveCartItems(List<CartItemEntity> cartItems) async {
+  Future<void> saveCartItems(List<OrderEntity> cartItems) async {
     await cartBox.saveData(cartItems);
   }
 
   @override
-  List<CartItemEntity> getCartItems() {
+  List<OrderEntity> getCartItems() {
     return cartBox.getData();
   }
 }

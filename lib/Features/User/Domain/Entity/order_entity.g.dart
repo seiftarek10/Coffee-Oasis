@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cart_item_entity.dart';
+part of 'order_entity.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CartItemEntityAdapter extends TypeAdapter<CartItemEntity> {
+class OrderEntityAdapter extends TypeAdapter<OrderEntity> {
   @override
   final int typeId = 8;
 
   @override
-  CartItemEntity read(BinaryReader reader) {
+  OrderEntity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return CartItemEntity(
+    return OrderEntity(
       id: fields[0] as String?,
       counter: fields[1] as int,
       coffee: fields[2] as CoffeeEntity,
@@ -24,7 +24,7 @@ class CartItemEntityAdapter extends TypeAdapter<CartItemEntity> {
   }
 
   @override
-  void write(BinaryWriter writer, CartItemEntity obj) {
+  void write(BinaryWriter writer, OrderEntity obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,7 +41,7 @@ class CartItemEntityAdapter extends TypeAdapter<CartItemEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CartItemEntityAdapter &&
+      other is OrderEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -17,7 +17,7 @@ import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_all_categories
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/cart_item_entity.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 
@@ -71,7 +71,7 @@ void setupGetIt() {
     userBox: HiveServices<UserEntity>(boxName: BoxesName.userBox),
     coffeeDrinksBox:
         HiveServices<CoffeeDrinksHiveModel>(boxName: BoxesName.coffeeBox),
-    cartBox: HiveServices<CartItemEntity>(boxName: BoxesName.cartBox),
+    cartBox: HiveServices<OrderEntity>(boxName: BoxesName.cartBox),
   ));
 
   getIt.registerSingleton<UserRepoImpl>(UserRepoImpl(
