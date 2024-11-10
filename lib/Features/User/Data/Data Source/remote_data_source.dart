@@ -25,6 +25,7 @@ abstract class UserRemoteDataSource {
   Future<void> makeOrder({required OrderEntity order});
   Future<void> deleteFromCartAfterOrder({required String id});
   Future<List<OrderEntity>> getMyOrders();
+  Future<void> orderAll();
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -182,5 +183,32 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       userOrders.add(OrderModel.fromJson(order));
     }
     return userOrders;
+  }
+
+  @override
+  Future<void> orderAll() async {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    final cartRef = firestore
+        .collection(EndPoints.allCart)
+        .doc(uid)
+        .collection(EndPoints.userCart);
+    final orderRef = firestore
+        .collection(EndPoints.allOrders)
+        .doc(uid)
+        .collection(EndPoints.userOrders);
+
+    final batch = firestore.batch();
+
+    final cartItems = await cartRef.get();
+
+    for (var cartItem in cartItems.docs) {
+      final orderDoc = orderRef.doc(cartItem.id);
+      batch.set(orderDoc, cartItem.data());
+
+      batch.delete(cartItem.reference);
+    }
+
+    await batch.commit();
   }
 }
