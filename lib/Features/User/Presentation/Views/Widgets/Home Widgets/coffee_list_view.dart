@@ -51,7 +51,7 @@ class UserHomeCoffeeDrinksListView extends StatelessWidget {
                     onPreessed: () async {
                       await BlocProvider.of<AddToCartCubit>(context).addToCart(
                           cartItem: CartItemEntity(
-                              counter: 0, coffee: coffeeDrinks[index]));
+                              counter: 1, coffee: coffeeDrinks[index]));
                     },
                   ));
             }, childCount: coffeeDrinks.length)),

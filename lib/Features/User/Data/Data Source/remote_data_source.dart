@@ -95,13 +95,30 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<void> addToCart({required CartItemEntity cartItem}) async {
     String uid = FirebaseAuth.instance.currentUser!.uid;
-    await _fireStoreServices.postToSubCollection(
-        fireBasePathParam: FireBasePathParam(
-          parentCollection: EndPoints.allCart,
-          parentDocId: uid,
-          subCollection: EndPoints.userCart,
-        ),
-        body: cartItem.toJson());
+    final coffeeeItem = await FirebaseFirestore.instance
+        .collection(EndPoints.allCart)
+        .doc(uid)
+        .collection(EndPoints.userCart)
+        .doc(cartItem.coffee.id)
+        .get();
+
+    if (coffeeeItem.exists) {
+      await _fireStoreServices.updateDocFromSubCollection(
+          fireBasePathParam: FireBasePathParam(
+              parentCollection: EndPoints.allCart,
+              parentDocId: uid,
+              subCollection: EndPoints.userCart,
+              subDocId: cartItem.coffee.id),
+          body: {'counter': coffeeeItem['counter'] + 1});
+    } else {
+      await _fireStoreServices.postToSubCollectionWithId(
+          fireBasePathParam: FireBasePathParam(
+              parentCollection: EndPoints.allCart,
+              parentDocId: uid,
+              subCollection: EndPoints.userCart,
+              subDocId: cartItem.coffee.id),
+          body: cartItem.toJson());
+    }
   }
 
   @override

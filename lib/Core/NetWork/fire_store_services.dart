@@ -26,6 +26,17 @@ class FireStoreServices {
         .add(body);
   }
 
+  Future<void> postToSubCollectionWithId(
+      {required FireBasePathParam fireBasePathParam,
+      required Map<String, dynamic> body}) async {
+    await FirebaseFirestore.instance
+        .collection(fireBasePathParam.parentCollection)
+        .doc(fireBasePathParam.parentDocId)
+        .collection(fireBasePathParam.subCollection!)
+        .doc(fireBasePathParam.subDocId)
+        .set(body);
+  }
+
   Future<QuerySnapshot<Map<String, dynamic>>> getCollection(
       {required String endPoint}) async {
     return await FirebaseFirestore.instance.collection(endPoint).get();
