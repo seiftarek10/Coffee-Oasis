@@ -1,5 +1,4 @@
 import 'package:coffee_oasis/Core/Services/get_it.dart';
-import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/add_to_cart_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_all_categoires_use_case.dart';
@@ -36,28 +35,26 @@ class UserHomeView extends StatelessWidget {
               AddToCartCubit(AddToCartUseCase(getIt.get<UserRepoImpl>())),
         )
       ],
-      child: AppAnimatedOpacity(
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverToBoxAdapter(
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      const UserHomeHeader(),
-                      SizedBox(height: 75.h),
-                      const UserGetAllCategoriesBlocBuilder(),
-                      const SizedBox(height: 30),
-                    ],
-                  ),
-                  const OfferCard(),
-                ],
-              ),
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverToBoxAdapter(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    const UserHomeHeader(),
+                    SizedBox(height: 75.h),
+                    const UserGetAllCategoriesBlocBuilder(),
+                    const SizedBox(height: 30),
+                  ],
+                ),
+                const OfferCard(),
+              ],
             ),
-            const UserGetCoffeeDrinksBlocBuilder()
-          ],
-        ),
+          ),
+          const UserGetCoffeeDrinksBlocBuilder()
+        ],
       ),
     );
   }

@@ -79,10 +79,31 @@ class UserRepoImpl implements UserRepo {
       List<CoffeeEntity> coffeeDrinks;
 
       if (id == null) {
-        coffeeDrinks = await handleGetAllCoffee();
+        coffeeDrinks = _userLocalDataSource.getAllCoffee();
+        if (coffeeDrinks.isEmpty) {
+          coffeeDrinks = await _userRemoteDataSource.getAllCoffee();
+        }
       } else {
-        coffeeDrinks = await getSpecificCategoryCoffeeDrinks(id: id);
+        coffeeDrinks = _userLocalDataSource.getCoffeeDrinks(id: id);
+        if (coffeeDrinks.isEmpty) {
+          coffeeDrinks = await _userRemoteDataSource.getCoffeeDrinks(id: id);
+        }
       }
+      FirebaseFirestore.instance
+          .collection(EndPoints.coffeeDrinks)
+          .snapshots()
+          .listen((snapshot) async {
+        if (snapshot.docChanges.any((change) =>
+            change.type == DocumentChangeType.added ||
+            change.type == DocumentChangeType.modified ||
+            change.type == DocumentChangeType.removed)) {
+          if (id == null) {
+            coffeeDrinks = await _userRemoteDataSource.getAllCoffee();
+          } else {
+            coffeeDrinks = await _userRemoteDataSource.getCoffeeDrinks(id: id);
+          }
+        }
+      });
 
       return right(coffeeDrinks);
     } catch (e) {
@@ -91,51 +112,6 @@ class UserRepoImpl implements UserRepo {
       }
       return left(FireBaseError(errMessage: e.toString()));
     }
-  }
-
-  Future<List<CoffeeEntity>> handleGetAllCoffee() async {
-    List<CoffeeEntity> coffeeDrinks;
-
-    coffeeDrinks = _userLocalDataSource.getAllCoffee();
-    if (coffeeDrinks.isEmpty) {
-      coffeeDrinks = await _userRemoteDataSource.getAllCoffee();
-    }
-    FirebaseFirestore.instance
-        .collection(EndPoints.coffeeDrinks)
-        .snapshots()
-        .listen((snapshot) async {
-      if (snapshot.docChanges.any((change) =>
-          change.type == DocumentChangeType.added ||
-          change.type == DocumentChangeType.modified ||
-          change.type == DocumentChangeType.removed)) {
-        coffeeDrinks = await _userRemoteDataSource.getAllCoffee();
-      }
-    });
-
-    return coffeeDrinks;
-  }
-
-  Future<List<CoffeeEntity>> getSpecificCategoryCoffeeDrinks(
-      {required String id}) async {
-    List<CoffeeEntity> coffeeDrinks;
-
-    coffeeDrinks = _userLocalDataSource.getCoffeeDrinks(id: id);
-    if (coffeeDrinks.isEmpty) {
-      coffeeDrinks = await _userRemoteDataSource.getCoffeeDrinks(id: id);
-    }
-    FirebaseFirestore.instance
-        .collection(EndPoints.coffeeDrinks)
-        .snapshots()
-        .listen((snapshot) async {
-      if (snapshot.docChanges.any((change) =>
-          change.type == DocumentChangeType.added ||
-          change.type == DocumentChangeType.modified ||
-          change.type == DocumentChangeType.removed)) {
-        coffeeDrinks = await _userRemoteDataSource.getCoffeeDrinks(id: id);
-      }
-    });
-
-    return coffeeDrinks;
   }
 
   @override
@@ -187,6 +163,21 @@ class UserRepoImpl implements UserRepo {
   Future<Either<Failure, void>> deleteCartItem({required String id}) async {
     try {
       await _userRemoteDataSource.deleteCartItem(id: id);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> makeOrder({required OrderEntity order}) async {
+    try {
+      await _userRemoteDataSource.makeOrder(order: order);
+      await _userRemoteDataSource.deleteFromCartAfterOrder(
+          id: order.coffee.id!);
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {

@@ -20,19 +20,22 @@ class OrderEntityAdapter extends TypeAdapter<OrderEntity> {
       id: fields[0] as String?,
       counter: fields[1] as int,
       coffee: fields[2] as CoffeeEntity,
+      reciptWay: fields[3] as ReciptWay?,
     );
   }
 
   @override
   void write(BinaryWriter writer, OrderEntity obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.counter)
       ..writeByte(2)
-      ..write(obj.coffee);
+      ..write(obj.coffee)
+      ..writeByte(3)
+      ..write(obj.reciptWay);
   }
 
   @override

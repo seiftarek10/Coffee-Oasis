@@ -3,6 +3,7 @@ import 'package:coffee_oasis/Core/Helpers/failed_message.dart';
 import 'package:coffee_oasis/Core/Helpers/success_message.dart';
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
+import 'package:coffee_oasis/Core/Widgets/Extra%20Models/coffee_details_extra.dart';
 import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Add%20To%20Cart/add_to_cart_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/coffee_drink_item.dart';
@@ -47,8 +48,10 @@ class UserHomeCoffeeDrinksListView extends StatelessWidget {
                   return GestureDetector(
                       onTap: () {
                         GoRouter.of(context).push(Routes.coffeeDetails,
-                            extra: OrderEntity(
-                                counter: 1, coffee: coffeeDrinks[index]));
+                            extra: CoffeeDetailsExtra(
+                                orderEntity: OrderEntity(
+                                    counter: 1, coffee: coffeeDrinks[index]),
+                                fromCartView: false));
                       },
                       child: UserHomeCoffeeDrinkItem(
                           coffeeEntity: coffeeDrinks[index],

@@ -28,7 +28,7 @@ class _CounterWidgetState extends State<CounterWidget> {
 
   void decreaseCounter() {
     setState(() {
-      if (_counter == 0) {
+      if (_counter == 1) {
         return;
       }
       _counter--;

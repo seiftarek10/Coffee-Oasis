@@ -10,7 +10,7 @@ import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
 import 'package:coffee_oasis/Core/Models/user_model.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
-import 'package:coffee_oasis/Features/User/Data/Models/cart_item_model.dart';
+import 'package:coffee_oasis/Features/User/Data/Models/order_model.dart';
 import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -22,6 +22,8 @@ abstract class UserRemoteDataSource {
   Future<void> addToCart({required OrderEntity cartItem});
   Future<List<OrderEntity>> getCartItems();
   Future<void> deleteCartItem({required String id});
+  Future<void> makeOrder({required OrderEntity order});
+  Future<void> deleteFromCartAfterOrder({required String id});
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -29,9 +31,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final UserLocalDataSource _userLocalDataSource;
 
   UserRemoteDataSourceImpl(this._fireStoreServices, this._userLocalDataSource);
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+
   @override
   Future<UserEntity> getUserInfo() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
     DocumentSnapshot<Map<String, dynamic>?> data =
         await _fireStoreServices.getDoc(endPoint: EndPoints.users, docId: uid);
     UserEntity user = UserModel.fromJson(data);
@@ -94,7 +97,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> addToCart({required OrderEntity cartItem}) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
     final coffeeeItem = await FirebaseFirestore.instance
         .collection(EndPoints.allCart)
         .doc(uid)
@@ -117,13 +119,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
               parentDocId: uid,
               subCollection: EndPoints.userCart,
               subDocId: cartItem.coffee.id),
-          body: cartItem.toJson());
+          body: cartItem.toCartJson());
     }
   }
 
   @override
   Future<List<OrderEntity>> getCartItems() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
     QuerySnapshot<Map<String, dynamic>> response =
         await _fireStoreServices.getSubCollection(
             fireBasePathParam: FireBasePathParam(
@@ -140,13 +141,30 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> deleteCartItem({required String id}) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
-
     await _fireStoreServices.deleteDocFromSubCollection(
         fireBasePathParam: FireBasePathParam(
             parentCollection: EndPoints.allCart,
             parentDocId: uid,
             subCollection: EndPoints.userCart,
             subDocId: id));
+  }
+
+  @override
+  Future<void> makeOrder({required OrderEntity order}) async {
+    await _fireStoreServices.postToSubCollection(
+        fireBasePathParam: FireBasePathParam(
+            parentCollection: EndPoints.allOrders,
+            parentDocId: uid,
+            subCollection: EndPoints.userOrders),
+        body: order.toCartJson());
+  }
+
+  @override
+  Future<void> deleteFromCartAfterOrder({required String id}) async {
+    List<OrderEntity> cartItems = await getCartItems();
+    bool exist = cartItems.any((cartItem) => cartItem.id == id);
+    if (exist) {
+      await deleteCartItem(id: id);
+    } else {}
   }
 }

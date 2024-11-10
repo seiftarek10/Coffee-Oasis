@@ -5,4 +5,6 @@ abstract class EndPoints {
   static const String users = 'users';
   static const String allCart = 'allCart';
   static const String userCart = 'userCart';
+  static const String allOrders = 'allOrders';
+  static const String userOrders = 'userOrders';
 }

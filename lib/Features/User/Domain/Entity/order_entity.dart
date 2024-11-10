@@ -8,12 +8,25 @@ class OrderEntity extends HiveObject {
   @HiveField(0)
   final String? id;
   @HiveField(1)
-  final int counter;
+  int counter;
   @HiveField(2)
   final CoffeeEntity coffee;
-  OrderEntity({this.id, required this.counter, required this.coffee});
+  @HiveField(3)
+  final ReciptWay? reciptWay;
+  OrderEntity(
+      {this.id, required this.counter, required this.coffee, this.reciptWay});
 
-  toJson() {
+  toCartJson() {
     return {'counter': counter, 'coffee': coffee.toJson()};
   }
+
+  toOrderJson() {
+    return {
+      'counter': counter,
+      'coffee': coffee.toJson(),
+      'reciptWay': reciptWay
+    };
+  }
 }
+
+enum ReciptWay { delivery, pickup }
