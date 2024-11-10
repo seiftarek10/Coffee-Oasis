@@ -14,7 +14,8 @@ class OrdersListView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate((context, index) {
         return GestureDetector(
           onTap: () {
-            GoRouter.of(context).push(Routes.orderDetails);
+            GoRouter.of(context)
+                .push(Routes.orderDetails, extra: orders[index]);
           },
           child: Padding(
               padding: const EdgeInsets.only(bottom: 24.0),

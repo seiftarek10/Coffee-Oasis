@@ -12,6 +12,8 @@ class GetUserInfoCubit extends Cubit<GetUserInfoState> {
 
   final GetUserInfoUseCase _getUserInfoUseCase;
 
+  late UserEntity user;
+
   Future<void> getUserInfo({
     required bool remoteSource,
   }) async {
@@ -19,7 +21,9 @@ class GetUserInfoCubit extends Cubit<GetUserInfoState> {
     Either<Failure, UserEntity> response =
         await _getUserInfoUseCase.execute(param: remoteSource);
 
-    response.fold((failure) => emit(GetUserInfoFailure()),
-        (data) => emit(GetUserInfoSuccess(userEntity: data)));
+    response.fold((failure) => emit(GetUserInfoFailure()), (data) {
+      user = data;
+      emit(GetUserInfoSuccess(userEntity: data));
+    });
   }
 }

@@ -1,12 +1,16 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:flutter/material.dart';
 
-class AddressContainer extends StatelessWidget {
-  const AddressContainer({
+class UserContactContainer extends StatelessWidget {
+  const UserContactContainer({
     super.key,
+    required this.userinfo,
   });
+
+  final UserEntity userinfo;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +22,13 @@ class AddressContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Alexendria', style: Fonts.font20_700),
+          Text(userinfo.userName ?? 'No User Name', style: Fonts.font20_700),
           const SizedBox(height: 6),
-          Text('Khaled Abn El Waled', style: Fonts.font16_500),
+          Text(userinfo.address ?? 'No Address', style: Fonts.font16_500),
           const SizedBox(height: 10),
           Row(children: [
             const Icon(Icons.phone),
-            Text(' 01027870171', style: Fonts.font16_500)
+            Text(' ${userinfo.phoneNumber}', style: Fonts.font16_500)
           ])
         ],
       ),

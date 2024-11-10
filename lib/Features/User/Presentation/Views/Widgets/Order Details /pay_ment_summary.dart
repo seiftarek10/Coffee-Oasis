@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 class PaymentSummary extends StatelessWidget {
   const PaymentSummary({
     super.key,
+    required this.price,
+    required this.counter,
   });
+
+  final String price;
+  final int counter;
 
   @override
   Widget build(BuildContext context) {
@@ -20,23 +25,17 @@ class PaymentSummary extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Price', style: Fonts.font16_500),
-            Text(r'$ 5,43', style: Fonts.font18_700),
+            Text('Price for Item', style: Fonts.font16_500),
+            Text(r'$ ' '${int.parse(price) / counter}',
+                style: Fonts.font18_700),
           ],
         ),
         Space.k8,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Deliver', style: Fonts.font16_500),
-            Text(r'$ 3,43', style: Fonts.font18_700),
-          ],
-        ),  Space.k8,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Total', style: Fonts.font16_500),
-            Text(r'$ 3,43', style: Fonts.font18_700),
+            Text('Total Price', style: Fonts.font16_500),
+            Text(r'$ ' '${double.parse(price)}', style: Fonts.font18_700),
           ],
         ),
       ],
