@@ -32,25 +32,20 @@ class CartView extends StatelessWidget {
       ],
       child: Background(
           child: AppAnimatedOpacity(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Space.k20,
-                    const CartHeaderPage(),
-                    const SizedBox(height: 40),
-                    const DeleteNote(),
-                    Space.k12
-                  ],
-                ),
-              ),
-              const GetCartItemsBlocBuilder()
-            ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Space.k20,
+                const CartHeaderPage(),
+                const SizedBox(height: 40),
+                const DeleteNote(),
+                Space.k12,
+                const GetCartItemsBlocBuilder(),
+              ],
+            ),
           ),
         ),
       )),

@@ -57,9 +57,10 @@ class DetailsViewBottomBar extends StatelessWidget {
                     child: AppButton(
                       onPressed: (trigger) async {
                         trigger();
-                        OrderEntity finalorder = _finalOrder();
+                        OrderEntity finalOrder = _finalOrder();
                         await BlocProvider.of<MakeOrderCubit>(context)
-                            .makeOrder(order: finalorder);
+                            .makeOrder(order: finalOrder);
+
                         trigger();
                       },
                       backgroundColor: AppColors.kPrimaryColor,
@@ -79,6 +80,8 @@ class DetailsViewBottomBar extends StatelessWidget {
   OrderEntity _finalOrder() {
     return OrderEntity(
         counter: order.counter,
+        isDelivery: order.isDelivery,
+        isFinished: false,
         coffee: CoffeeEntity(
             id: order.coffee.id,
             category: order.coffee.category,

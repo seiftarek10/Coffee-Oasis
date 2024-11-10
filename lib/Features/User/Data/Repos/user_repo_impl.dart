@@ -186,4 +186,16 @@ class UserRepoImpl implements UserRepo {
       return left(FireBaseError(errMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<OrderEntity>>> getMyOrders() async {
+    try {
+      return right(await _userRemoteDataSource.getMyOrders());
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
 }

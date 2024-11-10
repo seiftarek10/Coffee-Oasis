@@ -86,7 +86,11 @@ class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
                     },
                   ),
                   const Divider(height: 22),
-                  const RecivedOptions(),
+                  RecivedOptions(
+                    isDelivery: (reciptWay) {
+                      makedOrder.isDelivery = reciptWay;
+                    },
+                  ),
                   Space.k24
                 ],
               ),

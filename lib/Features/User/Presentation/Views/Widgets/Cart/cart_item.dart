@@ -32,7 +32,7 @@ class CartItem extends StatelessWidget {
           ),
           const SizedBox(width: 16),
           Expanded(
-              flex: 7,
+              flex: 6,
               child: TitleAndSubTitleCaffeeCard(
                 title: cartItemEntity.coffee.name ?? 'No Name',
                 subTitle: cartItemEntity.coffee.category ?? 'No Category',

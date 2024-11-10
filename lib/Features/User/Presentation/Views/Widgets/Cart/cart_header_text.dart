@@ -27,11 +27,10 @@ class CartHeaderPage extends StatelessWidget {
               TextSpan(
                   text: 'Delivery',
                   style: Fonts.font18_700.copyWith(
-                      color:  AppColors.kDarkerPrimaryColor,
+                      color: AppColors.kDarkerPrimaryColor,
                       fontWeight: FontWeight.bold)),
               const TextSpan(text: 'to complete your Order')
             ])),
-       
       ],
     );
   }

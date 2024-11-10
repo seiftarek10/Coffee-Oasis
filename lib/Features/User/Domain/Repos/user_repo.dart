@@ -13,4 +13,5 @@ abstract class UserRepo {
   Future<Either<Failure, List<OrderEntity>>> getCartItems();
   Future<Either<Failure, void>> deleteCartItem({required String id});
   Future<Either<Failure, void>> makeOrder({required OrderEntity order});
+  Future<Either<Failure, List<OrderEntity>>> getMyOrders();
 }

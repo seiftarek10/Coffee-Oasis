@@ -24,6 +24,7 @@ abstract class UserRemoteDataSource {
   Future<void> deleteCartItem({required String id});
   Future<void> makeOrder({required OrderEntity order});
   Future<void> deleteFromCartAfterOrder({required String id});
+  Future<List<OrderEntity>> getMyOrders();
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -156,7 +157,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
             parentCollection: EndPoints.allOrders,
             parentDocId: uid,
             subCollection: EndPoints.userOrders),
-        body: order.toCartJson());
+        body: order.toOrderJson());
   }
 
   @override
@@ -166,5 +167,20 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     if (exist) {
       await deleteCartItem(id: id);
     } else {}
+  }
+
+  @override
+  Future<List<OrderEntity>> getMyOrders() async {
+    QuerySnapshot<Map<String, dynamic>> response =
+        await _fireStoreServices.getSubCollection(
+            fireBasePathParam: FireBasePathParam(
+                parentCollection: EndPoints.allOrders,
+                parentDocId: uid,
+                subCollection: EndPoints.userOrders));
+    List<OrderEntity> userOrders = [];
+    for (var order in response.docs) {
+      userOrders.add(OrderModel.fromJson(order));
+    }
+    return userOrders;
   }
 }

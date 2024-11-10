@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/Widgets/States%20Widgets/circular_indicator.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/empty_widget.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/error_widget.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_all_categories/get_all_categories_cubit.dart';
@@ -28,22 +29,8 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
     });
   }
 
-  Widget _centerizedWidget(BuildContext context, Widget child) {
-    return ConstrainedBox(
-      constraints:
-          BoxConstraints(minHeight: MediaQuery.sizeOf(context).height * 0.6),
-      child: child,
-    );
-  }
-
   Widget _buildLoadingWidget(BuildContext context) {
-    return SliverToBoxAdapter(
-        child: _centerizedWidget(
-            context,
-            const Center(
-                child: CircularProgressIndicator(
-              color: Colors.white,
-            ))));
+    return const SliverToBoxAdapter(child: AppCircularIndicator(height: 0.6));
   }
 
   Widget _buildEmptyWidget(BuildContext context) {
