@@ -15,4 +15,11 @@ abstract class UserRepo {
   Future<Either<Failure, void>> makeOrder({required OrderEntity order});
   Future<Either<Failure, List<OrderEntity>>> getMyOrders();
   Future<Either<Failure, void>> orderAll();
+  Future<Either<Failure, void>> addFavoriteCoffee(
+      {required CoffeeEntity coffee});
+  Future<Either<Failure, bool>> isFavoriteCoffee({required String id});
+  Future<Either<Failure, List<CoffeeEntity>>> getFavoritesCoffee();
+  Future<Either<Failure, void>> deleteFavoriteItem({required String id});
+  Future<Either<Failure, void>> handleFavoriteCoffee(
+      {required CoffeeEntity coffee, required bool isExist});
 }

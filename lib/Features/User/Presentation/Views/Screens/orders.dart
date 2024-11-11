@@ -5,7 +5,7 @@ import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_my_orders_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20My%20Orders/get_my_orders_cubit.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Bloc%20Widgets/get_my_orders_bloc_builder.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Orders/Bloc%20Widgets/get_my_orders_bloc_builder.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Orders/order_header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

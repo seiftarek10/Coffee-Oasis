@@ -21,6 +21,8 @@ class UserRepoImpl implements UserRepo {
       required UserLocalDataSource userLocalDataSource})
       : _userRemoteDataSource = userRemoteDataSource,
         _userLocalDataSource = userLocalDataSource;
+
+  String uid = FirebaseAuth.instance.currentUser!.uid;
   @override
   Future<Either<Failure, UserEntity>> getUserInfo(
       {required bool remoteSource}) async {
@@ -131,7 +133,6 @@ class UserRepoImpl implements UserRepo {
   @override
   Future<Either<Failure, List<OrderEntity>>> getCartItems() async {
     try {
-      String uid = FirebaseAuth.instance.currentUser!.uid;
       List<OrderEntity> cartItem = [];
       cartItem = _userLocalDataSource.getCartItems();
       if (cartItem.isEmpty) {
@@ -203,6 +204,108 @@ class UserRepoImpl implements UserRepo {
   Future<Either<Failure, void>> orderAll() async {
     try {
       await _userRemoteDataSource.orderAll();
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CoffeeEntity>>> getFavoritesCoffee() async {
+    try {
+      List<CoffeeEntity> favCoffee = [];
+      favCoffee = _userLocalDataSource.getFavoritesCoffee();
+
+      if (favCoffee.isEmpty) {
+        favCoffee = await _userRemoteDataSource.getFavoritesCoffee();
+      }
+      FirebaseFirestore.instance
+          .collection(EndPoints.favorites)
+          .doc(uid)
+          .collection(EndPoints.userFavorites)
+          .snapshots()
+          .listen((snapshot) async {
+        if (snapshot.docChanges.any((change) =>
+            change.type == DocumentChangeType.added ||
+            change.type == DocumentChangeType.modified ||
+            change.type == DocumentChangeType.removed)) {
+          favCoffee = await _userRemoteDataSource.getFavoritesCoffee();
+        }
+      });
+      return right(favCoffee);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isFavoriteCoffee({required String id}) async {
+    try {
+      bool isExist = _userLocalDataSource.isFavoriteCoffee(id: id);
+      FirebaseFirestore.instance
+          .collection(EndPoints.favorites)
+          .doc(uid)
+          .collection(EndPoints.userFavorites)
+          .snapshots()
+          .listen((snapshot) async {
+        if (snapshot.docChanges.any((change) =>
+            change.type == DocumentChangeType.added ||
+            change.type == DocumentChangeType.modified ||
+            change.type == DocumentChangeType.removed)) {
+          isExist = await _userRemoteDataSource.isFavoriteCoffee(id: id);
+        }
+      });
+      return right(isExist);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteFavoriteItem({required String id}) async {
+    try {
+      await _userRemoteDataSource.deleteFavoriteItem(id: id);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addFavoriteCoffee(
+      {required CoffeeEntity coffee}) async {
+    try {
+      await _userRemoteDataSource.addFavoriteItem(coffee: coffee);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> handleFavoriteCoffee(
+      {required CoffeeEntity coffee, required bool isExist}) async {
+    try {
+      if (isExist) {
+        await deleteFavoriteItem(id: coffee.id!);
+      } else {
+        await addFavoriteCoffee(coffee: coffee);
+      }
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {

@@ -9,7 +9,7 @@ import 'package:coffee_oasis/Features/User/Domain/Use%20Case/order_all_use_case.
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Detete%20Cart%20Item/delete_cart_item_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Cart%20Items/get_cart_items_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Order%20All/order_all_cubit.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Bloc%20Widgets/get_cart_items_bloc_builder.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/Bloc%20Widgets/get_cart_items_bloc_builder.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_header_text.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Common%20Widgets/delete_note.dart';
 import 'package:flutter/material.dart';

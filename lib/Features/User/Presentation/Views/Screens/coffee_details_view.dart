@@ -2,7 +2,10 @@ import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Features/User/Domain/Use%20Case/handle_fav_coffee_use_case.dart';
+import 'package:coffee_oasis/Features/User/Domain/Use%20Case/is_favorite_item_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/make_order_use_case.dart';
+import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Handle%20Favoirtes%20Coffee/handle_favorite_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Cart%20Items/get_cart_items_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Make%20Order/make_order_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/bottom_bar.dart';
@@ -40,64 +43,67 @@ class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          MakeOrderCubit(MakeOrderUseCase(getIt.get<UserRepoImpl>())),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) =>
+                MakeOrderCubit(MakeOrderUseCase(getIt.get<UserRepoImpl>()))),
+        BlocProvider(
+            create: (context) => HandleFavoriteCubit(
+                HandleFavCoffeeUseCase(getIt.get<UserRepoImpl>()),
+                IsFavoriteItemUseCase(getIt.get<UserRepoImpl>()))
+              ..isFavoriteCoffee(id: widget.orderEntity.coffee.id!))
+      ],
       child: Scaffold(
-        bottomNavigationBar: widget.fromCartView
-            ? BlocProvider.value(
-                value: widget.getCartItemsCubit!,
-                child: DetailsViewBottomBar(
-                  fromCartView: true,
+          bottomNavigationBar: widget.fromCartView
+              ? BlocProvider.value(
+                  value: widget.getCartItemsCubit!,
+                  child: DetailsViewBottomBar(
+                    fromCartView: true,
+                    order: makedOrder,
+                  ),
+                )
+              : DetailsViewBottomBar(
                   order: makedOrder,
+                  fromCartView: false,
                 ),
-              )
-            : DetailsViewBottomBar(
-                order: makedOrder,
-                fromCartView: false,
-              ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Space.k20,
-                  const CoffeeDetailsAppBar(),
-                  Space.k24,
-                  CoffeePhotoAndName(
-                    orderEntity: widget.orderEntity,
-                  ),
-                  const Divider(height: 32),
-                  Description(
-                    description:
-                        widget.orderEntity.coffee.description ?? 'Coffee Drink',
-                  ),
-                  const Divider(height: 22),
-                  CounterWidget(
-                    counter: widget.orderEntity.counter,
-                    counterNotifier: (counter) {
-                      setState(() {
-                        makedOrder = OrderEntity(
-                            counter: counter,
-                            coffee: widget.orderEntity.coffee);
-                      });
-                    },
-                  ),
-                  const Divider(height: 22),
-                  RecivedOptions(
-                    isDelivery: (reciptWay) {
-                      makedOrder.isDelivery = reciptWay;
-                    },
-                  ),
-                  Space.k24
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+          body: SafeArea(
+              child: SingleChildScrollView(
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Space.k20,
+                            CoffeeDetailsAppBar(
+                              coffee: widget.orderEntity.coffee,
+                            ),
+                            Space.k24,
+                            CoffeePhotoAndName(
+                              orderEntity: widget.orderEntity,
+                            ),
+                            const Divider(height: 32),
+                            Description(
+                              description:
+                                  widget.orderEntity.coffee.description ??
+                                      'Coffee Drink',
+                            ),
+                            const Divider(height: 22),
+                            CounterWidget(
+                                counter: widget.orderEntity.counter,
+                                counterNotifier: (counter) {
+                                  setState(() {
+                                    makedOrder = OrderEntity(
+                                        counter: counter,
+                                        coffee: widget.orderEntity.coffee);
+                                  });
+                                }),
+                            const Divider(height: 22),
+                            RecivedOptions(isDelivery: (reciptWay) {
+                              makedOrder.isDelivery = reciptWay;
+                            }),
+                            Space.k24
+                          ]))))),
     );
   }
 }

@@ -17,6 +17,10 @@ abstract class UserLocalDataSource {
   List<CoffeeEntity> getCoffeeDrinks({required String id});
   Future<void> saveCartItems(List<OrderEntity> cartItems);
   List<OrderEntity> getCartItems();
+  Future<void> saveFavoritesCoffee(
+      {required CoffeeDrinksHiveModel favoritesCoffee});
+  List<CoffeeEntity> getFavoritesCoffee();
+  bool isFavoriteCoffee({required String id});
 }
 
 class UserLocalDataSourceImpl implements UserLocalDataSource {
@@ -90,5 +94,28 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   @override
   List<OrderEntity> getCartItems() {
     return cartBox.getData();
+  }
+
+  @override
+  Future<void> saveFavoritesCoffee(
+      {required CoffeeDrinksHiveModel favoritesCoffee}) async {
+    await coffeeDrinksBox.saveWithKey(
+        object: favoritesCoffee, objectKey: favoritesCoffee.id);
+  }
+
+  @override
+  List<CoffeeEntity> getFavoritesCoffee() {
+    CoffeeDrinksHiveModel? favCoffee =
+        coffeeDrinksBox.getByKey(objectKey: "FavoritesCoffee");
+    return favCoffee?.coffeeDrinks ?? [];
+  }
+
+  @override
+  bool isFavoriteCoffee({required String id}) {
+    List<CoffeeEntity> favCoffee = getFavoritesCoffee();
+    if (favCoffee.any((favCoffee) => favCoffee.id == id)) {
+      return true;
+    }
+    return false;
   }
 }

@@ -2,7 +2,7 @@ import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_name_category.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Common%20Widgets/favorite_icon.dart';
+// import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Common%20Widgets/favorite_icon.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteItem extends StatelessWidget {
@@ -10,11 +10,11 @@ class FavoriteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppWhiteContainer(
+    return const AppWhiteContainer(
       noPadding: true,
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             flex: 3,
             child: AppClipReact(
               radiusForAll: false,
@@ -23,17 +23,17 @@ class FavoriteItem extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 16),
-          const Expanded(
+          SizedBox(width: 16),
+          Expanded(
             flex: 7,
             child: TitleAndSubTitleCaffeeCard(
               title: '',
               subTitle: '',
             ),
           ),
-          Expanded(
-              flex: 3,
-              child: FavoriteIcon(isClicked: true, clicked: (isClicked) {})),
+          // Expanded(
+          //     flex: 3,
+          //     child: FavoriteIcon(isClicked: true, clicked: (isClicked) {})),
         ],
       ),
     );

@@ -26,6 +26,10 @@ abstract class UserRemoteDataSource {
   Future<void> deleteFromCartAfterOrder({required String id});
   Future<List<OrderEntity>> getMyOrders();
   Future<void> orderAll();
+  Future<void> addFavoriteItem({required CoffeeEntity coffee});
+  Future<bool> isFavoriteCoffee({required String id});
+  Future<List<CoffeeEntity>> getFavoritesCoffee();
+  Future<void> deleteFavoriteItem({required String id});
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -210,5 +214,55 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
 
     await batch.commit();
+  }
+
+  @override
+  Future<void> addFavoriteItem({required CoffeeEntity coffee}) async {
+    await _fireStoreServices.postToSubCollectionWithId(
+        fireBasePathParam: FireBasePathParam(
+            parentCollection: EndPoints.favorites,
+            parentDocId: uid,
+            subCollection: EndPoints.userFavorites,
+            subDocId: coffee.id),
+        body: coffee.toJson());
+    await getFavoritesCoffee();
+  }
+
+  @override
+  Future<bool> isFavoriteCoffee({required String id}) async {
+    List<CoffeeEntity> favCoffee = await getFavoritesCoffee();
+    if (favCoffee.any((favCoffee) => favCoffee.id == id)) {
+      return true;
+    }
+    return false;
+  }
+
+  @override
+  Future<List<CoffeeEntity>> getFavoritesCoffee() async {
+    QuerySnapshot<Map<String, dynamic>> favoritesCoffeeCollection =
+        await _fireStoreServices.getSubCollection(
+            fireBasePathParam: FireBasePathParam(
+                parentCollection: EndPoints.favorites,
+                parentDocId: uid,
+                subCollection: EndPoints.userFavorites));
+    List<CoffeeEntity> favoritesCoffee = [];
+    for (var coffee in favoritesCoffeeCollection.docs) {
+      favoritesCoffee.add(CoffeeEntity.fromJson(coffee.data()));
+    }
+    await _userLocalDataSource.saveFavoritesCoffee(
+        favoritesCoffee: CoffeeDrinksHiveModel(
+            id: 'FavoritesCoffee', coffeeDrinks: favoritesCoffee));
+    return favoritesCoffee;
+  }
+
+  @override
+  Future<void> deleteFavoriteItem({required String id}) async {
+    await _fireStoreServices.deleteDocFromSubCollection(
+        fireBasePathParam: FireBasePathParam(
+            parentCollection: EndPoints.favorites,
+            parentDocId: uid,
+            subCollection: EndPoints.userFavorites,
+            subDocId: id));
+    await getFavoritesCoffee();
   }
 }
