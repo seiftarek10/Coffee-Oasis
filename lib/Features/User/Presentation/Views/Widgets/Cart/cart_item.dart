@@ -42,7 +42,7 @@ class CartItem extends StatelessWidget {
             child: Text(
               cartItemEntity.counter == 1
                   ? '1 item'
-                  : '${cartItemEntity.counter} items',
+                  : '${cartItemEntity.counter} items ',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Fonts.font18_700

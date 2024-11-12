@@ -28,7 +28,7 @@ class OrderContainer extends StatelessWidget {
               ),
               Space.k20,
               PaymentSummary(
-                price: order.coffee.price ?? '0',
+                price: order.price ?? 0,
                 counter: order.counter,
               )
             ])));

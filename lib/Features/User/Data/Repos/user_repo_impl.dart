@@ -22,7 +22,6 @@ class UserRepoImpl implements UserRepo {
       : _userRemoteDataSource = userRemoteDataSource,
         _userLocalDataSource = userLocalDataSource;
 
-  String uid = FirebaseAuth.instance.currentUser!.uid;
   @override
   Future<Either<Failure, UserEntity>> getUserInfo(
       {required bool remoteSource}) async {
@@ -132,6 +131,7 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, List<OrderEntity>>> getCartItems() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     try {
       List<OrderEntity> cartItem = [];
       cartItem = _userLocalDataSource.getCartItems();
@@ -215,6 +215,7 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, List<CoffeeEntity>>> getFavoritesCoffee() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     try {
       List<CoffeeEntity> favCoffee = [];
       favCoffee = _userLocalDataSource.getFavoritesCoffee();
@@ -246,6 +247,7 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, bool>> isFavoriteCoffee({required String id}) async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     try {
       bool isExist = _userLocalDataSource.isFavoriteCoffee(id: id);
       FirebaseFirestore.instance

@@ -26,7 +26,7 @@ class GetMyOrdersBlocBuilder extends StatelessWidget {
 
   Widget _buildSuccessBody(List<OrderEntity> orders) {
     if (orders.isEmpty) {
-      return const SliverToBoxAdapter(child: AppEmptyWidget(height: 0.55));
+      return const SliverToBoxAdapter(child: AppEmptyWidget(height: 0.6));
     }
     return OrdersListView(
       orders: orders,
@@ -44,6 +44,6 @@ class GetMyOrdersBlocBuilder extends StatelessWidget {
   }
 
   Widget _buildLoadingBody() {
-    return const SliverToBoxAdapter(child: AppCircularIndicator(height: 0.55));
+    return const SliverToBoxAdapter(child: AppCircularIndicator(height: 0.6));
   }
 }

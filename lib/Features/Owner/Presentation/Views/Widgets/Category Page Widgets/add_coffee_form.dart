@@ -21,7 +21,8 @@ class AddCoffeeDrinkForm extends StatelessWidget {
   final String id;
   final String category;
   static File? selectedPhoto;
-  static String? coffeeName, description, price;
+  static String? coffeeName, description;
+  static num? price;
   static final GlobalKey<FormState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class AddCoffeeDrinkForm extends StatelessWidget {
                           AppTextField(
                               labelText: 'Price',
                               onSaved: (value) {
-                                price = value;
+                                price = num.parse(value ?? '0');
                               },
                               validator: (value) {
                                 return ValidationForm.nullOrEpmty(value);

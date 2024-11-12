@@ -22,7 +22,7 @@ class UserHomeCoffeeDrinksListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String price = '';
+    num? price;
     String coffeeName = '';
     return BlocListener<AddToCartCubit, AddToCartState>(
         listener: (context, state) {
@@ -50,19 +50,24 @@ class UserHomeCoffeeDrinksListView extends StatelessWidget {
                         GoRouter.of(context).push(Routes.coffeeDetails,
                             extra: CoffeeDetailsExtra(
                                 orderEntity: OrderEntity(
-                                    counter: 1, coffee: coffeeDrinks[index]),
+                                    counter: 1,
+                                    price: 1 * (coffeeDrinks[index].price ?? 0),
+                                    coffee: coffeeDrinks[index]),
                                 fromCartView: false));
                       },
                       child: UserHomeCoffeeDrinkItem(
                           coffeeEntity: coffeeDrinks[index],
                           onPreessed: (trigger) async {
                             trigger();
+
                             await BlocProvider.of<AddToCartCubit>(context)
                                 .addToCart(
                                     cartItem: OrderEntity(
                                         counter: 1,
+                                        price: coffeeDrinks[index].price,
                                         coffee: coffeeDrinks[index]));
-                            price = coffeeDrinks[index].price ?? '';
+
+                            price = coffeeDrinks[index].price ?? 0;
                             coffeeName = coffeeDrinks[index].name ?? '';
                             trigger();
                           }));

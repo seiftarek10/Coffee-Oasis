@@ -6,8 +6,8 @@ import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_coffee_drinks_u
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Add%20To%20Cart/add_to_cart_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20All%20Categories/user_get_all_categories_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Coffee%20Drinks/user_get_coffee_drink_cubit.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Bloc%20Widgets/get_all_categories_bloc_builder.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Bloc%20Widgets/get_coffee_drinks_bloc_builder.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/Bloc%20Widgets/get_all_categories_bloc_builder.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/Bloc%20Widgets/get_coffee_drinks_bloc_builder.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/offer_card.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/user_home_header.dart';
 import 'package:flutter/material.dart';

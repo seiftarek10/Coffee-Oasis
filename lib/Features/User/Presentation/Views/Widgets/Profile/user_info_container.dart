@@ -20,7 +20,6 @@ class UserInfoContainer extends StatelessWidget {
         Text('User Info', style: Fonts.font35_700White),
         const SizedBox(height: 10),
         AppWhiteContainer(
-       
           child: Column(
             children: [
               ProfileInfoItem(
@@ -33,7 +32,7 @@ class UserInfoContainer extends StatelessWidget {
                         return EditFieldBody(
                           labelText: 'seift470@gmail.com',
                           onSaved: (v) {},
-                          onPressed: (t)async{},
+                          onPressed: (t) async {},
                           formKey: GlobalKey(),
                         );
                       });
@@ -51,7 +50,7 @@ class UserInfoContainer extends StatelessWidget {
                           labelText: '01027870171',
                           onSaved: (v) {},
                           formKey: GlobalKey(),
-                          onPressed: (t)async{},
+                          onPressed: (t) async {},
                         );
                       });
                 },
@@ -66,28 +65,32 @@ class UserInfoContainer extends StatelessWidget {
                       builder: (context) {
                         return EditFieldBody(
                           labelText: 'Giza',
-                               formKey: GlobalKey(),
+                          formKey: GlobalKey(),
                           onSaved: (v) {},
-                          onPressed: (t)async{},
+                          onPressed: (t) async {},
                         );
                       });
                 },
               ),
               const SizedBox(height: 20),
-              ProfileInfoItem(
-                title: 'Favorite',
-                info: '',
-                editItem: false,
-                onPressed: () {
+              GestureDetector(
+                onTap: () {
                   GoRouter.of(context).push(Routes.favorite);
                 },
+                child: const ProfileInfoItem(
+                  title: 'Favorite',
+                  info: '',
+                  editItem: false,
+                ),
               ),
               const SizedBox(height: 20),
-              ProfileInfoItem(
-                title: 'Log Out',
-                info: '',
-                editItem: false,
-                onPressed: () {},
+              GestureDetector(
+                onTap: () {},
+                child: const ProfileInfoItem(
+                  title: 'Log Out',
+                  info: '',
+                  editItem: false,
+                ),
               ),
             ],
           ),

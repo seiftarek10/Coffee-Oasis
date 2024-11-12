@@ -5,7 +5,7 @@ class CoffeeDrinkModel extends CoffeeEntity {
   final String? coffeeId;
   final String? coffeeName;
   final String? coffeephoto;
-  final String? coffeeprice;
+  final num? coffeeprice;
   final String? coffeedescription;
   final String? coffeeCategory;
 
@@ -16,7 +16,7 @@ class CoffeeDrinkModel extends CoffeeEntity {
             id: coffeeId,
             name: coffeeName ?? '',
             photo: coffeephoto ?? '',
-            price: coffeeprice ?? '',
+            price: coffeeprice ?? 0,
             category: coffeeCategory ?? '');
   factory CoffeeDrinkModel.fromjson(
       QueryDocumentSnapshot<Map<String, dynamic>> json) {

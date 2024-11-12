@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
+import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/empty_widget.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/error_widget.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Coffee%20Drinks/user_get_coffee_drink_cubit.dart';
@@ -19,7 +20,7 @@ class UserGetCoffeeDrinksBlocBuilder extends StatelessWidget {
       if (state is UserGetCoffeeDrinkSuccess) {
         return _buildSuccessWidget(state.coffee);
       } else if (state is UserGetCoffeeDrinkFailure) {
-        return _buildErrorWidget(context);
+        return _buildErrorWidget(context, state.errMessage);
       } else {
         return _buildLoadingWidget();
       }
@@ -35,14 +36,16 @@ class UserGetCoffeeDrinksBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildErrorWidget(BuildContext context) {
+  Widget _buildErrorWidget(BuildContext context, String message) {
     return SliverToBoxAdapter(
         child: AppErrorWidget(
+            height: 0.3,
+            color: AppColors.kPrimaryColor,
             onTap: () {
               BlocProvider.of<UserGetCoffeeDrinkCubit>(context)
                   .getCoffeeDrinks();
             },
-            text: 'Try,Again'));
+            text: '$message Try,Again'));
   }
 
   Widget _buildLoadingWidget() {

@@ -6,7 +6,7 @@ import 'package:coffee_oasis/Core/Widgets/search_filed.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_user_info_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Bloc%20Widgets/user_name_bloc_builder.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/Bloc%20Widgets/user_name_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

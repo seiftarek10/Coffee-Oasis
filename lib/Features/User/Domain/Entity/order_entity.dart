@@ -15,20 +15,24 @@ class OrderEntity extends HiveObject {
   bool? isDelivery;
   @HiveField(4)
   bool? isFinished;
+  @HiveField(5)
+  final num? price;
   OrderEntity(
       {this.id,
       required this.counter,
+      required this.price,
       required this.coffee,
       this.isDelivery,
       this.isFinished});
 
   toCartJson() {
-    return {'counter': counter, 'coffee': coffee.toJson()};
+    return {'counter': counter, 'price': price, 'coffee': coffee.toJson()};
   }
 
   toOrderJson() {
     return {
       'counter': counter,
+      'price': price,
       'coffee': coffee.toJson(),
       'isDelivery': isDelivery,
       'isFinished': isFinished

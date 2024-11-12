@@ -95,6 +95,9 @@ class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
                                   setState(() {
                                     makedOrder = OrderEntity(
                                         counter: counter,
+                                        price: counter *
+                                            (widget.orderEntity.coffee.price ??
+                                                0),
                                         coffee: widget.orderEntity.coffee);
                                   });
                                 }),

@@ -21,8 +21,19 @@ class HandleFavoriteCubit extends Cubit<HandleFavoriteState> {
     emit(HandleFavoriteLoading());
     Either<Failure, bool> response =
         await _isFavoriteItemUseCase.execute(param: id);
-    response.fold((failure) => emit(HandleFavoriteFailure(errMessage: '')),
-        (isFavorite) => emit(IsExistState(isExist: isFavorite)));
+    response.fold((failure) {
+      if (!isClosed) {
+        emit(HandleFavoriteFailure(errMessage: ''));
+      }
+    }, (isFavorite) {
+      if (!isClosed) {
+        emit(IsExistState(isExist: isFavorite));
+      }
+    });
+  }
+
+  void initialFavCoffee() {
+    emit(IsExistState(isExist: true));
   }
 
   Future<void> handleFavoriteCoffee(
@@ -30,14 +41,19 @@ class HandleFavoriteCubit extends Cubit<HandleFavoriteState> {
     emit(HandleFavoriteLoading());
     Either<Failure, void> response =
         await _handleFavCoffeeUseCase.execute(param: [coffee, isExist]);
-    response.fold(
-        (failure) =>
-            emit(HandleFavoriteFailure(errMessage: failure.errMessage)),
-        (success) {
+    response.fold((failure) {
+      if (!isClosed) {
+        emit(HandleFavoriteFailure(errMessage: failure.errMessage));
+      }
+    }, (success) {
       if (isExist) {
-        emit(DeleteFavoriteSuccess());
+        if (!isClosed) {
+          emit(DeleteFavoriteSuccess());
+        }
       } else {
-        emit(AddFavoriteSuccess());
+        if (!isClosed) {
+          emit(AddFavoriteSuccess());
+        }
       }
     });
   }

@@ -17,7 +17,7 @@ class GetCartItemsBlocBuilder extends StatelessWidget {
         if (state is GetCartItemsSuccess) {
           return _buildSuccessBody(state.cartItems);
         } else if (state is GetCartItemsFailure) {
-          return _buildErrorBody(context);
+          return _buildErrorBody(context, state.errMessage);
         } else {
           return _buildLoadingBody(context);
         }
@@ -28,7 +28,7 @@ class GetCartItemsBlocBuilder extends StatelessWidget {
   Widget _buildSuccessBody(List<OrderEntity> cartItems) {
     if (cartItems.isEmpty) {
       return const AppEmptyWidget(
-        height: 0.55,
+        height: 1,
       );
     }
     return OrderAllBlocListner(
@@ -38,16 +38,18 @@ class GetCartItemsBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildErrorBody(BuildContext context) {
+  Widget _buildErrorBody(BuildContext context, String message) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minHeight: MediaQuery.sizeOf(context).height * 0.55,
+        minHeight: MediaQuery.sizeOf(context).height * 0.3,
       ),
-      child: AppErrorWidget(
-          onTap: () async {
-            await BlocProvider.of<GetCartItemsCubit>(context).getCartItems();
-          },
-          text: 'Try,Again'),
+      child: Center(
+        child: AppErrorWidget(
+            onTap: () async {
+              await BlocProvider.of<GetCartItemsCubit>(context).getCartItems();
+            },
+            text: '$message, Try,Again'),
+      ),
     );
   }
 

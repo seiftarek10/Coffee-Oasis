@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Helpers/validation_form.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
-import 'package:coffee_oasis/Core/Widgets/app_button.dart';   
+import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:coffee_oasis/Features/Auth/Presentation/View%20Models/Cubits/Sign%20In/sign_in_cubit.dart';
 import 'package:flutter/material.dart';
@@ -34,16 +34,17 @@ class SignInForm extends StatelessWidget {
                 return ValidationForm.validPassword(password);
               },
               onSaved: (value) {
-                password=value;
+                password = value;
               }),
           Space.k40,
           AppButton(
+            needCirculartPadding: true,
             backgroundColor: AppColors.kPrimaryColor,
             onPressed: (trigger) async {
-              if(_key.currentState!.validate()){
+              if (_key.currentState!.validate()) {
                 _key.currentState!.save();
                 trigger();
-               await _singIn(context);
+                await _singIn(context);
                 trigger();
               }
             },
@@ -53,7 +54,8 @@ class SignInForm extends StatelessWidget {
         ]));
   }
 
-  Future<void> _singIn(BuildContext context)async{
-    await BlocProvider.of<SignInCubit>(context).signIn(email: email!, password: password!);
+  Future<void> _singIn(BuildContext context) async {
+    await BlocProvider.of<SignInCubit>(context)
+        .signIn(email: email!, password: password!);
   }
 }

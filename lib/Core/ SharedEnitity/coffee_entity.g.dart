@@ -21,7 +21,7 @@ class CoffeeEntityAdapter extends TypeAdapter<CoffeeEntity> {
       photo: fields[1] as String?,
       name: fields[2] as String?,
       description: fields[3] as String?,
-      price: fields[4] as String?,
+      price: fields[4] as num?,
       category: fields[5] as String?,
     );
   }

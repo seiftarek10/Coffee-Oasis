@@ -17,7 +17,7 @@ class CoffeeEntity extends HiveObject {
   final String? description;
 
   @HiveField(4)
-  final String? price;
+  final num? price;
 
   @HiveField(5)
   final String? category;

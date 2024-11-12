@@ -41,7 +41,7 @@ class DetailsViewBottomBar extends StatelessWidget {
                   Text('Price', style: Fonts.font16_500),
                   Text(
                       r'$ '
-                      "${int.parse(order.coffee.price ?? '1') * order.counter}",
+                      "${order.price ?? 0}",
                       style: Fonts.font18_700
                           .copyWith(color: AppColors.kPrimaryColor)),
                 ],
@@ -60,7 +60,6 @@ class DetailsViewBottomBar extends StatelessWidget {
                         OrderEntity finalOrder = _finalOrder();
                         await BlocProvider.of<MakeOrderCubit>(context)
                             .makeOrder(order: finalOrder);
-
                         trigger();
                       },
                       backgroundColor: AppColors.kPrimaryColor,
@@ -79,6 +78,7 @@ class DetailsViewBottomBar extends StatelessWidget {
 
   OrderEntity _finalOrder() {
     return OrderEntity(
+        price: order.price ?? 0,
         counter: order.counter,
         isDelivery: order.isDelivery,
         isFinished: false,
@@ -88,7 +88,6 @@ class DetailsViewBottomBar extends StatelessWidget {
             description: order.coffee.description,
             name: order.coffee.name,
             photo: order.coffee.photo,
-            price: (int.tryParse(order.coffee.price ?? '1')! * order.counter)
-                .toString()));
+            price: order.coffee.price ?? 0));
   }
 }
