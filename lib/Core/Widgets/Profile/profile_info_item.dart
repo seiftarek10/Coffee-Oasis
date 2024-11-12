@@ -6,12 +6,14 @@ class ProfileInfoItem extends StatelessWidget {
     super.key,
     required this.info,
     required this.title,
-    this.onPressed, this.editItem,
+    this.onPressed,
+    this.editItem,
+    this.needIcon,
   });
 
   final String title, info;
   final void Function()? onPressed;
-  final bool? editItem;
+  final bool? editItem, needIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,22 @@ class ProfileInfoItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: Fonts.font20_700),
-           editItem==null?  Text(info, style: Fonts.font16_500):const SizedBox.shrink(),
+            Text(title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Fonts.font20_700),
+            editItem == null
+                ? Text(info, style: Fonts.font16_500)
+                : const SizedBox.shrink(),
           ],
         ),
-        IconButton(onPressed: onPressed, icon:  Icon(editItem==null? Icons.edit:Icons.arrow_forward_ios_sharp))
+        needIcon == null
+            ? IconButton(
+                onPressed: onPressed,
+                icon: Icon(editItem == null
+                    ? Icons.edit
+                    : Icons.arrow_forward_ios_sharp))
+            : const SizedBox.shrink()
       ],
     );
   }

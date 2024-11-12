@@ -1,6 +1,5 @@
 import 'package:coffee_oasis/Core/Widgets/Profile/edit_profile_field.dart';
 import 'package:coffee_oasis/Core/Widgets/Profile/profile_info_item.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/update_shop_info/update_shop_info_cubit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +12,7 @@ class ProfileItemController extends StatelessWidget {
       required this.onPressed,
       required this.onSaved,
       required this.formKey,
-      required this.shopInfoCubit});
+      required this.cubit});
 
   final String label;
   final String title;
@@ -21,7 +20,7 @@ class ProfileItemController extends StatelessWidget {
   final void Function(String?) onSaved;
 
   final GlobalKey<FormState> formKey;
-  final UpdateShopInfoCubit shopInfoCubit;
+  final Cubit cubit;
   @override
   Widget build(BuildContext context) {
     return ProfileInfoItem(
@@ -32,7 +31,7 @@ class ProfileItemController extends StatelessWidget {
               context: context,
               builder: (context) {
                 return BlocProvider.value(
-                    value: shopInfoCubit,
+                    value: cubit,
                     child: EditFieldBody(
                         formKey: formKey,
                         labelText: label,

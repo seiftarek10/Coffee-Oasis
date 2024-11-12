@@ -25,8 +25,8 @@ class OrderModel extends OrderEntity {
         json.id,
         json.data()['counter'],
         json.data()['price'] ?? 0,
-        json.data()['isDelivery'],
-        json.data()['isFinished'],
+        json.data()['isDelivery'] ?? true,
+        json.data()['isFinished'] ?? false,
         CoffeeEntity.fromJson(json.data()['coffee']));
   }
 }

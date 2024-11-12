@@ -58,6 +58,7 @@ class DetailsViewBottomBar extends StatelessWidget {
                       onPressed: (trigger) async {
                         trigger();
                         OrderEntity finalOrder = _finalOrder();
+
                         await BlocProvider.of<MakeOrderCubit>(context)
                             .makeOrder(order: finalOrder);
                         trigger();

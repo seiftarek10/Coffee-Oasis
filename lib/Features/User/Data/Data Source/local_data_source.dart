@@ -9,6 +9,7 @@ import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class UserLocalDataSource {
+  Future<String?> getUserID();
   Future<UserEntity?> getUserInfo();
   Future<void> saveCategories(List<CategoryEntity> categories);
   List<CategoryEntity> getAllCategories();
@@ -34,6 +35,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       required this.categoryBox,
       required this.coffeeDrinksBox,
       required this.cartBox});
+  @override
   Future<String?> getUserID() async {
     Box<String> box = await Hive.openBox<String>(BoxesName.uidBox);
     return box.get(AppConstant.uid);

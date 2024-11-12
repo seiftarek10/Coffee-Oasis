@@ -30,6 +30,7 @@ abstract class UserRemoteDataSource {
   Future<bool> isFavoriteCoffee({required String id});
   Future<List<CoffeeEntity>> getFavoritesCoffee();
   Future<void> deleteFavoriteItem({required String id});
+  Future<void> updateUserInfo({required Map<String, dynamic> body});
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -103,7 +104,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> addToCart({required OrderEntity cartItem}) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return;
+    }
     final coffeeeItem = await FirebaseFirestore.instance
         .collection(EndPoints.allCart)
         .doc(uid)
@@ -136,7 +140,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<List<OrderEntity>> getCartItems() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return [];
+    }
     QuerySnapshot<Map<String, dynamic>> response =
         await _fireStoreServices.getSubCollection(
             fireBasePathParam: FireBasePathParam(
@@ -153,7 +160,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> deleteCartItem({required String id}) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return;
+    }
     await _fireStoreServices.deleteDocFromSubCollection(
         fireBasePathParam: FireBasePathParam(
             parentCollection: EndPoints.allCart,
@@ -164,7 +174,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> makeOrder({required OrderEntity order}) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return;
+    }
     await _fireStoreServices.postToSubCollection(
         fireBasePathParam: FireBasePathParam(
             parentCollection: EndPoints.allOrders,
@@ -184,7 +197,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<List<OrderEntity>> getMyOrders() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return [];
+    }
     QuerySnapshot<Map<String, dynamic>> response =
         await _fireStoreServices.getSubCollection(
             fireBasePathParam: FireBasePathParam(
@@ -200,7 +216,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> orderAll() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return;
+    }
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     final cartRef = firestore
@@ -222,7 +241,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     for (var cartItem in cartItems.docs) {
       final orderDoc = orderRef.doc(cartItem.id);
-      batch.set(orderDoc, cartItem.data());
+      OrderEntity order = OrderModel.fromJson(cartItem);
+      batch.set(orderDoc, order.toOrderJson());
 
       batch.delete(cartItem.reference);
     }
@@ -232,7 +252,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> addFavoriteItem({required CoffeeEntity coffee}) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return;
+    }
     await _fireStoreServices.postToSubCollectionWithId(
         fireBasePathParam: FireBasePathParam(
             parentCollection: EndPoints.favorites,
@@ -254,7 +277,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<List<CoffeeEntity>> getFavoritesCoffee() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return [];
+    }
     QuerySnapshot<Map<String, dynamic>> favoritesCoffeeCollection =
         await _fireStoreServices.getSubCollection(
             fireBasePathParam: FireBasePathParam(
@@ -273,7 +299,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> deleteFavoriteItem({required String id}) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return;
+    }
     await _fireStoreServices.deleteDocFromSubCollection(
         fireBasePathParam: FireBasePathParam(
             parentCollection: EndPoints.favorites,
@@ -281,5 +310,17 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
             subCollection: EndPoints.userFavorites,
             subDocId: id));
     await getFavoritesCoffee();
+  }
+
+  @override
+  Future<void> updateUserInfo({required Map<String, dynamic> body}) async {
+    String? uid = await _userLocalDataSource.getUserID();
+
+    if (uid == null) {
+      return;
+    }
+
+    await _fireStoreServices.updateDoc(
+        endPoint: EndPoints.users, body: body, docId: uid);
   }
 }

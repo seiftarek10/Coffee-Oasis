@@ -10,7 +10,6 @@ import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source
 import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Repos/user_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class UserRepoImpl implements UserRepo {
   final UserRemoteDataSource _userRemoteDataSource;
@@ -27,8 +26,8 @@ class UserRepoImpl implements UserRepo {
       {required bool remoteSource}) async {
     try {
       UserEntity? user = await _userLocalDataSource.getUserInfo();
-      if (!remoteSource || user != null) {
-        return right(user!);
+      if (!remoteSource && user != null) {
+        return right(user);
       }
       user = await _userRemoteDataSource.getUserInfo();
       return right(user);
@@ -131,8 +130,11 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, List<OrderEntity>>> getCartItems() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
     try {
+      String? uid = await _userLocalDataSource.getUserID();
+      if (uid == null) {
+        return right([]);
+      }
       List<OrderEntity> cartItem = [];
       cartItem = _userLocalDataSource.getCartItems();
       if (cartItem.isEmpty) {
@@ -215,8 +217,11 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, List<CoffeeEntity>>> getFavoritesCoffee() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
     try {
+      String? uid = await _userLocalDataSource.getUserID();
+      if (uid == null) {
+        return right([]);
+      }
       List<CoffeeEntity> favCoffee = [];
       favCoffee = _userLocalDataSource.getFavoritesCoffee();
 
@@ -247,7 +252,10 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, bool>> isFavoriteCoffee({required String id}) async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return right(false);
+    }
     try {
       bool isExist = _userLocalDataSource.isFavoriteCoffee(id: id);
       FirebaseFirestore.instance
@@ -308,6 +316,20 @@ class UserRepoImpl implements UserRepo {
       } else {
         await addFavoriteCoffee(coffee: coffee);
       }
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateUserInfo(
+      {required Map<String, dynamic> body}) async {
+    try {
+      await _userRemoteDataSource.updateUserInfo(body: body);
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {

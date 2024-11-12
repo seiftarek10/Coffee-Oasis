@@ -22,4 +22,6 @@ abstract class UserRepo {
   Future<Either<Failure, void>> deleteFavoriteItem({required String id});
   Future<Either<Failure, void>> handleFavoriteCoffee(
       {required CoffeeEntity coffee, required bool isExist});
+  Future<Either<Failure, void>> updateUserInfo(
+      {required Map<String, dynamic> body});
 }
