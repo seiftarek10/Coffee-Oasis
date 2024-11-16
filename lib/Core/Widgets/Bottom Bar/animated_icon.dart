@@ -30,26 +30,21 @@ class _AnimtaedCircleAvatarState extends State<AnimtaedCircleAvatar>
 
   @override
   void dispose() {
-    super.dispose();
+    _controller.stop();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SlideTransition(
-      position: _position,
-      child: CircleAvatar(
-        backgroundColor: AppColors.kPrimaryColor,
-        child: Icon(
-          widget.icon,
-          size:  26,
-          color: Colors.white,
-        ))
-
-
-    );
+        position: _position,
+        child: CircleAvatar(
+            backgroundColor: AppColors.kPrimaryColor,
+            child: Icon(
+              widget.icon,
+              size: 26,
+              color: Colors.white,
+            )));
   }
 }
-
-
-

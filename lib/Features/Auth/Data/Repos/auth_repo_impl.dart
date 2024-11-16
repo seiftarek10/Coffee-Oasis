@@ -58,4 +58,15 @@ class AuthRepoImpl implements AuthRepo {
   Future<UserEntity> getUserInfo({required String uid}) async {
     return await _authRemoteDataSource.getUser(id: uid);
   }
+
+  @override
+  Future<Either<Failure, void>> signOut() async {
+    try {
+      await _authLocalDataSource.signOut();
+      await _authRemoteDataSource.signOut();
+      return right(unit);
+    } catch (e) {
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
 }

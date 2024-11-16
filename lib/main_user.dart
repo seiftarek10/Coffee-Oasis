@@ -38,6 +38,9 @@ Future<void> setupHive() async {
   Hive.registerAdapter(OrderEntityAdapter());
   Hive.registerAdapter(ShopInfoEntityAdapter());
 
+  if (!Hive.isBoxOpen(BoxesName.uidBox)) {
+    await Hive.openBox<String>(BoxesName.uidBox);
+  }
   if (!Hive.isBoxOpen(BoxesName.cartBox)) {
     await Hive.openBox<OrderEntity>(BoxesName.cartBox);
   }

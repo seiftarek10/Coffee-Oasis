@@ -18,4 +18,8 @@ class FireAuthServices {
     return await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
   }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }

@@ -13,6 +13,7 @@ abstract class AuthRemoteDataSource {
       {required String email, required String password});
 
   Future<UserEntity> getUser({required String id});
+  Future<void> signOut();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -42,5 +43,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     DocumentSnapshot<Map<String, dynamic>?> response =
         await _fireStoreServices.getDoc(endPoint: EndPoints.users, docId: id);
     return UserModel.fromJson(response);
+  }
+
+  @override
+  Future<void> signOut() async {
+    await _fireAuthServices.signOut();
   }
 }
