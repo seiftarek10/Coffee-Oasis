@@ -9,7 +9,6 @@ import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Update%20User%20Info/update_user_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Profile/Bloc%20Widgets/get_user_info_bloc_builder.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Profile/shop_info_container.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

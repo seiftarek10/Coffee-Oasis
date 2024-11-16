@@ -5,7 +5,6 @@ import 'package:coffee_oasis/Core/Helpers/validation_form.dart';
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Widgets/Profile/profile_header.dart';
-import 'package:coffee_oasis/Core/Widgets/Profile/profile_item_controller.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 import 'package:coffee_oasis/Core/Extension/null_or_empty.dart';
 import 'package:coffee_oasis/Core/Widgets/Profile/profile_info_item.dart';
@@ -42,8 +41,8 @@ class UserInfoContainer extends StatelessWidget {
         const SizedBox(height: 10),
         AppWhiteContainer(
             child: Column(children: [
-          ProfileItemController(
-              label: userInfo.email ?? 'No Eamil',
+          ProfileInfoItem(
+              info: userInfo.email ?? 'No Eamil',
               title: "Eamil",
               onPressed: (trigger) async {
                 emailKey.currentState!.save();
@@ -64,8 +63,8 @@ class UserInfoContainer extends StatelessWidget {
               formKey: emailKey,
               cubit: updateUserInfoCubit),
           Space.k20,
-          ProfileItemController(
-              label: userInfo.address ?? 'No Address',
+          ProfileInfoItem(
+              info: userInfo.address ?? 'No Address',
               title: "Address",
               onPressed: (trigger) async {
                 addressKey.currentState!.save();
@@ -82,8 +81,8 @@ class UserInfoContainer extends StatelessWidget {
               formKey: addressKey,
               cubit: updateUserInfoCubit),
           Space.k20,
-          ProfileItemController(
-              label: userInfo.phoneNumber ?? 'No Phone',
+          ProfileInfoItem(
+              info: userInfo.phoneNumber ?? 'No Phone',
               title: "Phone",
               onPressed: (trigger) async {
                 phoneKey.currentState!.save();
