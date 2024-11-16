@@ -80,6 +80,7 @@ class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
                             ),
                             Space.k24,
                             CoffeePhotoAndName(
+                              tag: widget.orderEntity.coffee.id ?? '',
                               orderEntity: widget.orderEntity,
                             ),
                             const Divider(height: 32),

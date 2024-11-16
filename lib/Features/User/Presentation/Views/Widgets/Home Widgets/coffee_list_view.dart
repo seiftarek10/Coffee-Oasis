@@ -55,22 +55,25 @@ class UserHomeCoffeeDrinksListView extends StatelessWidget {
                                     coffee: coffeeDrinks[index]),
                                 fromCartView: false));
                       },
-                      child: UserHomeCoffeeDrinkItem(
-                          coffeeEntity: coffeeDrinks[index],
-                          onPreessed: (trigger) async {
-                            trigger();
+                      child: Hero(
+                        tag: coffeeDrinks[index].id!,
+                        child: UserHomeCoffeeDrinkItem(
+                            coffeeEntity: coffeeDrinks[index],
+                            onPreessed: (trigger) async {
+                              trigger();
 
-                            await BlocProvider.of<AddToCartCubit>(context)
-                                .addToCart(
-                                    cartItem: OrderEntity(
-                                        counter: 1,
-                                        price: coffeeDrinks[index].price,
-                                        coffee: coffeeDrinks[index]));
+                              await BlocProvider.of<AddToCartCubit>(context)
+                                  .addToCart(
+                                      cartItem: OrderEntity(
+                                          counter: 1,
+                                          price: coffeeDrinks[index].price,
+                                          coffee: coffeeDrinks[index]));
 
-                            price = coffeeDrinks[index].price ?? 0;
-                            coffeeName = coffeeDrinks[index].name ?? '';
-                            trigger();
-                          }));
+                              price = coffeeDrinks[index].price ?? 0;
+                              coffeeName = coffeeDrinks[index].name ?? '';
+                              trigger();
+                            }),
+                      ));
                 }, childCount: coffeeDrinks.length))));
   }
 }

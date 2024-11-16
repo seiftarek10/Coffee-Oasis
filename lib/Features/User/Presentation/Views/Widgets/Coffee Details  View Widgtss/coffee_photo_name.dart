@@ -9,9 +9,11 @@ class CoffeePhotoAndName extends StatelessWidget {
   const CoffeePhotoAndName({
     super.key,
     required this.orderEntity,
+    required this.tag,
   });
 
   final OrderEntity orderEntity;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +21,12 @@ class CoffeePhotoAndName extends StatelessWidget {
       children: [
         AppClipReact(
           radiusForAll: true,
-          child: CoffeePhotoCard(
-            aspectRatio: 327 / 202,
-            photo: orderEntity.coffee.photo,
+          child: Hero(
+            tag: tag,
+            child: CoffeePhotoCard(
+              aspectRatio: 327 / 202,
+              photo: orderEntity.coffee.photo,
+            ),
           ),
         ),
         const SizedBox(height: 16),

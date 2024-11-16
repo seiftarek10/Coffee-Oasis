@@ -59,18 +59,15 @@ class AppRouter {
                 pageTransition(context, state, const UserView())),
         GoRoute(
             path: Routes.coffeeDetails,
-            pageBuilder: (context, state) {
+            builder: (context, state) {
               CoffeeDetailsExtra coffeeDetailsExtra =
                   state.extra as CoffeeDetailsExtra;
 
-              return pageTransition(
-                  context,
-                  state,
-                  CoffeeDetailsView(
-                    orderEntity: coffeeDetailsExtra.orderEntity,
-                    fromCartView: coffeeDetailsExtra.fromCartView,
-                    getCartItemsCubit: coffeeDetailsExtra.getCartItemsCubit,
-                  ));
+              return CoffeeDetailsView(
+                orderEntity: coffeeDetailsExtra.orderEntity,
+                fromCartView: coffeeDetailsExtra.fromCartView,
+                getCartItemsCubit: coffeeDetailsExtra.getCartItemsCubit,
+              );
             }),
         GoRoute(
             path: Routes.orderDetails,

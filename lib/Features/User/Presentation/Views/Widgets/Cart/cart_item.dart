@@ -25,9 +25,12 @@ class CartItem extends StatelessWidget {
             flex: 3,
             child: AppClipReact(
                 radiusForAll: false,
-                child: CoffeePhotoCard(
-                  aspectRatio: 1,
-                  photo: cartItemEntity.coffee.photo,
+                child: Hero(
+                  tag: cartItemEntity.coffee.id!,
+                  child: CoffeePhotoCard(
+                    aspectRatio: 1,
+                    photo: cartItemEntity.coffee.photo,
+                  ),
                 )),
           ),
           const SizedBox(width: 16),

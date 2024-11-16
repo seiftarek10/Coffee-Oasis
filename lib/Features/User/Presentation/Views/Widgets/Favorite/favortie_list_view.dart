@@ -28,6 +28,7 @@ class FavortieListView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 24.0),
               child: FavoriteItem(
+                tag: favCoffee[index].toString(),
                 coffee: favCoffee[index],
               ),
             ),

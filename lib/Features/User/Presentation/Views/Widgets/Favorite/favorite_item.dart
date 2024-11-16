@@ -10,8 +10,10 @@ class FavoriteItem extends StatelessWidget {
   const FavoriteItem({
     super.key,
     required this.coffee,
+    required this.tag,
   });
   final CoffeeEntity coffee;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,12 @@ class FavoriteItem extends StatelessWidget {
             flex: 3,
             child: AppClipReact(
               radiusForAll: false,
-              child: CoffeePhotoCard(
-                aspectRatio: 1,
-                photo: coffee.photo,
+              child: Hero(
+                tag: coffee.id!,
+                child: CoffeePhotoCard(
+                  aspectRatio: 1,
+                  photo: coffee.photo,
+                ),
               ),
             ),
           ),

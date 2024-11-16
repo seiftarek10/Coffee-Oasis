@@ -31,7 +31,7 @@ class GetCartItemsBlocBuilder extends StatelessWidget {
         height: 1,
       );
     }
-    return OrderAllBlocListner(
+    return OrderAllButtonBlocListner(
       child: CartItemListView(
         cartItems: cartItems,
       ),

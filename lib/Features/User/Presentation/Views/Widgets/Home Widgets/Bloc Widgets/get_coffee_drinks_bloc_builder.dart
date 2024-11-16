@@ -65,6 +65,7 @@ class UserGetCoffeeDrinksBlocBuilder extends StatelessWidget {
                     itemBuilder: ((context, index) {
                       return UserHomeCoffeeDrinkItem(
                         coffeeEntity: CoffeeEntity(),
+                        // tag: '',
                         onPreessed: (t) async {},
                       );
                     })))));

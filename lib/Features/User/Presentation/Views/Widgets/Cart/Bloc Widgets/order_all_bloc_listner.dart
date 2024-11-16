@@ -7,8 +7,8 @@ import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Orde
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OrderAllBlocListner extends StatelessWidget {
-  const OrderAllBlocListner({
+class OrderAllButtonBlocListner extends StatelessWidget {
+  const OrderAllButtonBlocListner({
     super.key,
     required this.child,
   });

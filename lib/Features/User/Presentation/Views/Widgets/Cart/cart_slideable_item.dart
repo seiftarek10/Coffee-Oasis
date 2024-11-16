@@ -4,11 +4,12 @@ import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_
 import 'package:flutter/material.dart';
 
 class CartSlideableItem extends StatelessWidget {
-  const CartSlideableItem(
-      {super.key,
-      required this.itemKey,
-      required this.cartItem,
-      required this.delete});
+  const CartSlideableItem({
+    super.key,
+    required this.itemKey,
+    required this.cartItem,
+    required this.delete,
+  });
 
   final Key itemKey;
 
