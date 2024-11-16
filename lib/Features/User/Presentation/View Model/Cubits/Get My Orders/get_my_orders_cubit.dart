@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:coffee_oasis/Core/Base%20Cubit/base_cubit.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_my_orders_use_case.dart';
@@ -7,16 +7,17 @@ import 'package:meta/meta.dart';
 
 part 'get_my_orders_state.dart';
 
-class GetMyOrdersCubit extends Cubit<GetMyOrdersState> {
+class GetMyOrdersCubit extends BaseCubit<GetMyOrdersState> {
   GetMyOrdersCubit(this._getMyOrdersUseCase) : super(GetMyOrdersInitial());
   final GetMyOrdersUseCase _getMyOrdersUseCase;
 
   Future<void> getMyOrders() async {
-    emit(GetMyOrdersLoading());
+    safeEmit(GetMyOrdersLoading());
     Either<Failure, List<OrderEntity>> response =
         await _getMyOrdersUseCase.execute();
     response.fold(
-        (failure) => emit(GetMyOrdersFailure(errMessage: failure.errMessage)),
-        (data) => emit(GetMyOrdersSuccess(orders: data)));
+        (failure) =>
+            safeEmit(GetMyOrdersFailure(errMessage: failure.errMessage)),
+        (data) => safeEmit(GetMyOrdersSuccess(orders: data)));
   }
 }
