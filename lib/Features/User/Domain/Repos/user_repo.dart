@@ -2,6 +2,7 @@ import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:dartz/dartz.dart';
 
@@ -24,4 +25,6 @@ abstract class UserRepo {
       {required CoffeeEntity coffee, required bool isExist});
   Future<Either<Failure, void>> updateUserInfo(
       {required Map<String, dynamic> body});
+
+  Future<Either<Failure, ShopInfoEntity>> getShopInfo();
 }

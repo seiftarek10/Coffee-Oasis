@@ -1,14 +1,17 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
+import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_user_info_use_case.dart';
+import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_user_shop_info_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/update_user_info_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Update%20User%20Info/update_user_info_cubit.dart';
+import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/cubit/user_get_shop_info_cubit.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Profile/Bloc%20Widgets/get_shop_info_bloc_builder.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Profile/Bloc%20Widgets/get_user_info_bloc_builder.dart';
-import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Profile/shop_info_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,11 +25,16 @@ class UserProfile extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               GetUserInfoCubit(GetUserInfoUseCase(getIt.get<UserRepoImpl>()))
-                ..getUserInfo(remoteSource: true),
+                ..getUserInfo(remoteSource: false),
         ),
         BlocProvider(
           create: (context) => UpdateUserInfoCubit(
               UpdateUserInfoUseCase(getIt.get<UserRepoImpl>())),
+        ),
+        BlocProvider(
+          create: (context) => UserGetShopInfoCubit(
+              UserGetShopInfoUseCase(getIt.get<UserRepoImpl>()))
+            ..getShopInfo(),
         ),
       ],
       child: Background(
@@ -43,8 +51,11 @@ class UserProfile extends StatelessWidget {
                     );
                   }),
                   Space.k40,
-                  const UserShopInfoContainer(),
-                  Space.k40,
+                  const UserGetShopInfoBlocBuilder(),
+                  Space.k20,
+                  Text('Deveolped By @ Seif Tariq',
+                      style: Fonts.font18_700.copyWith(color: Colors.white)),
+                  Space.k20,
                 ],
               ),
             ),

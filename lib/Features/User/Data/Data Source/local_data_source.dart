@@ -1,5 +1,6 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
 import 'package:coffee_oasis/Core/Constant/value_constant.dart';
@@ -9,6 +10,7 @@ import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class UserLocalDataSource {
+  Future<void> saveUserInfo({required UserEntity user});
   Future<String?> getUserID();
   Future<UserEntity?> getUserInfo();
   Future<void> saveCategories(List<CategoryEntity> categories);
@@ -22,6 +24,9 @@ abstract class UserLocalDataSource {
       {required CoffeeDrinksHiveModel favoritesCoffee});
   List<CoffeeEntity> getFavoritesCoffee();
   bool isFavoriteCoffee({required String id});
+
+  Future<void> saveShopInfo({required ShopInfoEntity shopInfo});
+  ShopInfoEntity? getShopInfo();
 }
 
 class UserLocalDataSourceImpl implements UserLocalDataSource {
@@ -29,12 +34,24 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   final HiveServices<CategoryEntity> categoryBox;
   final HiveServices<CoffeeDrinksHiveModel> coffeeDrinksBox;
   final HiveServices<OrderEntity> cartBox;
+  final HiveServices<ShopInfoEntity> shopInfoBox;
 
   UserLocalDataSourceImpl(
       {required this.userBox,
       required this.categoryBox,
       required this.coffeeDrinksBox,
-      required this.cartBox});
+      required this.cartBox,
+      required this.shopInfoBox});
+
+  @override
+  Future<void> saveUserInfo({required UserEntity user}) async {
+    String? uid = await getUserID();
+    if (uid == null) {
+      return;
+    }
+    await userBox.saveWithKey(object: user, objectKey: uid);
+  }
+
   @override
   Future<String?> getUserID() async {
     Box<String> box = await Hive.openBox<String>(BoxesName.uidBox);
@@ -119,5 +136,16 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       return true;
     }
     return false;
+  }
+
+  @override
+  Future<void> saveShopInfo({required ShopInfoEntity shopInfo}) async {
+    await shopInfoBox.saveWithKey(object: shopInfo, objectKey: 'shopInfo');
+  }
+
+  @override
+  ShopInfoEntity? getShopInfo() {
+    ShopInfoEntity? info = shopInfoBox.getByKey(objectKey: 'shopInfo');
+    return info;
   }
 }

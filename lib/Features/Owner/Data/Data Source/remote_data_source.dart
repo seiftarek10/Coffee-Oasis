@@ -10,7 +10,7 @@ import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/shop_info_model.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 
 abstract class OwnerRemoteDataSource {
   Future<void> addCategory({required CategoryEntity category});

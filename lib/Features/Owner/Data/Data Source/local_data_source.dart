@@ -2,7 +2,7 @@ import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/hive_services.dart'
 import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 
 abstract class OwnerLocalDataSource {
   Future<void> saveCategories({required List<CategoryEntity> categories});

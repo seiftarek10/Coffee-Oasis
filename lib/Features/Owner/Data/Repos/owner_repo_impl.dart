@@ -5,7 +5,7 @@ import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Repos/owner_repo.dart';
 import 'package:dartz/dartz.dart';
 

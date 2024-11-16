@@ -28,7 +28,7 @@ class GetProfileUserInfoBlocBuilder extends StatelessWidget {
             onTap: () async {
               context.read<GetUserInfoCubit>().getUserInfo(remoteSource: true);
             },
-            text: 'Try,Again');
+            text: ' Try,Again');
       } else {
         return Skeletonizer(
             child: UserInfoContainer(

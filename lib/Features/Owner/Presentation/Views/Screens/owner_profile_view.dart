@@ -8,22 +8,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OwnerProfileView extends StatelessWidget {
   const OwnerProfileView({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) =>
-            GetShopInfoCubit(GetShopInfoUseCase(getIt.get<OwnerRepoImpl>()))
-              ..getShopInfo(
-                remoteSource: false
-              ),
-        child: Builder(
-          builder: (context) {
-            return OwnerProfileBlocBuilder(
-              getShopInfoCubit: context.read<GetShopInfoCubit>(),
-            );
-          }
-        ));
+        create: (context) => OwnerGetShopInfoCubit(
+            OwnerGetShopInfoUseCase(getIt.get<OwnerRepoImpl>()))
+          ..getShopInfo(remoteSource: false),
+        child: Builder(builder: (context) {
+          return OwnerProfileBlocBuilder(
+            getShopInfoCubit: context.read<OwnerGetShopInfoCubit>(),
+          );
+        }));
   }
 }
-

@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
@@ -35,10 +36,23 @@ Future<void> setupHive() async {
   Hive.registerAdapter(CoffeeEntityAdapter());
   Hive.registerAdapter(CoffeeDrinksHiveModelAdapter());
   Hive.registerAdapter(OrderEntityAdapter());
-  await Hive.openBox<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
-  await Hive.openBox<UserEntity>(BoxesName.userBox);
-  await Hive.openBox<CategoryEntity>(BoxesName.categoriesBox);
-  await Hive.openBox<OrderEntity>(BoxesName.cartBox);
+  Hive.registerAdapter(ShopInfoEntityAdapter());
+
+  if (!Hive.isBoxOpen(BoxesName.cartBox)) {
+    await Hive.openBox<OrderEntity>(BoxesName.cartBox);
+  }
+  if (!Hive.isBoxOpen(BoxesName.userBox)) {
+    await Hive.openBox<UserEntity>(BoxesName.userBox);
+  }
+  if (!Hive.isBoxOpen(BoxesName.coffeeBox)) {
+    await Hive.openBox<CoffeeDrinksHiveModel>(BoxesName.coffeeBox);
+  }
+  if (!Hive.isBoxOpen(BoxesName.categoriesBox)) {
+    await Hive.openBox<CategoryEntity>(BoxesName.categoriesBox);
+  }
+  if (!Hive.isBoxOpen(BoxesName.shopInfo)) {
+    await Hive.openBox<ShopInfoEntity>(BoxesName.shopInfo);
+  }
 }
 
 Future<void> checkAndMigrateHiveData() async {

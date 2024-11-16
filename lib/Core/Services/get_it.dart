@@ -12,7 +12,7 @@ import 'package:coffee_oasis/Features/Auth/Data/Repos/auth_repo_impl.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Repos/owner_repo_impl.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_all_categories.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
@@ -72,6 +72,7 @@ void setupGetIt() {
     coffeeDrinksBox:
         HiveServices<CoffeeDrinksHiveModel>(boxName: BoxesName.coffeeBox),
     cartBox: HiveServices<OrderEntity>(boxName: BoxesName.cartBox),
+    shopInfoBox: HiveServices<ShopInfoEntity>(boxName: BoxesName.shopInfo),
   ));
 
   getIt.registerSingleton<UserRepoImpl>(UserRepoImpl(

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/Models/category_model.dart';
@@ -9,10 +10,10 @@ import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
 import 'package:coffee_oasis/Core/Models/user_model.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
+import 'package:coffee_oasis/Features/Owner/Data/Models/shop_info_model.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Models/order_model.dart';
 import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class UserRemoteDataSource {
   Future<UserEntity> getUserInfo();
@@ -31,6 +32,7 @@ abstract class UserRemoteDataSource {
   Future<List<CoffeeEntity>> getFavoritesCoffee();
   Future<void> deleteFavoriteItem({required String id});
   Future<void> updateUserInfo({required Map<String, dynamic> body});
+  Future<ShopInfoEntity> getShopInfo();
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -41,10 +43,16 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<UserEntity> getUserInfo() async {
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    String? uid = await _userLocalDataSource.getUserID();
+    if (uid == null) {
+      return UserEntity();
+    }
+
     DocumentSnapshot<Map<String, dynamic>?> data =
         await _fireStoreServices.getDoc(endPoint: EndPoints.users, docId: uid);
     UserEntity user = UserModel.fromJson(data);
+    await _userLocalDataSource.saveUserInfo(user: user);
+
     return user;
   }
 
@@ -322,5 +330,14 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     await _fireStoreServices.updateDoc(
         endPoint: EndPoints.users, body: body, docId: uid);
+  }
+
+  @override
+  Future<ShopInfoEntity> getShopInfo() async {
+    DocumentSnapshot<Map<String, dynamic>?> response = await _fireStoreServices
+        .getDoc(endPoint: EndPoints.shopInfo, docId: '1');
+    ShopInfoEntity shopInfo = ShopInfoModel.fromJson(response.data());
+    await _userLocalDataSource.saveShopInfo(shopInfo: shopInfo);
+    return (shopInfo);
   }
 }

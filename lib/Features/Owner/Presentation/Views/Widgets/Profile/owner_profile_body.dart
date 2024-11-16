@@ -3,7 +3,7 @@ import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/Animation/opacity.dart';
 import 'package:coffee_oasis/Core/Widgets/Profile/profile_header.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Repos/owner_repo_impl.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/update_shop_info_use_case.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_shop_info/get_shop_info_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/update_shop_info/update_shop_info_cubit.dart';
@@ -20,7 +20,7 @@ class OwnerProfileBody extends StatelessWidget {
   });
 
   final ShopInfoEntity shopInfoEntity;
-  final GetShopInfoCubit getShopInfoCubit;
+  final OwnerGetShopInfoCubit getShopInfoCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class OwnerProfileBody extends StatelessWidget {
                     Space.k40,
                     Builder(builder: (context) {
                       return BlocProvider.value(
-                       value:  getShopInfoCubit,
+                        value: getShopInfoCubit,
                         child: ShopInfoContainerBlocListner(
                           updateShopInfoCubit:
                               context.read<UpdateShopInfoCubit>(),

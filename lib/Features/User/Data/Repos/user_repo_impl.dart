@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
@@ -331,6 +332,31 @@ class UserRepoImpl implements UserRepo {
     try {
       await _userRemoteDataSource.updateUserInfo(body: body);
       return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ShopInfoEntity>> getShopInfo() async {
+    try {
+      ShopInfoEntity? shopInfo = _userLocalDataSource.getShopInfo();
+      shopInfo ??= await _userRemoteDataSource.getShopInfo();
+      FirebaseFirestore.instance
+          .collection(EndPoints.shopInfo)
+          .snapshots()
+          .listen((snapshot) async {
+        if (snapshot.docChanges.any((change) =>
+            change.type == DocumentChangeType.added ||
+            change.type == DocumentChangeType.modified ||
+            change.type == DocumentChangeType.removed)) {
+          shopInfo = await _userRemoteDataSource.getShopInfo();
+        }
+      });
+      return right(shopInfo ?? ShopInfoEntity());
     } catch (e) {
       if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));
