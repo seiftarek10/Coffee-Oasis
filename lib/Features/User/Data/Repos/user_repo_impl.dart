@@ -45,12 +45,11 @@ class UserRepoImpl implements UserRepo {
     try {
       List<CategoryEntity>? categories = [];
       categories = _userLocalDataSource.getAllCategories();
-      final completer = Completer<Either<Failure, List<CategoryEntity>>>();
+
       if (categories.isEmpty) {
         categories = await _userRemoteDataSource.getAllCategories();
         await _userLocalDataSource.saveCategories(categories);
       }
-      completer.complete(right(categories));
 
       FirebaseFirestore.instance
           .collection(EndPoints.categories)
@@ -64,7 +63,7 @@ class UserRepoImpl implements UserRepo {
         }
       });
 
-      return completer.future;
+      return right(categories ?? []);
     } catch (e) {
       if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));
