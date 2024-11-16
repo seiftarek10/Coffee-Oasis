@@ -12,7 +12,7 @@ import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_user_shop_info_
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/update_user_info_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Update%20User%20Info/update_user_info_cubit.dart';
-import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/cubit/user_get_shop_info_cubit.dart';
+import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/User%20Get%20Shop%20Info/user_get_shop_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Profile/Bloc%20Widgets/get_shop_info_bloc_builder.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Profile/Bloc%20Widgets/get_user_info_bloc_builder.dart';
 import 'package:flutter/material.dart';
