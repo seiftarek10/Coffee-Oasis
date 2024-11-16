@@ -13,6 +13,7 @@ class UserGetCoffeeDrinkCubit extends Cubit<UserGetCoffeeDrinkState> {
 
   final UserGetCoffeeDrinksUseCase _userGetCoffeeDrinksUseCase;
 
+  List<CoffeeEntity> allCoffee = [];
   Future<void> getCoffeeDrinks({String? id}) async {
     emit(UserGetCoffeeDrinkLoadigng());
 
@@ -22,6 +23,17 @@ class UserGetCoffeeDrinkCubit extends Cubit<UserGetCoffeeDrinkState> {
     response.fold(
         (failure) =>
             emit(UserGetCoffeeDrinkFailure(errMessage: failure.errMessage)),
-        (data) => emit(UserGetCoffeeDrinkSuccess(coffee: data)));
+        (data) {
+      emit(UserGetCoffeeDrinkSuccess(coffee: data));
+      allCoffee = data;
+    });
+  }
+
+  void serachForCoffee({required String searchedCoffee}) {
+    List<CoffeeEntity> coffee = allCoffee
+        .where((coffee) =>
+            coffee.name!.toLowerCase().startsWith(searchedCoffee.toLowerCase()))
+        .toList();
+    emit(UserGetCoffeeDrinkSuccess(coffee: coffee));
   }
 }

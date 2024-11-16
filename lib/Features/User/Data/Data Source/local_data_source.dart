@@ -55,7 +55,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   @override
   Future<String?> getUserID() async {
     Box<String> box = await Hive.openBox<String>(BoxesName.uidBox);
-    return box.get(AppConstant.uid);
+    return box.get(AppConstant.uidKey);
   }
 
   @override
@@ -140,12 +140,14 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<void> saveShopInfo({required ShopInfoEntity shopInfo}) async {
-    await shopInfoBox.saveWithKey(object: shopInfo, objectKey: 'shopInfo');
+    await shopInfoBox.saveWithKey(
+        object: shopInfo, objectKey: AppConstant.shopInfoKey);
   }
 
   @override
   ShopInfoEntity? getShopInfo() {
-    ShopInfoEntity? info = shopInfoBox.getByKey(objectKey: 'shopInfo');
+    ShopInfoEntity? info =
+        shopInfoBox.getByKey(objectKey: AppConstant.shopInfoKey);
     return info;
   }
 }

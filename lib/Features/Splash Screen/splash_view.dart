@@ -48,7 +48,7 @@ class _SplashViewState extends State<SplashView> {
 
   Future<bool> chenkedSignIn() async {
     var box = await Hive.openBox<String>(BoxesName.uidBox);
-    String? uid = box.get(AppConstant.uid);
+    String? uid = box.get(AppConstant.uidKey);
     if (uid == null) {
       return false;
     }

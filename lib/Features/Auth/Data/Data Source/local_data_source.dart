@@ -24,6 +24,6 @@ class AuthLoaclaDataSourceImpl implements AuthLocalDataSource {
     if (box.containsKey(uid)) {
       return;
     }
-    await box.put(AppConstant.uid, uid);
+    await box.put(AppConstant.uidKey, uid);
   }
 }
