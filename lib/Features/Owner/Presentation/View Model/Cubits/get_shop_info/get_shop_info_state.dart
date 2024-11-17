@@ -1,20 +1,20 @@
 part of 'get_shop_info_cubit.dart';
 
 @immutable
-sealed class GetShopInfoState {}
+sealed class OwnerGetShopInfoState {}
 
-final class GetShopInfoInitial extends GetShopInfoState {}
+final class GetShopInfoInitial extends OwnerGetShopInfoState {}
 
-final class GetShopInfoLoading extends GetShopInfoState {}
+final class OwenrGetShopInfoLoading extends OwnerGetShopInfoState {}
 
-final class GetShopInfoFailure extends GetShopInfoState {
+final class OwnerGetShopInfoFailure extends OwnerGetShopInfoState {
   final String errMessage;
 
-  GetShopInfoFailure({required this.errMessage});
+  OwnerGetShopInfoFailure({required this.errMessage});
 }
 
-final class GetShopInfoSuccess extends GetShopInfoState {
+final class OwenrGetShopInfoSuccess extends OwnerGetShopInfoState {
   final ShopInfoEntity shopInfoEntity;
 
-  GetShopInfoSuccess({required this.shopInfoEntity});
+  OwenrGetShopInfoSuccess({required this.shopInfoEntity});
 }

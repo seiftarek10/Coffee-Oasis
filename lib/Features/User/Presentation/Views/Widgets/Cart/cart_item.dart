@@ -4,30 +4,48 @@ import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_name_category.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:flutter/material.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({
     super.key,
+    required this.cartItemEntity,
   });
+
+  final OrderEntity cartItemEntity;
 
   @override
   Widget build(BuildContext context) {
     return AppWhiteContainer(
-     noPadding: true,
+      noPadding: true,
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             flex: 3,
             child: AppClipReact(
-                radiusForAll: false, child: CoffeePhotoCard(aspectRatio: 1)),
+                radiusForAll: false,
+                child: Hero(
+                  tag: cartItemEntity.coffee.id!,
+                  child: CoffeePhotoCard(
+                    aspectRatio: 1,
+                    photo: cartItemEntity.coffee.photo,
+                  ),
+                )),
           ),
           const SizedBox(width: 16),
-          const Expanded(flex: 7, child: TitleAndSubTitleCaffeeCard()),
+          Expanded(
+              flex: 6,
+              child: TitleAndSubTitleCaffeeCard(
+                title: cartItemEntity.coffee.name ?? 'No Name',
+                subTitle: cartItemEntity.coffee.category ?? 'No Category',
+              )),
           Expanded(
             flex: 3,
             child: Text(
-              r'$ 4.53',
+              cartItemEntity.counter == 1
+                  ? '1 item'
+                  : '${cartItemEntity.counter} items ',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Fonts.font18_700

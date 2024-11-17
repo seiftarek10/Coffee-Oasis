@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 class TitleAndSubTitleCaffeeCard extends StatelessWidget {
   const TitleAndSubTitleCaffeeCard({
     super.key,
+    required this.title,
+    required this.subTitle,
   });
+
+  final String title, subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +17,11 @@ class TitleAndSubTitleCaffeeCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 4),
-        Text('Coffee Name',
+        Text(title,
             style: Fonts.font18_700,
             maxLines: 1,
             overflow: TextOverflow.ellipsis),
-        Text('Category',
+        Text(subTitle,
             style: Fonts.font16_300,
             maxLines: 1,
             overflow: TextOverflow.ellipsis),

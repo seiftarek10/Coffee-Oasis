@@ -1,9 +1,9 @@
 import 'package:coffee_oasis/Core/Extension/null_or_empty.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
+import 'package:coffee_oasis/Core/Widgets/Profile/profile_info_item.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/update_shop_info/update_shop_info_cubit.dart';
-import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Profile/profile_item_controller.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Profile/work_time_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,11 +35,11 @@ class ShopInfoContainer extends StatelessWidget {
       const SizedBox(height: 10),
       AppWhiteContainer(
           child: Column(children: [
-        ProfileItemController(
-            label: shopInfoEntity.phoneNumber ?? '',
+        ProfileInfoItem(
+            info: shopInfoEntity.phoneNumber ?? '',
             title: 'Phone',
             formKey: _phoneFormKey,
-            shopInfoCubit: updateShopInfoCubit,
+            cubit: updateShopInfoCubit,
             onSaved: (value) => _phoneNumber = value,
             onPressed: (trigger) async {
               _phoneFormKey.currentState!.save();
@@ -52,11 +52,11 @@ class ShopInfoContainer extends StatelessWidget {
               trigger();
             }),
         const SizedBox(height: 20),
-        ProfileItemController(
-            label: shopInfoEntity.location ?? '',
+        ProfileInfoItem(
+            info: shopInfoEntity.location ?? '',
             title: 'Location',
             formKey: _locationFormKey,
-            shopInfoCubit: updateShopInfoCubit,
+            cubit: updateShopInfoCubit,
             onSaved: (value) => _location = value,
             onPressed: (trigger) async {
               _locationFormKey.currentState!.save();
@@ -69,7 +69,7 @@ class ShopInfoContainer extends StatelessWidget {
             }),
         const SizedBox(height: 20),
         WorkTimeItem(
-          shopInfoCubit: updateShopInfoCubit,
+          updateShopInfoCubit: updateShopInfoCubit,
           shopInfoEntity: shopInfoEntity,
         )
       ]))

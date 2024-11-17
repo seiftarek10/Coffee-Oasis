@@ -1,20 +1,26 @@
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderDetatilsRecivedWay extends StatelessWidget {
-  const OrderDetatilsRecivedWay({super.key});
-
+  const OrderDetatilsRecivedWay({super.key, required this.isDeliverd});
+  final bool isDeliverd;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        _buildContainer('Deliver', true, true),
-        _buildContainer('Pickup', false, false),
-      ],
-    );
+    return isDeliverd
+        ? Row(
+            children: [
+              _buildContainer('Deliver', true, true),
+              _buildContainer('Pickup', false, false),
+            ],
+          )
+        : Row(
+            children: [
+              _buildContainer('Deliver', true, false),
+              _buildContainer('Pickup', false, true),
+            ],
+          );
   }
 
   Widget _buildContainer(String text, bool isLeft, bool isSelected) {
@@ -26,12 +32,12 @@ class OrderDetatilsRecivedWay extends StatelessWidget {
           color: isSelected ? AppColors.kPrimaryColor : AppColors.kWhiteObacity,
           borderRadius: isLeft
               ? const BorderRadius.only(
-                  topLeft: Radius.circular(AppConstant.kBorderRadius),
-                  bottomLeft: Radius.circular(AppConstant.kBorderRadius),
+                  topLeft: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
                 )
               : const BorderRadius.only(
-                  topRight: Radius.circular(AppConstant.kBorderRadius),
-                  bottomRight: Radius.circular(AppConstant.kBorderRadius),
+                  topRight: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
                 ),
         ),
         child: Text(

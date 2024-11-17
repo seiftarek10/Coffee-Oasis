@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/Helpers/failed_message.dart';
 import 'package:coffee_oasis/Core/Helpers/success_message.dart';
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_shop_info/get_shop_info_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/update_shop_info/update_shop_info_cubit.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/Views/Widgets/Profile/shop_info_container.dart';
@@ -24,7 +24,8 @@ class ShopInfoContainerBlocListner extends StatelessWidget {
         if (state is UpdateShopInfoSuccess) {
           GoRouter.of(context).pop();
           successMessage(context: context, message: 'Updated Successfuly');
-          await BlocProvider.of<GetShopInfoCubit>(context).getShopInfo();
+          await BlocProvider.of<OwnerGetShopInfoCubit>(context)
+              .getShopInfo(remoteSource: true);
         } else if (state is UpdateShopInfoFailure) {
           failedMessage(context: context, message: state.errMessage);
         }

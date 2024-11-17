@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ManageCategoryFloatingButton extends StatelessWidget {
   const ManageCategoryFloatingButton({super.key, required this.cubit});
-  final GetAllCategoriesCubit cubit;
+  final OwnerGetAllCategoriesCubit cubit;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

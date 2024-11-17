@@ -15,10 +15,12 @@ class DeleteCategoryBlocListener extends StatelessWidget {
         if (state is DeleteCategorySuccess) {
           successMessage(
               context: context, message: 'Category Deleted Successfuly');
-          await context.read<GetAllCategoriesCubit>().getAllCategories();
+          context
+              .read<OwnerGetAllCategoriesCubit>()
+              .getAllCategories(remoteSource: true);
         } else if (state is DeleteCategoryFailure) {
           failedMessage(context: context, message: state.errMessage);
-        } 
+        }
       },
       child: child,
     );

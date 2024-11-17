@@ -6,20 +6,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OwnerProfileBlocBuilder extends StatelessWidget {
   const OwnerProfileBlocBuilder({super.key, required this.getShopInfoCubit});
-  final GetShopInfoCubit getShopInfoCubit;
+  final OwnerGetShopInfoCubit getShopInfoCubit;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetShopInfoCubit, GetShopInfoState>(
+    return BlocBuilder<OwnerGetShopInfoCubit, OwnerGetShopInfoState>(
         builder: (context, state) {
-      if (state is GetShopInfoSuccess) {
+      if (state is OwenrGetShopInfoSuccess) {
         return OwnerProfileBody(
           shopInfoEntity: state.shopInfoEntity,
           getShopInfoCubit: getShopInfoCubit,
-          );
-      } else if (state is GetShopInfoFailure) {
+        );
+      } else if (state is OwnerGetShopInfoFailure) {
         return AppErrorWidget(
             onTap: () async {
-              await context.read<GetShopInfoCubit>().getShopInfo();
+              await context
+                  .read<OwnerGetShopInfoCubit>()
+                  .getShopInfo(remoteSource: true);
             },
             text: state.errMessage);
       } else {

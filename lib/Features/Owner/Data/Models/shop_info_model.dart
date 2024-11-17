@@ -1,4 +1,4 @@
-import 'package:coffee_oasis/Features/Owner/Domain/Entites/shop_info_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 
 class ShopInfoModel extends ShopInfoEntity {
   final String? number;
@@ -14,7 +14,7 @@ class ShopInfoModel extends ShopInfoEntity {
             startTime: shopStartTime,
             endTime: shopEndTime);
   factory ShopInfoModel.fromJson(Map<String, dynamic>? json) {
-    return ShopInfoModel(
-        json?['phone'], json?['location'], json?['startTime'], json?['endTime']);
+    return ShopInfoModel(json?['phone'], json?['location'], json?['startTime'],
+        json?['endTime']);
   }
 }

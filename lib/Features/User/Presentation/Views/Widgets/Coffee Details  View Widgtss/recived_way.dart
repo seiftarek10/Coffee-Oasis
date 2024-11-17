@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 class RecivedOptions extends StatefulWidget {
   const RecivedOptions({
     super.key,
+    required this.isDelivery,
   });
+
+  final ValueChanged<bool> isDelivery;
 
   @override
   State<RecivedOptions> createState() => _RecivedOptionsState();
@@ -13,6 +16,13 @@ class RecivedOptions extends StatefulWidget {
 
 class _RecivedOptionsState extends State<RecivedOptions> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    widget.isDelivery(true);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,6 +37,11 @@ class _RecivedOptionsState extends State<RecivedOptions> {
                   onTap: () {
                     setState(() {
                       _selectedIndex = index;
+                      if (_selectedIndex == 0) {
+                        widget.isDelivery(true);
+                      } else {
+                        widget.isDelivery(false);
+                      }
                     });
                   },
                   child: RecivingOptionContainer(

@@ -1,18 +1,28 @@
-import 'package:coffee_oasis/Core/constant.dart';
+import 'package:coffee_oasis/Core/Constant/value_constant.dart';
+import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_item.dart';
 import 'package:flutter/material.dart';
 
 class CartSlideableItem extends StatelessWidget {
-  const CartSlideableItem({super.key, required this.itemKey});
+  const CartSlideableItem({
+    super.key,
+    required this.itemKey,
+    required this.cartItem,
+    required this.delete,
+  });
 
   final Key itemKey;
+
+  final OrderEntity cartItem;
+
+  final void Function() delete;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Dismissible(
-          direction: DismissDirection.endToStart,
+            direction: DismissDirection.endToStart,
             key: itemKey,
             background: Container(
               decoration: BoxDecoration(
@@ -24,10 +34,14 @@ class CartSlideableItem extends StatelessWidget {
               child: const Icon(Icons.delete, color: Colors.white),
             ),
             confirmDismiss: (direction) async {
-              if (direction == DismissDirection.endToStart) {}
+              if (direction == DismissDirection.endToStart) {
+                delete();
+              }
               return false;
             },
-            child: const CartItem()),
+            child: CartItem(
+              cartItemEntity: cartItem,
+            )),
         const SizedBox(height: 12),
       ],
     );

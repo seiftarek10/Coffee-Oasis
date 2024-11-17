@@ -9,13 +9,14 @@ class EditFieldBody extends StatelessWidget {
       required this.labelText,
       required this.onSaved,
       this.keyboardType,
-      required this.onPressed, required this.formKey});
+      required this.onPressed,
+      required this.formKey});
 
   final String labelText;
   final void Function(String?) onSaved;
   final TextInputType? keyboardType;
   final Future<void> Function(Function) onPressed;
-  final GlobalKey<FormState>formKey;
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class EditFieldBody extends StatelessWidget {
           minHeight: MediaQuery.of(context).size.height,
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

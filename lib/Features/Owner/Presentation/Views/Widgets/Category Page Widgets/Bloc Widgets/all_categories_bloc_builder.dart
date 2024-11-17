@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/Widgets/States%20Widgets/circular_indicator.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/empty_widget.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/error_widget.dart';
 import 'package:coffee_oasis/Features/Owner/Presentation/View%20Model/Cubits/get_all_categories/get_all_categories_cubit.dart';
@@ -11,7 +12,7 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetAllCategoriesCubit, GetAllCategoriesState>(
+    return BlocBuilder<OwnerGetAllCategoriesCubit, OwnerGetAllCategoriesState>(
         builder: (context, state) {
       if (state is GetAllCategoriesSuccess) {
         if (state.categories.isEmpty) {
@@ -28,29 +29,15 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
     });
   }
 
-  Widget _centerizedWidget(BuildContext context, Widget child) {
-    return ConstrainedBox(
-      constraints:
-          BoxConstraints(minHeight: MediaQuery.sizeOf(context).height * 0.6),
-      child: child,
-    );
-  }
-
   Widget _buildLoadingWidget(BuildContext context) {
-    return SliverToBoxAdapter(
-        child: _centerizedWidget(
-            context,
-            const Center(
-                child: CircularProgressIndicator(
-              color: Colors.white,
-            ))));
+    return const SliverToBoxAdapter(child: AppCircularIndicator(height: 0.6));
   }
 
   Widget _buildEmptyWidget(BuildContext context) {
     return const SliverToBoxAdapter(
-        child:  EmptyWidget(
-          height: 0.6,
-        ));
+        child: AppEmptyWidget(
+      height: 0.6,
+    ));
   }
 
   Widget _buildErrorWidget(BuildContext context, String text) {
@@ -58,7 +45,7 @@ class AllCategoriesListViewBlocBuilder extends StatelessWidget {
       child: AppErrorWidget(
           text: "$text try,again",
           onTap: () async {
-            await BlocProvider.of<GetAllCategoriesCubit>(context)
+            await BlocProvider.of<OwnerGetAllCategoriesCubit>(context)
                 .getAllCategories();
           }),
     );

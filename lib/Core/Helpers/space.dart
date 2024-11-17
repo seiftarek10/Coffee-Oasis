@@ -9,4 +9,6 @@ abstract class Space {
   static SizedBox k20 = const SizedBox(height: 20);
   static SizedBox k40 = const SizedBox(height: 40);
   static SizedBox k90 = const SizedBox(height: 90);
+  static SizedBox k55 = const SizedBox(height: 55);
+  static SizedBox k100 = const SizedBox(height: 100);
 }
