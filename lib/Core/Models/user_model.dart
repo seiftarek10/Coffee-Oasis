@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 
 class UserModel extends UserEntity {
@@ -19,13 +18,8 @@ class UserModel extends UserEntity {
           phoneNumber: phone,
           address: userAddress,
         );
-  factory UserModel.fromJson(DocumentSnapshot<Map<String, dynamic>?> json) {
-    return UserModel(
-        json.data()?['uid'],
-        json.data()?['email'],
-        null,
-        json.data()?['userName'],
-        json.data()?['phoneNumber'],
-        json.data()?['Address']);
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(json['uid'], json['email'], null, json['userName'],
+        json['phoneNumber'], json['Address']);
   }
 }

@@ -36,6 +36,7 @@ class GetMyOrdersBlocBuilder extends StatelessWidget {
   Widget _buildErrorBody(BuildContext context, String message) {
     return SliverToBoxAdapter(
       child: AppErrorWidget(
+          height: 0.6,
           onTap: () {
             context.read<GetMyOrdersCubit>().getMyOrders();
           },

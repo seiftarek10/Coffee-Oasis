@@ -12,7 +12,7 @@ class GetUserInfoCubit extends BaseCubit<GetUserInfoState> {
 
   final GetUserInfoUseCase _getUserInfoUseCase;
 
-  late UserEntity user;
+  static UserEntity? user;
 
   Future<void> getUserInfo({
     required bool remoteSource,

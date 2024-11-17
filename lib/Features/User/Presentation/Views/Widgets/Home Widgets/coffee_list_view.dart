@@ -6,6 +6,7 @@ import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Widgets/Extra%20Models/coffee_details_extra.dart';
 import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Add%20To%20Cart/add_to_cart_cubit.dart';
+import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Home%20Widgets/coffee_drink_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,6 +66,7 @@ class UserHomeCoffeeDrinksListView extends StatelessWidget {
                               await BlocProvider.of<AddToCartCubit>(context)
                                   .addToCart(
                                       cartItem: OrderEntity(
+                                          user: GetUserInfoCubit.user,
                                           counter: 1,
                                           price: coffeeDrinks[index].price,
                                           coffee: coffeeDrinks[index]));

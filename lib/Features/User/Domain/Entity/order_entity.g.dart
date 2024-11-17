@@ -23,13 +23,14 @@ class OrderEntityAdapter extends TypeAdapter<OrderEntity> {
       coffee: fields[2] as CoffeeEntity,
       isDelivery: fields[3] as bool?,
       isFinished: fields[4] as bool?,
+      user: fields[6] as UserEntity?,
     );
   }
 
   @override
   void write(BinaryWriter writer, OrderEntity obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class OrderEntityAdapter extends TypeAdapter<OrderEntity> {
       ..writeByte(4)
       ..write(obj.isFinished)
       ..writeByte(5)
-      ..write(obj.price);
+      ..write(obj.price)
+      ..writeByte(6)
+      ..write(obj.user);
   }
 
   @override

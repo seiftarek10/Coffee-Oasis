@@ -42,7 +42,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserEntity> getUser({required String id}) async {
     DocumentSnapshot<Map<String, dynamic>?> response =
         await _fireStoreServices.getDoc(endPoint: EndPoints.users, docId: id);
-    return UserModel.fromJson(response);
+    return UserModel.fromJson(response.data()!);
   }
 
   @override

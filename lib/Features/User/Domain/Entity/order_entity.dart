@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'order_entity.g.dart';
@@ -17,16 +18,25 @@ class OrderEntity extends HiveObject {
   bool? isFinished;
   @HiveField(5)
   final num? price;
-  OrderEntity(
-      {this.id,
-      required this.counter,
-      required this.price,
-      required this.coffee,
-      this.isDelivery,
-      this.isFinished});
+  @HiveField(6)
+  final UserEntity? user;
+  OrderEntity({
+    this.id,
+    required this.counter,
+    required this.price,
+    required this.coffee,
+    this.isDelivery,
+    this.isFinished,
+    this.user,
+  });
 
   toCartJson() {
-    return {'counter': counter, 'price': price, 'coffee': coffee.toJson()};
+    return {
+      'counter': counter,
+      'price': price,
+      'coffee': coffee.toJson(),
+      'user': user?.toJson()
+    };
   }
 
   toOrderJson() {
@@ -35,7 +45,8 @@ class OrderEntity extends HiveObject {
       'price': price,
       'coffee': coffee.toJson(),
       'isDelivery': isDelivery,
-      'isFinished': isFinished
+      'isFinished': isFinished,
+      'user': user?.toJson()
     };
   }
 }

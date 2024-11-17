@@ -50,7 +50,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     DocumentSnapshot<Map<String, dynamic>?> data =
         await _fireStoreServices.getDoc(endPoint: EndPoints.users, docId: uid);
-    UserEntity user = UserModel.fromJson(data);
+    UserEntity user = UserModel.fromJson(data.data()!);
     await _userLocalDataSource.saveUserInfo(user: user);
 
     return user;

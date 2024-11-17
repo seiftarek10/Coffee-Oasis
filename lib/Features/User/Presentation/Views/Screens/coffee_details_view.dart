@@ -52,7 +52,7 @@ class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
             create: (context) => HandleFavoriteCubit(
                 HandleFavCoffeeUseCase(getIt.get<UserRepoImpl>()),
                 IsFavoriteItemUseCase(getIt.get<UserRepoImpl>()))
-              ..isFavoriteCoffee(id: widget.orderEntity.coffee.id!))
+              ..isFavoriteCoffee(id: widget.orderEntity.coffee.id!)),
       ],
       child: Scaffold(
           bottomNavigationBar: widget.fromCartView
