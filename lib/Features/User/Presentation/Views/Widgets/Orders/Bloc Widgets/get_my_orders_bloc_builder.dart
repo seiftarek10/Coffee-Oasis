@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/circular_indicator.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/empty_widget.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/error_widget.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20My%20Orders/get_my_orders_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Orders/orders_list_view.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class GetMyOrdersBlocBuilder extends StatelessWidget {
     });
   }
 
-  Widget _buildSuccessBody(List<OrderEntity> orders) {
+  Widget _buildSuccessBody(List<OrderItemEntity> orders) {
     if (orders.isEmpty) {
       return const SliverToBoxAdapter(child: AppEmptyWidget(height: 0.6));
     }

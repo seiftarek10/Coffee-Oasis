@@ -1,36 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'order_entity.dart';
+part of 'order_item_entity.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class OrderEntityAdapter extends TypeAdapter<OrderEntity> {
+class OrderItemEntityAdapter extends TypeAdapter<OrderItemEntity> {
   @override
   final int typeId = 8;
 
   @override
-  OrderEntity read(BinaryReader reader) {
+  OrderItemEntity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return OrderEntity(
+    return OrderItemEntity(
       id: fields[0] as String?,
       counter: fields[1] as int,
       price: fields[5] as num?,
       coffee: fields[2] as CoffeeEntity,
       isDelivery: fields[3] as bool?,
       isFinished: fields[4] as bool?,
-      user: fields[6] as UserEntity?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, OrderEntity obj) {
+  void write(BinaryWriter writer, OrderItemEntity obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -42,9 +41,7 @@ class OrderEntityAdapter extends TypeAdapter<OrderEntity> {
       ..writeByte(4)
       ..write(obj.isFinished)
       ..writeByte(5)
-      ..write(obj.price)
-      ..writeByte(6)
-      ..write(obj.user);
+      ..write(obj.price);
   }
 
   @override
@@ -53,7 +50,7 @@ class OrderEntityAdapter extends TypeAdapter<OrderEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is OrderEntityAdapter &&
+      other is OrderItemEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

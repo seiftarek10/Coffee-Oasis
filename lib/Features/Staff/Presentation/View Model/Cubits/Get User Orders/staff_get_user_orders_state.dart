@@ -14,7 +14,7 @@ final class StaffGetUserOrdersFailure extends StaffGetUserOrdersState {
 }
 
 final class StaffGetUserOrdersSuccess extends StaffGetUserOrdersState {
-  final List<OrderEntity> orders;
+  final List<OrderItemEntity> orders;
 
   StaffGetUserOrdersSuccess({required this.orders});
 }

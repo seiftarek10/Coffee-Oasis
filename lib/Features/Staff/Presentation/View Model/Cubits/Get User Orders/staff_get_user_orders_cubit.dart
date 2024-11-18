@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Base%20Cubit/base_cubit.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Staff/Domain/Use%20Cases/get_user_orders_use_case.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
@@ -16,7 +16,7 @@ class StaffGetUserOrdersCubit extends BaseCubit<StaffGetUserOrdersState> {
       {required bool isDelivery, required String id}) async* {
     safeEmit(StaffGetUserOrdersInitial());
 
-    Stream<Either<Failure, List<OrderEntity>>> response =
+    Stream<Either<Failure, List<OrderItemEntity>>> response =
         _staffGetAllOrdersUseCase.execute(isDelivery: isDelivery, id: id);
 
     await for (var result in response) {

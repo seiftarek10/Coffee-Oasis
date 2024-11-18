@@ -14,7 +14,7 @@ final class StaffGetAllOrdersFailure extends StaffGetAllOrdersState {
 }
 
 final class StaffGetAllOrdersSuccess extends StaffGetAllOrdersState {
-  final List<OrderEntity> orders;
+  final List<OrderItemEntity> orders;
 
   StaffGetAllOrdersSuccess({required this.orders});
 }

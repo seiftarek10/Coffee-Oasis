@@ -3,29 +3,30 @@ import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/Models/category_model.dart';
 import 'package:coffee_oasis/Core/Models/coffee_drink_model.dart';
 import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
+import 'package:coffee_oasis/Core/Models/order_model.dart';
 import 'package:coffee_oasis/Core/Models/user_model.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/shop_info_model.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
-import 'package:coffee_oasis/Features/User/Data/Models/order_model.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 
 abstract class UserRemoteDataSource {
   Future<UserEntity> getUserInfo();
   Future<List<CategoryEntity>> getAllCategories();
   Future<List<CoffeeEntity>> getCoffeeDrinks({required String id});
   Future<List<CoffeeEntity>> getAllCoffee();
-  Future<void> addToCart({required OrderEntity cartItem});
-  Future<List<OrderEntity>> getCartItems();
+  Future<void> addToCart({required OrderItemEntity cartItem});
+  Future<List<OrderItemEntity>> getCartItems();
   Future<void> deleteCartItem({required String id});
-  Future<void> makeOrder({required OrderEntity order});
+  Future<void> makeOrder({required UserOrderEntity order});
   Future<void> deleteFromCartAfterOrder({required String id});
-  Future<List<OrderEntity>> getMyOrders();
+  Future<List<OrderItemEntity>> getMyOrders();
   Future<void> orderAll();
   Future<void> addFavoriteItem({required CoffeeEntity coffee});
   Future<bool> isFavoriteCoffee({required String id});
@@ -111,7 +112,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<void> addToCart({required OrderEntity cartItem}) async {
+  Future<void> addToCart({required OrderItemEntity cartItem}) async {
     String? uid = await _userLocalDataSource.getUserID();
     if (uid == null) {
       return;
@@ -147,7 +148,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<List<OrderEntity>> getCartItems() async {
+  Future<List<OrderItemEntity>> getCartItems() async {
     String? uid = await _userLocalDataSource.getUserID();
     if (uid == null) {
       return [];
@@ -158,9 +159,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
                 parentCollection: EndPoints.allCart,
                 parentDocId: uid,
                 subCollection: EndPoints.userCart));
-    List<OrderEntity> cartItems = [];
+    List<OrderItemEntity> cartItems = [];
     for (var item in response.docs) {
-      cartItems.add(OrderModel.fromJson(item));
+      cartItems.add(OrderModel.fromJson(item.data(), item.id));
     }
     await _userLocalDataSource.saveCartItems(cartItems);
     return cartItems;
@@ -181,22 +182,54 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<void> makeOrder({required OrderEntity order}) async {
+  Future<void> makeOrder({required UserOrderEntity order}) async {
     String? uid = await _userLocalDataSource.getUserID();
     if (uid == null) {
       return;
     }
-    await _fireStoreServices.postToSubCollection(
-        fireBasePathParam: FireBasePathParam(
-            parentCollection: EndPoints.allOrders,
-            parentDocId: uid,
-            subCollection: EndPoints.userOrders),
-        body: order.toOrderJson());
+
+    CollectionReference ordersRef =
+        FirebaseFirestore.instance.collection(EndPoints.allOrders);
+    DocumentReference orderRef = ordersRef.doc(uid);
+    DocumentSnapshot snapshot = await orderRef.get();
+
+    if (snapshot.exists) {
+      final existingOrder = snapshot.data() as Map<String, dynamic>;
+      List<OrderItemEntity> existingCoffee = (existingOrder['coffee'] as List)
+          .map((item) => OrderModel.fromJson(
+              item as Map<String, dynamic>, item['coffee']['id']))
+          .toList();
+
+      final newCoffeeItem = order.coffee![0];
+
+      final existingIndex = existingCoffee
+          .indexWhere((item) => item.coffee.id == newCoffeeItem.coffee.id);
+
+      if (existingIndex != -1) {
+        existingCoffee[existingIndex].counter += newCoffeeItem.counter;
+        existingCoffee[existingIndex].price =
+            (existingCoffee[existingIndex].price ?? 0) + newCoffeeItem.price!;
+
+        await orderRef.update({
+          'coffee': existingCoffee.map((item) => item.toOrderJson()).toList(),
+        });
+      } else {
+        await orderRef.update({
+          'coffee': FieldValue.arrayUnion([newCoffeeItem.toOrderJson()]),
+        });
+      }
+    } else {
+      await _fireStoreServices.postDocWithId(
+        endPoint: EndPoints.allOrders,
+        id: uid,
+        body: order.toJson(),
+      );
+    }
   }
 
   @override
   Future<void> deleteFromCartAfterOrder({required String id}) async {
-    List<OrderEntity> cartItems = await getCartItems();
+    List<OrderItemEntity> cartItems = await getCartItems();
     bool exist = cartItems.any((cartItem) => cartItem.id == id);
     if (exist) {
       await deleteCartItem(id: id);
@@ -204,20 +237,17 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<List<OrderEntity>> getMyOrders() async {
+  Future<List<OrderItemEntity>> getMyOrders() async {
     String? uid = await _userLocalDataSource.getUserID();
     if (uid == null) {
       return [];
     }
-    QuerySnapshot<Map<String, dynamic>> response =
-        await _fireStoreServices.getSubCollection(
-            fireBasePathParam: FireBasePathParam(
-                parentCollection: EndPoints.allOrders,
-                parentDocId: uid,
-                subCollection: EndPoints.userOrders));
-    List<OrderEntity> userOrders = [];
-    for (var order in response.docs) {
-      userOrders.add(OrderModel.fromJson(order));
+    DocumentSnapshot<Map<String, dynamic>?> response = await _fireStoreServices
+        .getDoc(endPoint: EndPoints.allOrders, docId: uid);
+
+    List<OrderItemEntity> userOrders = [];
+    for (var order in response.data()!['coffee']) {
+      userOrders.add(OrderModel.fromJson(order, order['coffee']['id']));
     }
     return userOrders;
   }
@@ -228,33 +258,65 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     if (uid == null) {
       return;
     }
+
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     final cartRef = firestore
         .collection(EndPoints.allCart)
         .doc(uid)
         .collection(EndPoints.userCart);
-    final orderRef = firestore
-        .collection(EndPoints.allOrders)
-        .doc(uid)
-        .collection(EndPoints.userOrders);
-
-    final batch = firestore.batch();
+    final orderRef = firestore.collection(EndPoints.allOrders).doc(uid);
 
     final cartItems = await cartRef.get();
-    List<OrderEntity> orders = [];
-    for (var order in cartItems.docs) {
-      orders.add(OrderModel.fromJson(order));
+    if (cartItems.docs.isEmpty) {
+      return;
     }
 
-    for (var cartItem in cartItems.docs) {
-      final orderDoc = orderRef.doc(cartItem.id);
-      OrderEntity order = OrderModel.fromJson(cartItem);
-      batch.set(orderDoc, order.toOrderJson());
+    List<OrderItemEntity> newCoffeeItems = cartItems.docs
+        .map((doc) => OrderModel.fromJson(doc.data(), doc.id))
+        .toList();
 
+    final existingOrderSnapshot = await orderRef.get();
+    List<OrderItemEntity> existingCoffee = [];
+    UserEntity? user;
+
+    if (existingOrderSnapshot.exists) {
+      final existingData = existingOrderSnapshot.data()!;
+      existingCoffee = (existingData['coffee'] as List)
+          .map((e) => OrderModel.fromJson(
+              e as Map<String, dynamic>, existingOrderSnapshot.id))
+          .toList();
+
+      user = UserModel.fromJson(existingData['user']);
+    } else {
+      user = await _userLocalDataSource.getUserInfo();
+      if (user == null) {
+        return;
+      }
+    }
+
+    for (var newItem in newCoffeeItems) {
+      final existingIndex =
+          existingCoffee.indexWhere((item) => item.coffee.id == newItem.id);
+      if (existingIndex != -1) {
+        existingCoffee[existingIndex].counter =
+            (existingCoffee[existingIndex].counter) + (newItem.counter);
+        existingCoffee[existingIndex].price =
+            (existingCoffee[existingIndex].price ?? 0) + (newItem.price ?? 0);
+      } else {
+        existingCoffee.add(newItem);
+      }
+    }
+
+    await orderRef.set({
+      'coffee': existingCoffee.map((item) => item.toOrderJson()).toList(),
+      'user': user.toJson(),
+    });
+
+    final batch = firestore.batch();
+    for (var cartItem in cartItems.docs) {
       batch.delete(cartItem.reference);
     }
-
     await batch.commit();
   }
 

@@ -4,13 +4,13 @@ import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_name_category.dart';
 import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Orders/order_state_text.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({super.key, required this.order});
-  final OrderEntity order;
+  final OrderItemEntity order;
   @override
   Widget build(BuildContext context) {
     return AppWhiteContainer(

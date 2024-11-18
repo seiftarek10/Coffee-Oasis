@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/circular_indicator.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/empty_widget.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/error_widget.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Cart%20Items/get_cart_items_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/Bloc%20Widgets/order_all_bloc_listner.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_item_list_view.dart';
@@ -25,7 +25,7 @@ class GetCartItemsBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccessBody(List<OrderEntity> cartItems) {
+  Widget _buildSuccessBody(List<OrderItemEntity> cartItems) {
     if (cartItems.isEmpty) {
       return const AppEmptyWidget(
         height: 1,

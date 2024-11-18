@@ -1,5 +1,5 @@
 import 'package:coffee_oasis/Core/Constant/value_constant.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Cart/cart_item.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class CartSlideableItem extends StatelessWidget {
 
   final Key itemKey;
 
-  final OrderEntity cartItem;
+  final OrderItemEntity cartItem;
 
   final void Function() delete;
 

@@ -3,7 +3,7 @@ import 'package:coffee_oasis/Core/Widgets/States%20Widgets/empty_widget.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/error_widget.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/View%20Model/Cubits/Get%20All%20Orders/staff_get_all_orders_cubit.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Home%20Widgets/delivery_order_list_view.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +24,7 @@ class GetDeliveryOrdersBlocBuilder extends StatelessWidget {
     });
   }
 
-  Widget _buildSuccessBody(List<OrderEntity> orders) {
+  Widget _buildSuccessBody(List<OrderItemEntity> orders) {
     if (orders.isEmpty) {
       return const AppEmptyWidget(height: 0.6);
     }

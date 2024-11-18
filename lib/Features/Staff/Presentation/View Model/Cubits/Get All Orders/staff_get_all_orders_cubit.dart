@@ -1,6 +1,6 @@
 import 'package:coffee_oasis/Core/Base%20Cubit/base_cubit.dart';
 import 'package:coffee_oasis/Features/Staff/Domain/Use%20Cases/get_all_order_use_case.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:meta/meta.dart';
 
 part 'staff_get_all_orders_state.dart';
