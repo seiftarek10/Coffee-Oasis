@@ -22,6 +22,7 @@ class StaffOrderItem extends StatefulWidget {
 class _StaffOrderItemState extends State<StaffOrderItem> {
   List<String> coffeeNames = [];
   int length = 0;
+  String? photo;
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _StaffOrderItemState extends State<StaffOrderItem> {
       if (coffee.isDelivery == widget.isDelivery) {
         length += 1;
         coffeeNames.add(coffee.coffee.name ?? '');
+        photo = coffee.coffee.photo;
       }
     }
     super.initState();
@@ -39,10 +41,11 @@ class _StaffOrderItemState extends State<StaffOrderItem> {
     return AppWhiteContainer(
       noPadding: true,
       child: Row(children: [
-        const Expanded(
+        Expanded(
             flex: 2,
             child: AppClipReact(
-                radiusForAll: false, child: CoffeePhotoCard(aspectRatio: 1))),
+                radiusForAll: false,
+                child: CoffeePhotoCard(aspectRatio: 1, photo: photo))),
         const SizedBox(width: 16),
         Expanded(
             flex: 7,

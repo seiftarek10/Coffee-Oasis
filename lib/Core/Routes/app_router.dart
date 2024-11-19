@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/Extra%20Models/staff_order_details_extra.dart';
 import 'package:coffee_oasis/Core/Routes/page_transition.dart';
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Core/Widgets/Extra%20Models/coffee_details_extra.dart';
@@ -94,8 +95,17 @@ class AppRouter {
                 pageTransition(context, state, const SignInView())),
         GoRoute(
             path: Routes.staffOrderDetails,
-            pageBuilder: (context, state) =>
-                pageTransition(context, state, const StaffOrderDetailsView())),
+            pageBuilder: (context, state) {
+              StaffOrderDetailsExtra data =
+                  state.extra as StaffOrderDetailsExtra;
+              return pageTransition(
+                  context,
+                  state,
+                  StaffOrderDetailsView(
+                    userOrder: data.userOrder,
+                    delivery: data.delivery,
+                  ));
+            }),
         GoRoute(
             path: Routes.staff,
             pageBuilder: (context, state) =>

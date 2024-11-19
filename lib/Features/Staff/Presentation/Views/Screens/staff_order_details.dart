@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/button.dart';
@@ -9,8 +10,10 @@ import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20D
 import 'package:flutter/material.dart';
 
 class StaffOrderDetailsView extends StatelessWidget {
-  const StaffOrderDetailsView({super.key});
-
+  const StaffOrderDetailsView(
+      {super.key, required this.userOrder, required this.delivery});
+  final UserOrderEntity userOrder;
+  final bool delivery;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +30,9 @@ class StaffOrderDetailsView extends StatelessWidget {
                               Space.k40,
                               const RequesterInfo(),
                               Space.k24,
-                              const StaffOrderContainer(
-                                deliver: true,
+                              StaffOrderContainer(
+                                deliver: delivery,
+                                allOrderCoffee: userOrder.coffee,
                               ),
                               Space.k24,
                               const StaffPaymentSummaryContaier(

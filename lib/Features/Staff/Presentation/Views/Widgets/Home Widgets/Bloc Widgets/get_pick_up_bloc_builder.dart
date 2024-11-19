@@ -23,21 +23,6 @@ class GetPickUpBlocBuilder extends StatelessWidget {
         }
       },
     );
-
-    // return StreamBuilder(
-    //     stream: FirebaseFirestore.instance
-    //         .collection(EndPoints.allOrders)
-    //         .where('isDelivery', isEqualTo: false)
-    //         .snapshots(),
-    //     builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    //       if (snapshot.hasData) {
-    //         return _buildSuccessBody(snapshot.data!.docs);
-    //       } else if (snapshot.hasError) {
-    //         return _buildErrorBody();
-    //       } else {
-    //         return _buildLoadingBody();
-    //       }
-    //     });
   }
 
   Widget _buildSuccessBody(List<UserOrderEntity> orders) {
