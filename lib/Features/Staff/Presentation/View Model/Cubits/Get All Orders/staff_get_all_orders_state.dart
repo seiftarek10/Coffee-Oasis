@@ -13,8 +13,14 @@ final class StaffGetAllOrdersFailure extends StaffGetAllOrdersState {
   StaffGetAllOrdersFailure({required this.errMessage});
 }
 
-final class StaffGetAllOrdersSuccess extends StaffGetAllOrdersState {
-  final List<OrderItemEntity> orders;
+final class StaffGetAllPickUpOrdersSuccess extends StaffGetAllOrdersState {
+  final List<UserOrderEntity> orders;
 
-  StaffGetAllOrdersSuccess({required this.orders});
+  StaffGetAllPickUpOrdersSuccess({required this.orders});
+}
+
+final class StaffGetAllDeliveryOrdersSuccess extends StaffGetAllOrdersState {
+  final List<UserOrderEntity> orders;
+
+  StaffGetAllDeliveryOrdersSuccess({required this.orders});
 }

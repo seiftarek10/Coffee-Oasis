@@ -1,3 +1,5 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Home%20Widgets/staff_order_item.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +16,12 @@ class DeliveryAllOrdersListView extends StatelessWidget {
           onTap: () {
             GoRouter.of(context).push(Routes.staffOrderDetails);
           },
-          child: const Padding(
-            padding: EdgeInsets.only(bottom: 24),
-            child: StaffOrderItem(),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 24),
+            child: StaffOrderItem(
+              order: UserOrderEntity(coffee: [], user: UserEntity()),
+              isDelivery: true,
+            ),
           ),
         );
       }),

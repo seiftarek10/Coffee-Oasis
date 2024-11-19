@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
+import 'package:coffee_oasis/Core/Models/order_model.dart';
+import 'package:coffee_oasis/Core/Models/user_model.dart';
 
 class UserOrderEntity {
   final String? id;
@@ -13,5 +16,19 @@ class UserOrderEntity {
       'coffee': coffee?.map((order) => order.toOrderJson()).toList(),
       'user': user?.toJson()
     };
+  }
+
+  factory UserOrderEntity.fromStream(
+      DocumentSnapshot<Map<String, dynamic>> json) {
+    final data = json.data() as Map<String, dynamic>;
+    final coffeeList = data['coffee'] as List<dynamic>;
+
+    return UserOrderEntity(
+        id: json.id,
+        coffee: coffeeList
+            .map(
+                (coffee) => OrderModel.fromJson(coffee, coffee['coffee']['id']))
+            .toList(),
+        user: UserModel.fromJson(data['user']));
   }
 }

@@ -14,6 +14,8 @@ import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/remote_data_sourc
 import 'package:coffee_oasis/Features/Owner/Data/Repos/owner_repo_impl.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Features/Owner/Domain/Use%20Case/get_all_categories.dart';
+import 'package:coffee_oasis/Features/Staff/Data/Data%20Source/remote_data_source.dart';
+import 'package:coffee_oasis/Features/Staff/Data/Repo/staff_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
@@ -79,4 +81,6 @@ void setupGetIt() {
       userRemoteDataSource: UserRemoteDataSourceImpl(
           getIt.get<FireStoreServices>(), getIt.get<UserLocalDataSourceImpl>()),
       userLocalDataSource: getIt.get<UserLocalDataSourceImpl>()));
+  getIt.registerSingleton<StaffRepoImpl>(
+      StaffRepoImpl(staffRemoteDataSource: StaffRemoteDataSourceImpl()));
 }
