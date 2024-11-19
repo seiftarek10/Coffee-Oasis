@@ -27,9 +27,11 @@ class Tabs extends StatelessWidget {
           if (index == 0) {
             BlocProvider.of<StaffGetAllOrdersCubit>(context)
                 .getAllOrders(isDelivery: false);
+            BlocProvider.of<StaffGetAllOrdersCubit>(context).inDelivery = false;
           } else {
             BlocProvider.of<StaffGetAllOrdersCubit>(context)
                 .getAllOrders(isDelivery: true);
+            BlocProvider.of<StaffGetAllOrdersCubit>(context).inDelivery = true;
           }
         },
         tabs: [

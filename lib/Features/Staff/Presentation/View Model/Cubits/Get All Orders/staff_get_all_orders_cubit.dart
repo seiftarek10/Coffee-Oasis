@@ -11,6 +11,11 @@ class StaffGetAllOrdersCubit extends BaseCubit<StaffGetAllOrdersState> {
   StaffGetAllOrdersCubit(this._getAllOrdersUseCase)
       : super(StaffGetAllOrdersInitial());
 
+  List<UserOrderEntity> deliveryOrders = [];
+  List<UserOrderEntity> pickupOrders = [];
+
+  bool inDelivery = false;
+
   void getAllOrders({required bool isDelivery}) {
     safeEmit(StaffGetAllOrdersLoading());
 
@@ -22,8 +27,10 @@ class StaffGetAllOrdersCubit extends BaseCubit<StaffGetAllOrdersState> {
             (orders) {
           if (isDelivery) {
             safeEmit(StaffGetAllDeliveryOrdersSuccess(orders: orders));
+            deliveryOrders = orders;
           } else {
             safeEmit(StaffGetAllPickUpOrdersSuccess(orders: orders));
+            pickupOrders = orders;
           }
         });
       },
@@ -31,5 +38,25 @@ class StaffGetAllOrdersCubit extends BaseCubit<StaffGetAllOrdersState> {
         safeEmit(StaffGetAllOrdersFailure(errMessage: error.toString()));
       },
     );
+  }
+
+  void searchOrders({required String word}) {
+    List<UserOrderEntity> searchedList = [];
+    if (inDelivery) {
+      searchedList = deliveryOrders
+          .where((order) =>
+              order.user?.userName?.toLowerCase() == word.toLowerCase())
+          .toList();
+      safeEmit(StaffGetAllDeliveryOrdersSuccess(orders: searchedList));
+    } else {
+      searchedList = pickupOrders
+          .where((order) =>
+              order.user?.userName
+                  ?.toLowerCase()
+                  .startsWith(word.toLowerCase()) ??
+              false)
+          .toList();
+      safeEmit(StaffGetAllPickUpOrdersSuccess(orders: searchedList));
+    }
   }
 }
