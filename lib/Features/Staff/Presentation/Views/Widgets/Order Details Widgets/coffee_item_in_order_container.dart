@@ -29,7 +29,7 @@ class CoffeeItemInStaffOrderDetailsContainer extends StatelessWidget {
           flex: 7,
           child: TitleAndSubTitleCaffeeCard(
             title: order.coffee.name ?? 'No Coffee Name',
-            subTitle: order.coffee.category ?? 'No Category',
+            subTitle: "Coffee Price: " "${order.coffee.price.toString()}" r" $",
           )),
       Text(order.counter.toString(), style: Fonts.font18_700)
     ]);

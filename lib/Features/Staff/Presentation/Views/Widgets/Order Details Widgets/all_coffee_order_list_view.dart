@@ -13,7 +13,7 @@ class AllCoffeeOrderListView extends StatelessWidget {
         itemCount: allOrderCoffee.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: CoffeeItemInStaffOrderDetailsContainer(
               order: allOrderCoffee[index],
             ),

@@ -1,10 +1,11 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/button.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/order_details_header_text.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/payment_summary_contaier.dart';
-import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/requester_info.dart';
+import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/user_info.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/staff_order_container.dart';
 
 import 'package:flutter/material.dart';
@@ -28,15 +29,18 @@ class StaffOrderDetailsView extends StatelessWidget {
                               Space.k40,
                               const OrderDetailsHeaderText(),
                               Space.k40,
-                              const RequesterInfo(),
+                              StaffUserInfoContainerinOrderDetails(
+                                user: userOrder.user ?? UserEntity(),
+                              ),
                               Space.k24,
                               StaffOrderContainer(
                                 deliver: delivery,
                                 allOrderCoffee: userOrder.coffee,
                               ),
                               Space.k24,
-                              const StaffPaymentSummaryContaier(
-                                deliver: true,
+                              StaffPaymentSummaryContaier(
+                                deliver: delivery,
+                                allCOrderCoffee: userOrder.coffee ?? [],
                               ),
                               Space.k40,
                               const StaffOrderDetailsButton(),
