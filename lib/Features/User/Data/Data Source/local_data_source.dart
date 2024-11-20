@@ -6,7 +6,7 @@ import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
 import 'package:coffee_oasis/Core/Constant/value_constant.dart';
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/hive_services.dart';
 import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class UserLocalDataSource {
@@ -18,8 +18,8 @@ abstract class UserLocalDataSource {
   Future<void> saveCoffeeDrink({required CoffeeDrinksHiveModel coffeeDrinks});
   List<CoffeeEntity> getAllCoffee();
   List<CoffeeEntity> getCoffeeDrinks({required String id});
-  Future<void> saveCartItems(List<OrderEntity> cartItems);
-  List<OrderEntity> getCartItems();
+  Future<void> saveCartItems(List<OrderItemEntity> cartItems);
+  List<OrderItemEntity> getCartItems();
   Future<void> saveFavoritesCoffee(
       {required CoffeeDrinksHiveModel favoritesCoffee});
   List<CoffeeEntity> getFavoritesCoffee();
@@ -33,7 +33,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   final HiveServices<UserEntity> userBox;
   final HiveServices<CategoryEntity> categoryBox;
   final HiveServices<CoffeeDrinksHiveModel> coffeeDrinksBox;
-  final HiveServices<OrderEntity> cartBox;
+  final HiveServices<OrderItemEntity> cartBox;
   final HiveServices<ShopInfoEntity> shopInfoBox;
 
   UserLocalDataSourceImpl(
@@ -54,7 +54,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<String?> getUserID() async {
-    Box<String> box = await Hive.openBox<String>(BoxesName.uidBox);
+    Box<String> box = Hive.box<String>(BoxesName.uidBox);
     return box.get(AppConstant.uidKey);
   }
 
@@ -106,12 +106,12 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  Future<void> saveCartItems(List<OrderEntity> cartItems) async {
+  Future<void> saveCartItems(List<OrderItemEntity> cartItems) async {
     await cartBox.saveData(cartItems);
   }
 
   @override
-  List<OrderEntity> getCartItems() {
+  List<OrderItemEntity> getCartItems() {
     return cartBox.getData();
   }
 

@@ -1,31 +1,36 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
 import 'package:flutter/material.dart';
 
-class RequesterInfo extends StatelessWidget {
-  const RequesterInfo({
+class StaffUserInfoContainerinOrderDetails extends StatelessWidget {
+  const StaffUserInfoContainerinOrderDetails({
     super.key,
+    required this.user,
   });
+
+  final UserEntity user;
 
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('Requster Info',
-          style: Fonts.font24_700.copyWith(color: Colors.white)),
+      Text('User Info', style: Fonts.font24_700.copyWith(color: Colors.white)),
       Space.k8,
       AppWhiteContainer(
           child: Column(children: [
-        _buildRequesterInfoItem(info: 'Seif Tariq', icon: Icons.person),
+        _buildRequesterInfoItem(
+            info: user.userName ?? 'No Name', icon: Icons.person),
         Space.k12,
-        _buildRequesterInfoItem(info: '01027870171', icon: Icons.phone),
+        _buildRequesterInfoItem(
+            info: user.phoneNumber ?? '00000000000', icon: Icons.phone),
         Space.k12,
-        _buildRequesterInfoItem(info: 'Giza', icon: Icons.location_on_rounded),
+        _buildRequesterInfoItem(
+            info: user.address ?? 'No Address',
+            icon: Icons.location_on_rounded),
       ]))
     ]);
   }
-
-
 
   Widget _buildRequesterInfoItem(
       {required String info, required IconData icon}) {

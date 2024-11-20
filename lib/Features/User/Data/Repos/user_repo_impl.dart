@@ -4,11 +4,12 @@ import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Repos/user_repo.dart';
 import 'package:dartz/dartz.dart';
 
@@ -116,7 +117,7 @@ class UserRepoImpl implements UserRepo {
 
   @override
   Future<Either<Failure, void>> addToCart(
-      {required OrderEntity coffeeItem}) async {
+      {required OrderItemEntity coffeeItem}) async {
     try {
       await _userRemoteDataSource.addToCart(cartItem: coffeeItem);
       return right(unit);
@@ -129,13 +130,13 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<Either<Failure, List<OrderEntity>>> getCartItems() async {
+  Future<Either<Failure, List<OrderItemEntity>>> getCartItems() async {
     try {
       String? uid = await _userLocalDataSource.getUserID();
       if (uid == null) {
         return right([]);
       }
-      List<OrderEntity> cartItem = [];
+      List<OrderItemEntity> cartItem = [];
       cartItem = _userLocalDataSource.getCartItems();
       if (cartItem.isEmpty) {
         cartItem = await _userRemoteDataSource.getCartItems();
@@ -176,11 +177,17 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<Either<Failure, void>> makeOrder({required OrderEntity order}) async {
+  Future<Either<Failure, void>> makeOrder(
+      {required UserOrderEntity order,
+      required String id,
+      required bool isDelivery,
+      required bool fromCart}) async {
     try {
-      await _userRemoteDataSource.makeOrder(order: order);
-      await _userRemoteDataSource.deleteFromCartAfterOrder(
-          id: order.coffee.id!);
+      await _userRemoteDataSource.makeOrder(
+          order: order, isDelivery: isDelivery);
+      if (fromCart) {
+        await _userRemoteDataSource.deleteFromCartAfterOrder(id: id);
+      }
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {
@@ -191,7 +198,7 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<Either<Failure, List<OrderEntity>>> getMyOrders() async {
+  Future<Either<Failure, List<OrderItemEntity>>> getMyOrders() async {
     try {
       return right(await _userRemoteDataSource.getMyOrders());
     } catch (e) {

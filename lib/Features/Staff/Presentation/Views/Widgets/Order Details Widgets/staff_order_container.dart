@@ -1,14 +1,15 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
-import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
-import 'package:coffee_oasis/Core/Widgets/coffee_name_category.dart';
-import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
+
 import 'package:coffee_oasis/Core/Widgets/white_container.dart';
+import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/all_coffee_order_list_view.dart';
 import 'package:flutter/material.dart';
 
 class StaffOrderContainer extends StatelessWidget {
-  const StaffOrderContainer({super.key, required this.deliver});
-
+  const StaffOrderContainer(
+      {super.key, required this.deliver, required this.allOrderCoffee});
+  final List<OrderItemEntity>? allOrderCoffee;
   final bool deliver;
   @override
   Widget build(BuildContext context) {
@@ -18,21 +19,9 @@ class StaffOrderContainer extends StatelessWidget {
       AppWhiteContainer(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           child: Column(children: [
-            Row(children: [
-              const Expanded(
-                  flex: 2,
-                  child: AppClipReact(
-                      radiusForAll: true,
-                      child: CoffeePhotoCard(aspectRatio: 1))),
-              const SizedBox(width: 16),
-              const Expanded(
-                  flex: 7,
-                  child: TitleAndSubTitleCaffeeCard(
-                    title: '',
-                    subTitle: '',
-                  )),
-              Text('1', style: Fonts.font18_700)
-            ]),
+            AllCoffeeOrderListView(
+              allOrderCoffee: allOrderCoffee ?? [],
+            ),
             deliver
                 ? Column(children: [
                     const Divider(height: 30),

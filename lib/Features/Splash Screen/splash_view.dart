@@ -20,15 +20,14 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   void _navigation() {
     Future.delayed(const Duration(milliseconds: 500), () async {
-      bool loggedIn = await chenkedSignIn();
-      nextPage(flavor: widget.flavor, isUserLoggedIn: loggedIn);
+      nextPage(flavor: widget.flavor);
     });
   }
 
-  void nextPage({required Flavor flavor, required bool isUserLoggedIn}) {
+  Future<void> nextPage({required Flavor flavor}) async {
     switch (flavor) {
       case Flavor.user:
-        if (isUserLoggedIn) {
+        if (chenkedSignIn()) {
           GoRouter.of(context).pushReplacement(Routes.user);
         } else {
           GoRouter.of(context).pushReplacement(Routes.signin);
@@ -46,8 +45,8 @@ class _SplashViewState extends State<SplashView> {
     }
   }
 
-  Future<bool> chenkedSignIn() async {
-    var box = await Hive.openBox<String>(BoxesName.uidBox);
+  bool chenkedSignIn() {
+    var box = Hive.box<String>(BoxesName.uidBox);
     String? uid = box.get(AppConstant.uidKey);
     if (uid == null) {
       return false;

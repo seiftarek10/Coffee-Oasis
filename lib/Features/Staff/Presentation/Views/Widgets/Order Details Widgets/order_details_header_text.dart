@@ -9,23 +9,18 @@ class OrderDetailsHeaderText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-         ArrowBackIcon(),
-         Expanded(
-           child: RichHeaderText(
-            title: 'Order Details',
-            smallTitle:true ,
-            subTitle: [
-              'Comprehensive ',
-              'Information ',
-              'to Manage Coffee Oasis Orders ',
-              'Seamlessly'
-            ],
-                   ),
-         )
-      ],
-    );
+    return const Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      ArrowBackIcon(),
+      Expanded(
+          child: RichHeaderText(
+              title: 'Order Details',
+              smallTitle: true,
+              subTitle: [
+            'Comprehensive ',
+            'Information ',
+            'to Manage Coffee Oasis Orders ',
+            'Seamlessly'
+          ]))
+    ]);
   }
 }

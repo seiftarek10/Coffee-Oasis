@@ -4,7 +4,7 @@ import 'package:coffee_oasis/Core/Theme/fonts.dart';
 
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_user_info_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Order%20Details%20/Bloc%20Widgets/get_contact_user_info.dart';
@@ -17,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OrderDetailsView extends StatelessWidget {
   const OrderDetailsView({super.key, required this.order});
 
-  final OrderEntity order;
+  final OrderItemEntity order;
 
   @override
   Widget build(BuildContext context) {

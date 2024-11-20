@@ -12,19 +12,10 @@ class UserNameBlocBuilder extends StatelessWidget {
     return BlocBuilder<GetUserInfoCubit, GetUserInfoState>(
         builder: (context, state) {
       if (state is GetUserInfoSuccess) {
-        return TweenAnimationBuilder(
-            tween: Tween<double>(begin: 0, end: 1),
-            duration: const Duration(milliseconds: 230),
-            builder: (context, value, child) {
-              return Opacity(
-                opacity: value,
-                child: Text(
-                  state.userEntity.userName ?? '',
-                  style:
-                      Fonts.font20_700.copyWith(color: AppColors.kWhiteObacity),
-                ),
-              );
-            });
+        return Text(
+          state.userEntity.userName ?? '',
+          style: Fonts.font20_700.copyWith(color: AppColors.kWhiteObacity),
+        );
       } else {
         return const Text('');
       }

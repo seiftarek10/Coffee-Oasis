@@ -8,7 +8,7 @@ final class GetMyOrdersInitial extends GetMyOrdersState {}
 final class GetMyOrdersLoading extends GetMyOrdersState {}
 
 final class GetMyOrdersSuccess extends GetMyOrdersState {
-  final List<OrderEntity> orders;
+  final List<OrderItemEntity> orders;
 
   GetMyOrdersSuccess({required this.orders});
 }

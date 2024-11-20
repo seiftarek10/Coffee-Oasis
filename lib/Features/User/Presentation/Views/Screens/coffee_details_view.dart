@@ -1,7 +1,7 @@
 import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/handle_fav_coffee_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/is_favorite_item_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/make_order_use_case.dart';
@@ -24,7 +24,7 @@ class CoffeeDetailsView extends StatefulWidget {
       this.getCartItemsCubit,
       required this.fromCartView});
 
-  final OrderEntity orderEntity;
+  final OrderItemEntity orderEntity;
   final GetCartItemsCubit? getCartItemsCubit;
   final bool fromCartView;
 
@@ -33,7 +33,7 @@ class CoffeeDetailsView extends StatefulWidget {
 }
 
 class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
-  late OrderEntity makedOrder;
+  late OrderItemEntity makedOrder;
 
   @override
   void initState() {
@@ -52,7 +52,7 @@ class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
             create: (context) => HandleFavoriteCubit(
                 HandleFavCoffeeUseCase(getIt.get<UserRepoImpl>()),
                 IsFavoriteItemUseCase(getIt.get<UserRepoImpl>()))
-              ..isFavoriteCoffee(id: widget.orderEntity.coffee.id!))
+              ..isFavoriteCoffee(id: widget.orderEntity.coffee.id!)),
       ],
       child: Scaffold(
           bottomNavigationBar: widget.fromCartView
@@ -94,7 +94,7 @@ class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
                                 counter: widget.orderEntity.counter,
                                 counterNotifier: (counter) {
                                   setState(() {
-                                    makedOrder = OrderEntity(
+                                    makedOrder = OrderItemEntity(
                                         counter: counter,
                                         price: counter *
                                             (widget.orderEntity.coffee.price ??

@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/Extra%20Models/staff_order_details_extra.dart';
 import 'package:coffee_oasis/Core/Routes/page_transition.dart';
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Core/Widgets/Extra%20Models/coffee_details_extra.dart';
@@ -11,7 +12,7 @@ import 'package:coffee_oasis/Features/Owner/Presentation/Views/owner.dart';
 import 'package:coffee_oasis/Features/Splash%20Screen/splash_view.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Screens/staff_home_view.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Screens/staff_order_details.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/coffee_details_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/favorite_view.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Screens/order_details.dart';
@@ -72,7 +73,7 @@ class AppRouter {
         GoRoute(
             path: Routes.orderDetails,
             pageBuilder: (context, state) {
-              OrderEntity order = state.extra as OrderEntity;
+              OrderItemEntity order = state.extra as OrderItemEntity;
               return pageTransition(
                   context,
                   state,
@@ -94,8 +95,17 @@ class AppRouter {
                 pageTransition(context, state, const SignInView())),
         GoRoute(
             path: Routes.staffOrderDetails,
-            pageBuilder: (context, state) =>
-                pageTransition(context, state, const StaffOrderDetailsView())),
+            pageBuilder: (context, state) {
+              StaffOrderDetailsExtra data =
+                  state.extra as StaffOrderDetailsExtra;
+              return pageTransition(
+                  context,
+                  state,
+                  StaffOrderDetailsView(
+                    userOrder: data.userOrder,
+                    delivery: data.delivery,
+                  ));
+            }),
         GoRoute(
             path: Routes.staff,
             pageBuilder: (context, state) =>

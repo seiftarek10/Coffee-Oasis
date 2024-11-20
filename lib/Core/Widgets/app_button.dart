@@ -35,9 +35,11 @@ class _AppButtonState extends State<AppButton> {
   bool _isLoading = false;
 
   void _toggleLoading() {
-    setState(() {
-      _isLoading = !_isLoading;
-    });
+    if (mounted) {
+      setState(() {
+        _isLoading = !_isLoading;
+      });
+    }
   }
 
   @override

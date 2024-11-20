@@ -2,7 +2,7 @@ import 'package:coffee_oasis/Core/Utils/assets.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_photo_card.dart';
 import 'package:coffee_oasis/Core/Widgets/coffee_name_category.dart';
 import 'package:coffee_oasis/Core/Widgets/app_clip_rect.dart';
-import 'package:coffee_oasis/Features/User/Domain/Entity/order_entity.dart';
+import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:flutter/material.dart';
 
 class CoffeePhotoAndName extends StatelessWidget {
@@ -12,7 +12,7 @@ class CoffeePhotoAndName extends StatelessWidget {
     required this.tag,
   });
 
-  final OrderEntity orderEntity;
+  final OrderItemEntity orderEntity;
   final String tag;
 
   @override
