@@ -32,8 +32,8 @@ abstract class HiveSetup {
     if (!Hive.isBoxOpen(BoxesName.categoriesBox)) {
       await Hive.openBox<CategoryEntity>(BoxesName.categoriesBox);
     }
-    if (!Hive.isBoxOpen(BoxesName.shopInfo)) {
-      await Hive.openBox<ShopInfoEntity>(BoxesName.shopInfo);
+    if (!Hive.isBoxOpen(BoxesName.shopInfoBox)) {
+      await Hive.openBox<ShopInfoEntity>(BoxesName.shopInfoBox);
     }
   }
 
@@ -50,8 +50,8 @@ abstract class HiveSetup {
     if (!Hive.isBoxOpen(BoxesName.categoriesBox)) {
       await Hive.openBox<CategoryEntity>(BoxesName.categoriesBox);
     }
-    if (!Hive.isBoxOpen(BoxesName.shopInfo)) {
-      await Hive.openBox<ShopInfoEntity>(BoxesName.shopInfo);
+    if (!Hive.isBoxOpen(BoxesName.shopInfoBox)) {
+      await Hive.openBox<ShopInfoEntity>(BoxesName.shopInfoBox);
     }
   }
 }

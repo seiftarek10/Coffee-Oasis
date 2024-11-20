@@ -74,13 +74,14 @@ void setupGetIt() {
     coffeeDrinksBox:
         HiveServices<CoffeeDrinksHiveModel>(boxName: BoxesName.coffeeBox),
     cartBox: HiveServices<OrderItemEntity>(boxName: BoxesName.cartBox),
-    shopInfoBox: HiveServices<ShopInfoEntity>(boxName: BoxesName.shopInfo),
+    shopInfoBox: HiveServices<ShopInfoEntity>(boxName: BoxesName.shopInfoBox),
   ));
 
   getIt.registerSingleton<UserRepoImpl>(UserRepoImpl(
       userRemoteDataSource: UserRemoteDataSourceImpl(
           getIt.get<FireStoreServices>(), getIt.get<UserLocalDataSourceImpl>()),
       userLocalDataSource: getIt.get<UserLocalDataSourceImpl>()));
-  getIt.registerSingleton<StaffRepoImpl>(
-      StaffRepoImpl(staffRemoteDataSource: StaffRemoteDataSourceImpl(fireStoreServices: getIt.get<FireStoreServices>())));
+  getIt.registerSingleton<StaffRepoImpl>(StaffRepoImpl(
+      staffRemoteDataSource: StaffRemoteDataSourceImpl(
+          fireStoreServices: getIt.get<FireStoreServices>())));
 }

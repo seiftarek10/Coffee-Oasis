@@ -10,7 +10,8 @@ class AppBottomBar extends StatefulWidget {
     super.key,
     required this.pages,
     required this.bottomBarItmeModel,
-    required this.useBackGround, this.needRightPadding,
+    required this.useBackGround,
+    this.needRightPadding,
   });
 
   final List<Widget> pages;
@@ -35,20 +36,35 @@ class _AppBottomBarState extends State<AppBottomBar> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: Row(
-                children: widget.bottomBarItmeModel.asMap().entries.map((e) {
-              return Expanded(
-                child: NavigationBarItem(
-                    onTap: () {
-                      setState(() {
-                        _selectedIndex = e.key;
-                      });
-                    },
-                    bottomBarItemModel: e.value,
-                    isActive: _selectedIndex == e.key,
-                    needRightPadding: widget.needRightPadding,
-                    )
-              );
-            }).toList()),
+              children: [
+                if (widget.bottomBarItmeModel.length == 2)
+                  const Expanded(child: SizedBox.shrink()),
+                ...widget.bottomBarItmeModel.asMap().entries.map((e) {
+                  final isLast = e.key == widget.bottomBarItmeModel.length - 1;
+                  return [
+                    Expanded(
+                      flex: 3,
+                      child: NavigationBarItem(
+                        onTap: () {
+                          setState(() {
+                            _selectedIndex = e.key;
+                          });
+                        },
+                        bottomBarItemModel: e.value,
+                        isActive: _selectedIndex == e.key,
+                        needRightPadding: widget.needRightPadding,
+                      ),
+                    ),
+                    if (!isLast && widget.bottomBarItmeModel.length == 2)
+                      const Expanded(child: SizedBox.shrink()),
+                  ];
+                }).expand((item) => item), // Flatten the list
+                if (widget.bottomBarItmeModel.length == 2)
+                  const Expanded(
+                      child:
+                          SizedBox.shrink()), // Add an Expanded after the items
+              ],
+            ),
           )),
       body: SafeArea(
           child: widget.useBackGround == true
