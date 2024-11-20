@@ -45,14 +45,18 @@ class _StaffOrderItemState extends State<StaffOrderItem> {
       child: Stack(
         children: [
           Positioned(
-              top: 10.h,
-              right: 10.w,
-              child: Text(
-                DateFormat.Md().add_Hm().format(DateTime.parse(
-                    widget.order.coffee?.last.date ??
-                        DateTime.now().toString())),
-                style: Fonts.font14_500,
-              )),
+            top: 10.h,
+            right: 10.w,
+            child: Text(
+              widget.order.coffee?.isNotEmpty == true
+                  ? DateFormat.Md().add_Hm().format(
+                        DateTime.parse(widget.order.coffee!.last.date ??
+                            DateTime.now().toString()),
+                      )
+                  : 'No Date Available',
+              style: Fonts.font14_500,
+            ),
+          ),
           Row(children: [
             Expanded(
                 flex: 2,
