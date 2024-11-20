@@ -17,15 +17,17 @@ class OrderItemEntity extends HiveObject {
   bool? isFinished;
   @HiveField(5)
   num? price;
+  @HiveField(6)
+  String? date;
 
-  OrderItemEntity({
-    this.id,
-    required this.counter,
-    required this.price,
-    required this.coffee,
-    this.isDelivery,
-    this.isFinished,
-  });
+  OrderItemEntity(
+      {this.id,
+      required this.counter,
+      required this.price,
+      required this.coffee,
+      this.isDelivery,
+      this.isFinished,
+      this.date});
 
   toCartJson() {
     return {
@@ -35,13 +37,14 @@ class OrderItemEntity extends HiveObject {
     };
   }
 
-  toOrderJson() {
+  toOrderJson({required String date}) {
     return {
       'counter': counter,
       'price': price,
       'coffee': coffee.toJson(),
       'isDelivery': isDelivery,
       'isFinished': isFinished,
+      'Date': date
     };
   }
 }

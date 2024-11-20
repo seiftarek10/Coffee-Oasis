@@ -211,11 +211,14 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
             (existingCoffee[existingIndex].price ?? 0) + newCoffeeItem.price!;
 
         await orderRef.update({
-          'coffee': existingCoffee.map((item) => item.toOrderJson()).toList(),
+          'coffee': existingCoffee
+              .map((item) => item.toOrderJson(date: DateTime.now().toString()))
+              .toList(),
         });
       } else {
         await orderRef.update({
-          'coffee': FieldValue.arrayUnion([newCoffeeItem.toOrderJson()]),
+          'coffee': FieldValue.arrayUnion(
+              [newCoffeeItem.toOrderJson(date: DateTime.now().toString())]),
         });
       }
     } else {
@@ -309,7 +312,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
 
     await orderRef.set({
-      'coffee': existingCoffee.map((item) => item.toOrderJson()).toList(),
+      'coffee': existingCoffee
+          .map((item) => item.toOrderJson(date: item.date ?? ''))
+          .toList(),
       'user': user.toJson(),
     });
 

@@ -13,7 +13,8 @@ class UserOrderEntity {
 
   toJson() {
     return {
-      'coffee': coffee?.map((order) => order.toOrderJson()).toList(),
+      'coffee':
+          coffee?.map((order) => order.toOrderJson(date: order.date!)).toList(),
       'user': user?.toJson()
     };
   }

@@ -62,6 +62,7 @@ class CartItemListView extends StatelessWidget {
               onPressed: (trigger) async {
                 trigger();
                 await BlocProvider.of<OrderAllCubit>(context).orderAll();
+                trigger();
               }),
         ),
         Space.bottomSpace
