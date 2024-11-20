@@ -3,12 +3,11 @@ import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Features/Staff/Domain/Repo/staff_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class StaffGetAllOrdersUseCase {
+class StaffGetPickUpOrdersUseCase {
   final StaffRepo _staffRepo;
 
-  StaffGetAllOrdersUseCase(this._staffRepo);
-  Stream<Either<Failure, List<UserOrderEntity>>> execute(
-      {required bool isDelivery}) {
-    return _staffRepo.getAllOrders(isDelivery: isDelivery);
+  StaffGetPickUpOrdersUseCase(this._staffRepo);
+  Stream<Either<Failure, List<UserOrderEntity>>> execute() {
+    return _staffRepo.getPickupOrders();
   }
 }

@@ -1,4 +1,3 @@
-import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Extra%20Models/staff_order_details_extra.dart';
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
@@ -17,17 +16,9 @@ class PickUpOrdersListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            List<OrderItemEntity> allCoffeeOrders = orders[index]
-                    .coffee
-                    ?.where((coffee) => coffee.isDelivery == false)
-                    .toList() ??
-                [];
-
             GoRouter.of(context).push(Routes.staffOrderDetails,
                 extra: StaffOrderDetailsExtra(
-                    userOrder: UserOrderEntity(
-                        coffee: allCoffeeOrders, user: orders[index].user),
-                    delivery: false));
+                    userOrder: orders[index], delivery: false));
           },
           child: Padding(
             padding: const EdgeInsets.only(bottom: 24),

@@ -12,11 +12,10 @@ class StaffRepoImpl implements StaffRepo {
       : _staffRemoteDataSource = staffRemoteDataSource;
 
   @override
-  Stream<Either<Failure, List<UserOrderEntity>>> getAllOrders(
-      {required bool isDelivery}) {
+  Stream<Either<Failure, List<UserOrderEntity>>> getDeliveryOrders() {
     try {
       Stream<List<UserOrderEntity>> orders =
-          _staffRemoteDataSource.getAllOrders(isDelivery: isDelivery);
+          _staffRemoteDataSource.getDeliveryOrders();
       return orders.map((order) => right(order));
     } catch (e) {
       if (e is FirebaseException) {
@@ -27,11 +26,38 @@ class StaffRepoImpl implements StaffRepo {
   }
 
   @override
-  Future<Either<Failure, void>> submitOrder(
-      {required String orderId, required String coffeeId}) async {
+  Future<Either<Failure, void>> submitDeliveryOrder(
+      {required UserOrderEntity userOrder}) async {
     try {
-      await _staffRemoteDataSource.submitOrder(
-          orderId: orderId, coffeeId: coffeeId);
+      await _staffRemoteDataSource.submitDeliveryOrder(userOrder: userOrder);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Stream<Either<Failure, List<UserOrderEntity>>> getPickupOrders() {
+    try {
+      Stream<List<UserOrderEntity>> orders =
+          _staffRemoteDataSource.getPickupOrders();
+      return orders.map((order) => right(order));
+    } catch (e) {
+      if (e is FirebaseException) {
+        return Stream.value(left(FireBaseError.firebaseException(e)));
+      }
+      return Stream.value(left(FireBaseError(errMessage: e.toString())));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> submitPickuoOrder(
+      {required UserOrderEntity userOrder}) async {
+    try {
+      await _staffRemoteDataSource.submitPickUpyOrder(userOrder: userOrder);
       return right(unit);
     } catch (e) {
       if (e is FirebaseException) {

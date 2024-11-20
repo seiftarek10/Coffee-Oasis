@@ -10,4 +10,6 @@ abstract class EndPoints {
   static const String userOrders = 'userOrders';
   static const String favorites = 'favorites';
   static const String userFavorites = 'userFavorites';
+  static const String ownerDeliveryOrders = 'OwnerDeliveryOrders';
+  static const String ownerPickUpOrders = 'OwnerPickUpOrders';
 }

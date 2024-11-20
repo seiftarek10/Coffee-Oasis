@@ -36,8 +36,7 @@ class GetPickUpBlocBuilder extends StatelessWidget {
     return AppErrorWidget(
         height: 0.6,
         onTap: () {
-          BlocProvider.of<StaffGetAllOrdersCubit>(context)
-              .getAllOrders(isDelivery: false);
+          BlocProvider.of<StaffGetAllOrdersCubit>(context).getPickupOrders();
         },
         text: 'some Thing Is Wrong');
   }

@@ -4,7 +4,8 @@ import 'package:coffee_oasis/Core/Helpers/space.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/backgrounc.dart';
 import 'package:coffee_oasis/Features/Staff/Data/Repo/staff_repo_impl.dart';
-import 'package:coffee_oasis/Features/Staff/Domain/Use%20Cases/submit_order_use_case.dart';
+import 'package:coffee_oasis/Features/Staff/Domain/Use%20Cases/submit_delivery_order_use_case.dart';
+import 'package:coffee_oasis/Features/Staff/Domain/Use%20Cases/submit_picku_order_use_case.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/View%20Model/Cubits/Submit%20Order/submit_order_cubit.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/button.dart';
 import 'package:coffee_oasis/Features/Staff/Presentation/Views/Widgets/Order%20Details%20Widgets/order_details_header_text.dart';
@@ -23,8 +24,9 @@ class StaffOrderDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          SubmitOrderCubit(SubmitOrderUseCase(getIt.get<StaffRepoImpl>())),
+      create: (context) => SubmitOrderCubit(
+          SubmitDeliveryOrderUseCase(getIt.get<StaffRepoImpl>()),
+          SubmitPickUpOrderUseCase(getIt.get<StaffRepoImpl>())),
       child: Scaffold(
           body: SafeArea(
               child: Background(
@@ -51,7 +53,10 @@ class StaffOrderDetailsView extends StatelessWidget {
                                   allCOrderCoffee: userOrder.coffee ?? [],
                                 ),
                                 Space.k40,
-                                const StaffOrderDetailsButton(),
+                                StaffOrderDetailsButton(
+                                  isDelivery: delivery,
+                                  userOrder: userOrder,
+                                ),
                                 Space.k40
                               ])))))),
     );

@@ -4,8 +4,10 @@ import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
 
 abstract class StaffRemoteDataSource {
-  Stream<List<UserOrderEntity>> getAllOrders({required bool isDelivery});
-  Future<void> submitOrder({required String orderId, required String coffeeId});
+  Stream<List<UserOrderEntity>> getDeliveryOrders();
+  Stream<List<UserOrderEntity>> getPickupOrders();
+  Future<void> submitDeliveryOrder({required UserOrderEntity userOrder});
+  Future<void> submitPickUpyOrder({required UserOrderEntity userOrder});
 }
 
 class StaffRemoteDataSourceImpl implements StaffRemoteDataSource {
@@ -14,52 +16,75 @@ class StaffRemoteDataSourceImpl implements StaffRemoteDataSource {
   StaffRemoteDataSourceImpl({required FireStoreServices fireStoreServices})
       : _fireStoreServices = fireStoreServices;
   @override
-  Stream<List<UserOrderEntity>> getAllOrders(
-      {required bool isDelivery}) async* {
+  Stream<List<UserOrderEntity>> getDeliveryOrders() async* {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     await for (final allOrdersSnapshot
         in firestore.collection(EndPoints.deliveryOrders).snapshots()) {
-      final List<UserOrderEntity> allFilteredOrders = [];
+      final List<UserOrderEntity> allOrders = [];
 
       for (final orderDoc in allOrdersSnapshot.docs) {
         final userOrdersSnapshot = await _fireStoreServices.getDoc(
             endPoint: EndPoints.deliveryOrders, docId: orderDoc.id);
 
         if (userOrdersSnapshot.exists) {
-          final data = userOrdersSnapshot.data() as Map<String, dynamic>;
-          final coffeeList = data['coffee'] as List<dynamic>?;
+          final userOrderEntity =
+              UserOrderEntity.fromStream(userOrdersSnapshot);
 
-          final hasMatchingDelivery = coffeeList?.any((item) {
-                bool handleIsDeliveryNull = item['isDelivery'] ?? true;
-                return handleIsDeliveryNull == isDelivery;
-              }) ??
-              false;
-
-          if (hasMatchingDelivery) {
-            final userOrderEntity =
-                UserOrderEntity.fromStream(userOrdersSnapshot);
-            allFilteredOrders.add(userOrderEntity);
-          }
+          allOrders.add(userOrderEntity);
         }
       }
 
-      yield allFilteredOrders;
+      yield allOrders;
     }
   }
 
   @override
-  Future<void> submitOrder(
-      {required String orderId, required String coffeeId}) async {
-    // DocumentSnapshot<Map<String, dynamic>> data = await _fireStoreServices
-    //     .getDoc(endPoint: EndPoints.allOrders, docId: orderId);
-    // final userOrder = data.data() as Map<String, dynamic>;
-    // final userOrderCoffee = userOrder['coffee'] as List<dynamic>;
-    // bool isExist =
-    //     userOrderCoffee.any((coffee) => coffee['coffee']['id'] == coffeeId);
-    // if (isExist) {
-    //   userOrderCoffee
-    //       .removeWhere((coffee) => coffee['coffee']['id'] == coffeeId);
-    // }
+  Stream<List<UserOrderEntity>> getPickupOrders() async* {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    await for (final allOrdersSnapshot
+        in firestore.collection(EndPoints.pickupOrders).snapshots()) {
+      final List<UserOrderEntity> allOrders = [];
+
+      for (final orderDoc in allOrdersSnapshot.docs) {
+        final userOrdersSnapshot = await _fireStoreServices.getDoc(
+            endPoint: EndPoints.pickupOrders, docId: orderDoc.id);
+
+        if (userOrdersSnapshot.exists) {
+          final userOrderEntity =
+              UserOrderEntity.fromStream(userOrdersSnapshot);
+          allOrders.add(userOrderEntity);
+        }
+      }
+
+      yield allOrders;
+    }
+  }
+
+  @override
+  Future<void> submitDeliveryOrder({required UserOrderEntity userOrder}) async {
+    if (userOrder.id == null) {
+      return;
+    }
+    await _fireStoreServices.deleteDoc(
+        endPoint: EndPoints.deliveryOrders, docId: userOrder.id!);
+    await _fireStoreServices.postDoc(
+      endPoint: EndPoints.ownerDeliveryOrders,
+      body: userOrder.toJson(),
+    );
+  }
+
+  @override
+  Future<void> submitPickUpyOrder({required UserOrderEntity userOrder}) async {
+    if (userOrder.id == null) {
+      return;
+    }
+    await _fireStoreServices.deleteDoc(
+        endPoint: EndPoints.pickupOrders, docId: userOrder.id!);
+    await _fireStoreServices.postDoc(
+      endPoint: EndPoints.ownerPickUpOrders,
+      body: userOrder.toJson(),
+    );
   }
 }

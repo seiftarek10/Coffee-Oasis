@@ -25,12 +25,11 @@ class Tabs extends StatelessWidget {
         indicatorSize: TabBarIndicatorSize.values[0],
         onTap: (index) {
           if (index == 0) {
-            BlocProvider.of<StaffGetAllOrdersCubit>(context)
-                .getAllOrders(isDelivery: false);
+            BlocProvider.of<StaffGetAllOrdersCubit>(context).getPickupOrders();
             BlocProvider.of<StaffGetAllOrdersCubit>(context).inDelivery = false;
           } else {
             BlocProvider.of<StaffGetAllOrdersCubit>(context)
-                .getAllOrders(isDelivery: true);
+                .getDeliveryOrders();
             BlocProvider.of<StaffGetAllOrdersCubit>(context).inDelivery = true;
           }
         },
