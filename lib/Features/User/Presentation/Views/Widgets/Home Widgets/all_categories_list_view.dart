@@ -22,31 +22,33 @@ class _UserHomeCategoriesListViewState
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: SizedBox(
-        height: 45,
-        child: Row(
-          children: [
-            GestureDetector(
-              onTap: () async {
-                setState(() {
-                  _selectedIndex = 0;
-                });
-                await BlocProvider.of<UserGetCoffeeDrinkCubit>(context)
-                    .getCoffeeDrinks();
-              },
-              child: UserHomeCategoryItem(
-                categoryName: 'All Coffee',
-                isSelected: _selectedIndex == 0,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: SizedBox(
+          height: 45,
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: () async {
+                  setState(() {
+                    _selectedIndex = 0;
+                  });
+                  await BlocProvider.of<UserGetCoffeeDrinkCubit>(context)
+                      .getCoffeeDrinks();
+                },
+                child: UserHomeCategoryItem(
+                  categoryName: 'All Coffee',
+                  isSelected: _selectedIndex == 0,
+                ),
               ),
-            ),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Skeletonizer(
+              const SizedBox(width: 6),
+              Skeletonizer(
                 enabled: widget.enabled,
                 child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: widget.categories.length,
                     itemBuilder: (context, index) {
@@ -70,8 +72,8 @@ class _UserHomeCategoriesListViewState
                       );
                     }),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
