@@ -16,22 +16,22 @@ android {
         create("owner") {
             dimension = "default"
             resValue "string","app_name","Owner"
-            applicationIdSuffix = ""
+            applicationIdSuffix = ".owner"
         }
         create("staff") {
             dimension = "default"
             resValue "string","app_name","Staff"
-            applicationIdSuffix = ""
+            applicationIdSuffix = ".staff"
         }
         create("delivery") {
             dimension = "default"
             resValue "string","app_name","Delivery"
-            applicationIdSuffix = ""
+            applicationIdSuffix = ".delivery"
         }
         create("user") {
             dimension = "default"
             resValue "string","app_name","User"
-            applicationIdSuffix = ""
+            applicationIdSuffix = ".user"
         }
     }
     namespace = "com.example.coffee_oasis"
