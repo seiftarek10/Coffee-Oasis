@@ -14,10 +14,11 @@ class MakeOrderCubit extends BaseCubit<MakeOrderState> {
   Future<void> makeOrder(
       {required UserOrderEntity order,
       required String id,
+      required bool isDelivery,
       required bool fromCart}) async {
     safeEmit(MakeOrderLoading());
-    Either<Failure, void> response =
-        await _makeOrderUseCase.execute(param: [order, id, fromCart]);
+    Either<Failure, void> response = await _makeOrderUseCase
+        .execute(param: [order, id, fromCart, isDelivery]);
     response.fold(
         (failure) => safeEmit(MakeOrderFailure(errMessage: failure.errMessage)),
         (success) => safeEmit(MakeOrderSuccess()));

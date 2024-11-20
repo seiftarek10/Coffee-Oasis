@@ -10,6 +10,9 @@ class MakeOrderUseCase extends UseCase<void, List<dynamic>> {
   @override
   Future<Either<Failure, void>> execute({List<dynamic>? param}) async {
     return await _userRepo.makeOrder(
-        order: param![0], id: param[1], fromCart: param[2]);
+        order: param![0],
+        id: param[1],
+        fromCart: param[2],
+        isDelivery: param[3]);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TitleAndSubTitleCaffeeCard extends StatelessWidget {
   const TitleAndSubTitleCaffeeCard({
@@ -21,6 +22,7 @@ class TitleAndSubTitleCaffeeCard extends StatelessWidget {
             style: Fonts.font18_700,
             maxLines: 1,
             overflow: TextOverflow.ellipsis),
+        SizedBox(height: 4.h),
         Text(subTitle,
             style: Fonts.font16_300,
             maxLines: 1,

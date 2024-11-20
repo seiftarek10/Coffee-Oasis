@@ -40,6 +40,7 @@ class OrderItem extends StatelessWidget {
               Expanded(
                   flex: 6,
                   child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TitleAndSubTitleCaffeeCard(

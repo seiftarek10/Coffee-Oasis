@@ -17,7 +17,7 @@ class GetPickUpBlocBuilder extends StatelessWidget {
         if (state is StaffGetAllPickUpOrdersSuccess) {
           return _buildSuccessBody(state.orders);
         } else if (state is StaffGetAllOrdersFailure) {
-          return _buildErrorBody();
+          return _buildErrorBody(context);
         } else {
           return _buildLoadingBody();
         }
@@ -32,9 +32,14 @@ class GetPickUpBlocBuilder extends StatelessWidget {
     return PickUpOrdersListView(orders: orders);
   }
 
-  Widget _buildErrorBody() {
+  Widget _buildErrorBody(BuildContext context) {
     return AppErrorWidget(
-        height: 0.6, onTap: () {}, text: 'some Thing Is Wrong');
+        height: 0.6,
+        onTap: () {
+          BlocProvider.of<StaffGetAllOrdersCubit>(context)
+              .getAllOrders(isDelivery: false);
+        },
+        text: 'some Thing Is Wrong');
   }
 
   Widget _buildLoadingBody() {

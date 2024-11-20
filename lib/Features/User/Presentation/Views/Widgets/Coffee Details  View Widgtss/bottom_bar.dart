@@ -65,7 +65,8 @@ class DetailsViewBottomBar extends StatelessWidget {
                             .makeOrder(
                                 order: finalOrder,
                                 id: order.coffee.id!,
-                                fromCart: fromCartView);
+                                fromCart: fromCartView,
+                                isDelivery: order.isDelivery ?? true);
 
                         trigger();
                       },

@@ -180,9 +180,11 @@ class UserRepoImpl implements UserRepo {
   Future<Either<Failure, void>> makeOrder(
       {required UserOrderEntity order,
       required String id,
+      required bool isDelivery,
       required bool fromCart}) async {
     try {
-      await _userRemoteDataSource.makeOrder(order: order);
+      await _userRemoteDataSource.makeOrder(
+          order: order, isDelivery: isDelivery);
       if (fromCart) {
         await _userRemoteDataSource.deleteFromCartAfterOrder(id: id);
       }

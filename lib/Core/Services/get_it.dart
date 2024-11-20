@@ -82,5 +82,5 @@ void setupGetIt() {
           getIt.get<FireStoreServices>(), getIt.get<UserLocalDataSourceImpl>()),
       userLocalDataSource: getIt.get<UserLocalDataSourceImpl>()));
   getIt.registerSingleton<StaffRepoImpl>(
-      StaffRepoImpl(staffRemoteDataSource: StaffRemoteDataSourceImpl()));
+      StaffRepoImpl(staffRemoteDataSource: StaffRemoteDataSourceImpl(fireStoreServices: getIt.get<FireStoreServices>())));
 }

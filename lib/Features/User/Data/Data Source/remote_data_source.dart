@@ -24,7 +24,8 @@ abstract class UserRemoteDataSource {
   Future<void> addToCart({required OrderItemEntity cartItem});
   Future<List<OrderItemEntity>> getCartItems();
   Future<void> deleteCartItem({required String id});
-  Future<void> makeOrder({required UserOrderEntity order});
+  Future<void> makeOrder(
+      {required UserOrderEntity order, required bool isDelivery});
   Future<void> deleteFromCartAfterOrder({required String id});
   Future<List<OrderItemEntity>> getMyOrders();
   Future<void> orderAll();
@@ -182,14 +183,15 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<void> makeOrder({required UserOrderEntity order}) async {
+  Future<void> makeOrder(
+      {required UserOrderEntity order, required bool isDelivery}) async {
     String? uid = await _userLocalDataSource.getUserID();
     if (uid == null) {
       return;
     }
 
-    CollectionReference ordersRef =
-        FirebaseFirestore.instance.collection(EndPoints.allOrders);
+    CollectionReference ordersRef = FirebaseFirestore.instance.collection(
+        isDelivery == true ? EndPoints.deliveryOrders : EndPoints.pickupOrders);
     DocumentReference orderRef = ordersRef.doc(uid);
     DocumentSnapshot snapshot = await orderRef.get();
 
@@ -223,7 +225,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       }
     } else {
       await _fireStoreServices.postDocWithId(
-        endPoint: EndPoints.allOrders,
+        endPoint: isDelivery == true
+            ? EndPoints.deliveryOrders
+            : EndPoints.pickupOrders,
         id: uid,
         body: order.toJson(),
       );
@@ -245,13 +249,21 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     if (uid == null) {
       return [];
     }
-    DocumentSnapshot<Map<String, dynamic>?> response = await _fireStoreServices
-        .getDoc(endPoint: EndPoints.allOrders, docId: uid);
+    DocumentSnapshot<Map<String, dynamic>?> pickUpOrders =
+        await _fireStoreServices.getDoc(
+            endPoint: EndPoints.pickupOrders, docId: uid);
+    DocumentSnapshot<Map<String, dynamic>?> deliveryOrders =
+        await _fireStoreServices.getDoc(
+            endPoint: EndPoints.deliveryOrders, docId: uid);
 
     List<OrderItemEntity> userOrders = [];
-    for (var order in response.data()!['coffee']) {
+    for (var order in pickUpOrders.data()?['coffee'] ?? []) {
       userOrders.add(OrderModel.fromJson(order, order['coffee']['id']));
     }
+    for (var order in deliveryOrders.data()?['coffee'] ?? []) {
+      userOrders.add(OrderModel.fromJson(order, order['coffee']['id']));
+    }
+
     return userOrders;
   }
 
@@ -268,7 +280,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         .collection(EndPoints.allCart)
         .doc(uid)
         .collection(EndPoints.userCart);
-    final orderRef = firestore.collection(EndPoints.allOrders).doc(uid);
+    final deliveryOrderRef =
+        firestore.collection(EndPoints.deliveryOrders).doc(uid);
 
     final cartItems = await cartRef.get();
     if (cartItems.docs.isEmpty) {
@@ -279,15 +292,15 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         .map((doc) => OrderModel.fromJson(doc.data(), doc.id))
         .toList();
 
-    final existingOrderSnapshot = await orderRef.get();
+    final existingDeliveryOrderSnapshot = await deliveryOrderRef.get();
     List<OrderItemEntity> existingCoffee = [];
     UserEntity? user;
 
-    if (existingOrderSnapshot.exists) {
-      final existingData = existingOrderSnapshot.data()!;
+    if (existingDeliveryOrderSnapshot.exists) {
+      final existingData = existingDeliveryOrderSnapshot.data()!;
       existingCoffee = (existingData['coffee'] as List)
           .map((e) => OrderModel.fromJson(
-              e as Map<String, dynamic>, existingOrderSnapshot.id))
+              e as Map<String, dynamic>, existingDeliveryOrderSnapshot.id))
           .toList();
 
       user = UserModel.fromJson(existingData['user']);
@@ -311,7 +324,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       }
     }
 
-    await orderRef.set({
+    await deliveryOrderRef.set({
       'coffee': existingCoffee
           .map((item) => item.toOrderJson(date: item.date ?? ''))
           .toList(),

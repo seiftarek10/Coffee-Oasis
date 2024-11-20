@@ -17,7 +17,7 @@ class GetDeliveryOrdersBlocBuilder extends StatelessWidget {
       if (state is StaffGetAllDeliveryOrdersSuccess) {
         return _buildSuccessBody(state.orders);
       } else if (state is StaffGetAllOrdersFailure) {
-        return _buildErrorBody();
+        return _buildErrorBody(context);
       } else {
         return _buildLoadingBody();
       }
@@ -33,9 +33,14 @@ class GetDeliveryOrdersBlocBuilder extends StatelessWidget {
     );
   }
 
-  Widget _buildErrorBody() {
+  Widget _buildErrorBody(BuildContext context) {
     return AppErrorWidget(
-        height: 0.6, onTap: () {}, text: 'some Thing Is Wrong');
+        height: 0.6,
+        onTap: () {
+          BlocProvider.of<StaffGetAllOrdersCubit>(context)
+              .getAllOrders(isDelivery: true);
+        },
+        text: 'some Thing Is Wrong');
   }
 
   Widget _buildLoadingBody() {

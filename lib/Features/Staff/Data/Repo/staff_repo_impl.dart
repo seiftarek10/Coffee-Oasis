@@ -25,4 +25,19 @@ class StaffRepoImpl implements StaffRepo {
       return Stream.value(left(FireBaseError(errMessage: e.toString())));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> submitOrder(
+      {required String orderId, required String coffeeId}) async {
+    try {
+      await _staffRemoteDataSource.submitOrder(
+          orderId: orderId, coffeeId: coffeeId);
+      return right(unit);
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
 }

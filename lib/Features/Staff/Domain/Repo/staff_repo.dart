@@ -5,4 +5,5 @@ import 'package:dartz/dartz.dart';
 abstract class StaffRepo {
   Stream<Either<Failure, List<UserOrderEntity>>> getAllOrders(
       {required bool isDelivery});
+  Future<Either<Failure, void>> submitOrder({required String orderId,required String coffeeId});
 }
