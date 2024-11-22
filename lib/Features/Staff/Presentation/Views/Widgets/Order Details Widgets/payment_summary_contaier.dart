@@ -58,7 +58,7 @@ class _StaffPaymentSummaryContaierState
                         style: Fonts.font18_700,
                       ),
                       Text(
-                        r'$ 4.53',
+                        r'$ 2.50',
                         style: Fonts.font18_700,
                       )
                     ]),
@@ -71,7 +71,8 @@ class _StaffPaymentSummaryContaierState
             style: Fonts.font18_700,
           ),
           Text(
-            "${totalPrice.toString()} " r'$',
+            "${(widget.deliver ? totalPrice + 2.5 : totalPrice).toString()} "
+            r'$',
             style: Fonts.font18_700,
           )
         ])

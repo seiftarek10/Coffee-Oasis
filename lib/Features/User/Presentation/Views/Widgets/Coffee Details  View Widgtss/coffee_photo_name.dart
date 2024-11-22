@@ -35,13 +35,19 @@ class CoffeePhotoAndName extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TitleAndSubTitleCaffeeCard(
-                title: orderEntity.coffee.name ?? '',
-                subTitle: orderEntity.coffee.category ?? '',
+              Expanded(
+                flex: 3,
+                child: TitleAndSubTitleCaffeeCard(
+                  title: orderEntity.coffee.name ?? '',
+                  subTitle: orderEntity.coffee.category ?? '',
+                ),
               ),
-              Image.asset(
-                Assets.imagesSuperiority,
-                scale: 0.95,
+              Expanded(
+                flex: 2,
+                child: Image.asset(
+                  Assets.imagesSuperiority,
+                  scale: 0.95,
+                ),
               )
             ],
           ),
