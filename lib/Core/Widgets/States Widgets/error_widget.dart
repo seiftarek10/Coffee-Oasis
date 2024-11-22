@@ -27,6 +27,7 @@ class AppErrorWidget extends StatelessWidget {
             Icon(Icons.replay_circle_filled_rounded,
                 size: 50.h, color: color ?? Colors.white),
             Text(text,
+                textAlign: TextAlign.center,
                 style: Fonts.font35_700White
                     .copyWith(color: color ?? Colors.white))
           ],

@@ -84,7 +84,11 @@ class EditCoffeeDrinkForm extends StatelessWidget {
                                 _resetForm(context);
                               },
                               onPressed: (trigger) async {
-                                _validateInput(context);
+                                bool isNotValid = _validateInput(context);
+                                if (isNotValid) {
+                                  GoRouter.of(context).pop();
+                                  return;
+                                }
                                 trigger();
                                 await _updateCoffee(context);
                                 trigger();
@@ -98,14 +102,15 @@ class EditCoffeeDrinkForm extends StatelessWidget {
     selectedPhtot = null;
   }
 
-  void _validateInput(BuildContext context) {
+  bool _validateInput(BuildContext context) {
     _key.currentState!.save();
     if (newPrice.isNullOrEmpty &&
         newDescription.isNullOrEmpty &&
         newName.isNullOrEmpty &&
         selectedPhtot == null) {
-      GoRouter.of(context).pop();
-      return;
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -119,7 +124,7 @@ class EditCoffeeDrinkForm extends StatelessWidget {
       updatedBody['description'] = newDescription;
     }
     if (!newPrice.isNullOrEmpty) {
-      updatedBody['price'] = newPrice;
+      updatedBody['price'] = num.parse(newPrice!);
     }
     if (selectedPhtot != null) {
       updatedBody['photo'] = await _getNewUrl();

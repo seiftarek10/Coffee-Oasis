@@ -49,7 +49,8 @@ class CoffeeDrinkItem extends StatelessWidget {
                   ),
                   SizedBox(height: 5.h),
                   Text(
-                    'Price :${coffeeEntity?.price ?? '0'} ' r'$',
+                    'Price :${double.parse(coffeeEntity?.price.toString() ?? '0')} '
+                    r'$',
                     style: Fonts.font14_500PrimaryColor,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
