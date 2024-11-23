@@ -7,8 +7,9 @@ import 'package:meta/meta.dart';
 part 'update_user_info_state.dart';
 
 class UpdateUserInfoCubit extends BaseCubit<UpdateUserInfoState> {
-  UpdateUserInfoCubit(this._updateUserInfoUseCase)
-      : super(UpdateUserInfoInitial());
+  UpdateUserInfoCubit(
+    this._updateUserInfoUseCase,
+  ) : super(UpdateUserInfoInitial());
 
   final UpdateUserInfoUseCase _updateUserInfoUseCase;
 

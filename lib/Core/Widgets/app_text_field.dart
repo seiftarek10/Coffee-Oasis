@@ -8,7 +8,10 @@ class AppTextField extends StatelessWidget {
     super.key,
     required this.labelText,
     required this.onSaved,
-    this.suffixIcon,  this.validator,  this.keyboardType,
+    this.suffixIcon,
+    this.validator,
+    this.keyboardType,
+    this.obsecureText,
   });
 
   final String labelText;
@@ -16,15 +19,17 @@ class AppTextField extends StatelessWidget {
   final void Function(String?) onSaved;
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
+  final bool? obsecureText;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20),
         color: const Color.fromARGB(57, 0, 0, 0),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
+          obscureText: obsecureText ?? false,
           onSaved: onSaved,
           keyboardType: keyboardType,
           cursorColor: AppColors.kPrimaryColor,
@@ -36,14 +41,10 @@ class AppTextField extends StatelessWidget {
               labelStyle: Fonts.font18_700.copyWith(color: Colors.white),
               fillColor: Colors.transparent,
               filled: true,
-              enabledBorder:
-                  _borderStyle(color: AppColors.kWhiteObacity),
-              focusedBorder:
-                  _borderStyle(color: AppColors.kPrimaryColor),
-                  errorBorder: _borderStyle(color: Colors.red),
-                  focusedErrorBorder:_borderStyle(color: Colors.red) 
-                  ),
-              
+              enabledBorder: _borderStyle(color: AppColors.kWhiteObacity),
+              focusedBorder: _borderStyle(color: AppColors.kPrimaryColor),
+              errorBorder: _borderStyle(color: Colors.red),
+              focusedErrorBorder: _borderStyle(color: Colors.red)),
         ));
   }
 }
@@ -51,6 +52,5 @@ class AppTextField extends StatelessWidget {
 OutlineInputBorder _borderStyle({required Color color}) {
   return OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
-      
       borderSide: BorderSide(width: 2, color: color));
 }

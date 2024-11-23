@@ -4,6 +4,7 @@ import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:coffee_oasis/Features/Auth/Presentation/View%20Models/Cubits/Sign%20In/sign_in_cubit.dart';
+import 'package:coffee_oasis/Features/Auth/Presentation/Views/Widgets/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,14 +29,11 @@ class SignInForm extends StatelessWidget {
                 email = value;
               }),
           Space.k24,
-          AppTextField(
-              labelText: 'Password',
-              validator: (password) {
-                return ValidationForm.validPassword(password);
-              },
-              onSaved: (value) {
-                password = value;
-              }),
+          PasswordField(
+            onSaved: (value) {
+              password = value;
+            },
+          ),
           Space.k40,
           AppButton(
             needCirculartPadding: true,

@@ -5,6 +5,7 @@ import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:coffee_oasis/Core/Widgets/app_text_field.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Features/Auth/Presentation/View%20Models/Cubits/Sign%20Up/sign_up_cubit.dart';
+import 'package:coffee_oasis/Features/Auth/Presentation/Views/Widgets/password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,14 +30,11 @@ class SignUpForm extends StatelessWidget {
                   userEntity.email = email;
                 }),
             Space.k24,
-            AppTextField(
-                labelText: 'Password',
-                validator: (password) {
-                  return ValidationForm.validPassword(password);
-                },
-                onSaved: (password) {
-                  userEntity.password = password;
-                }),
+            PasswordField(
+              onSaved: (value) {
+                userEntity.password = value;
+              },
+            ),
             Space.k24,
             AppTextField(
                 labelText: 'User Name',

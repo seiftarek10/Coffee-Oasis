@@ -43,23 +43,23 @@ class ProfileInfoItem extends StatelessWidget {
           ],
         ),
         needIcon == null
-            ? IconButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return BlocProvider.value(
-                            value: cubit!,
-                            child: EditFieldBody(
-                                formKey: formKey!,
-                                labelText: info,
-                                onSaved: onSaved!,
-                                onPressed: onPressed!));
-                      });
-                },
-                icon: Icon(editItem == null
-                    ? Icons.edit
-                    : Icons.arrow_forward_ios_sharp))
+            ? editItem == null
+                ? IconButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return BlocProvider.value(
+                                value: cubit!,
+                                child: EditFieldBody(
+                                    formKey: formKey!,
+                                    labelText: info,
+                                    onSaved: onSaved!,
+                                    onPressed: onPressed!));
+                          });
+                    },
+                    icon: const Icon(Icons.edit))
+                : const Icon(Icons.arrow_forward_ios_sharp)
             : const SizedBox.shrink()
       ],
     );

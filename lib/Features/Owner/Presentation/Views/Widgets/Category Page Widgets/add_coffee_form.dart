@@ -62,6 +62,7 @@ class AddCoffeeDrinkForm extends StatelessWidget {
                           Space.k40,
                           AppTextField(
                               labelText: 'Price',
+                              keyboardType: TextInputType.number,
                               onSaved: (value) {
                                 price = num.parse(value ?? '0');
                               },

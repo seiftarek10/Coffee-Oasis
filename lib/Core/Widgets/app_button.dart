@@ -13,16 +13,12 @@ class AppButton extends StatefulWidget {
     this.squareShape,
     this.radius,
     this.needCirculartPadding,
-    this.childIsIcon,
-    this.icon,
   });
 
   final Color titleColor, backgroundColor;
   final String title;
   final bool? squareShape;
   final bool? needCirculartPadding;
-  final bool? childIsIcon;
-  final IconData? icon;
   final double? radius;
   final Future<void> Function(Function toggleLoading) onPressed;
 
@@ -45,39 +41,32 @@ class _AppButtonState extends State<AppButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          overlayColor: AppColors.kPrimaryColor,
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          backgroundColor: widget.backgroundColor,
-          shape: widget.squareShape != null
-              ? RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(widget.radius ?? 10))
-              : null),
-      onPressed: _isLoading
-          ? null
-          : () async => await widget.onPressed(_toggleLoading),
-      child: _isLoading
-          ? SizedBox(
-              height: 23.h,
-              width: 23.w,
-              child: Padding(
-                padding: widget.needCirculartPadding == null
-                    ? EdgeInsets.zero
-                    : const EdgeInsets.all(5.0),
-                child: const CircularProgressIndicator(
-                  color: Colors.white,
+        style: ElevatedButton.styleFrom(
+            overlayColor: AppColors.kPrimaryColor,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            backgroundColor: widget.backgroundColor,
+            shape: widget.squareShape != null
+                ? RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(widget.radius ?? 10))
+                : null),
+        onPressed: _isLoading
+            ? null
+            : () async => await widget.onPressed(_toggleLoading),
+        child: _isLoading
+            ? SizedBox(
+                height: 23.h,
+                width: 23.w,
+                child: Padding(
+                  padding: widget.needCirculartPadding == null
+                      ? EdgeInsets.zero
+                      : const EdgeInsets.all(5.0),
+                  child: const CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-            )
-          : widget.childIsIcon == null
-              ? Text(widget.title,
-                  textAlign: TextAlign.center,
-                  style: Fonts.font20_700.copyWith(color: widget.titleColor))
-              : Icon(
-                  widget.icon,
-                  size: 23.h,
-                  color: Colors.white,
-                ),
-    );
+              )
+            : Text(widget.title,
+                textAlign: TextAlign.center,
+                style: Fonts.font20_700.copyWith(color: widget.titleColor)));
   }
 }

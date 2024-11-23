@@ -32,7 +32,8 @@ class UserProfile extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => UpdateUserInfoCubit(
-                UpdateUserInfoUseCase(getIt.get<UserRepoImpl>())),
+              UpdateUserInfoUseCase(getIt.get<UserRepoImpl>()),
+            ),
           ),
           BlocProvider(
             create: (context) => UserGetShopInfoCubit(

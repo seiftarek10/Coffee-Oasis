@@ -46,6 +46,7 @@ class UserInfoContainer extends StatelessWidget {
         ProfileInfoItem(
             info: userInfo.email ?? 'No Eamil',
             title: "Eamil",
+            needIcon: false,
             onPressed: (trigger) async {
               emailKey.currentState!.save();
               if (_validationForm(context, email)) {
@@ -56,6 +57,7 @@ class UserInfoContainer extends StatelessWidget {
               }
 
               trigger();
+
               await _update(context, {'email': email});
               trigger();
             },

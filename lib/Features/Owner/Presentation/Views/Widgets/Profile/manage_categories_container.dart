@@ -6,13 +6,12 @@ import 'package:go_router/go_router.dart';
 
 class ManageCategoriesContainer extends StatelessWidget {
   const ManageCategoriesContainer({super.key});
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-          GoRouter.of(context).push(Routes.manageCategories);
+      onTap: () {
+        GoRouter.of(context).push(Routes.manageCategories);
       },
       child: const AppWhiteContainer(
         child: ProfileInfoItem(

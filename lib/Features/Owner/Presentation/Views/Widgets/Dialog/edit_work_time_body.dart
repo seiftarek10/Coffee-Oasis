@@ -13,7 +13,8 @@ class EditWorkTimeBody extends StatelessWidget {
     required this.onSavedEndTime,
     required this.startTimeAmOrPm,
     required this.endTimeAmOrPm,
-    required this.onPressed, required this.formKey,
+    required this.onPressed,
+    required this.formKey,
   });
   final String startTime, endTime;
   final void Function(String?) onSavedStartTime, onSavedEndTime;
@@ -26,12 +27,13 @@ class EditWorkTimeBody extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Form(
-              key:formKey ,
+              key: formKey,
               child: Column(children: [
                 SizedBox(height: 200.h),
                 AppTextField(
                     labelText: startTime,
                     onSaved: onSavedStartTime,
+                    keyboardType: TextInputType.number,
                     suffixIcon: Padding(
                       padding: const EdgeInsets.only(right: 5.0),
                       child: AmPmSwitcher(onSelectionChanged: (value) {
@@ -42,6 +44,7 @@ class EditWorkTimeBody extends StatelessWidget {
                 AppTextField(
                     labelText: endTime,
                     onSaved: onSavedEndTime,
+                    keyboardType: TextInputType.number,
                     suffixIcon: Padding(
                       padding: const EdgeInsets.only(right: 5.0),
                       child: AmPmSwitcher(onSelectionChanged: (value) {

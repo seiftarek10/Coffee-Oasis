@@ -43,7 +43,7 @@ class _UserHomeCategoriesListViewState
                   isSelected: _selectedIndex == 0,
                 ),
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: 10),
               Skeletonizer(
                 enabled: widget.enabled,
                 child: ListView.builder(

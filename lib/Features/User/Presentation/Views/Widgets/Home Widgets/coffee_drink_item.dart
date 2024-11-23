@@ -67,9 +67,7 @@ class UserHomeCoffeeDrinkItem extends StatelessWidget {
                                       child: AppButton(
                                         onPressed: onPreessed,
                                         needCirculartPadding: true,
-                                        title: '',
-                                        icon: Icons.add,
-                                        childIsIcon: true,
+                                        title: '+',
                                         titleColor: Colors.white,
                                         backgroundColor:
                                             AppColors.kPrimaryColor,

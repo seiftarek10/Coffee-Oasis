@@ -50,7 +50,7 @@ class UserHomeView extends StatelessWidget {
                 Column(
                   children: [
                     const UserHomeHeader(),
-                    SizedBox(height: 75.h),
+                    SizedBox(height: 85.h),
                     const UserGetAllCategoriesBlocBuilder(),
                     const SizedBox(height: 30),
                   ],

@@ -14,6 +14,7 @@ abstract class AuthRemoteDataSource {
 
   Future<UserEntity> getUser({required String id});
   Future<void> signOut();
+
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -49,4 +50,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> signOut() async {
     await _fireAuthServices.signOut();
   }
+
+
 }

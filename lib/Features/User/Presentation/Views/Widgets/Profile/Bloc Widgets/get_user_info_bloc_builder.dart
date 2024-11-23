@@ -1,6 +1,7 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:coffee_oasis/Core/Widgets/States%20Widgets/error_widget.dart';
+
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/update_user_info_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
@@ -34,7 +35,8 @@ class GetProfileUserInfoBlocBuilder extends StatelessWidget {
             child: UserInfoContainer(
           userInfo: UserEntity(),
           updateUserInfoCubit: UpdateUserInfoCubit(
-              UpdateUserInfoUseCase(getIt.get<UserRepoImpl>())),
+            UpdateUserInfoUseCase(getIt.get<UserRepoImpl>()),
+          ),
         ));
       }
     });
