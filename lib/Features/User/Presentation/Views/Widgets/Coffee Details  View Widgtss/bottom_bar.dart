@@ -7,7 +7,7 @@ import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/make_order_use_case.dart';
-import 'package:coffee_oasis/Features/User/Domain/Use%20Case/payment_use_case.dart';
+import 'package:coffee_oasis/Features/User/Domain/Use%20Case/payment_stripe_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Make%20Order/make_order_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/payment_option_sheet_body.dart';
@@ -71,7 +71,8 @@ class DetailsViewBottomBar extends StatelessWidget {
                             return BlocProvider(
                               create: (context) => MakeOrderCubit(
                                   MakeOrderUseCase(getIt.get<UserRepoImpl>()),
-                                  PaymentUseCase(getIt.get<UserRepoImpl>())),
+                                  PaymentByStripeUseCase(
+                                      getIt.get<UserRepoImpl>())),
                               child: PaymentOptionsBottomSheetBody(
                                 order: preparedOrder,
                                 fromCartView: fromCartView,

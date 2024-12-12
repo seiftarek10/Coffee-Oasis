@@ -37,7 +37,8 @@ abstract class UserRemoteDataSource {
   Future<void> deleteFavoriteItem({required String id});
   Future<void> updateUserInfo({required Map<String, dynamic> body});
   Future<ShopInfoEntity> getShopInfo();
-  Future<void> pay({required PaymentIntentInputModel paymentIntentInputModel});
+  Future<void> payByStripe(
+      {required PaymentIntentInputModel paymentIntentInputModel});
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -46,7 +47,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final StripeServices _stripeServices;
 
   UserRemoteDataSourceImpl(
-      this._fireStoreServices, this._userLocalDataSource, this._stripeServices);
+    this._fireStoreServices,
+    this._userLocalDataSource,
+    this._stripeServices,
+  );
 
   @override
   Future<UserEntity> getUserInfo() async {
@@ -428,7 +432,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<void> pay(
+  Future<void> payByStripe(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     await _stripeServices.pay(paymentIntentModelInput: paymentIntentInputModel);
   }

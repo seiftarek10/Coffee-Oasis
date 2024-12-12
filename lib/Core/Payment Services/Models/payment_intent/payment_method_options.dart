@@ -24,7 +24,6 @@ class PaymentMethodOptions {
       card: json['card'] == null
           ? null
           : Card.fromJson(json['card'] as Map<String, dynamic>),
-    
       klarna: json['klarna'] == null
           ? null
           : Klarna.fromJson(json['klarna'] as Map<String, dynamic>),

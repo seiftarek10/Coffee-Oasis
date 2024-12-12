@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
@@ -375,10 +374,10 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<Either<Failure, void>> pay(
+  Future<Either<Failure, void>> payByStripe(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     try {
-      await _userRemoteDataSource.pay(
+      await _userRemoteDataSource.payByStripe(
           paymentIntentInputModel: paymentIntentInputModel);
       return right(unit);
     } catch (e) {
@@ -386,10 +385,8 @@ class UserRepoImpl implements UserRepo {
         return left(FireBaseError.firebaseException(e));
       }
       if (e is DioException) {
-        log(e.toString());
         return left(DioFailure.fromDioException(e));
       }
-      log(e.toString());
 
       return left(FireBaseError(errMessage: e.toString()));
     }

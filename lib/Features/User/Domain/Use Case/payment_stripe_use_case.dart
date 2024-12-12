@@ -4,12 +4,12 @@ import 'package:coffee_oasis/Core/Payment%20Services/Models/payment_intent/payme
 import 'package:coffee_oasis/Features/User/Domain/Repos/user_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class PaymentUseCase extends UseCase<void, PaymentIntentInputModel> {
+class PaymentByStripeUseCase extends UseCase<void, PaymentIntentInputModel> {
   final UserRepo userRepo;
 
-  PaymentUseCase(this.userRepo);
+  PaymentByStripeUseCase(this.userRepo);
   @override
   Future<Either<Failure, dynamic>> execute({param}) async {
-    return await userRepo.pay(paymentIntentInputModel: param!);
+    return await userRepo.payByStripe(paymentIntentInputModel: param!);
   }
 }

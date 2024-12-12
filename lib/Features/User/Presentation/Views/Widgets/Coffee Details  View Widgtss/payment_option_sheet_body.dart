@@ -1,5 +1,6 @@
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Helpers/space.dart';
+import 'package:coffee_oasis/Core/Payment%20Services/Models/pay_pal_input_model.dart';
 import 'package:coffee_oasis/Core/Payment%20Services/Models/payment_intent/payment_intent_input_model.dart';
 
 import 'package:coffee_oasis/Core/Theme/colors.dart';
@@ -82,11 +83,20 @@ class _PaymentOptionsBottomSheetBodyState
 
   Future<void> _makeOrder() async {
     if (currentIndex == 0) {
-      BlocProvider.of<MakeOrderCubit>(context).pay(
+      BlocProvider.of<MakeOrderCubit>(context).payByStripe(
           paymentIntentInputModel: PaymentIntentInputModel(
               amount: widget.order.coffee![0].price!.toInt() * 100,
               currency: 'Usd'));
-    } else if (currentIndex == 2) {
+    } else if (currentIndex == 1) {
+      BlocProvider.of<MakeOrderCubit>(context).payByPayPal(
+          payPalInputModel: PayPalInputModel(
+              amount: widget.order.coffee![0].price!.toString(),
+              order: PayPalOrderItemModel(
+                  name: widget.order.coffee![0].coffee.name!,
+                  quantity: widget.order.coffee![0].counter,
+                  price: widget.order.coffee![0].price!.toString())),
+          context: context);
+    } else {
       widget.order.isPaid = false;
       await BlocProvider.of<MakeOrderCubit>(context).makeOrder(
           order: widget.order,
