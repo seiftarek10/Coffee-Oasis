@@ -5,10 +5,9 @@ import 'package:coffee_oasis/Core/Theme/fonts.dart';
 import 'package:coffee_oasis/Core/Widgets/app_button.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
-import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Make%20Order/make_order_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/Bloc%20Widgets/make_order_bloc_listner.dart';
+import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/payment_option_sheet_body.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailsViewBottomBar extends StatelessWidget {
@@ -58,17 +57,22 @@ class DetailsViewBottomBar extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 20),
                     child: AppButton(
                       onPressed: (trigger) async {
-                        trigger();
-                        UserOrderEntity finalOrder = _finalOrder();
+                        // trigger();
+                        // UserOrderEntity finalOrder = _finalOrder();
 
-                        await BlocProvider.of<MakeOrderCubit>(context)
-                            .makeOrder(
-                                order: finalOrder,
-                                id: order.coffee.id!,
-                                fromCart: fromCartView,
-                                isDelivery: order.isDelivery ?? true);
+                        // await BlocProvider.of<MakeOrderCubit>(context)
+                        //     .makeOrder(
+                        //         order: finalOrder,
+                        //         id: order.coffee.id!,
+                        //         fromCart: fromCartView,
+                        //         isDelivery: order.isDelivery ?? true);
 
-                        trigger();
+                        // trigger();
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return const PaymentOptionsBottomSheetBody();
+                            });
                       },
                       backgroundColor: AppColors.kPrimaryColor,
                       title: 'Order Now',
