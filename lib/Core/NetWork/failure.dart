@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 
 abstract class Failure {
   final String errMessage;
@@ -24,6 +25,41 @@ class FireBaseError extends Failure {
 
       default:
         return FireBaseError(errMessage: "Proccess Failed");
+    }
+  }
+}
+
+class DioFailure extends Failure {
+  DioFailure({required super.errMessage});
+
+  factory DioFailure.fromDioException(DioException error) {
+    switch (error.type) {
+      case DioExceptionType.connectionTimeout:
+        return DioFailure(errMessage: 'Connection Timeout');
+      case DioExceptionType.sendTimeout:
+        return DioFailure(errMessage: 'Send Timeout');
+      case DioExceptionType.receiveTimeout:
+        return DioFailure(errMessage: 'Receive Timeout');
+      case DioExceptionType.badCertificate:
+        return DioFailure(errMessage: 'Bad Certificate');
+      case DioExceptionType.badResponse:
+        return DioFailure(
+          errMessage:
+              'Bad Response: ${error.response?.statusCode} - ${error.response?.statusMessage ?? 'Unknown error'}',
+        );
+      case DioExceptionType.cancel:
+        return DioFailure(errMessage: 'Request Cancelled');
+      case DioExceptionType.connectionError:
+        return DioFailure(
+            errMessage:
+                'Connection Error: Please check your internet connection');
+      case DioExceptionType.unknown:
+        return DioFailure(
+          errMessage:
+              'Unknown Error: ${error.message ?? 'An unexpected error occurred'}',
+        );
+      default:
+        return DioFailure(errMessage: 'Unexpected Error');
     }
   }
 }

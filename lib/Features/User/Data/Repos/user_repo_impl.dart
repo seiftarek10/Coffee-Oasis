@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/category_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/coffee_entity.dart';
@@ -13,6 +14,7 @@ import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Repos/user_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class UserRepoImpl implements UserRepo {
   final UserRemoteDataSource _userRemoteDataSource;
@@ -383,6 +385,12 @@ class UserRepoImpl implements UserRepo {
       if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));
       }
+      if (e is DioException) {
+        log(e.toString());
+        return left(DioFailure.fromDioException(e));
+      }
+      log(e.toString());
+
       return left(FireBaseError(errMessage: e.toString()));
     }
   }

@@ -16,7 +16,7 @@ class StripeServices {
     var response = await getIt.get<ApiServices>().post(
         endPoint: 'https://api.stripe.com/v1/payment_intents',
         body: {
-          'amont': paymentIntentModelInput.amount,
+          'amount': paymentIntentModelInput.amount,
           'currency': paymentIntentModelInput.currency
         },
         header: {

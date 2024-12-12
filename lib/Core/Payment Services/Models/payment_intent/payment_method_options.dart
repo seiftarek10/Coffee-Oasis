@@ -1,20 +1,17 @@
 import 'amazon_pay.dart';
 import 'card.dart';
-import 'cashapp.dart';
 import 'klarna.dart';
 import 'link.dart';
 
 class PaymentMethodOptions {
   AmazonPay? amazonPay;
   Card? card;
-  Cashapp? cashapp;
   Klarna? klarna;
   Link? link;
 
   PaymentMethodOptions({
     this.amazonPay,
     this.card,
-    this.cashapp,
     this.klarna,
     this.link,
   });
@@ -27,9 +24,7 @@ class PaymentMethodOptions {
       card: json['card'] == null
           ? null
           : Card.fromJson(json['card'] as Map<String, dynamic>),
-      cashapp: json['cashapp'] == null
-          ? null
-          : Cashapp.fromJson(json['cashapp'] as Map<String, dynamic>),
+    
       klarna: json['klarna'] == null
           ? null
           : Klarna.fromJson(json['klarna'] as Map<String, dynamic>),
@@ -42,7 +37,6 @@ class PaymentMethodOptions {
   Map<String, dynamic> toJson() => {
         'amazon_pay': amazonPay?.toJson(),
         'card': card?.toJson(),
-        'cashapp': cashapp?.toJson(),
         'klarna': klarna?.toJson(),
         'link': link?.toJson(),
       };

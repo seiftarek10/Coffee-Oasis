@@ -13,6 +13,6 @@ class ApiServices {
     dio.options.headers = header ?? {};
     dio.options.contentType = contentType;
     var response = await dio.post(endPoint, data: body);
-    return response.data();
+    return response.data;
   }
 }
