@@ -24,21 +24,18 @@ class _PaymentOptionWidgetState extends State<PaymentOptionWidget> {
       onTap: widget.onTap,
       child: AnimatedContainer(
         height: MediaQuery.sizeOf(context).height * 0.07,
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
             border: Border.all(
                 color:
                     widget.isSelected ? AppColors.kPrimaryColor : Colors.grey,
-                width: 4,
+                width: widget.isSelected ? 6 : 3,
                 style: BorderStyle.solid),
             color: Colors.white,
             borderRadius: BorderRadius.circular(15)),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: SvgPicture.asset(
-            widget.icon,
-            fit: BoxFit.fill,
-          ),
+        child: SvgPicture.asset(
+          widget.icon,
+          fit: BoxFit.fitHeight,
         ),
       ),
     );

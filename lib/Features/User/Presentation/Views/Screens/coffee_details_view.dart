@@ -4,10 +4,8 @@ import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/handle_fav_coffee_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/is_favorite_item_use_case.dart';
-import 'package:coffee_oasis/Features/User/Domain/Use%20Case/make_order_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Handle%20Favoirtes%20Coffee/handle_favorite_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20Cart%20Items/get_cart_items_cubit.dart';
-import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Make%20Order/make_order_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/bottom_bar.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/coffee_details_appbar.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Coffee%20Details%20%20View%20Widgtss/coffee_photo_name.dart';
@@ -45,9 +43,6 @@ class _CoffeeDetailsViewState extends State<CoffeeDetailsView> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-            create: (context) =>
-                MakeOrderCubit(MakeOrderUseCase(getIt.get<UserRepoImpl>()))),
         BlocProvider(
             create: (context) => HandleFavoriteCubit(
                 HandleFavCoffeeUseCase(getIt.get<UserRepoImpl>()),

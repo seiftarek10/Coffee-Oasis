@@ -9,10 +9,8 @@ import 'package:coffee_oasis/Features/Auth/Presentation/View%20Models/Cubits/Sig
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_user_info_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/get_user_shop_info_use_case.dart';
-import 'package:coffee_oasis/Features/User/Domain/Use%20Case/payment_use_case.dart';
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/update_user_info_use_case.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Get%20User%20Info/get_user_info_cubit.dart';
-import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Payment%20Cubit/payment_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/Update%20User%20Info/update_user_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/View%20Model/Cubits/User%20Get%20Shop%20Info/user_get_shop_info_cubit.dart';
 import 'package:coffee_oasis/Features/User/Presentation/Views/Widgets/Profile/Bloc%20Widgets/get_shop_info_bloc_builder.dart';
@@ -45,10 +43,6 @@ class UserProfile extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 SignOutCubit(SignOutUseCase(getIt.get<AuthRepoImpl>())),
-          ),
-          BlocProvider(
-            create: (context) =>
-                PaymentCubit(PaymentUseCase(getIt.get<UserRepoImpl>())),
           ),
         ],
         child: Background(

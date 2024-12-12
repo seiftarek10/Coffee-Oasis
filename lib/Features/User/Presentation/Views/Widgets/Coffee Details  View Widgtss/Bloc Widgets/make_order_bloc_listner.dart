@@ -1,3 +1,4 @@
+import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Helpers/failed_message.dart';
 import 'package:coffee_oasis/Core/Helpers/success_message.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
@@ -8,11 +9,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class MakeOrderBlocListner extends StatelessWidget {
-  const MakeOrderBlocListner(
-      {super.key, required this.child, required this.fromCartView});
+  const MakeOrderBlocListner({
+    super.key,
+    required this.child,
+    required this.fromCartView,
+    required this.finalOrder,
+  });
 
   final Widget child;
   final bool fromCartView;
+
+  final UserOrderEntity finalOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +36,12 @@ class MakeOrderBlocListner extends StatelessWidget {
           }
         } else if (state is MakeOrderFailure) {
           failedMessage(context: context, message: state.errMessage);
+        } else if (state is PaySuccess) {
+          await BlocProvider.of<MakeOrderCubit>(context).makeOrder(
+              order: finalOrder,
+              id: finalOrder.coffee![0].coffee.id!,
+              fromCart: fromCartView,
+              isDelivery: finalOrder.coffee![0].isDelivery!);
         }
       },
       child: child,

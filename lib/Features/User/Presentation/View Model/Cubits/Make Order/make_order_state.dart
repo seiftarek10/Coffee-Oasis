@@ -9,6 +9,8 @@ final class MakeOrderLoading extends MakeOrderState {}
 
 final class MakeOrderSuccess extends MakeOrderState {}
 
+final class PaySuccess extends MakeOrderState {}
+
 final class MakeOrderFailure extends MakeOrderState {
   final String errMessage;
 

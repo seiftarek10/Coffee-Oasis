@@ -8,8 +8,10 @@ class UserOrderEntity {
   final String? id;
   final List<OrderItemEntity>? coffee;
   final UserEntity? user;
+  bool? isPaid;
 
-  UserOrderEntity({this.id, required this.coffee, required this.user});
+  UserOrderEntity(
+      {this.id, required this.coffee, required this.user, this.isPaid});
 
   toJson() {
     return {
@@ -17,7 +19,8 @@ class UserOrderEntity {
           ?.map((order) =>
               order.toOrderJson(date: order.date ?? DateTime.now().toString()))
           .toList(),
-      'user': user?.toJson()
+      'user': user?.toJson(),
+      'isPaid': isPaid ?? true
     };
   }
 
@@ -32,6 +35,7 @@ class UserOrderEntity {
             .map(
                 (coffee) => OrderModel.fromJson(coffee, coffee['coffee']['id']))
             .toList(),
-        user: UserModel.fromJson(data['user']));
+        user: UserModel.fromJson(data['user']),
+        isPaid: json['isPaid'] ?? false);
   }
 }
