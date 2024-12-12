@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
-import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
+import 'package:coffee_oasis/Core/NetWork/Fire%20Base/fire_store_services.dart';
 
 abstract class StaffRemoteDataSource {
   Stream<List<UserOrderEntity>> getDeliveryOrders();

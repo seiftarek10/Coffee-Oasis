@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class InActiveBottomBarItem extends StatelessWidget {
   const InActiveBottomBarItem({
-    super.key, required this.icon,
+    super.key,
+    required this.icon,
   });
 
   final IconData icon;

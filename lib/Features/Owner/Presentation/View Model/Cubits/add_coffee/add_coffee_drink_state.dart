@@ -13,6 +13,4 @@ final class AddCoffeeDrinkFailure extends AddCoffeeDrinkState {
   AddCoffeeDrinkFailure({required this.errMessage});
 }
 
-final class AddCoffeeDrinkSuccess extends AddCoffeeDrinkState {
-
-}
+final class AddCoffeeDrinkSuccess extends AddCoffeeDrinkState {}

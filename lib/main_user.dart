@@ -1,4 +1,5 @@
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/set_up_hive.dart';
+import 'package:coffee_oasis/Core/Payment%20Services/stripe_services.dart';
 import 'package:coffee_oasis/Core/Services/bloc_observer.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 
@@ -7,7 +8,6 @@ import 'package:coffee_oasis/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +17,7 @@ Future<void> main() async {
 
   setupGetIt();
 
-  Stripe.publishableKey =
-      'pk_test_51QVCvcCTbCHoJuAwplSNXPRBKG3WRoNEGyKKNp2TrjaI5oUCmiAPwdQXdSFz2FcpwAZ6sQq54u2E6EPzQzMwT4ah00VG99mB3j';
+  StripeServices.initializeStripe();
 
   await HiveSetup.setupUserHive();
   Bloc.observer = MyBlocObserver();

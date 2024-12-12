@@ -31,7 +31,7 @@ class AuthLoaclaDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> signOut() async {
     var box = Hive.box<UserEntity>(BoxesName.userBox);
-    var uid =  Hive.box<String>(BoxesName.uidBox);
+    var uid = Hive.box<String>(BoxesName.uidBox);
     await box.clear();
     await uid.clear();
   }

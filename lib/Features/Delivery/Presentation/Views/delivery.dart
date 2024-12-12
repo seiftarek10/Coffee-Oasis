@@ -15,16 +15,15 @@ class DeliveryView extends StatelessWidget {
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: CustomScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      slivers: [
-                      SliverToBoxAdapter(
-                          child: Column(children: [
-                        Space.k24,
-                        const DeliveryHomeHeader(),
-                        Space.k40
-                      ])),
-                      
-                      const DeliveryAllOrdersListView()
-                    ])))));
+                        physics: const BouncingScrollPhysics(),
+                        slivers: [
+                          SliverToBoxAdapter(
+                              child: Column(children: [
+                            Space.k24,
+                            const DeliveryHomeHeader(),
+                            Space.k40
+                          ])),
+                          const DeliveryAllOrdersListView()
+                        ])))));
   }
 }

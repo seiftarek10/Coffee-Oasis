@@ -7,6 +7,7 @@ import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
+import 'package:coffee_oasis/Core/Payment%20Services/Models/payment_intent/payment_intent_input_model.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
@@ -363,6 +364,21 @@ class UserRepoImpl implements UserRepo {
         }
       });
       return right(shopInfo ?? ShopInfoEntity());
+    } catch (e) {
+      if (e is FirebaseException) {
+        return left(FireBaseError.firebaseException(e));
+      }
+      return left(FireBaseError(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> pay(
+      {required PaymentIntentInputModel paymentIntentInputModel}) async {
+    try {
+      await _userRemoteDataSource.pay(
+          paymentIntentInputModel: paymentIntentInputModel);
+      return right(unit);
     } catch (e) {
       if (e is FirebaseException) {
         return left(FireBaseError.firebaseException(e));

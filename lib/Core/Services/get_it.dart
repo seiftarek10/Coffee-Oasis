@@ -3,9 +3,11 @@ import 'package:coffee_oasis/Core/%20SharedEnitity/user_entity.dart';
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/boxes_name.dart';
 import 'package:coffee_oasis/Core/Hive%20Local%20Data%20Base/hive_services.dart';
 import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
-import 'package:coffee_oasis/Core/NetWork/fire_auth_services.dart';
-import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
-import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
+import 'package:coffee_oasis/Core/NetWork/Dio%20Services/api_services.dart';
+import 'package:coffee_oasis/Core/NetWork/Fire%20Base/fire_auth_services.dart';
+import 'package:coffee_oasis/Core/NetWork/Fire%20Base/fire_store_services.dart';
+import 'package:coffee_oasis/Core/NetWork/Fire%20Base/storage_services.dart';
+import 'package:coffee_oasis/Core/Payment%20Services/stripe_services.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/Auth/Data/Repos/auth_repo_impl.dart';
@@ -20,6 +22,7 @@ import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/remote_data_source.dart';
 import 'package:coffee_oasis/Features/User/Data/Repos/user_repo_impl.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 
@@ -77,11 +80,15 @@ void setupGetIt() {
     shopInfoBox: HiveServices<ShopInfoEntity>(boxName: BoxesName.shopInfoBox),
   ));
 
+  getIt.registerSingleton<StripeServices>(StripeServices());
   getIt.registerSingleton<UserRepoImpl>(UserRepoImpl(
       userRemoteDataSource: UserRemoteDataSourceImpl(
-          getIt.get<FireStoreServices>(), getIt.get<UserLocalDataSourceImpl>()),
+          getIt.get<FireStoreServices>(),
+          getIt.get<UserLocalDataSourceImpl>(),
+          getIt.get<StripeServices>()),
       userLocalDataSource: getIt.get<UserLocalDataSourceImpl>()));
   getIt.registerSingleton<StaffRepoImpl>(StaffRepoImpl(
       staffRemoteDataSource: StaffRemoteDataSourceImpl(
           fireStoreServices: getIt.get<FireStoreServices>())));
+  getIt.registerSingleton<ApiServices>(ApiServices(dio: Dio()));
 }

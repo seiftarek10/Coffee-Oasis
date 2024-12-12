@@ -5,6 +5,7 @@ import 'package:coffee_oasis/Core/%20SharedEnitity/user_order_entity.dart';
 import 'package:coffee_oasis/Core/NetWork/failure.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/shop_info_entity.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
+import 'package:coffee_oasis/Core/Payment%20Services/Models/payment_intent/payment_intent_input_model.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class UserRepo {
@@ -33,4 +34,6 @@ abstract class UserRepo {
       {required Map<String, dynamic> body});
 
   Future<Either<Failure, ShopInfoEntity>> getShopInfo();
+  Future<Either<Failure, void>> pay(
+      {required PaymentIntentInputModel paymentIntentInputModel});
 }

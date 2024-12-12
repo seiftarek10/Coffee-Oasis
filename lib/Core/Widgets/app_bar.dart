@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeaderBar extends StatelessWidget {
-  const HeaderBar({super.key, required this.headerText,  this.titleColor,  this.iconColor,  this.borderIconColor});
+  const HeaderBar(
+      {super.key,
+      required this.headerText,
+      this.titleColor,
+      this.iconColor,
+      this.borderIconColor});
 
   final String headerText;
   final Color? titleColor, iconColor, borderIconColor;
@@ -16,11 +21,12 @@ class HeaderBar extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-       const ArrowBackIcon(),
+        const ArrowBackIcon(),
         Expanded(
             child: Text(headerText,
                 textAlign: TextAlign.center,
-                style: Fonts.font35_700White.copyWith(color: titleColor??Colors.white))),
+                style: Fonts.font35_700White
+                    .copyWith(color: titleColor ?? Colors.white))),
         SizedBox(
           width: 20.w,
         )

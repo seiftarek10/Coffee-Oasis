@@ -16,9 +16,8 @@ class SignUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignUpCubit(
-        SignUpUseCase(getIt.get<AuthRepoImpl>())
-      ),
+      create: (context) =>
+          SignUpCubit(SignUpUseCase(getIt.get<AuthRepoImpl>())),
       child: Scaffold(
         body: SafeArea(
             child: Background(

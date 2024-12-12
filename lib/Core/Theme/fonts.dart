@@ -10,9 +10,9 @@ abstract class Fonts {
       TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700);
   static TextStyle font20_700 =
       TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700);
-    static TextStyle font24_700 =
-      TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w700,color: Colors.black);
-  
+  static TextStyle font24_700 = TextStyle(
+      fontSize: 24.sp, fontWeight: FontWeight.w700, color: Colors.black);
+
   static TextStyle font16_300 =
       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w300);
 
@@ -26,9 +26,9 @@ abstract class Fonts {
       fontSize: 14.sp,
       fontWeight: FontWeight.w500,
       color: AppColors.kPrimaryColor);
-  
+
   static TextStyle font14_500 = TextStyle(
-      fontSize: 14.sp,
-      fontWeight: FontWeight.w500,
-      );
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+  );
 }

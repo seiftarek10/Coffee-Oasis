@@ -1,4 +1,3 @@
-
 import 'package:coffee_oasis/Core/Routes/routes_keys.dart';
 import 'package:coffee_oasis/Core/Theme/colors.dart';
 import 'package:coffee_oasis/Core/Theme/fonts.dart';
@@ -18,7 +17,8 @@ class NoAccountText extends StatelessWidget {
           children: <TextSpan>[
             TextSpan(
                 text: "Sign Up",
-                style: Fonts.font20_700.copyWith(color: AppColors.kPrimaryColor),
+                style:
+                    Fonts.font20_700.copyWith(color: AppColors.kPrimaryColor),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     GoRouter.of(context).pushReplacement(Routes.signup);

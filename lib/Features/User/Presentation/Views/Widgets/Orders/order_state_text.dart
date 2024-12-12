@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class OrderStateText extends StatelessWidget {
   const OrderStateText({
     super.key,
-    required this.isFinished, required this.isDelivered,
+    required this.isFinished,
+    required this.isDelivered,
   });
 
   final bool isFinished;
@@ -14,7 +15,11 @@ class OrderStateText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      isFinished ? isDelivered? 'OnTheWay': 'Finished' : 'Preparing',
+      isFinished
+          ? isDelivered
+              ? 'OnTheWay'
+              : 'Finished'
+          : 'Preparing',
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: Fonts.font16_500.copyWith(

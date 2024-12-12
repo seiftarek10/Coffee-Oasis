@@ -11,7 +11,9 @@ import 'package:coffee_oasis/Core/Models/coffee_drinks_hive_model.dart';
 import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
 import 'package:coffee_oasis/Core/Models/order_model.dart';
 import 'package:coffee_oasis/Core/Models/user_model.dart';
-import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
+import 'package:coffee_oasis/Core/NetWork/Fire%20Base/fire_store_services.dart';
+import 'package:coffee_oasis/Core/Payment%20Services/Models/payment_intent/payment_intent_input_model.dart';
+import 'package:coffee_oasis/Core/Payment%20Services/stripe_services.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Models/shop_info_model.dart';
 import 'package:coffee_oasis/Features/User/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Core/%20SharedEnitity/order_item_entity.dart';
@@ -35,13 +37,16 @@ abstract class UserRemoteDataSource {
   Future<void> deleteFavoriteItem({required String id});
   Future<void> updateUserInfo({required Map<String, dynamic> body});
   Future<ShopInfoEntity> getShopInfo();
+  Future<void> pay({required PaymentIntentInputModel paymentIntentInputModel});
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final FireStoreServices _fireStoreServices;
   final UserLocalDataSource _userLocalDataSource;
+  final StripeServices _stripeServices;
 
-  UserRemoteDataSourceImpl(this._fireStoreServices, this._userLocalDataSource);
+  UserRemoteDataSourceImpl(
+      this._fireStoreServices, this._userLocalDataSource, this._stripeServices);
 
   @override
   Future<UserEntity> getUserInfo() async {
@@ -419,5 +424,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     ShopInfoEntity shopInfo = ShopInfoModel.fromJson(response.data());
     await _userLocalDataSource.saveShopInfo(shopInfo: shopInfo);
     return (shopInfo);
+  }
+
+  @override
+  Future<void> pay(
+      {required PaymentIntentInputModel paymentIntentInputModel}) async {
+    await _stripeServices.pay(paymentIntentModelInput: paymentIntentInputModel);
   }
 }

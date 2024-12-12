@@ -37,8 +37,7 @@ class GetDeliveryOrdersBlocBuilder extends StatelessWidget {
     return AppErrorWidget(
         height: 0.6,
         onTap: () {
-          BlocProvider.of<StaffGetAllOrdersCubit>(context)
-              .getDeliveryOrders;
+          BlocProvider.of<StaffGetAllOrdersCubit>(context).getDeliveryOrders;
         },
         text: 'some Thing Is Wrong');
   }

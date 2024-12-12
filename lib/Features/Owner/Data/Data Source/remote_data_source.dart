@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coffee_oasis/Core/Models/fire_base_path_param.dart';
-import 'package:coffee_oasis/Core/NetWork/fire_store_services.dart';
+import 'package:coffee_oasis/Core/NetWork/Fire%20Base/fire_store_services.dart';
 import 'package:coffee_oasis/Core/Constant/endpoints.dart';
-import 'package:coffee_oasis/Core/NetWork/storage_services.dart';
+import 'package:coffee_oasis/Core/NetWork/Fire%20Base/storage_services.dart';
 import 'package:coffee_oasis/Features/Owner/Data/Data%20Source/local_data_source.dart';
 import 'package:coffee_oasis/Core/Models/category_model.dart';
 import 'package:coffee_oasis/Core/Models/coffee_drink_model.dart';

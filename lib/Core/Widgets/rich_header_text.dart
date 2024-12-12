@@ -6,7 +6,8 @@ class RichHeaderText extends StatelessWidget {
   const RichHeaderText({
     super.key,
     required this.title,
-    required this.subTitle, this.smallTitle,
+    required this.subTitle,
+    this.smallTitle,
   });
 
   final String title;
@@ -20,7 +21,9 @@ class RichHeaderText extends StatelessWidget {
       children: [
         Text(
           title,
-          style: smallTitle!=null? Fonts.font35_700White:Fonts.font40_700White,
+          style: smallTitle != null
+              ? Fonts.font35_700White
+              : Fonts.font40_700White,
         ),
         RichText(
             text: TextSpan(

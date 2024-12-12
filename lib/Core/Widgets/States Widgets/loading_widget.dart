@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class AppLoadingWidget extends StatelessWidget {
   const AppLoadingWidget({
-    super.key, required this.child,
+    super.key,
+    required this.child,
   });
 
   final Widget child;
@@ -19,11 +19,10 @@ class AppLoadingWidget extends StatelessWidget {
             itemCount: 7,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
-            itemBuilder: (context,index){
-             return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: child
-              );
+            itemBuilder: (context, index) {
+              return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: child);
             },
           )),
     );

@@ -12,9 +12,4 @@ abstract class Routes {
   static const String staffOrderDetails = '/stafforderdetails';
   static const String delivery = '/delivery';
   static const String manageCategories = '/manageCategories';
-
-
-
-
-  
 }

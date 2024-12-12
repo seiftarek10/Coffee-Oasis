@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavIconBlocBuilder extends StatelessWidget {
-  const FavIconBlocBuilder(
-      {super.key, required this.coffeeEntity});
+  const FavIconBlocBuilder({super.key, required this.coffeeEntity});
 
   final CoffeeEntity coffeeEntity;
 
@@ -29,12 +28,11 @@ class FavIconBlocBuilder extends StatelessWidget {
   Widget _buildFavoriteIcon(BuildContext context, bool isExist) {
     return FavoriteIcon(
         isFavorite: isExist,
-        onPressed: 
-            () async {
-              await context
-                  .read<HandleFavoriteCubit>()
-                  .handleFavoriteCoffee(coffee: coffeeEntity, isExist: isExist);
-            });
+        onPressed: () async {
+          await context
+              .read<HandleFavoriteCubit>()
+              .handleFavoriteCoffee(coffee: coffeeEntity, isExist: isExist);
+        });
   }
 
   Widget _buildLoadingBody() {

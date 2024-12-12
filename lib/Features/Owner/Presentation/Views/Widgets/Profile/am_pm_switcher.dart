@@ -19,7 +19,7 @@ class _AmPmSwitcherState extends State<AmPmSwitcher> {
       fillColor: AppColors.kPrimaryColor,
       selectedColor: Colors.white,
       color: Colors.white,
-      selectedBorderColor:AppColors.kPrimaryColor,
+      selectedBorderColor: AppColors.kPrimaryColor,
       borderRadius: BorderRadius.circular(20),
       isSelected: [selectedValue == "AM", selectedValue == "PM"],
       onPressed: (int index) {
