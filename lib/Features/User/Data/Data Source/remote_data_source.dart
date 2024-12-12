@@ -334,6 +334,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           .map((item) => item.toOrderJson(date: item.date ?? ''))
           .toList(),
       'user': user.toJson(),
+      'isPaid': false
     });
 
     final batch = firestore.batch();
