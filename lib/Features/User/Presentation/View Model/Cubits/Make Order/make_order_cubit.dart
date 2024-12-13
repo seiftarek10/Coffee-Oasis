@@ -7,6 +7,7 @@ import 'package:coffee_oasis/Features/User/Domain/Use%20Case/make_order_use_case
 import 'package:coffee_oasis/Features/User/Domain/Use%20Case/payment_stripe_use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,16 +36,16 @@ class MakeOrderCubit extends BaseCubit<MakeOrderState> {
       {required PayPalInputModel payPalInputModel,
       required BuildContext context}) async {
     safeEmit(MakeOrderLoading());
-
+    await dotenv.load(fileName: '.env');
+    String clientId = dotenv.env['payPalClientId']!;
+    String secretKey = dotenv.env['payPalSecretKey']!;
     Future.microtask(() {
       if (context.mounted) {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (BuildContext context) => PaypalCheckoutView(
             sandboxMode: true,
-            clientId:
-                "AdJts_I8N9CKqs7eSx9ZcdmpFE26F2L2IyBBsLwKCQXoCS4j_A3ELx75M2POIuH9KbkYodFX_IyZjmPH",
-            secretKey:
-                "EDkYwHO-l6kCUzfaMuP27s7NsHJ_qx6q451Ai3bIvsHis_ipWrJd_IKw4IBZAKHL1uACRPRWbsuN5SAb",
+            clientId: clientId,
+            secretKey: secretKey,
             transactions: [
               {
                 "amount": {

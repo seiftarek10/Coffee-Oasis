@@ -3,16 +3,19 @@ import 'package:coffee_oasis/Core/Payment%20Services/Models/payment_intent/payme
 import 'package:coffee_oasis/Core/Payment%20Services/Models/payment_intent/payment_intent_input_model.dart';
 import 'package:coffee_oasis/Core/Services/get_it.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 class StripeServices {
-  static initializeStripe() {
-    Stripe.publishableKey =
-        'pk_test_51QVCvcCTbCHoJuAwplSNXPRBKG3WRoNEGyKKNp2TrjaI5oUCmiAPwdQXdSFz2FcpwAZ6sQq54u2E6EPzQzMwT4ah00VG99mB3j';
+  static initializeStripe() async {
+    await dotenv.load(fileName: '.env');
+    String publishableKey = dotenv.env['stripePublishableKey']!;
+    Stripe.publishableKey = publishableKey;
   }
 
   Future<PaymentIntentModel> _createPaymentIntent(
       {required PaymentIntentInputModel paymentIntentModelInput}) async {
+    String secretKey = dotenv.env['stripeSecretKey']!;
     var response = await getIt.get<ApiServices>().post(
         endPoint: 'https://api.stripe.com/v1/payment_intents',
         body: {
@@ -20,8 +23,7 @@ class StripeServices {
           'currency': paymentIntentModelInput.currency
         },
         header: {
-          'Authorization':
-              'Bearer sk_test_51QVCvcCTbCHoJuAwTPkHGej1bytqCUW03vfsuUlMVvOnX9SYkLTZXbtcagQznUl1LxUIfkcBVJ2AUd4fQqy45D3t00mhoPGng3',
+          'Authorization': 'Bearer $secretKey',
         },
         contentType: Headers.formUrlEncodedContentType);
 
