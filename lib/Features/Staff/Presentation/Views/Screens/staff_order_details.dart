@@ -50,7 +50,7 @@ class StaffOrderDetailsView extends StatelessWidget {
                                 Space.k24,
                                 StaffPaymentSummaryContaier(
                                   deliver: delivery,
-                                  allCOrderCoffee: userOrder.coffee ?? [],
+                                  allOrderCoffee: userOrder.coffee ?? [],
                                 ),
                                 Space.k40,
                                 StaffOrderDetailsButton(

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 class StaffPaymentSummaryContaier extends StatefulWidget {
   const StaffPaymentSummaryContaier(
-      {super.key, required this.deliver, required this.allCOrderCoffee});
-  final List<OrderItemEntity> allCOrderCoffee;
+      {super.key, required this.deliver, required this.allOrderCoffee});
+  final List<OrderItemEntity> allOrderCoffee;
   final bool deliver;
 
   @override
@@ -22,7 +22,7 @@ class _StaffPaymentSummaryContaierState
 
   @override
   void initState() {
-    for (var coffee in widget.allCOrderCoffee) {
+    for (var coffee in widget.allOrderCoffee) {
       totalCoffeeItems += coffee.counter;
       totalPrice += coffee.price ?? 0;
     }
@@ -71,7 +71,7 @@ class _StaffPaymentSummaryContaierState
             style: Fonts.font18_700,
           ),
           Text(
-            "${(widget.deliver ? totalPrice + 2.5 : totalPrice).toString()} "
+            "${(widget.deliver ? totalPrice + 2.5 : totalPrice).toDouble().toString()} "
             r'$',
             style: Fonts.font18_700,
           )
