@@ -11,6 +11,7 @@ class OrderModel extends OrderItemEntity {
   final bool? orderisFinished;
   final CoffeeEntity cartCoffee;
   final String? dateTime;
+  final bool? isOrderPaid;
 
   OrderModel(
       this.cartItemId,
@@ -19,7 +20,8 @@ class OrderModel extends OrderItemEntity {
       this.orderisDelivery,
       this.orderisFinished,
       this.cartCoffee,
-      this.dateTime)
+      this.dateTime,
+      this.isOrderPaid)
       : super(
             id: cartItemId,
             counter: cartCounter,
@@ -27,7 +29,8 @@ class OrderModel extends OrderItemEntity {
             isDelivery: orderisDelivery,
             isFinished: orderisFinished,
             coffee: cartCoffee,
-            date: dateTime);
+            date: dateTime,
+            isPaid: isOrderPaid);
 
   factory OrderModel.fromJson(Map<String, dynamic> json, String id) {
     return OrderModel(
@@ -37,7 +40,8 @@ class OrderModel extends OrderItemEntity {
         json['isDelivery'] ?? true,
         json['isFinished'] ?? false,
         CoffeeEntity.fromJson(json['coffee']),
-        json['Date'] ?? DateTime.now().toString());
+        json['Date'] ?? DateTime.now().toString(),
+        json['isPaid']);
   }
 
   factory OrderModel.fromStream(QueryDocumentSnapshot<Object?> json) {
@@ -50,6 +54,7 @@ class OrderModel extends OrderItemEntity {
         data['isDelivery'] as bool? ?? true,
         data['isFinished'] as bool? ?? false,
         CoffeeEntity.fromJson(data['coffee'] as Map<String, dynamic>),
-        json['Date'] ?? DateTime.now());
+        json['Date'] ?? DateTime.now(),
+        json['isPaid']);
   }
 }

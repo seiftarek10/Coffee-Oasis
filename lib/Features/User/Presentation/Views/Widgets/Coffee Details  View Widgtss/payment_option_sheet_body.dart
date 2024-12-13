@@ -97,7 +97,7 @@ class _PaymentOptionsBottomSheetBodyState
                   price: widget.order.coffee![0].price!.toString())),
           context: context);
     } else {
-      widget.order.isPaid = false;
+      widget.order.coffee![0].isPaid = false;
       await BlocProvider.of<MakeOrderCubit>(context).makeOrder(
           order: widget.order,
           id: widget.order.coffee![0].coffee.id!,

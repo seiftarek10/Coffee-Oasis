@@ -76,8 +76,6 @@ class MakeOrderCubit extends BaseCubit<MakeOrderState> {
             onError: (error) {
               safeEmit(MakeOrderFailure(errMessage: error.toString()));
               GoRouter.of(context).pop();
-
-              // Navigator.pop(context);
             },
             onCancel: () {
               safeEmit(MakeOrderFailure(errMessage: 'Cancelled'));

@@ -30,6 +30,7 @@ class OrderContainer extends StatelessWidget {
               PaymentSummary(
                 price: order.price ?? 0,
                 counter: order.counter,
+                isPaid: order.isPaid ?? false,
               )
             ])));
   }

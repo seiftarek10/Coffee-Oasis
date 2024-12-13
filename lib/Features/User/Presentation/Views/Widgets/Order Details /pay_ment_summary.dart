@@ -7,10 +7,12 @@ class PaymentSummary extends StatelessWidget {
     super.key,
     required this.price,
     required this.counter,
+    required this.isPaid,
   });
 
   final num price;
   final int counter;
+  final bool isPaid;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,11 @@ class PaymentSummary extends StatelessWidget {
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Text('Total Price', style: Fonts.font16_500),
         Text(r'$ ' '${price / 1}', style: Fonts.font18_700)
+      ]),
+      Space.k8,
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text('Is Paid', style: Fonts.font16_500),
+        Text(isPaid ? 'Yes' : 'No', style: Fonts.font16_500)
       ])
     ]);
   }

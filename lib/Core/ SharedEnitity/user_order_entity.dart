@@ -8,10 +8,8 @@ class UserOrderEntity {
   final String? id;
   final List<OrderItemEntity>? coffee;
   final UserEntity? user;
-  bool? isPaid;
 
-  UserOrderEntity(
-      {this.id, required this.coffee, required this.user, this.isPaid});
+  UserOrderEntity({this.id, required this.coffee, required this.user});
 
   toJson() {
     return {
@@ -20,7 +18,6 @@ class UserOrderEntity {
               order.toOrderJson(date: order.date ?? DateTime.now().toString()))
           .toList(),
       'user': user?.toJson(),
-      'isPaid': isPaid ?? true
     };
   }
 
@@ -30,12 +27,11 @@ class UserOrderEntity {
     final coffeeList = data['coffee'] as List<dynamic>;
 
     return UserOrderEntity(
-        id: json.id,
-        coffee: coffeeList
-            .map(
-                (coffee) => OrderModel.fromJson(coffee, coffee['coffee']['id']))
-            .toList(),
-        user: UserModel.fromJson(data['user']),
-        isPaid: json['isPaid'] ?? false);
+      id: json.id,
+      coffee: coffeeList
+          .map((coffee) => OrderModel.fromJson(coffee, coffee['coffee']['id']))
+          .toList(),
+      user: UserModel.fromJson(data['user']),
+    );
   }
 }

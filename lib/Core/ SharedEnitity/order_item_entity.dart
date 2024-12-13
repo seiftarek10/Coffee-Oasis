@@ -19,6 +19,8 @@ class OrderItemEntity extends HiveObject {
   num? price;
   @HiveField(6)
   String? date;
+  @HiveField(7)
+  bool? isPaid;
 
   OrderItemEntity(
       {this.id,
@@ -27,7 +29,8 @@ class OrderItemEntity extends HiveObject {
       required this.coffee,
       this.isDelivery,
       this.isFinished,
-      this.date});
+      this.date,
+      this.isPaid});
 
   toCartJson() {
     return {
@@ -42,9 +45,10 @@ class OrderItemEntity extends HiveObject {
       'counter': counter,
       'price': price,
       'coffee': coffee.toJson(),
-      'isDelivery': isDelivery,
+      'isDelivery': isDelivery ?? true,
       'isFinished': isFinished,
-      'Date': date
+      'Date': date,
+      'isPaid': isPaid ?? false
     };
   }
 }

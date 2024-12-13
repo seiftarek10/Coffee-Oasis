@@ -37,11 +37,12 @@ class MakeOrderBlocListner extends StatelessWidget {
         } else if (state is MakeOrderFailure) {
           failedMessage(context: context, message: state.errMessage);
         } else if (state is PaySuccess) {
+          finalOrder.coffee![0].isPaid = true;
           await BlocProvider.of<MakeOrderCubit>(context).makeOrder(
               order: finalOrder,
               id: finalOrder.coffee![0].coffee.id!,
               fromCart: fromCartView,
-              isDelivery: finalOrder.coffee![0].isDelivery!);
+              isDelivery: finalOrder.coffee![0].isDelivery ?? true);
         }
       },
       child: child,
